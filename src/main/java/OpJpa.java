@@ -28,15 +28,18 @@ public class OpJpa {
 
 	public static void main(String[] args) throws Exception {
 		OpJpa opJpa = new OpJpa();
-		opJpa.readCases();
+        // Test case
+        Calendar cal = GregorianCalendar.getInstance();
+        cal.set(2014, Calendar.AUGUST, 8);
+		opJpa.loadCasesForDate(cal.getTime());
 	}
 	
 	public OpJpa() {
-		emf = Persistence.createEntityManagerFactory("opjpa");
-		em = emf.createEntityManager();
+//		emf = Persistence.createEntityManagerFactory("opjpa");
+//		em = emf.createEntityManager();
 	}
 
-	public void readCases() throws Exception {
+	public void readCasesFromDatabase() throws Exception {
         Calendar cal = GregorianCalendar.getInstance();
         cal.set(2014, Calendar.AUGUST, 8 );
 
@@ -49,17 +52,15 @@ public class OpJpa {
 			System.out.println("Summary = " + courtCase.getSummary());
 		}
 	}
-	public void loadCases() throws Exception {
 
-        // Test case
-        Calendar cal = GregorianCalendar.getInstance();
-        cal.set(2014, Calendar.AUGUST, 8 );
+	public void loadCasesForDate(Date date) throws Exception {
+
         
-//    	CaseParserInterface caseParserInterface = InterfacesFactory.getCaseParserInterface(); 
-    	CaseParserInterface caseParserInterface = new CACasesFile(); 
+    	CaseParserInterface caseParserInterface = InterfacesFactory.getCaseParserInterface(); 
+//    	CaseParserInterface caseParserInterface = new CACasesFile(); 
 
     	Reader reader = caseParserInterface.getCaseList();
-    	List<CourtCase> courtCases = caseParserInterface.parseCaseList(reader, cal.getTime());
+    	List<CourtCase> courtCases = caseParserInterface.parseCaseListForDate(reader, date);
     	reader.close();
 		
     	// Create the CACodes list
@@ -79,14 +80,58 @@ public class OpJpa {
 		}
 		
 		// persist
-		
+/*		
 		DatabaseFacade opDatabase = new DatabaseFacade(em);
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 		opDatabase.persistCases(courtCases);
 		tx.commit();
 		System.out.println("Transaction committed.");
+*/		
 		
+/*
+		File xmlCodes = new File(OpJpa.class.getResource("/xmlcodes").getFile()); 
+        codesInterface.loadXMLCodes( xmlCodes );
+*/        
+	}
+	public void loadCasesFromFile() throws Exception {
+
+        // Test case
+        Calendar cal = GregorianCalendar.getInstance();
+        cal.set(2014, Calendar.AUGUST, 8 );
+        
+//    	CaseParserInterface caseParserInterface = InterfacesFactory.getCaseParserInterface(); 
+    	CaseParserInterface caseParserInterface = new CACasesFile(); 
+
+    	Reader reader = caseParserInterface.getCaseList();
+    	List<CourtCase> courtCases = caseParserInterface.parseCaseListForDate(reader, cal.getTime());
+    	reader.close();
+		
+    	// Create the CACodes list
+        CodesInterface codesInterface = InterfacesFactory.getCodesInterface();
+		
+//        QueueUtility queue = new QueueUtility(compressSections);  // true is compress references within individual titles
+		CodeTitles[] codeTitles = codesInterface.getCodeTitles();
+		CodeCitationParser parser = new CodeCitationParser(codeTitles);
+		
+		for( CourtCase courtCase: courtCases ) {
+			System.out.println("Case = " + courtCase.getName());
+			
+			InputStream inputStream = caseParserInterface.getCaseFile(courtCase);
+			parser.parseCase(courtCase, inputStream);
+			inputStream.close();
+
+		}
+		
+		// persist
+/*		
+		DatabaseFacade opDatabase = new DatabaseFacade(em);
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		opDatabase.persistCases(courtCases);
+		tx.commit();
+		System.out.println("Transaction committed.");
+*/		
 /*
 		File xmlCodes = new File(OpJpa.class.getResource("/xmlcodes").getFile()); 
         codesInterface.loadXMLCodes( xmlCodes );
