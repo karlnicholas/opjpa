@@ -1,0 +1,6 @@
+/target/
+/html/
+/cases/
+.classpath
+.settings/
+.project
