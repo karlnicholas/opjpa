@@ -1,6 +1,10 @@
 
 
 import javax.persistence.*;
+import javax.xml.parsers.*;
+import javax.xml.transform.*;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import static org.quartz.JobBuilder.newJob;
 import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
@@ -8,21 +12,32 @@ import static org.quartz.TriggerBuilder.newTrigger;
 
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
+import org.w3c.dom.*;
 
-import java.util.Date;
+import codesparser.*;
+
+import java.io.*;
+import java.util.*;
+import java.util.Calendar;
 import java.util.logging.Logger;
 
 import load.InterfacesFactory;
-import opinions.facade.CasesFacade;
+import opinions.facade.*;
+import opinions.model.CourtCase;
+import opinions.parsers.*;
+import opinions.viewmodel.*;
 
 public class OpJpaTest {
 	
 	private static Logger log = Logger.getLogger(OpJpaTest.class.getName());
 	private Scheduler sched;
+	private EntityManagerFactory emf;
+	private EntityManager em;
 
 	public final static String caseListFile = "html/60days.html";
 	public final static String casesDir = "cases/";
 	public final static String encoding = "UTF-8";
+	public final static String xmlCodes = "/xmlcodes"; 
 	
 //    private final static int levelOfInterest = 2;
 //    private final static boolean compressSections = true;
@@ -31,29 +46,46 @@ public class OpJpaTest {
 
 	public static void main(String[] args) throws Exception {
 		OpJpaTest opJpa = new OpJpaTest();
-		opJpa.run();
-	    // wait long enough so that the scheduler as an opportunity to
-	    // run the job!
-	    log.info("------- Waiting 65 seconds... -------------");
-	    try {
-		      // wait 65 seconds to show job
-		      Thread.sleep(65L * 1000L);
-		      // executing...
-		    } catch (Exception e) {
-		      //
-		    }
-		opJpa.close();
+//		opJpa.runUpdateScheduler();
+		CodesInterface codesInterface = InterfacesFactory.getCodesInterface();
+		codesInterface.loadXMLCodes(new File(OpJpaTest.class.getResource(xmlCodes).getFile()));
+		opJpa.testViewModel(
+				codesInterface, 
+				true, 
+				2);
 	}
 	
 	public OpJpaTest() throws Exception {
+		emf = Persistence.createEntityManagerFactory("opjpa");
+		em = emf.createEntityManager();
+	}
+	
+	public void testViewModel(
+			CodesInterface codesInterface, 
+			boolean compressCodeReferences, 
+			int levelOfInterest
+	) throws Exception {
+		List<CourtCase> cases = readCasesFromDatabase();
+		List<ViewModelCase> viewModelCases = new ArrayList<ViewModelCase>();
+		ViewModelCaseBuilder viewBuilder = new ViewModelCaseBuilder(codesInterface); 
+		// copy to ParsedCase 
+		for( CourtCase ccase: cases ) {
+
+			ViewModelCase viewModelCase = viewBuilder.buildParsedCase(ccase, compressCodeReferences);
+			viewModelCase.trimToLevelOfInterest(levelOfInterest);
+			viewModelCases.add(viewModelCase);
+		}
+
+		writeReportXML("xml/DocumentReport.xml", viewModelCases);
+		
+		
+	}
+
+	private void runUpdateScheduler() throws Exception {
 
 	    // First we must get a reference to a scheduler
 	    SchedulerFactory sf = new StdSchedulerFactory();
 	    sched = sf.getScheduler();
-
-	}
-
-	private void run() throws Exception {
 
 	    log.info("------- Scheduling Job  -------------------");
 
@@ -77,12 +109,19 @@ public class OpJpaTest {
 	    sched.start();
 
 	    log.info("------- Started Scheduler -----------------");
-
-	}
-	
-	private void close() throws Exception {
+	    // wait long enough so that the scheduler as an opportunity to
+	    // run the job!
+	    log.info("------- Waiting 65 seconds... -------------");
+	    try {
+		      // wait 65 seconds to show job
+		      Thread.sleep(65L * 1000L);
+		      // executing...
+		    } catch (Exception e) {
+		      //
+		    }
         sched.shutdown();
 	}
+	
 
 	public static class HelloJob implements Job {
 
@@ -111,140 +150,132 @@ public class OpJpaTest {
 	    }
 	}
 
-}
-/*
+	public List<CourtCase> loadTestCases() throws Exception {
+	    // Test case
+	    Calendar cal = GregorianCalendar.getInstance();
+	    cal.set(2014, Calendar.AUGUST, 12, 0, 0, 0 );
+	    cal.set(Calendar.MILLISECOND, 0);
+	    
+//		CaseParserInterface caseParserInterface = InterfacesFactory.getCaseParserInterface(); 
+		CaseParserInterface caseParserInterface = new CATestCases(); 
 
-public void loadCasesFromFile() throws Exception {
-    // Test case
-    Calendar cal = GregorianCalendar.getInstance();
-    cal.set(2014, Calendar.AUGUST, 8 );
-    
-//	CaseParserInterface caseParserInterface = InterfacesFactory.getCaseParserInterface(); 
-	CaseParserInterface caseParserInterface = new CACasesFile(); 
+		Reader reader = caseParserInterface.getCaseList();
+		List<CourtCase> courtCases = caseParserInterface.parseCaseList(reader);
+		reader.close();
 
-	Reader reader = caseParserInterface.getCaseList();
-	List<CourtCase> courtCases = caseParserInterface.parseCaseListForDate(reader, cal.getTime());
-	reader.close();
-	
-	// Create the CACodes list
-    CodesInterface codesInterface = InterfacesFactory.getCodesInterface();
-	
-//    QueueUtility queue = new QueueUtility(compressSections);  // true is compress references within individual titles
-	CodeTitles[] codeTitles = codesInterface.getCodeTitles();
-	CodeCitationParser parser = new CodeCitationParser(codeTitles);
-	
-	for( CourtCase courtCase: courtCases ) {
-		System.out.println("Case = " + courtCase.getName());
+		// trim list to available test cases
+		Iterator<CourtCase> ccit = courtCases.iterator();
+		while ( ccit.hasNext() ) {
+			CourtCase ccase = ccit.next();
+			Date cDate = ccase.getPublishDate();
+			if ( cDate.compareTo(cal.getTime()) != 0 ) {
+				ccit.remove();
+			}
+		}
+		System.out.println("Cases = " + courtCases.size() );
+		// Create the CACodes list
+	    CodesInterface codesInterface = InterfacesFactory.getCodesInterface();
 		
-		InputStream inputStream = caseParserInterface.getCaseFile(courtCase);
-		parser.parseCase(courtCase, inputStream);
-		inputStream.close();
+//	    QueueUtility queue = new QueueUtility(compressSections);  // true is compress references within individual titles
+		CodeTitles[] codeTitles = codesInterface.getCodeTitles();
+		CodeCitationParser parser = new CodeCitationParser(codeTitles);
+		
+		for( CourtCase courtCase: courtCases ) {
+			System.out.println("Case = " + courtCase.getName());
+			
+			InputStream inputStream = caseParserInterface.getCaseFile(courtCase);
+			parser.parseCase(courtCase, inputStream);
+			inputStream.close();
 
+		}
+		// persist
+		return courtCases;
 	}
-	// persist
 
-	DatabaseFacade databaseFacade = new DatabaseFacade(em);
-	EntityTransaction tx = em.getTransaction();
-	tx.begin();
-	databaseFacade.persistCases(courtCases);
-	tx.commit();
-	System.out.println("Transaction committed.");
-}
+	public static void writeReportXML(String fileName, List<ViewModelCase> cases)
+	        throws ParserConfigurationException,
+	        TransformerException,
+	        IOException
+	{
+	    Element rootElement;
 
-List<ViewModelCase> ccases = new ArrayList<ViewModelCase>();
-ViewModelCaseBuilder pCaseBuilder = new ViewModelCaseBuilder(codesInterface); 
-// copy to ParsedCase 
-for( Case ccase: cases ) {
+	    File file = new File( fileName );
+	    // root elements
+	    Document xmlDoc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+	    rootElement = xmlDoc.createElement("cases");
+	    xmlDoc.appendChild(rootElement);
 
-	ViewModelCase codesCase = pCaseBuilder.buildParsedCase(ccase, compressSections);
-	codesCase.trimToLevelOfInterest(levelOfInterest);
-	ccases.add(codesCase);
-}
+	    for( CourtCase ccase: cases ) {
+	        rootElement.appendChild( ccase.createXML(xmlDoc) );
+	    }
 
-writeReportXML("xml/DocumentReport.xml", ccases);
-public static void writeReportXML(String fileName, List<ViewModelCase> cases)
-        throws ParserConfigurationException,
-        TransformerException,
-        IOException
-{
-    Element rootElement;
+	    // write the content into xml file
+	    TransformerFactory transformerFactory = TransformerFactory.newInstance();
+	    Transformer transformer = transformerFactory.newTransformer();
+	    DOMSource source = new DOMSource(xmlDoc);
+	    StreamResult result = new StreamResult( new FileOutputStream( file ) );
 
-    File file = new File( fileName );
-    // root elements
-    Document xmlDoc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
-    rootElement = xmlDoc.createElement("cases");
-    xmlDoc.appendChild(rootElement);
+	    // Output to console for testing
+	    // StreamResult result = new StreamResult(System.out);
+	    transformer.transform(source, result);
 
-    for( Case ccase: cases ) {
-        rootElement.appendChild( ccase.createXML(xmlDoc) );
-    }
-
-    // write the content into xml file
-    TransformerFactory transformerFactory = TransformerFactory.newInstance();
-    Transformer transformer = transformerFactory.newTransformer();
-    DOMSource source = new DOMSource(xmlDoc);
-    StreamResult result = new StreamResult( new FileOutputStream( file ) );
-
-    // Output to console for testing
-    // StreamResult result = new StreamResult(System.out);
-    transformer.transform(source, result);
-
-    result.getOutputStream().close();
-}
-
-private static InputStream saveCopyOfCase(String directory, String fileName, InputStream inputStream ) throws Exception {
-	
-    File file = new File(directory + "/" + fileName);
-    file.createNewFile();
-    
-    OutputStream out = new FileOutputStream( file );
-    ByteArrayOutputStream baos = new ByteArrayOutputStream(); 
-    try {
-    	byte[] bytes = new byte[2^18];
-    	int len;
-    	while ( (len = inputStream.read(bytes, 0, bytes.length)) != -1 ) {
-    		out.write(bytes, 0, len);
-    		baos.write(bytes, 0, len);
-    	}
-    	out.close();
-    	baos.close();
-        return new BufferedInputStream(new ByteArrayInputStream(baos.toByteArray()));
-
-    } finally {
-    	inputStream.close();
-    }
-}
-
-private static Reader saveCopyOfCaseList(Reader reader) throws Exception {
-	
-    File file = new File(caseListFile);
-    file.createNewFile();
-    
-    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter( new FileOutputStream( file ), encoding));
-    CharArrayWriter cWriter = new CharArrayWriter(); 
-	char[] cbuf = new char[2^18];
-	int len;
-	while ( (len = reader.read(cbuf, 0, cbuf.length)) != -1 ) {
-		writer.write(cbuf, 0, len);
-		cWriter.write(cbuf, 0, len);
+	    result.getOutputStream().close();
 	}
-	reader.close();
-	writer.close();
-	cWriter.close();
-    return new BufferedReader( new CharArrayReader(cWriter.toCharArray()) );
-}
 
-public void readCasesFromDatabase() throws Exception {
-    Calendar cal = GregorianCalendar.getInstance();
-    cal.set(2014, Calendar.AUGUST, 8 );
+	private static InputStream saveCopyOfCase(String directory, String fileName, InputStream inputStream ) throws Exception {
+		
+	    File file = new File(directory + "/" + fileName);
+	    file.createNewFile();
+	    
+	    OutputStream out = new FileOutputStream( file );
+	    ByteArrayOutputStream baos = new ByteArrayOutputStream(); 
+	    try {
+	    	byte[] bytes = new byte[2^13];
+	    	int len;
+	    	while ( (len = inputStream.read(bytes, 0, bytes.length)) != -1 ) {
+	    		out.write(bytes, 0, len);
+	    		baos.write(bytes, 0, len);
+	    	}
+	    	out.close();
+	    	baos.close();
+	        return new BufferedInputStream(new ByteArrayInputStream(baos.toByteArray()));
 
-    DatabaseFacade databaseFacade = new DatabaseFacade(em);
-	List<CourtCase> courtCases = databaseFacade.findByPublishDate(cal.getTime());
-	
-	for( CourtCase courtCase: courtCases ) {
-		System.out.println("Case = " + courtCase.getName());
-		System.out.println("Disposition = " + courtCase.getDisposition());
-		System.out.println("Summary = " + courtCase.getSummary());
+	    } finally {
+	    	inputStream.close();
+	    }
 	}
+
+	private static Reader saveCopyOfCaseList(Reader reader) throws Exception {
+		
+	    File file = new File(caseListFile);
+	    file.createNewFile();
+	    
+	    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter( new FileOutputStream( file ), encoding));
+	    CharArrayWriter cWriter = new CharArrayWriter(); 
+		char[] cbuf = new char[2^13];
+		int len;
+		while ( (len = reader.read(cbuf, 0, cbuf.length)) != -1 ) {
+			writer.write(cbuf, 0, len);
+			cWriter.write(cbuf, 0, len);
+		}
+		reader.close();
+		writer.close();
+		cWriter.close();
+	    return new BufferedReader( new CharArrayReader(cWriter.toCharArray()) );
+	}
+
+	public List<CourtCase> readCasesFromDatabase() throws Exception {
+	    Calendar cal = GregorianCalendar.getInstance();
+	    cal.set(2014, Calendar.AUGUST, 12 );
+
+	    DatabaseFacade databaseFacade = new DatabaseFacade(em);
+		List<CourtCase> courtCases = databaseFacade.findByPublishDate(cal.getTime());
+		
+		for( CourtCase courtCase: courtCases ) {
+			System.out.println("Case = " + courtCase.getName());
+		}
+		
+		return courtCases;
+	}
+
 }
-*/

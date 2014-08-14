@@ -5,7 +5,7 @@ import java.io.*;
 import opcalifornia.*;
 import opinions.model.CourtCase;
 
-public class CACasesFile extends CACaseParser {
+public class CATestCases extends CACaseParser {
 	
 	@Override
 	public Reader getCaseList() throws Exception {
