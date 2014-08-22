@@ -23,9 +23,9 @@ import java.util.logging.Logger;
 
 import load.InterfacesFactory;
 import opinions.facade.*;
-import opinions.model.CourtCase;
+import opinions.model.courtcase.CourtCase;
+import opinions.model.opinion.*;
 import opinions.parsers.*;
-import opinions.viewmodel.*;
 
 public class OpJpaTest {
 	
@@ -66,12 +66,12 @@ public class OpJpaTest {
 			int levelOfInterest
 	) throws Exception {
 		List<CourtCase> cases = readCasesFromDatabase();
-		List<ViewModelCase> viewModelCases = new ArrayList<ViewModelCase>();
-		ViewModelCaseBuilder viewBuilder = new ViewModelCaseBuilder(codesInterface); 
+		List<OpinionCase> viewModelCases = new ArrayList<OpinionCase>();
+		OpinionCaseBuilder viewBuilder = new OpinionCaseBuilder(codesInterface); 
 		// copy to ParsedCase 
 		for( CourtCase ccase: cases ) {
 
-			ViewModelCase viewModelCase = viewBuilder.buildParsedCase(ccase, compressCodeReferences);
+			OpinionCase viewModelCase = viewBuilder.buildParsedCase(ccase, compressCodeReferences);
 			viewModelCase.trimToLevelOfInterest(levelOfInterest);
 			viewModelCases.add(viewModelCase);
 		}
@@ -192,7 +192,7 @@ public class OpJpaTest {
 		return courtCases;
 	}
 
-	public static void writeReportXML(String fileName, List<ViewModelCase> cases)
+	public static void writeReportXML(String fileName, List<OpinionCase> cases)
 	        throws ParserConfigurationException,
 	        TransformerException,
 	        IOException

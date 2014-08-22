@@ -3,7 +3,7 @@
 import java.io.*;
 
 import opcalifornia.*;
-import opinions.model.CourtCase;
+import opinions.model.courtcase.CourtCase;
 
 public class CATestCases extends CACaseParser {
 	
