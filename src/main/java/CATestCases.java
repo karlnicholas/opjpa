@@ -14,7 +14,7 @@ public class CATestCases extends CACaseParser {
 
 	@Override
 	public InputStream getCaseFile(CourtCase ccase) throws Exception {
-		return new BufferedInputStream(new FileInputStream(new File( OpJpaTest.casesDir + ccase.getName() )));
+		return new BufferedInputStream(new FileInputStream(new File( OpJpaTest.casesDir + ccase.getName() +".DOC" )));
 	}
 
 }

@@ -17,6 +17,8 @@ import org.w3c.dom.*;
 import codesparser.*;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
 import java.util.*;
 import java.util.Calendar;
 import java.util.logging.Logger;
@@ -37,35 +39,43 @@ public class OpJpaTest {
 	public final static String caseListFile = "html/60days.html";
 	public final static String casesDir = "cases/";
 	public final static String encoding = "UTF-8";
-	public final static String xmlCodes = "/xmlcodes"; 
+	public final static String xmlcodes = "/xmlcodes"; 
 	
 //    private final static int levelOfInterest = 2;
 //    private final static boolean compressSections = true;
-//    private static String DEBUGFILE = "C067636.DOC";
-//	private final static String DEBUGFILE = null;
+	private final static String DEBUGFILE = "ALL"; // "A140107" or "ALL";
 
 	public static void main(String[] args) throws Exception {
 		OpJpaTest opJpa = new OpJpaTest();
 //		opJpa.runUpdateScheduler();
 		CodesInterface codesInterface = InterfacesFactory.getCodesInterface();
-		codesInterface.loadXMLCodes(new File(OpJpaTest.class.getResource(xmlCodes).getFile()));
+		codesInterface.loadXMLCodes(new File(OpJpaTest.class.getResource(xmlcodes).getFile()));
 		opJpa.testViewModel(
+				opJpa.loadTestCases(),  
 				codesInterface, 
 				true, 
 				2);
+/*		
+		opJpa.testViewModel(
+			opJpa.readCasesFromDatabase(), 
+			codesInterface, 
+			true, 
+			2);
+*/			
 	}
 	
 	public OpJpaTest() throws Exception {
-		emf = Persistence.createEntityManagerFactory("opjpa");
-		em = emf.createEntityManager();
+//		emf = Persistence.createEntityManagerFactory("opjpa");
+//		em = emf.createEntityManager();
 	}
 	
+	
 	public void testViewModel(
+			List<CourtCase> cases, 	
 			CodesInterface codesInterface, 
 			boolean compressCodeReferences, 
 			int levelOfInterest
 	) throws Exception {
-		List<CourtCase> cases = readCasesFromDatabase();
 		List<OpinionCase> viewModelCases = new ArrayList<OpinionCase>();
 		OpinionCaseBuilder viewBuilder = new OpinionCaseBuilder(codesInterface); 
 		// copy to ParsedCase 
@@ -153,7 +163,7 @@ public class OpJpaTest {
 	public List<CourtCase> loadTestCases() throws Exception {
 	    // Test case
 	    Calendar cal = GregorianCalendar.getInstance();
-	    cal.set(2014, Calendar.AUGUST, 12, 0, 0, 0 );
+	    cal.set(2014, Calendar.JULY, 7, 0, 0, 0 );
 	    cal.set(Calendar.MILLISECOND, 0);
 	    
 //		CaseParserInterface caseParserInterface = InterfacesFactory.getCaseParserInterface(); 
@@ -167,9 +177,16 @@ public class OpJpaTest {
 		Iterator<CourtCase> ccit = courtCases.iterator();
 		while ( ccit.hasNext() ) {
 			CourtCase ccase = ccit.next();
-			Date cDate = ccase.getPublishDate();
-			if ( cDate.compareTo(cal.getTime()) != 0 ) {
-				ccit.remove();
+			if ( DEBUGFILE != null && !DEBUGFILE.equals("ALL") ) {
+				if ( !ccase.getName().equals(DEBUGFILE)) ccit.remove();
+			} else if (DEBUGFILE != null && DEBUGFILE.equals("ALL")) {
+				File tFile = new File(casesDir + ccase.getName() + ".DOC");
+				if ( !tFile.exists() ) ccit.remove();
+			} else {
+				Date cDate = ccase.getPublishDate();
+				if ( cDate.compareTo(cal.getTime()) != 0 ) {
+					ccit.remove();
+				}
 			}
 		}
 		System.out.println("Cases = " + courtCases.size() );
@@ -182,8 +199,9 @@ public class OpJpaTest {
 		
 		for( CourtCase courtCase: courtCases ) {
 			System.out.println("Case = " + courtCase.getName());
-			
+
 			InputStream inputStream = caseParserInterface.getCaseFile(courtCase);
+//			inputStream = saveCopyOfCase(casesDir, courtCase.getName()+".DOC", inputStream);
 			parser.parseCase(courtCase, inputStream);
 			inputStream.close();
 
