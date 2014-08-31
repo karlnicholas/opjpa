@@ -1,30 +1,21 @@
 
-
 import javax.persistence.*;
 import javax.xml.parsers.*;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import static org.quartz.JobBuilder.newJob;
-import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
-import static org.quartz.TriggerBuilder.newTrigger;
-
-import org.quartz.*;
-import org.quartz.impl.StdSchedulerFactory;
 import org.w3c.dom.*;
 
 import codesparser.*;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.LinkOption;
 import java.util.*;
-import java.util.Calendar;
 import java.util.logging.Logger;
 
 import load.InterfacesFactory;
 import opinions.facade.*;
+import opinions.model.courtcase.CodeCitation;
 import opinions.model.courtcase.CourtCase;
 import opinions.model.opinion.*;
 import opinions.parsers.*;
@@ -32,7 +23,6 @@ import opinions.parsers.*;
 public class OpJpaTest {
 	
 	private static Logger log = Logger.getLogger(OpJpaTest.class.getName());
-	private Scheduler sched;
 	private EntityManagerFactory emf;
 	private EntityManager em;
 
@@ -50,18 +40,30 @@ public class OpJpaTest {
 //		opJpa.runUpdateScheduler();
 		CodesInterface codesInterface = InterfacesFactory.getCodesInterface();
 		codesInterface.loadXMLCodes(new File(OpJpaTest.class.getResource(xmlcodes).getFile()));
+//		opJpa.playParse(codesInterface);
+		
 		opJpa.testViewModel(
 				opJpa.loadTestCases(),  
 				codesInterface, 
 				true, 
 				2);
-/*		
+		/*		
+
 		opJpa.testViewModel(
 			opJpa.readCasesFromDatabase(), 
 			codesInterface, 
 			true, 
 			2);
 */			
+	}
+	
+    private String[] terms = {"section", "§" , "sections", "§§"};
+	public void playParse(CodesInterface codesInterface) {
+		CodeCitationParser codeCitationParser = new CodeCitationParser(codesInterface.getCodeTitles());
+		String sentence = "(welf. & inst. code, §§ 4501; see also welf. & inst. code, § 4434.)";
+        TreeSet<CodeCitation> citationTree = new TreeSet<CodeCitation>();
+        codeCitationParser.parseSentence(sentence, citationTree);
+        System.out.println(citationTree);
 	}
 	
 	public OpJpaTest() throws Exception {
@@ -91,74 +93,6 @@ public class OpJpaTest {
 		
 	}
 
-	private void runUpdateScheduler() throws Exception {
-
-	    // First we must get a reference to a scheduler
-	    SchedulerFactory sf = new StdSchedulerFactory();
-	    sched = sf.getScheduler();
-
-	    log.info("------- Scheduling Job  -------------------");
-
-	    // define the job and tie it to our HelloJob class
-	    JobDetail job = newJob(HelloJob.class).withIdentity("job1", "group1").build();
-
-	    Date startTime = DateBuilder.nextGivenSecondDate(null, 15);
-	    
-	    // Trigger the job to run on the next round minute
-	    SimpleTrigger trigger = newTrigger().withIdentity("trigger3", "group1").startAt(startTime)
-		        .withSchedule(simpleSchedule().withIntervalInSeconds(20).withRepeatCount(0)).build();
-		  
-	    Date ft = sched.scheduleJob(job, trigger);
-
-	    log.info(job.getKey() + " will run at: " + ft + " and repeat: " + trigger.getRepeatCount() + " times, every "
-	             + trigger.getRepeatInterval() / 1000 + " seconds");
-
-
-	    // Start up the scheduler (nothing can actually run until the
-	    // scheduler has been started)
-	    sched.start();
-
-	    log.info("------- Started Scheduler -----------------");
-	    // wait long enough so that the scheduler as an opportunity to
-	    // run the job!
-	    log.info("------- Waiting 65 seconds... -------------");
-	    try {
-		      // wait 65 seconds to show job
-		      Thread.sleep(65L * 1000L);
-		      // executing...
-		    } catch (Exception e) {
-		      //
-		    }
-        sched.shutdown();
-	}
-	
-
-	public static class HelloJob implements Job {
-
-		private static EntityManagerFactory emf;
-		
-		public HelloJob() {
-			emf = Persistence.createEntityManagerFactory("opjpa");
-		}
-
-		@Override
-	    public void execute(JobExecutionContext context) throws JobExecutionException {
-			EntityManager em = emf.createEntityManager();
-			try {
-				CasesFacade casesFacade = new CasesFacade(
-						em, 
-						InterfacesFactory.getCaseParserInterface(), 
-						InterfacesFactory.getCodesInterface()
-					);
-				casesFacade.updateDatabase();
-				
-			} catch (Exception e) {
-				throw new RuntimeException(e);
-			} finally {
-				em.close();
-			}
-	    }
-	}
 
 	public List<CourtCase> loadTestCases() throws Exception {
 	    // Test case

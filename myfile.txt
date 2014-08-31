@@ -1,0 +1,1556 @@
+   filed 8/8/14 (unmodified opn. attached)
+   certified for publication
+   in the court of appeal of the state of california
+   fourth appellate district
+   division three
+   nancy f. lee,
+   plaintiff and appellant,
+   v.
+   william b. hanley,
+   defendant and respondent.
+   g048501
+   (super. ct. no. 30-2011-00532352)
+   order modifying opinion
+   and denying petitions for
+   rehearing
+   [no change in judgment]
+   on the court's own motion, the opinion filed in this case on july 15, 2014 is hereby ordered modified as follows:
+   1.	on page 3 of the opinion, after the sentence reading, "we hold that, to the extent a claim is construed as a wrongful act not arising in the performance of legal services, such as garden variety theft or conversion, section 340.6 is inapplicable[,]" add the following footnote: "of course, by so stating, we do not mean to imply that those are the only two causes of action to which the statute does not apply."
+---code of civil procedure:340.6:1
+   2.	on page 3, delete the first full paragraph.
+   substitute the following paragraph: "the gist of lee's second amended complaint was that, after attorney hanley's services to her had been terminated, he wrongfully refused to return money belonging to her. in other words, her lawsuit as framed was based on the purported acts or omissions of attorney hanley that did not arise in the performance of professional services to her. the matter before us was resolved at the demurrer stage, before the facts were developed. we do not know whether, on remand, the facts as ultimately developed will show a theft of funds, an accounting error, or something else. while a cause of action based on the theft or conversion of client funds, for example, would not be subject to the section 340.6 statute of limitations, a cause of action predicated on an accounting error could be. the '[r]esolution of a statute of limitations defense normally is a factual question . . . . ' (city of san diego v. u.s. gypsum co. (1994) 30 cal.app.4th 575, 582; baright v. willis (1984) 151 cal.app.3d 303, 311.) here, we cannot say that lee's second amended complaint demonstrates clearly and affirmatively on its face that her action is necessarily barred by the section 340.6 statute of limitations. (stueve bros. farms, llc v. berger kahn (2013) 222 cal.app.4th 303, 321 (stueve bros. farms).) this being the case, the court erred in sustaining the demurrer."
+---code of civil procedure:340.6:1
+---code of civil procedure:340.6:1
+   3.	on page 6, add the following sentence as the last sentence of the second full paragraph: "'when a demurrer is sustained with leave to amend, and the plaintiff chooses not to amend but to stand on the complaint, an appeal from the ensuing dismissal order may challenge the validity of the intermediate ruling sustaining the demurrer. ' (county of santa clara v. atlantic richfield co. (2006) 137 cal.app.4th 292, 312.)"
+   4.	on page 9, in the first sentence of the first full paragraph, insert the word "duty" between the words "fiduciary" and "causes."
+   5.	on page 12, delete the paragraph reading: "as we have stated, the second amended complaint in the matter before us included causes of action for breach of contract, breach of fiduciary duty, unjust enrichment, money had and received, and an equitable right to the return of unused funds. it did not assert causes of action for theft, conversion, or fraud."
+   6.	on page 12, delete the first two words of the paragraph beginning, "however, we" and substitute the word "we."
+   7.	change the first citation appearing on page 13 to read: "(macisaac, supra, 26 cal.2d at p. 815.)"
+   8.	on page 13, add the following language at the end of the second full paragraph: "given this, her second amended complaint was sufficient to withstand a demurrer. we do not mean to imply that lee's causes of action other than conversion are necessarily barred by the section 340.6 statute of limitations. as we stated at the outset, whether the facts ultimately will show that attorney hanley's acts or omissions supporting lee's various causes of action were acts or omissions arising in the performance of professional services is a matter yet to be determined."
+---code of civil procedure:340.6:1
+   9.	delete the last sentence of the paragraph which begins on page 13 and ends on page 14.
+   there is no change in the judgment.
+   appellant nancy f. lee and respondent william b. hanley each filed a petition for rehearing on july 30, 2014.
+   each of the petitions for rehearing is denied.
+   moore, j.
+   we concur:
+   bedsworth, acting p. j.
+   thompson, j.
+   filed 7/15/14 (unmodified version)
+   certified for publication
+   in the court of appeal of the state of california
+   fourth appellate district
+   division three
+   nancy f. lee,
+   plaintiff and appellant,
+   v.
+   william b. hanley,
+   defendant and respondent.
+   g048501
+   (super. ct. no. 30-2011-00532352)
+   o p i n i o n
+   appeal from a judgment of the superior court of orange county, robert j. moss, judge.
+   reversed.
+   walter j. wilson for plaintiff and appellant.
+   law offices of dimitri p. gross and dimitri p. gross for defendant and respondent.
+   * * *
+   plaintiff and appellant nancy f. lee hired attorney william b. hanley to represent her in certain civil litigation.
+   after the litigation settled, lee sought a refund of unearned attorney fees and unused expert witness fees she had advanced to attorney hanley.
+   not having received a refund, lee hired attorney walter j. wilson and terminated the services of attorney hanley.
+   attorney hanley thereafter refunded certain expert witness fees, but no attorney fees.
+   more than a year after hiring attorney wilson, lee filed a lawsuit against attorney hanley seeking the return of attorney fees.
+   attorney hanley filed a demurrer to lee's second amended complaint, based on the one-year statute of limitations contained in code of civil procedure section 340.6.
+---code of civil procedure*:340.6:1
+   the court sustained the demurrer and dismissed the action with prejudice.
+   lee appeals.
+   we reverse.
+   section 340.6 provides the statute of limitations for an action based on "a wrongful act or omission, other than for actual fraud, arising in the performance of professional services . . . ."
+---code of civil procedure:340.6:1
+   according to the plain wording of the statute, to the extent the wrongful act or omission in question arises "in the performance of professional services," the statute applies; to the extent the wrongful act or omission in question does not arise "in the performance of professional services," the statute is inapplicable.
+   this notwithstanding, it seems that almost any time a client brings an action against his or her attorney the wrongful act in question is construed as one arising in the performance of legal services, such that section 340.6 applies.
+---code of civil procedure:340.6:1
+   but surely it cannot be the case that every conceivable act an attorney may take that affects his or her client is one arising in the performance of legal services.
+   for example, if a client leaves her purse unattended in the attorney's office and the attorney takes money from it, would we say that act arose in the performance of legal services? how different is it if, when the legal services have been completed and the attorney's representation has been terminated, the attorney keeps the unearned fees belonging to the client? to steal from a client is not to render legal services to him or her.
+   we hold that, to the extent a claim is construed as a wrongful act not arising in the performance of legal services, such as garden variety theft or conversion, section 340.6 is inapplicable.
+---code of civil procedure:340.6:1
+   the matter before us was resolved at the demurrer stage, before the facts were developed.
+   however, the "[r]esolution of a statute of limitations defense normally is a factual question . . . . " (city of san diego v. u.s. gypsum co. (1994) 30 cal.app.4th 575, 582; baright v. willis (1984) 151 cal.app.3d 303, 311.)
+   here, the facts alleged in lee's second amended complaint could be construed as giving rise to a cause of action for the theft or conversion of an identifiable sum of money belonging to her.
+   this being the case, we cannot say that lee's second amended complaint demonstrates clearly and affirmatively on its face that her action is necessarily barred by the section 340.6 statute of limitations.
+---code of civil procedure:340.6:1
+   (stueve bros. farms, llc v. berger kahn (2013) 222 cal.app.4th 303, 321 (stueve bros. farms).)
+   because this action has not reached a point where the court can determine whether the wrongful act in question arose in the performance of legal services, and thus, whether or not section 340.6 applies, the demurrer should not have been sustained.
+---code of civil procedure:340.6:1
+   facts
+   in her second amended complaint, lee alleged that the litigation attorney hanley had handled for her settled on january 25, 2010, the lawsuit was dismissed three days later, and attorney hanley did no further work on the matter thereafter.
+   attached to her second amended complaint were copies of a february 1, 2010 letter from attorney hanley to lee and a february 1, 2010 invoice for legal services.
+   the letter stated that lee had a credit balance of $46,321.85 and the invoice so reflected.
+   the invoice itemized work performed in january 2010, including the drafting of a settlement agreement and cover letter on january 18, 2010.
+   lee also alleged that in april 2010, she telephoned attorney hanley and asked for a final billing statement and a return of her unused funds but that attorney hanley, in a harsh manner, told her she had no credit balance and would receive no refund.
+   on december 6, 2010, lee and attorney wilson each sent a letter to attorney hanley demanding the refund of $46,321.85 in unearned attorney fees plus approximately $10,000 in unused expert witness fees.
+   by these letters, lee terminated the services of attorney hanley and she and attorney wilson each informed him that attorney wilson would pursue the collection of the monies owed by attorney hanley to lee and also would handle any remaining matters associated with the settled litigation.
+   in her second amended complaint, lee also alleged that, on or about december 28, 2010, attorney hanley returned $9,725 in unused expert witness fees.
+   however, he never returned the $46,321.85 in unearned attorney fees.
+   on december 21, 2011, lee filed her initial complaint against attorney hanley.
+   attorney hanley filed a demurrer based on the one-year statute of limitations.
+   (§ 340.6.)
+---code of civil procedure:340.6:1
+   however, before that demurrer was heard, lee filed a first amended complaint.
+   the court ruled that the demurrer was moot.
+   attorney hanley filed a demurrer to the first amended complaint, also on the basis of the statute of limitations.
+   the court sustained the demurrer with leave to amend.
+   lee then filed her second amended complaint and attorney hanley filed another demurrer, again based on the statute of limitations.
+   the court sustained the demurrer with leave to file a further amended complaint.
+   in her opening brief on appeal, lee represents, albeit without citation to the record, that the court sustained the demurrer with respect to all grounds other than fraud, but gave lee leave to amend with respect to allegations based on fraud.
+   lee also states that because she "was unwilling to plead fraud against" hanley, she did not file a further amended complaint.
+   the court dismissed her action with prejudice.
+   ii
+   discussion
+   a. preliminary matter—request for judicial notice:
+   lee has filed a request for judicial notice, in which she asks this court to take notice of (1) certain portions of the legislative history of section 340.6, and (2) certain correspondence concerning her complaint to the state bar of california about attorney hanley.
+---code of civil procedure:340.6:1
+   attorney hanley opposes the motion.
+   he says lee failed to put the documents in question before the trial court and they are, in any event, irrelevant to the issues raised in this appeal.
+   the fact that lee did not address the legislative history of section 340.6 in the trial court does not mean she may not raise it on appeal from a judgment of dismissal following the sustaining of a demurrer.
+---code of civil procedure:340.6:1
+   "an appellate court may . . . consider new theories on appeal from the sustaining of a demurer to challenge or justify the ruling. as a general rule a party is not permitted to . . . raise new issues not presented in the trial court. . . . however, 'a litigant may raise for the first time on appeal a pure question of law which is presented by undisputed facts.' a demurrer is directed to the face of a complaint (code civ. proc., § 430.30, subd. (a)) and it raises only questions of law [citations]. thus an appellant challenging the sustaining of a general demurrer may change his or her theory on appeal [citation], and an appellate court can affirm or reverse the ruling on new grounds. after all, we review the validity of the ruling and not the reasons given. " (b & p development corp. v. city of saratoga (1986) 185 cal.app.3d 949, 959.)
+---code of civil procedure*:430.30:1
+   in this case, the proper interpretation of section 340.6 is a question of law and this court may consider the legislative history of section 340.6 in addressing the issue.
+---code of civil procedure:340.6:1
+---code of civil procedure:340.6:1
+   consequently, we grant lee's request to take judicial notice of the portions of the legislative history attached as exhibits 1 through 3 to her request.
+   however, the correspondence concerning the state bar investigation of lee's complaint about attorney hanley is irrelevant to the determination of the issues on appeal.
+   consequently, we deny lee's request to take judicial notice of the documents attached as exhibit 4 to her request.
+   b. standard of review:
+   "we review de novo an order sustaining a demurrer to determine whether the complaint alleges facts sufficient to state a cause of action. " (yee v. cheung (2013) 220 cal.app.4th 184, 192 (yee), criticized on another point in roger cleveland golf co., inc. v. krane & smith, apc (2014) 225 cal.app.4th 660, 668, 677 (roger cleveland) [statute inapplicable to malicious prosecution claims].)
+   "when a demurrer is sustained without leave to amend, 'we decide whether there is a reasonable possibility that the defect can be cured by amendment: if it can be, the trial court has abused its discretion and we reverse; if not, there has been no abuse of discretion and we affirm. the burden of proving such reasonable possibility is squarely on the plaintiff.'"
+   (yee, supra, 220 cal.app.4th at p. 193.)
+   "'"'a demurrer based on a statute of limitations will not lie where the action may be, but is not necessarily, barred. in order for the bar . . . to be raised by demurrer, the defect must clearly and affirmatively appear of the face of the complaint; it is not enough that the complaint shows that the action may be barred. '"'" (stueve bros. farms, supra, 222 cal.app.4th at p. 321. )
+   c. section 340.6:
+---code of civil procedure:340.6:1
+   section 340.6, subdivision (a) provides: "(a) an action against an attorney for a wrongful act or omission, other than for actual fraud, arising in the performance of professional services shall be commenced within one year after the plaintiff discovers, or through the use of reasonable diligence should have discovered, the facts constituting the wrongful act or omission, or four years from the date of the wrongful act or omission, whichever occurs first. . . . [i]n no event shall the time for commencement of legal action exceed four years except that the period shall be tolled during the time that any of the following exist: [¶] . . . [¶] (2) the attorney continues to represent the plaintiff regarding the specific subject matter in which the alleged wrongful act or omission occurred. [¶] (3) the attorney willfully conceals the facts constituting the wrongful act or omission when such facts are known to the attorney, except that this subdivision shall toll only the four-year limitation. . . ."
+---code of civil procedure:340.6:1
+   d. performance of professional services:
+   (1) levin and prakashpalan cases—
+   lee argues that the plain wording of section 340.6 shows the statute is inapplicable to her case.
+---code of civil procedure:340.6:1
+   she says attorney hanley completed his legal work when the litigation he was handling was settled and the case was dismissed.
+   any actions he took thereafter, including the wrongful keeping of the money belonging to her, were not part of the performance of professional services, because the performance of professional services had terminated.
+   she also contends that the misappropriation of client funds cannot be construed as the performance of professional services, no matter what the timing.
+   attorney hanley disagrees, citing levin v. graham & james (1995) 37 cal.app.4th 798 (levin) and prakashpalan v. engstrom, lipscomb & lack (2014) 223 cal.app.4th 1105 (prakashpalan).
+   in levin, the plaintiff stated causes of action for malpractice, identified unconscionable attorney fees as an aspect of malpractice, and requested a refund of unconscionable attorney fees as a remedy for malpractice.
+   under the facts of the case, the court rejected the assertion that a claim of unconscionable attorney fees was anything other than a claim for malpractice, subject to section 340.6.
+---code of civil procedure:340.6:1
+   the court observed that the plaintiff had asserted no claim independent of attorney malpractice, such as money had and received, and had not suggested another statute of limitations.
+   (levin, supra, 37 cal.app.4th at pp. 804-805.)
+   according to attorney hanley, levin, supra, 37 cal.app.4th 798 shows that lee's claim for a refund of attorney fees is subject to the one-year statute of limitations contained in section 340.6.
+---code of civil procedure:340.6:1
+   however, that case is distinguishable from the one before us.
+   the court in levin did not address either a demurrer or a situation where the plaintiff had asserted a cause of action other than malpractice.
+   furthermore, it did not purport to address all possible claims with respect to attorney fees, such as claims of theft or conversion.
+   here, lee expressed her general satisfaction with attorney hanley's performance of services.
+   her claim that the credit balance belonged to her was not based on either malpractice or the unconscionability of the fee.
+   rather, she simply sought the return of money belonging to her, on various causes of action, including money had and received.
+   levin, supra, 37 cal.app.4th 798 simply does not control.
+   we turn now to prakashpalan, supra, 223 cal.app.4th 1105.
+   in that case, the plaintiffs alleged that the defendant law firm settled a class action lawsuit for 93 insureds in november 1997, but that the plaintiffs, as class members, did not learn until february 2012 that the defendant had failed to fully and properly distribute $22 million of the settlement funds.
+   (id. at pp. 1114-1115.)
+   the trial court sustained the defendant's demurrer to the second amended complaint.
+   (id. at p. 1119.)
+   the appellate court affirmed in part and reversed in part.
+   (id. at pp. 1137-1138.)
+   the appellate court held that the plaintiffs' malpractice and breach of fiduciary causes of action, based on the alleged wrongful withholding of the settlement funds, were barred by section 340.6.
+---code of civil procedure:340.6:1
+   (prakashpalan, supra, 223 cal.app.4th at p. 1122.)
+   the court stated: "plaintiffs assert that the holding of settlement funds does not arise out of the provision of professional services and thus that section 340.6 does not apply for that reason. we disagree, as in this case, the funds in the trust account are settlement proceeds, [defendant's] conduct in holding such funds arises out of the provision of professional services, namely, the settlement of the case on plaintiffs' behalf."
+---code of civil procedure:340.6:1
+   (id. at p. 1122, fn. 4.)
+   according to attorney hanley, prakashpalan, supra, 223 cal.app.4th 1105 shows that when an attorney collects monies in the performance of professional services and a claim later arises over the retention or disbursement of those monies, the claim is one subject to section 340.6.
+---code of civil procedure:340.6:1
+   where in prakashpalan the issue was the attorneys' failure to properly or fully distribute settlement funds collected in the performance of professional services, in the matter before us, attorney hanley observes, the issue is the attorney's failure to properly or fully distribute legal fees collected in the performance of professional services.
+   we see a difference in the two situations, however.
+   an attorney's collection of settlement funds and distribution of those funds to the litigants entitled thereto is clearly part of the performance of the legal service of settling the lawsuit.
+   however, an attorney's receipt of a client advance for the future performance of legal services does not constitute the attorney's performance of those services.
+   true enough, various cases have broadly stated that section 340.6 applies irrespective of whether the theory of liability is based on breach of contract or tort.
+---code of civil procedure:340.6:1
+   the court in levin, for example, stated: "indeed, for any wrongful act or omission of an attorney arising in the performance of professional services, an action must be commenced within one year after the client discovers or through the use of reasonable diligence should have discovered the facts constituting the wrongful act or omission. in all cases other than actual fraud, whether the theory of liability is based on the breach of an oral or written contract, a tort, or a breach of a fiduciary duty, the one-year statutory period applies. " (levin, supra, 37 cal.app.4th at p. 805.)
+   similarly, the court in yee, supra, 220 cal.app.4th 184, stated: "the phrase '"wrongful act or omission"' is 'used interchangeably as a reference to both tortious and contractual wrongdoing.'"
+   (id. at pp. 194-195.)
+   the critical point, however, is that those cases do not state that the statute applies whenever an attorney commits any tort of any nature.
+   rather, they include the qualification, as set forth plainly in the statute, that the wrongful act or omission must be one "arising in the performance of professional services."
+   (see, e.g., levin, supra, 37 cal.app.4th at p. 805; yee, supra, 220 cal.app.4th at pp. 194-195.)
+   (2) legislative history—
+   lee argues that the legislative history of section 340.6 shows the statute was intended to apply only to malpractice claims.
+---code of civil procedure:340.6:1
+   we observe that the point was recently addressed in roger cleveland, supra, 225 cal.app.4th 660.
+   the court in roger cleveland, supra, 225 cal.app.4th 660 criticized the decisions in yee, supra, 220 cal.app.4th 184 and vafi v. mccloskey (2011) 193 cal.app.4th 874 (vafi) to the effect that section 340.6 applies to malicious prosecution claims.
+---code of civil procedure:340.6:1
+   the roger cleveland court held, for various reasons not important here, that the statute of limitations of section 335.1 is the one that applies to those claims.
+---code of civil procedure:335.1:1
+   (roger cleveland, supra, 225 cal.app.4th at p. 668.)
+   it stated, inter alia: "based upon the plain language of section 340.6, subdivision (a), we conclude the legislature's use of 'wrongful act or omission' by an attorney arising in the performance of professional services was intended to include any legal theory related to a claim by a client or former client against his or her attorney, and not a claim by a third party, alleging the attorney maliciously prosecuted an action against the plaintiff."
+---code of civil procedure:340.6:1
+   (roger cleveland, supra, 225 cal.app.4th at p. 680.)
+   in addition, the court in roger cleveland, supra, 225 cal.app.4th 660 observed that its interpretation was consistent with the legislative history of section 340.6.
+---code of civil procedure:340.6:1
+   it construed the legislative history of the statute, despite the plain wording of the statute, to reflect a legislative intent to apply the one-year statute of limitations to malpractice claims specifically.
+   (id. at pp. 680-682.)
+   the court noted that assembly bill no. 298 ((1977-1978 reg. sess.) as introduced jan. 25, 1977) originally proposed a limitations period applicable "'[i]n any action for damages against an attorney based upon the attorney's alleged professional negligence.'"
+   (roger cleveland, supra, 225 cal.app.4th at p. 681, fn. omitted.)
+   however, commentator ronald e. mallen suggested using the phrase "'wrongful act or omission occurring in the rendition of professional services'" because the concept of attorney malpractice was difficult to define.
+   (ibid.)
+   he further suggested that the limitations period be inapplicable to acts of actual fraud.
+   (ibid.)
+   as the court in roger cleveland, supra, 225 cal.app.4th 660 explained in some detail, the suggested language "wrongful act or omission" was thereafter included in the proposed legislation, although various communications and legislative materials regarding the proposed legislation continued to refer to the bill as pertaining to the statute of limitations for attorney malpractice actions.
+   (id. at pp. 681-682.)
+   the court concluded: "our review of the legislative history indicates the legislature intended to create a specially tailored statute of limitations for legal malpractice actions . . . ."
+   (id. at p. 682.)
+   (3) plain meaning—
+   this notwithstanding, the courts have for years looked to the wording of the statute as ultimately adopted, pertaining to "a wrongful act or omission, other than for actual fraud, arising in the performance of professional services" (§ 340.6), and applied it to allegations of wrongful acts or omissions other than malpractice.
+---code of civil procedure:340.6:1
+   (see, e.g., vafi, supra, 193 cal.app.4th 874 [malicious prosecution].)
+   "the principles of statutory analysis are well established. '"[w]e must look first to the words of the statute, 'because they generally provide the most reliable indicator of legislative intent.' if the statutory language is clear and unambiguous our inquiry ends. 'if there is no ambiguity in the language, we presume the legislature meant what it said and the plain meaning of the statute governs.' in reading statutes, we are mindful that words are to be given their plain and commonsense meaning. " thus, we "avoid a construction that would produce absurd consequences, which we presume the legislature did not intend. "'" (id. at p. 880.)
+   here, we find the words of the statute to be plain and unambiguous.
+   they provide the applicable statute of limitations for an action based on "a wrongful act or omission, other than for actual fraud, arising in the performance of professional services
+   . . . ." (§ 340.6.) so, if the wrongful act or omission at issue arises "in the performance of professional services," the statute applies. if the wrongful act or omission at issue does not arise "in the performance of professional services," the statute is inapplicable. as we have already stated, an attorney does not provide a service to the client by stealing his or her money.
+---code of civil procedure:340.6:1
+   as we have stated, the second amended complaint in the matter before us included causes of action for breach of contract, breach of fiduciary duty, unjust enrichment, money had and received, and an equitable right to the return of unused funds.
+   it did not assert causes of action for theft, conversion, or fraud.
+   however, we bristle against cutting off a litigant's claims because of inartful or sloppy pleading.
+   (see, e.g., barquis v. merchants collection assn. (1972) 7 cal.3d 94, 103 (barquis); macisaac v. pozzo (1945) 26 cal.2d 809, 816 (macisaac).)
+   rather, we liberally construe his or her pleading with a view to achieving substantial justice.
+   (yue v. city of auburn (1992) 3 cal.app.4th 751, 756-757.)
+   even if a litigant is inarticulate with respect to the relief sought, he or she is "nevertheless entitled to any relief warranted by the facts pleaded, and [the] failure to ask for the proper relief is not fatal to [his or her] cause. " (macisaac v. pozzo, supra, 26 cal.2d at p. 815.)
+   moreover, "we are not limited to plaintiffs' theory of recovery in testing the sufficiency of their complaint against a demurrer, but instead must determine if the factual allegations of the complaint are adequate to state a cause of action under any legal theory. the courts of this state have, of course, long since departed from holding a plaintiff strictly to the 'form of action' he has pleaded and instead have adopted the more flexible approach of examining the facts alleged to determine if a demurrer should be sustained. " (barquis, supra, 7 cal.3d at p. 103.)
+   the second amended complaint in the matter before us alleged that, after attorney hanley's services with respect to the settled litigation had been fully completed, he knowingly refused to release money belonging to lee, which he himself had characterized as her "credit balance."
+   when we liberally construe the second amended complaint we see that, despite lee's form of pleading, she has made factual allegations adequate to state a cause of action for conversion, for example.
+   (welco electronics, inc. v. mora (2014) 223 cal.app.4th 202, 208-209, 215-216 [wrongful exercise of dominion over identifiable sum of money belonging to another].)
+   as we have already noted, "'"'a demurrer based on a statute of limitations will not lie where the action may be, but is not necessarily, barred. in order for the bar . . . to be raised by demurrer, the defect must clearly and affirmatively appear of the face of the complaint; it is not enough that the complaint shows that the action may be barred. '"'" (stueve bros. farms, supra, 222 cal.app.4th at p. 321.)
+   here, we cannot say that lee's second amended complaint demonstrates clearly and affirmatively on its face that her action is necessarily barred by the statute of limitations.
+   it is simply premature at this point to conclude that lee cannot allege "facts sufficient to state a cause of action under any possible legal theory" (city of dinuba v. county of tulare (2007) 41 cal.4th 859, 870) that will survive the bar of the one-year statute of limitations.
+   e. remaining arguments:
+   (1) introduction—
+   we address lee's tolling and date of discovery arguments, in case on remand and further development of the facts, she continues to assert causes of action to which section 340.6 applies.
+---code of civil procedure:340.6:1
+   however, we do not address lee's argument that section 340.6 is unconstitutional as applied, due to her failure to provide any legal authority in support of that argument.
+---code of civil procedure:340.6:1
+   (roden v. amerisourcebergen corp. (2010) 186 cal.app.4th 620, 648-649.)
+   we also do not address arguments lee raised for the first time in her reply brief.
+   (schubert v. reynolds (2002) 95 cal.app.4th 100, 108.)
+   (2) tolling—
+   lee says that, even though she and attorney wilson each sent termination letters to attorney hanley on december 6, 2010, attorney hanley continued to represent her until he delivered to her the december 28, 2010 check for the refund of unused expert witness fees, because the delivery of the check was an act in representation of her as her attorney.
+   this is, of course, contrary to her assertion, in other portions of her briefing on appeal, that all professional services were terminated when the settled litigation was dismissed.
+   in any event, it is clear, for the purposes of the tolling provision of section 340.6, that attorney hanley's services were terminated no later than december 6, 2010, and that the one-year statute began to run no later than that date.
+---code of civil procedure:340.6:1
+   (stueve bros. farms, supra, 222 cal.app.4th at p. 314.)
+   (3) date of discovery—
+   lee also states she did not discover attorney hanley claimed that the taking of her money arose in the performance of professional services and that section 340.6 applied, until attorney wilson received the february 29, 2012 demurrer to her complaint.
+---code of civil procedure:340.6:1
+   although lee does not articulate the significance of her statement, we gather she views the date she discovered attorney hanley's legal theory as having some bearing upon the triggering of the statute of limitations.
+   it does not.
+   while the date of discovery of an attorney's alleged wrongful act is relevant to a determination of the running of the statute of limitations under section 340.6, the date of discovery of the attorney's legal defense is not.
+---code of civil procedure:340.6:1
+   (cf. croucier v. chavos (2012) 207 cal.app.4th 1138, 1146 [plaintiff's ignorance of legal theories is irrelevant].)
+   iii
+   disposition
+   the judgment of dismissal is reversed.
+   lee shall recover her costs on appeal.
+   moore, j.
+   we concur:
+   bedsworth, acting p. j.
+   thompson, j.
+   filed 8/8/14
+   certified for publication
+   in the court of appeal of the state of california
+   second appellate district
+   division eight
+   in re gary donnell williams,
+   on habeas corpus.
+   b252654
+   (los angeles county
+   super. ct. no. na086234)
+   original proceeding on petition for writ of habeas corpus.
+   petition granted and remanded.
+   ronald l. brown, public defender, albert j. menaster, bret rayburn and robin bernstein-lev, deputy public defenders for petitioner.
+   lawrence beach allen & choi, paul b. beach and matthew p. allen for respondent los angeles county sheriff's department.
+   jackie lacey, district attorney, matthew brown and roberta schwartz, deputy district attorneys, for respondent the people.
+   kamala d. harris, attorney general, julie weng-gutierrez, assistant attorney general and jennifer m. kim and carmen d. snuggs, deputy attorneys general, for department of developmental services as amicus curiae on behalf of respondent los angeles county sheriff's department.
+   enright & ocheltree, judith a. enright and julie a. ocheltree for south central los angeles regional center as amicus curiae.
+   _____________________________
+   while awaiting trial on a variety of sex crime charges, petitioner gary donnell williams was declared mentally incompetent to stand trial due to developmental disability.
+   (pen. code, § 1370.1.)
+---penal code*:1370.1:1
+   pursuant to its statutory obligation, the regional center provided a recommendation to the trial court to place williams where he was to receive services designed to restore him to competency.
+   (§ 1370, subd. (a)(1)(h)(2).)
+---penal code:1370:1
+   it determined the porterville developmental center (porterville or pdc) was best suited to his needs, and the trial court ordered that he be placed there.
+   however, porterville refused to accept williams because of safety concerns.
+   in the letter rejecting williams' placement, porterville cited recently enacted welfare and institutions code section 6510.5, which provides that "[u]nder no circumstances" can the court commit someone declared incompetent under section 1370.1 to a developmental center if the department of developmental services (dds) states in writing that the person in question cannot be safely served at that facility.
+---welfare and institutions code*:6510.5:1
+---penal code:1370.1:1
+   although the trial court opined that porterville's refusal to accept williams appeared to be arbitrary and capricious, it believed that, under the statute in question, it had no authority to place williams at porterville.
+   the court requested both the dds and the regional center to provide alternatives for williams' placement.
+   the dds suggested that an outside vendor could provide services to williams in county jail.
+   the regional center acknowledged it had previously provided such services in the county jail, but indicated such services cannot be provided for a commitment order under section 1370.1 and refused to recommend it.
+---penal code:1370.1:1
+   the regional center maintained that porterville was the only suitable placement and provided the court with no alternative for williams' placement.
+   given no other options, the trial court reluctantly ordered that williams remain in the los angeles county jail with the local regional center to provide competency services to williams while incarcerated.
+   by way of a petition for a writ of habeas corpus, williams claims his continued placement in the county jail (1) is not proper under section 1370.1, which limits where someone declared mentally incompetent due to developmental disability may be placed, and (2) violates his right to due process.
+---penal code:1370.1:1
+   in addition, williams argues the trial court may, and should, order porterville to accept him.
+   we agree that williams may not be placed in the county jail for the purpose of receiving competency services.
+   we also agree that, absent a determination that "there is a substantial likelihood that he will recover [his competency] in the foreseeable future" (in re davis (1973) 8 cal.3d 798, 801), williams' continued confinement violates his right to due process.
+   however, in light of the clear and unequivocal language in welfare and institutions code section 6510.5, we reject the contention that the trial court may order williams placed at porterville if the dds continues to maintain that he cannot be safely served at porterville.
+---welfare and institutions code*:6510.5:1
+   at the same time, we find the trial court may take steps to ensure that the dds fulfills its statutory obligation to ensure the regional center meets its duty to provide placement options for the treatment of williams, a developmentally disabled person.
+   this may include issuing an order to show cause to compel the dds to offer a placement option for williams.
+   the writ petition asks this court to direct that williams "be placed in lawful custody for treatment, or released."
+   in light of his prayer for relief, and because the record in this case "furnishes no basis for concluding that [williams is] not likely to respond to treatment . . . , it would be premature for us to order [williams] released from confinement at this time."
+   (in re davis, supra, 8 cal.3d at p. 806.)
+   accordingly, we grant the petition and direct the trial court (1) within 45 days of finality of this opinion, to order williams placed in a facility that meets the requirements of section 1370.1, and to ensure that such placement occurs forthwith, and (2) within 120 days of finality of this opinion, order that williams be released or be subject to alternative (i.e., civil) commitment procedures, unless the trial court determines that there is a substantial likelihood williams will attain competency in the foreseeable future.
+---penal code:1370.1:1
+   factual and procedural background
+   in december 2010, an information was filed, charging then 47-year-old petitioner gary donnell williams with sexual penetration by a foreign object (§ 289, subd. (a)(1)), sexual penetration by a foreign object of someone with a developmental disability (§ 289, subd. (b)), forcible rape (§ 261, subd. (a)(2)), rape of an incompetent person (§ 261, subd. (a)(1)), and sexual battery by restraint (§ 243.4, subd. (a)).
+---penal code:289:1
+---penal code:289:1
+---penal code:261:1
+---penal code:261:1
+---penal code:243.4:1
+   a host of prior convictions – mostly theft-related, but including one for sexual battery – were also alleged.
+   the charges arose out of events that took place in 2004.
+   williams allegedly boarded a bus and, at one point, seated himself next to a 28-year-old woman with down syndrome.
+   during the ride, williams allegedly convinced the woman that he and she were a couple and he lured her off the bus to a deserted alley, where he sexually assaulted her.
+   williams was arrested in 2010 and his dna allegedly matched dna taken from the victim's clothing following the crimes.
+   williams pleaded not guilty, the public defender was appointed to represent him and he was remanded in lieu of $1 million bail.
+   in april 2011, the trial court declared a doubt regarding williams' competence and criminal proceedings were suspended.
+   in august of that year, the trial court found williams incompetent to stand trial pursuant to section 1370.1, which applies when a defendant is declared mentally incompetent due to a developmental disability.
+---penal code:1370.1:1
+   the court referred williams to the south central los angeles regional center (sclarc), which was directed to examine williams in the county jail and to report to the court pursuant to section 1370.1.
+---penal code:1370.1:1
+   that section requires the court to consider the regional center's recommendation for placement before making a final placement decision.
+   (subd. (a)(1)(b)(i); see also subd. (a)(1)(h)(2).)
+   little progress was made with respect to williams' placement over the next approximately 15 months.
+   in november 2012, the sclarc sent a letter to williams' counsel advising that williams "has been assessed and determined eligible for regional center services."
+   the record is not entirely clear why it took the sclarc approximately 15 months from the trial court's finding of incompetency to make this determination.
+   however, the minute orders reflect that the trial court diligently conducted progress hearings on an almost monthly basis.
+   initially, the court continued the matter on several occasions because the sclarc apparently needed additional time to evaluate williams.
+   at least some of the subsequent continuances were due to williams being a "miss out," most likely for medical reasons, including williams' need to receive dialysis several times per week.
+   in january 2013, the sclarc sent a letter to the trial court, advising that "mr. williams was made eligible to receive services in 2012 with a diagnosis of mild mental retardation" and that, "[s]ince his eligibility, mr. williams has been incarcerated and has not participated in any sclarc funded programs."
+   the sclarc also stated in the letter that "[d]ue to the nature of mr. williams['] offense[s] as well as a [section] 290 sex registrant status, the regional center cannot find an appropriate community placement, as all residential facilities are within a quarter of a mile from schools."
+---penal code:290:1
+   in addition, the sclarc reported that lockdown facilities had advised, based on the nature of the offenses charged and williams' sex registrant status, that williams was "at high risk to offend with the more vulnerable population at these sites."
+   the letter concluded with a recommendation that "williams be ordered [placed in the] porterville developmental center."
+   the trial court acted promptly on the sclarc's recommendation.
+   in january 2013, just one day after the date of the sclarc's letter, the trial court ordered williams committed to porterville, where he was to be evaluated pursuant to section 1370.1.
+---penal code:1370.1:1
+   in february 2013, the trial court ordered the los angeles county sheriff's department (sheriff) to release williams' medical records to the regional center.
+   however, at a hearing that took place exactly one month later, williams' counsel advised the trial court that the regional center was still waiting for williams' medical records.
+   at the end of april 2013, the sclarc sent a letter to the trial court, advising that williams continued to be incarcerated in the county jail and that his case "is to be reviewed by the porterville development center clinical team for placement approval and placement on their waiting list."
+   an assessment attached to the letter indicated that williams' diagnosis was "moderate" mental retardation.
+   the assessment also noted that williams has "end-stage renal disease" and receives dialysis three times per week.
+   minutes from a hearing that took place in early may 2013 reflect that williams was still in the county jail "awaiting being transported to porterville development center."
+   the minutes noted that williams "will be placed on a waiting list for porterville. the wait . . . time is 6 to 9 months."
+   although not entirely clear, it appears this assertion was based on statements from a representative of the sclarc who was present at the hearing.
+   the matter was continued to june 2013.
+   in late may 2013, the acting community liaison representative for the porterville regional project sent a letter to the trial court (hereafter the rejection letter), advising that porterville had assessed williams for placement based on information it had received from the sclarc. according to the letter, an assessment "team determined that mr. williams cannot be safely served at pdc."
+   the letter then quoted welfare and institutions code section 6510.5, which provides: "under no circumstances shall the court order placement of a person described in this article or a dangerous person committed pursuant to section 1370.1 of the penal code to a developmental center if the department [dds] has specifically notified the court in writing that the individual cannot be safely served in that developmental center."
+---welfare and institutions code*:6510.5:1
+---penal code*:1370.1:1
+   the letter noted that porterville's patient population is "challenged and very susceptible."
+   the letter went on to describe williams' criminal history and two psychological assessments performed on williams in 2011 (before he was found mentally incompetent), concluding with the following:
+   "under all the circumstances, mr. williams presents as a person who would be noncompliant to treatment, would engage in malingering behaviors, and who would be manipulative and take advantage of less capable individuals such as those housed at [porterville]. mr. williams['] demonstrated inclinations, along with his long history of criminal behavior and offenses provide a very substantial risk to those consumers currently served in the secure treatment program at [porterville]. for these reasons [porterville's] clinical team has determined that mr. williams cannot be adequately and safely served at [porterville].
+   "accordingly, [welfare and institutions code] section 6510.5 precludes mr. williams' placement at [porterville] as he is 'a dangerous person committed pursuant to section 1370.1 of the penal code.' please regard this letter as written notification that mr. williams cannot be safely served in the porterville development center."
+---welfare and institutions code*:6510.5:1
+---penal code*:1370.1:1
+   in july 2013, the trial court held a hearing with the participation of, among others, a sclarc representative and the porterville acting community liaison representative who signed the rejection letter.
+   during the hearing, the court expressed skepticism regarding porterville's determination that williams could not be safely housed there.
+   it observed that it had "seen some people accused of very dangerous crimes go to porterville who could walk" and who were "physically, basically a hundred percent."
+   the court noted that williams is an "older gentleman" who is on dialysis and who has sometimes appeared in court on a gurney.
+   the court characterized williams as "one of the most physically incapacitated people that i have seen in this courtroom and this is a wheelchair courtroom."
+   the deputy district attorney also observed that, during the years she has been assigned to the case, williams "has always been in a wheelchair" and he "seem[s] to be very limited in his physical capacity, coupled with his medical situation."
+   the porterville representative confirmed that "numerous" people charged with sex offenses are housed at porterville.
+   the district attorney maintained that porterville is "the correct institution to actually house and take the defendant pursuant to welfare and institutions code section 6501," which, as discussed below, provides that, when dealing with persons charged with violent felonies who are committed under section 1370.1, priority should be given to placement at porterville.
+---welfare and institutions code*:6501:1
+---penal code:1370.1:1
+   counsel for the dds advised the trial court that, besides porterville, she did not believe there was a placement that could provide services to williams while adequately protecting the community.
+   the representative who signed the rejection letter informed the court that porterville has the capacity to accept 170 persons and that it was currently "at capacity."
+   the representative emphasized, however, that this is "not the reason that [williams' placement at porterville] was denied. he was denied based on the fact that [under welfare and institutions code section 6510.5,] we had the discretion to do so."
+---welfare and institutions code*:6510.5:1
+   the court then scheduled an order to show cause hearing as to why williams should not be ordered placed in porterville "at a time convenient."
+   in august 2013, the court vacated its order to show cause for technical reasons.
+   however, the court continued to discuss the merits of the case with counsel for the various interested parties in an effort to find a solution to the placement dilemma.
+   among other things, the court stated that porterville's decision to reject williams "appears to be arbitrary and capricious" but the court believed that welfare and institutions code section 6510.5 prevented it from placing williams in porterville.
+---welfare and institutions code*:6510.5:1
+   the court expressed its belief that under section 1370.1, the dds had to come up with an alternative treatment plan.
+---penal code:1370.1:1
+   counsel for the dds maintained that under section 1370.1, "the regional center would be the proper party to make a recommendation for alternate service."
+---penal code:1370.1:1
+   counsel for the dds suggested that an outside vendor could provide services to williams in the county jail.
+   counsel for the sclarc stated that the regional center "can arrange for a vendor to go in county jail. it has been done in other cases that we have; however, that's usually pending a placement at porterville."
+   counsel for the sclarc added, however, that "[t]he commitment order under [section] 1370.1 can't be county jail, the way i read [the statute]."
+---penal code:1370.1:1
+   williams' counsel also maintained that placement in the county jail is not proper under section 1370.1.
+---penal code:1370.1:1
+   the court continued the matter to september 2013 to consider alternative placement options.
+   in late august 2013, williams filed a petition for a writ of habeas corpus in the trial court, seeking his "immediate release from his present unlawful confinement."
+   williams maintained that his continued confinement is unlawful because there has been no determination that there is a substantial likelihood he will attain competency in the foreseeable future.
+   the trial court directed the district attorney to file a return.
+   in the return, the district attorney argued that williams could and should remain in county jail and should receive competency training there.
+   alternatively, the district attorney asked that the court place williams in patton state hospital.
+   the sclarc also filed a brief in which it argued that "the jail is not a placement option under penal code section 1370.1 and the regional center is not recommending it as a placement."
+---penal code*:1370.1:1
+   although stopping short of expressly stating that the court should order williams placed in porterville notwithstanding the rejection letter, the sclarc maintained that porterville is the only secure treatment facility where williams could be placed.
+   in late september 2013, after conducting a hearing on the matter, the trial court issued a written order denying the petition.
+   the court concluded that, in light of welfare and institutions code section 6510.5, it had no authority to place williams in porterville.
+---welfare and institutions code*:6510.5:1
+   the court then ruled that "[t]he only alternative to releasing the petitioner is for this court to order the sclarc to provide competency services in the los angeles county jail, which does qualify pursuant to penal code section 1369.1 as a 'treatment facility,' and to submit to the court the ninety[-]day evaluation required by penal code section 1370.1(b)(1)."
+---penal code*:1369.1:1
+---penal code:1370.1:1
+   two months later, williams filed a petition for a writ of habeas corpus in this court.
+   this court summarily denied the petition, but the supreme court granted williams' petition for review and transferred the matter to this court with directions to issue an order to show cause why williams' continued placement in county jail is not contrary to subdivision (a)(1)(b)(i), and why his continued confinement without a determination whether there is a substantial likelihood he will attain competency is not a denial of due process.
+   we issued such an order to show case, received separate returns from the sheriff and the district attorney, as well as a traverse from petitioner.
+   in addition, we invited and received amicus curiae briefs from the dds and the sclarc, each of which addressed the question whether the trial court had authority to order porterville to accept williams notwithstanding porterville's invocation of welfare and institutions code section 6510.5.
+---welfare and institutions code*:6510.5:1
+   the dds maintains that the trial court had no such authority.
+   the sclarc does not directly address the question, though it maintains that williams may challenge porterville's decision to reject his placement through the lanterman act's administrative fair hearing procedures.
+   the dds also suggests williams may challenge the rejection letter by way of such an administrative proceeding.
+   discussion
+   a.	placement of persons declared mentally incompetent due to	developmental disability
+   1.	applicable legal principles
+   a defendant may be found incompetent to stand trial due to a mental disorder or a developmental disability.
+   (§ 1367, subd. (a).)
+---penal code:1367:1
+   different procedures apply in each instance.
+   section 1370 applies to a person found incompetent due solely to mental disorder, while section 1370.1 applies to a person found incompetent due to developmental disability and to "a person who is incompetent as a result of a mental disorder, but is also developmentally disabled."
+---penal code:1370:1
+---penal code:1370.1:1
+   (§ 1367, subd. (b).)
+---penal code:1367:1
+   sections 1370 and 1370.1 contain many similarities, and even some virtually identical provisions, but there are some important differences.
+---penal code:1370:1
+   one of those differences is relevant to this writ proceeding.
+   it concerns the placement options available to the trial court when deciding where the incompetent person should receive services designed to help that person attain competency.
+   we focus on the statute applicable to this case – section 1370.1.
+---penal code:1370.1:1
+   under this statute, "[i]f the defendant is found mentally incompetent and is developmentally disabled, the trial or judgment shall be suspended until the defendant becomes mentally competent."
+   (subd. (a)(1)(b).)
+   subdivision (a)(1)(b) specifies the placement options available to the court after a finding of incompetency.
+   they are contained in three paragraphs – (i) through (iii), respectively.
+   the main placement provision is contained in paragraph (i), which provides in pertinent part:
+   "in the meantime [i.e., until the defendant becomes mentally competent], the court shall order that the mentally incompetent defendant be delivered by the sheriff or other person designated by the court to [1] a state hospital or developmental center for the care and treatment of the developmentally disabled or [2] any other available residential facility approved by the director of a regional center for the developmentally disabled established under division 4.5 (commencing with section 4500) of the welfare and institutions code as will promote the defendant's speedy attainment of mental competence, or [3] be placed on outpatient status pursuant to section 1370.4 and title 15 . . . ."
+---welfare and institutions code*:4500:1
+---penal code:1370.4:1
+   (subd. (a)(1)(b)(i).)
+   in this case, we are not concerned with the third of these options because, under section 1601, subdivision (a), persons charged with certain specified offenses are not eligible for outpatient status until they have "actually been confined in a state hospital or other treatment facility for 180 days or more . . . ."
+---penal code:1601:1
+   one of the specified offenses is forcible rape.
+   because williams was charged with forcible rape, he was not eligible for outpatient status.
+   (see also people v. superior court (lopez) (2005) 125 cal.app.4th 1558, 1563 (lopez) [trial court erred by placing incompetent defendant directly in outpatient treatment because he was facing trial on one of the offenses listed in section 1601, subdivision (a)].)
+---penal code:1601:1
+   therefore, the two placement options that were available to the trial court under subdivision (a)(1)(b)(i) were (1) "a state hospital or developmental center for the care and treatment of the developmentally disabled" or (2) "any other available residential facility approved by the director of a regional center for the developmentally disabled . . . as will promote the defendant's speedy attainment of mental competence."
+   the two remaining paragraphs in subdivision (a)(1)(b) authorize "alternative placement[s]" beyond those available under paragraph (i), but they apply only under limited circumstances.
+   paragraph (ii) of subdivision (a)(1)(b) provides:
+   "however, if the action against the defendant who has been found mentally incompetent is on a complaint charging a felony offense specified in section 290 [i.e., an offense for which sex offender registration is required upon conviction], the prosecutor shall determine whether the defendant [1] previously has been found mentally incompetent to stand trial pursuant to this chapter on a charge of a section 290 offense, or [2] whether the defendant is currently the subject of a pending section 1368 proceeding arising out of a charge of a section 290 offense. if either determination is made, the prosecutor shall so notify the court and defendant in writing. after this notification, and opportunity for hearing, the court shall order that the defendant be delivered by the sheriff to a state hospital or other secure treatment facility for the care and treatment of the developmentally disabled unless the court makes specific findings on the record that an alternative placement would provide more appropriate treatment for the defendant and would not pose a danger to the health and safety of others."
+---penal code:290:1
+---penal code:290:1
+---penal code:1368:1
+---penal code:290:1
+   (subd. (a)(1)(b)(ii), italics added.)
+   in lopez, supra, 125 cal.app.4th at pages 1563 through 1565, the court of appeal construed a virtually identical provision in the "parallel" statute that applies when someone is declared incompetent due solely to a mental disorder – section 1370, subdivision (a)(1)(b)(ii).
+---penal code:1370:1
+   the court observed that the provision "applies only if the defendant has been found mentally incompetent to stand trial on a section 290 offense and he falls into one of two prerequisite categories: (1) he previously was found incompetent to stand trial on a section 290 offense, or (2) he 'is currently the subject of a pending section 1368 proceeding arising out of a charge' listed in section 290."
+---penal code:290:1
+---penal code:290:1
+---penal code:1368:1
+---penal code:290:1
+   (lopez, supra, 125 cal.app.4th at p. 1564.)
+   before the defendant in lopez was declared incompetent, he was facing trial on a felony offense listed in section 290, but "there [wa]s nothing in the record to indicate defendant was previously found incompetent to stand trial on an offense listed in section 290."
+---penal code:290:1
+---penal code:290:1
+   (lopez, supra, at p. 1564.)
+   therefore, the first prerequisite category could not be invoked.
+   "as to the second category – whether the defendant 'is currently the subject of a pending section 1368 proceeding' based on an offense listed in section 290 –" the court in lopez concluded that "this language refers to a separate proceeding from the one before the trial court."
+---penal code:1368:1
+---penal code:290:1
+   (ibid.)
+   the court explained:
+   "any other interpretation of [section 1370,] subdivision (a)(1)(b)(ii) would render much of its language surplusage, '"'[a] construction . . . to be avoided.'"' (california insurance guarantee assn. v. workers' comp. appeals bd. (2003) 112 cal.app.4th 358, 366.) for example, if the fact that a defendant has been found incompetent to stand trial for a section 290 offense in the current proceeding were sufficient to satisfy the requirement of a 'pending section 1368 proceeding,' this second prerequisite category would apply in every case, rendering it unnecessary for the prosecuting attorney to ever make a determination whether either of the two prerequisite categories applied."
+---penal code:1370:1
+---penal code:290:1
+---penal code:1368:1
+   (lopez, supra, 125 cal.app.4th at p. 1565, first brackets and ellipsis in original.)
+   the supreme court denied review in lopez and the legislature has not made any changes to the statutory language at issue in lopez since that case was decided in 2005.
+   turning back to the placement options in subdivision (a)(1)(b), the third and final paragraph listing the placement options is paragraph (iii), which authorizes the trial court to consider "alternative placement[s]" only if, among other things, the defendant was denied bail.
+   2. application to petitioner's commitment in this case
+   we first consider whether williams' current placement in the county jail is proper under section 1370.1.
+---penal code:1370.1:1
+   we hold it is not.
+   subdivision (a)(1)(b)(i)
+   the placement options in section 1370.1 are contained in subdivision (a)(1)(b), with the main placement provision being in paragraph (i).
+---penal code:1370.1:1
+   as discussed above, that paragraph contains three placement options: (1) "a state hospital or developmental center for the care and treatment of the developmentally disabled or" (2) "any other available residential facility approved by the director of a regional center for the developmentally disabled established under division 4.5 (commencing with section 4500) of the welfare and institutions code as will promote the defendant's speedy attainment of mental competence," or (3) "outpatient status."
+---welfare and institutions code*:4500:1
+   the first and last of these options require little discussion.
+   a county jail is not a "state hospital or developmental center for the care and treatment of the developmentally disabled" and no party argues that it is.
+   and, as noted, under section 1601, subdivision (a), williams was not eligible for outpatient status because he was charged with forcible rape.
+---penal code:1601:1
+   turning to the second option, we are uncertain whether the county jail could theoretically qualify as a "residential facility approved by the director of a regional center for the developmentally disabled established under division 4.5 (commencing with section 4500) of the welfare and institutions code as will promote the defendant's speedy attainment of mental competence."
+---welfare and institutions code*:4500:1
+   in this case, the director of the sclarc has not approved the county jail under this provision, so it was not an option available to the trial court.
+   at oral argument, counsel for the dds stated that the county jail or other facility could qualify as such a residential facility if approved by the regional center.
+   counsel for the sclarc likewise seemed to concede that the county jail could qualify as such a residential facility if its director approved it as such.
+   however, counsel maintained that the sclarc could not approve the county jail for williams' placement because doing so would be inconsistent with its obligations under welfare and institutions code section 4648, subdivision (b), to advocate for, and protect, persons with developmental disabilities.
+---welfare and institutions code*:4648:1
+   perhaps because it was only a theoretical possibility, the district attorney and the sheriff do not argue williams' placement in the county jail could be proper if the regional center approved it as a residential facility.
+   however, williams claims it would not be proper because the county jail does not meet the requirements in "division 4.5 (commencing with section 4500) of the welfare and institutions code."
+---welfare and institutions code*:4500:1
+   because the propriety of such a placement is not before us, and because this point was not fully addressed by the parties in their briefing, we are not in a position to determine whether the county jail could qualify as a residential facility for williams' placement if the sclarc approves it.
+   however, we do not preclude the possibility that a "residential facility" under subdivision (a)(1)(b)(i) may include a correctional facility if it meets the requirements of division 4.5 of the welfare and institutions code and it is approved by the regional center.
+   b. subdivision (a)(1)(b)(ii)
+   we turn next to paragraph (ii) of subdivision (a)(1)(b).
+   it provides:
+   "however, if the action against the defendant who has been found mentally incompetent is on a complaint charging a felony offense specified in section 290 [i.e., an offense for which sex offender registration is required upon conviction], the prosecutor shall determine whether the defendant [1] previously has been found mentally incompetent to stand trial pursuant to this chapter on a charge of a section 290 offense, or [2] whether the defendant is currently the subject of a pending section 1368 proceeding arising out of a charge of a section 290 offense. if either determination is made, the prosecutor shall so notify the court and defendant in writing. after this notification, and opportunity for hearing, the court shall order that the defendant be delivered by the sheriff to a state hospital or other secure treatment facility for the care and treatment of the developmentally disabled unless the court makes specific findings on the record that an alternative placement would provide more appropriate treatment for the defendant and would not pose a danger to the health and safety of others."
+---penal code:290:1
+---penal code:290:1
+---penal code:1368:1
+---penal code:290:1
+   (subd. (a)(1)(b)(ii), italics added.)
+   the sheriff and the dds argue that this provision applies here.
+   according to the case law we discussed above, this provision "applies only if the defendant has been found mentally incompetent to stand trial on a section 290 offense and he falls into one of two prerequisite categories: (1) he previously was found incompetent to stand trial on a section 290 offense, or (2) he 'is currently the subject of a pending section 1368 proceeding arising out of a charge' listed in section 290."
+---penal code:290:1
+---penal code:290:1
+---penal code:1368:1
+---penal code:290:1
+   (lopez, supra, 125 cal.app.4th at p. 1564 [construing virtually identical language in section 1370, subd. (a)(1)(b)(ii)].)
+---penal code:1370:1
+   although williams was facing trial on one or more felony offenses listed in section 290, there is nothing in the record to indicate he was previously found incompetent to stand trial on an offense listed in section 290.
+---penal code:290:1
+---penal code:290:1
+   therefore, the first prerequisite category may not be invoked.
+   as for the second category, and as discussed above, the court in lopez concluded that "this language refers to a separate [pending] proceeding from the one before the trial court."
+   (lopez, supra, 125 cal.app.4th at p. 1564.)
+   there is no indication that williams was the subject of another pending section 1368 proceeding arising out of a charge listed in section 290.
+---penal code:1368:1
+---penal code:290:1
+   thus, based on the record before us, we cannot find williams' placement is appropriate under subdivision (a)(1)(b)(ii) either.
+   however, if the district attorney failed to assert a factual basis for applying the provision as we have just explained, it may do so after the matter is remanded to the trial court.
+   c. subdivision (a)(1)(b)(iii)
+   paragraph (iii) of subdivision (a)(1)(b) allows housing in a state hospital for the care and treatment of the developmentally disabled, and also for "alternative placement" upon the court making specific findings on the record.
+   however, it applies only when a defendant has been denied bail because of "a substantial likelihood that the person's release would result in great bodily harm to others, . . ."
+   this subdivision cannot be used in this case because williams was not denied bail.
+   d. other arguments
+   1)	section 1369.1
+---penal code:1369.1:1
+   the district attorney argues williams is properly placed in county jail because of a 2012 amendment to section 1369.1 pursuant to which a "'treatment facility' includes a county jail."
+---penal code:1369.1:1
+   (§ 1369.1, subd. (a).)
+---penal code:1369.1:1
+   as we now explain, while a county jail may qualify as a "treatment facility" for certain purposes, it does not qualify as a placement option under section 1370.1.
+---penal code:1370.1:1
+   first, the only reference to "treatment facility" in subdivision (a)(1)(b) – which, as noted, contains the placement options in section 1370.1 – is contained in paragraph (ii).
+---penal code:1370.1:1
+   that paragraph gives the court the option to place someone in a "secure treatment facility for the care and treatment of the developmentally disabled . . . ."
+   (subd. (a)(1)(b)(ii), italics added.)
+   as we have already explained, however, based on the record before us, williams does not qualify for placement under paragraph (ii) of subdivision (a)(1)(b).
+   second, the legislative history demonstrates that the amendment to section 1369.1 was meant to apply to the placement of defendants found mentally incompetent due to mental disorder under section 1370, not to the placement of defendants found mentally incompetent due to developmental disability under section 1370.1.
+---penal code:1369.1:1
+---penal code:1370:1
+---penal code:1370.1:1
+   section 1369.1 was enacted in 2007 and became effective on january 1, 2008.
+---penal code:1369.1:1
+   initially, it dealt only with the ability of county jails to administer antipsychotic medications.
+   when enacted, subdivision (a) of the statute provided in pertinent part:
+   "as used in this chapter, for the sole purpose of administering antipsychotic medication pursuant to a court order, 'treatment facility' includes a county jail. upon the concurrence of the county board of supervisors, the county mental health director, and the county sheriff, the jail may be designated to provide medically approved medication to defendants found to be mentally incompetent and unable to provide informed consent due to a mental disorder, pursuant to this chapter. . . . the provisions of sections 1370 and 1370.01 shall apply to antipsychotic medications provided in a county jail, provided, however, that the maximum period of time a defendant may be treated in a treatment facility pursuant to this section shall not exceed six months."
+---penal code:1370:1
+   (former § 1369.1, subd. (a), italics added.)
+---penal code:1369.1:1
+   thus, section 1369.1 dealt only with the ability of county jails to administer medication, and it was specifically limited to persons declared mentally incompetent due to a mental disorder (not due to developmental disability).
+---penal code:1369.1:1
+   that explains why the statute cites only sections 1370 and 1370.01 (both of which deal with mental incompetence due to mental disorder), and makes no reference to section 1370.1.
+---penal code:1370.1:1
+---penal code:1370:1
+   the language upon which the trial court in this case and the district attorney rely was added by way of a 2012 amendment, which went into effect in june of that year.
+   (stats. 2012, ch. 24, § 25.)
+---penal code:25:1
+   the only substantive change was the deletion of the phrase "for the sole purpose of administering antipsychotic medication pursuant to a court order."
+   thus, subdivision (a) now provides:
+   "as used in this chapter, 'treatment facility' includes a county jail. upon the concurrence of the county board of supervisors, the county mental health director, and the county sheriff, the jail may be designated to provide medically approved medication to defendants found to be mentally incompetent and unable to provide informed consent due to a mental disorder, pursuant to this chapter. . . . . the provisions of sections 1370 and 1370.01 shall apply to antipsychotic medications provided in a county jail, provided, however, that the maximum period of time a defendant may be treated in a treatment facility pursuant to this section shall not exceed six months."
+---penal code:1370:1
+   (§ 1369.1, subd. (a), italics added.)
+---penal code:1369.1:1
+   as can be seen, this subdivision refers only to persons suffering from a "mental disorder."
+   it makes no reference to persons suffering from a developmental disability.
+   in addition, as part of the same 2012 amendment to section 1369.1, the legislature also amended section 1370, the statute dealing with those declared mentally incompetent due to a mental disorder.
+---penal code:1369.1:1
+---penal code:1370:1
+   specifically, the legislature amended that statute to provide that a treatment facility where such persons may be placed includes the county jail.
+   section 1370, subdivision (a)(1)(b)(i), now provides:
+---penal code:1370:1
+   "in the meantime [pending restoration to sanity], the court shall order that the mentally incompetent [due to mental disorder] defendant be delivered by the sheriff [1] to a state hospital for the care and treatment of the mentally disordered, or [2] to any other available public or private treatment facility, including a local county jail treatment facility, approved by the community program director that will promote the defendant's speedy restoration to mental competence, or [3] placed on outpatient status as specified in section 1600."
+---penal code:1600:1
+   (§ 1370, subd. (a)(1)(b)(i)), italics added.)
+---penal code:1370:1
+   thus, section 1370, subdivision (a)(1)(b)(i), specifically authorizes placement in a "treatment facility," and specifically provides (as of june 2012) that a treatment facility includes a county jail.
+---penal code:1370:1
+   (see also § 1370, subd. (a)(1)(f)(2)(a) [discussing placement in a county jail treatment facility].)
+---penal code:1370:1
+   in contrast, section 1370.1 was not amended in june 2012 when the legislature amended sections 1369.1 and 1370 to provide that treatment facility includes a county jail.
+---penal code:1370.1:1
+---penal code:1369.1:1
+   indeed, section 1370.1 does not include a single reference to "jail."
+---penal code:1370.1:1
+   the district attorney argues that, although the legislature amended only section 1370, and not section 1370.1, to expressly authorize placement in a county jail, this court should interpret section 1370.1 as authorizing such placement "in order to harmonize this section [1370.1] with section 1370."
+---penal code:1370:1
+---penal code:1370.1:1
+---penal code:1370.1:1
+---penal code:1370.1:1
+---penal code:1370:1
+   we decline the invitation to rewrite the statute.
+   as the supreme court explained in a different context, "plaintiffs' argument would require us to adopt the following implausible line of reasoning: when two parallel statutes use nearly identical language, and when the legislature amends one but not the other, and when the amendment does not merely clarify existing law but actually changes the law, we should nevertheless continue to give the two statutes the same meaning, treating them as if the legislature had actually amended both . . . ."
+   (miklosy v. regents of university of california (2008) 44 cal.4th 876, 894.)
+   moreover, the discussion above demonstrates that the 2012 amendment to section 1369.1 was meant to apply only to the placement of those found mentally incompetent due solely to a mental disorder.
+---penal code:1369.1:1
+   the language in subdivision (a)(1)(b)(i) is clear.
+   "if the [statutory] language is clear, courts must generally follow its plain meaning unless a literal interpretation would result in absurd consequences the legislature did not intend."
+   (coalition of concerned communities, inc. v. city of los angeles (2004) 34 cal.4th 733, 737.)
+   no party contends that construing the subdivision according to its plain meaning would lead to absurd consequences.
+   we therefore decline to construe subdivision (a)(1)(b)(i) to include an amendment the legislature chose not to add.
+   2)	subdivision (e)
+   although not expressly relying on subdivision (e) for an alternative argument that williams is appropriately placed in county jail, the district attorney contends it gives rise to an "implication that correctional facilities may be an appropriate treatment facility if the circumstances warrant."
+   subdivision (e) provides:
+   "for the purpose of this section, 'secure treatment facility' shall not include, except for state mental hospitals, state developmental centers, and correctional treatment facilities, a facility licensed pursuant to chapter 2 (commencing with section 1250) of, chapter 3 (commencing with section 1500) of, or chapter 3.2 (commencing with section 1569) of, division 2 of the health and safety code, or a community board and care facility."
+---penal code:1250:1
+---penal code:1500:1
+---health and safety code*:1569:1
+   as discussed, while the term "secure treatment facility" appears in subdivision (a)(1)(b)(ii), williams' placement cannot be supported under this provision.
+   subdivision (a)(1)(b)(i) is the only provision containing the placement options available in this case.
+   it makes no reference to "secure treatment facility."
+   therefore, what may or may not be included in the term "secure treatment facility" is irrelevant.
+   in sum, williams' placement in the county jail cannot currently be upheld under any of the three provisions in subdivision (a)(1)(b), the subdivision that contains the only placement options available under section 1370.1.
+---penal code:1370.1:1
+   b.	due process limits on the commitment of persons declared mentally
+   incompetent to stand trial
+   1.	applicable legal principles
+   as noted above, pending restoration to sanity, the incompetent defendant is to be placed in an authorized facility for the purpose of receiving services designed to help that person attain competency.
+   (subd. (a)(1)(b).)
+   previously, such placement could last indefinitely.
+   (see in re polk (1999) 71 cal.app.4th 1230, 1235 ["before 1974, a criminal defendant found mentally incompetent to stand trial in california was committed to a state hospital until he regained competence and thus faced the possibility of an indefinite commitment without regard to the crime with which he was charged or his prognosis for recovery of competence"].)
+   however, there are now both constitutional and statutory time limits on such placements.
+   in jackson v. indiana (1972) 406 u.s. 715, 731 (jackson), the united states supreme court held that a state's "indefinite commitment of a criminal defendant solely on account of his incompetency to stand trial does not square with the fourteenth amendment's guarantee of due process."
+   the court held that, "[a]t the least, due process requires that the nature and duration of commitment bear some reasonable relation to the purpose for which the individual is committed."
+   (id. at p. 738.)
+   more specifically, the court held that a "person charged by a state with a criminal offense who is committed solely on account of his incapacity to proceed to trial cannot be held more than the reasonable period of time necessary to determine whether there is a substantial probability that he will attain that capacity in the foreseeable future. if it is determined that this is not the case, then the state must either institute the customary civil commitment proceeding that would be required to commit indefinitely any other citizen, or release the defendant."
+   (ibid., italics added.)
+   in in re davis, supra, 8 cal.3d 798, the california supreme court "acknowledge[d] that some provision must be made to assure that [incompetent defendants] do not face an indefinite commitment without regard to the likelihood that they will eventually regain their competence" and it proceeded to "adopt the rule of the jackson case that no person charged with a criminal offense and committed to a state hospital solely on account of his incapacity to proceed to trial may be so confined more than a reasonable period of time necessary to determine whether there is a substantial likelihood that he will recover that capacity in the foreseeable future."
+   (in re davis, supra, 8 cal.3d at p. 801.)
+   the supreme court went on to specify procedures that should apply to future commitments:
+   "in order to comply with jackson's demands the trial courts should henceforth direct the appropriate state hospital authorities to commence an immediate examination of the person committed and, within a reasonable time, report to the court the result of that examination and estimate the additional time probably necessary to restore the person to competence. should the person committed desire to challenge the report's conclusions, reasonable opportunity should be provided him to do so.
+   "if the report discloses that there exists no reasonable likelihood that the person will recover his competence to stand trial in the foreseeable future, then the court should either order him released from confinement or initiate appropriate alternative commitment proceedings under the lanterman-petris-short act (welf. & inst. code, § 5000 et seq.). on the other hand, if the report is optimistic regarding the person's probable recovery, the court should continue his commitment and require the hospital authorities to furnish, within a reasonable time, additional periodic reports regarding the person's progress."
+---welfare and institutions code*:5000:1
+   (in re davis, supra, 8 cal.3d at pp. 806-807, fns. omitted.)
+   in 1974, the legislature responded to the jackson and davis decisions by substantially amending the statutes governing incompetency commitments.
+   (see hale v. superior court (1975) 15 cal.3d 221, 223.)
+   subdivision (b)(1) now provides for specific time limits to ensure that a mentally incompetent person is not committed if there is no substantial likelihood of attaining competency.
+   the subdivision provides in pertinent part:
+   "within 90 days of admission of a person committed pursuant to subdivision (a), the executive director or designee of the state hospital, developmental center, or other facility to which the defendant is committed, . . . shall make a written report to the committing court and the regional center director or a designee concerning the defendant's progress toward becoming mentally competent. if the defendant has not become mentally competent, but the report discloses a substantial likelihood the defendant will become mentally competent within the next 90 days, the court may order that the defendant shall remain in the state hospital, developmental center, or other facility . . . for that period of time. within 150 days of an admission made pursuant to subdivision (a) or if the defendant becomes mentally competent, the executive director or designee of the hospital or developmental center or person in charge of the facility . . . shall report to the court and the regional center director or his or her designee regarding the defendant's progress toward becoming mentally competent. . . . if the report indicates that there is no substantial likelihood that the defendant has become mentally competent, the committing court shall order the defendant to be returned to the court for [commitment or detention] proceedings pursuant to paragraph (2) of subdivision (c)."
+   the maximum commitment under section 1370.1 is three years.
+---penal code:1370.1:1
+   (subd. (c)(1)(a) ["at the end of three years from the date of commitment or a period of commitment equal to the maximum term of imprisonment provided by law for the most serious offense charged in the information, indictment, or misdemeanor complaint, whichever is shorter, a defendant who has not become mentally competent shall be returned to the committing court"].)
+   2. application to petitioner's commitment in this case
+   although the court in davis referred to commitment to a "state hospital," the same due process concerns apply when someone is being held in confinement prior to transportation to such hospital or other facility.
+   (see craft v. superior court (2006) 140 cal.app.4th 1533, 1545 ["because commitment and treatment are the intertwined rationales for suspending criminal proceedings against a mentally incompetent defendant [citation], it follows that where there is no commitment and no treatment, the time an incompetent defendant spends in jail is unnecessary and implicates not only due process, but also counts towards a finding of prolonged incarceration under the state constitutional speedy trial guarantee"].)
+   due process requires that the nature and duration of commitment "bear some reasonable relation to the purpose for which the individual is committed."
+   (jackson, supra, 406 u.s. at p. 738.)
+   in this case, once the court found williams incompetent in august 2011, he was committed to the county jail solely for (1) the sclarc to evaluate williams and make the statutorily-required placement recommendation, (2) the trial to issue a placement order after receipt of the sclarc recommendation, and (3) the sheriff to transport williams to the facility in question.
+   while there may be no firm deadline for these things to occur, based on the record in this case, the two years that passed between the time the trial court found williams incompetent and the time it ordered him placed in the county jail for treatment is unreasonable.
+   after the trial court found williams incompetent to stand trial and ordered the sclarc to make a placement recommendation in august 2011, it was not until november 2012 that the sclarc actually fulfilled its duty and sent a letter to williams' counsel advising that williams had been assessed and determined to be eligible for regional center services.
+   we can discern that williams' health problems may have been responsible for some of the delay.
+   in addition, problems retrieving williams' medical records – which required considerable intervention by the trial court – may have contributed to the delay.
+   still, considering that williams had been examined by at least two experts before the court found him incompetent due to developmental disability , it is hard to understand why it took so long for the sclarc to reach its conclusion that williams was eligible for services.
+   it took another two months before the sclarc recommended to the court in january 2013 that williams be placed in porterville, a recommendation the trial court acted on within one day.
+   it then took another four months before porterville issued its letter stating that williams could not be safely served there, a letter that took the court, the parties and the sclarc by surprise because they all assumed williams was on porterville's waiting list, waiting only for a bed to become available.
+   it was incumbent on the regional center to make a placement recommendation and on the dds to accommodate, rather than hinder, placement efforts.
+   due process does not permit someone declared incompetent to be confined for such a long period of time without receiving any treatment, much less without a determination that there is a substantial likelihood the person will attain competency in the foreseeable future.
+   c.	the trial court correctly determined that, under welfare and institutions 	code section 6510.5, it had no authority to order williams placed in
+---penal code:6510.5:1
+   porterville.
+   however, the trial court still has options available to ensure
+   that the dds is fulfilling its statutory obligations
+   williams argues the trial court should have ordered him placed at porterville, notwithstanding that institution's refusal to accept him.
+   the district attorney concurs.
+   we are not persuaded.
+   in concluding it had no authority to do so, the trial court cited welfare and institutions code section 6510.5.
+---welfare and institutions code*:6510.5:1
+   that statute provides: "under no circumstances shall the court order placement of a person described in this article or a dangerous person committed pursuant to section 1370.1 of the penal code to a developmental center if the department [dds] has specifically notified the court in writing that the individual cannot be safely served in that developmental center."
+---penal code*:1370.1:1
+   (italics added.)
+   the statute in question, which was enacted and went into effect in june 2012, has not been cited in a single case.
+   the district attorney impliedly acknowledges the unambiguous language in welfare and institutions code section 6510.5.
+---welfare and institutions code*:6510.5:1
+   it notes, however, that under section 6501 of that code, porterville "is, in essence, a haven of last resort for those inmates who need to be securely restored to competency."
+---penal code:6501:1
+   the district attorney then argues that construing welfare and institutions code section 6510.5 as giving porterville the "unfettered discretion to decide who it chooses to treat completely eviscerates the stated intention of the legislature . . . that developmentally disabled persons charged with violent felonies be treated at porterville."
+---welfare and institutions code*:6510.5:1
+   in other words, the district attorney urges this court to read a "porterville exception" into welfare and institutions code section 6510.5.
+---welfare and institutions code*:6510.5:1
+   however, the statutory language is clear.
+   "under no circumstances" means under no circumstances.
+   it does not mean "under some circumstances."
+   and while the legislature determined that preferential consideration should be given to porterville when deciding where to place persons such as williams, it did not mandate placement at porterville.
+   neither did it indicate porterville was the sole placements for such defendants.
+   moreover, construing welfare and institutions code section 6510.5 according to its plain meaning may require difficult choices, but it does not necessarily lead to absurd consequences.
+---welfare and institutions code*:6510.5:1
+   dds is obligated to find a facility that is qualified for placement.
+   in addition, section 1370.1 provides for alternative (i.e., civil) commitment procedures if the defendant cannot attain competency.
+---penal code:1370.1:1
+   thus, while the trial court was right to question the basis for porterville's determination that williams could not be "safely served" at porterville, it correctly determined that it had no authority to place williams at porterville.
+   this does not mean the trial court has no tools at its disposal to ensure that the dds is performing its statutory duties.
+   first, the court can confirm that the dds stands by the rejection letter.
+   welfare and institutions code section 6510.5 requires the written notice that an incompetent person cannot be safely served at a particular development center to be from "the department" (the dds).
+---welfare and institutions code*:6510.5:1
+   the written notice in this case was given by way of the rejection letter, which was signed by the "acting community liaison representative" of "porterville regional center."
+   although the dds operates porterville and is charged with determining who is admitted to that facility (see welf. & inst. code, §§ 4440, 6501, 6509, subd. (a)(3), 7502.5, subd. (b)), the liaison representative did not expressly purport to be speaking on behalf of the dds. nonetheless, all parties and the trial court assumed that the rejection letter qualified as the written notice referenced in welfare and institutions code section 6510.5.
+---welfare and institutions code*:6510.5:1
+---penal code:4440:1
+   because this assumption was not questioned in the trial court or in this writ proceeding, we have no occasion to consider its validity.
+   however, nothing in this opinion should be construed as restricting the trial court's authority, after the matter is remanded to it, to take all steps it deems appropriate to confirm that the liaison representative's letter represents the official position of the dds. this may include requiring the dds's director to confirm that williams cannot be safely served at porterville, notwithstanding his extensive physical limitations and the legislature's designation of porterville as the preferred placement for someone accused of a violent felony.
+   second, the trial court may issue an order to show cause and ultimately compel the dds to fulfill its statutory obligations by offering a placement option.
+   welfare and institutions code section 4501 provides in pertinent part: "the state of california accepts a responsibility for persons with developmental disabilities and an obligation to them which it must discharge."
+---welfare and institutions code*:4501:1
+   (italics added.)
+   the dds is the entity charged with fulfilling this obligation.
+   (see welf. & inst. code, § 4416 ["unless otherwise indicated in this code, the state department of developmental services has jurisdiction over the execution of the laws relating to the care, custody, and treatment of developmentally disabled persons, as provided in this code"].)
+---welfare and institutions code*:4416:1
+   in addition, as noted above, the dds is required to ensure that the regional centers meet their statutory, regulatory, and contractual obligations.
+   (welf. & inst. code, §§ 4501; see also welf. & inst. code, § 4434.)
+---penal code:4434:1
+---welfare and institutions code*:4501:1
+   by vetoing the trial court's placement order – which order was made pursuant to the statutorily-required regional center recommendation – without offering any alternatives, the dds is making it impossible for the sclarc to fulfill its obligations.
+   while welfare and institutions code section 6510.5 may authorize the dds to veto a specific developmental center placement, it does not give the dds the authority to refuse to approve any placement.
+---welfare and institutions code*:6510.5:1
+   in short, the dds cannot escape its responsibilities and place the burden on the trial court to come up with a placement solution for a problem the dds has itself created.
+   if, as discussed below, the trial court in this case is forced to release this defendant – charged with registerable sex offenses and previously convicted of registerable sex offenses – because the dds has not provided a placement option, the responsibility for such action will lie with the dds, not with the court.
+   d.	petitioner must be lawfully committed or released
+   this brings us to the question of the remedy.
+   williams does not necessarily pray for an order directing that he be released outright.
+   in his petition, he maintains that he "is entitled to immediate release from such unlawful custody [in county jail], whether to be placed in lawful custody for treatment, or released (for outpatient treatment or otherwise)."
+   there is therefore no basis for ordering his immediate release.
+   (see also in re davis, supra, 8 cal.3d at p. 806 [because "the record in the cases before us furnishes no basis for concluding that petitioners are not likely to respond to treatment . . . , it would be premature for us to order petitioners released from confinement at this time"].)
+   to afford the trial court an opportunity to find a lawful placement, while ensuring that williams' current detention in the county jail is not prolonged unnecessarily, we direct the trial court to issue an order, within 45 days of finality of this opinion, placing williams in a facility that meets the requirements of subdivision (a)(1)(b), and to ensure that such placement occurs forthwith.
+   if such an order issues, within 120 days of finality of this opinion, the trial court is to order that williams be released or be subject to the alternative commitment procedures referenced in section 1370.1, unless the trial court determines there is a substantial likelihood that williams will attain competency in the foreseeable future.
+---penal code:1370.1:1
+   (see subd. (b)(1); in re davis, supra, 8 cal.3d at pp. 806-807.)
+   alternatively, if the trial court does not issue a new placement order within 45 days and ensure placement in accordance with such order forthwith, the trial court is directed to order that williams be released or be subject to the alternative commitment procedures referenced in section 1370.1.
+---penal code:1370.1:1
+   before concluding, we wish to add that, based on the comments of virtually all counsel at oral argument, this case reflects a statewide problem in finding adequate housing for persons declared mentally incompetent to stand trial, especially those who are developmentally disabled.
+   we urge the legislative and executive branches to work towards finding a solution to this problem to ensure that persons found mentally incompetent are provided the treatment they require and are not released onto the streets where they may pose a significant risk to themselves and to public safety.
+   disposition
+   the petition is granted.
+   the trial court is directed (1) within 45 days of finality of this opinion, to order petitioner placed in a facility that meets the requirements of penal code section 1370.1, subdivision (a)(1)(b), and to ensure that such placement occurs forthwith, and (2) within 120 days of finality of this opinion, order that petitioner be released or subject to alternative commitment procedures, unless the trial court determines there is a substantial likelihood petitioner will attain competency in the foreseeable future.
+---penal code*:1370.1:1
+   if the trial court does not issue a new placement order within 45 days of finality of this opinion, the trial court is directed to order that williams be released or be subject to the alternative commitment procedures referenced in penal code section 1370.1.
+---penal code*:1370.1:1
+   certified for publication
+   bigelow, p. j.
+   we concur:
+   flier, j.
+   grimes, j.
+   filed 8/8/14 opn filed after rehearing
+   certified for partial publication*
+   in the court of appeal of the state of california
+   second appellate district
+   division three
+   michael m. mojtahedi,
+   plaintiff and appellant,
+   v.
+   fernando d. vargas,
+   defendant and respondent.
+   b248551
+   (los angeles county
+   super. ct. no. tc026549)
+   appeal from judgment of the superior court of los angeles county,william barry, judge.
+   affirmed.
+   kazerouni law group, apc and s. mohammad reza kazerouni for plaintiff and appellant.
+   law office of lawrence m. lebowsky and lawrence m. lebowsky for defendant and respondent.
+   _____________________
+   introduction
+   plaintiff michael m. mojtahedi, the first of two attorneys to represent a pair of clients in a personal injury matter, appeals the trial court's judgment sustaining the demurrer to his second amended complaint without leave to amend.
+   in the underlying matter, plaintiff represented the clients until defendant fernando d. vargas substituted in as new counsel.
+   defendant obtained a settlement payment for the clients, which he deposited in his client trust fund account.
+   plaintiff never brought an action against his former clients to establish the reasonable cost of his attorney fees, and instead unsuccessfully demanded payment of attorney fees from defendant.
+   plaintiff subsequently sued defendant on the theory that he was owed a portion of the settlement checks.
+   the trial court sustained defendant's demurrer to the second amended complaint because plaintiff failed to establish the existence, amount, and enforceability of his attorney fees lien in an independent action against the clients.
+   we affirm for the same reasons.
+   facts and procedural background
+   in february 2010, vincente ramirez vera and josefina ramirez (collectively, the clients) hired plaintiff and his firm to represent them in a dispute with a claims adjuster regarding personal injuries sustained in an automobile accident.
+   the clients entered into a written attorney-client fee contract with plaintiff's law firm, which included a provision allowing the firm to assert a lien against all claims or causes of action that were subject to plaintiff's representation under the contract.
+   plaintiff represented the clients for about eight months.
+   defendant fernando d. vargas then contacted plaintiff, advising him that he was substituting into the case as new counsel for the clients.
+   shortly thereafter, plaintiff wrote to the claims adjuster, indicating that he had a lien for attorney's fees on future payments to the clients and requesting that any payment to the clients include plaintiff as a payee.
+   defendant settled the case in august 2011, and deposited the settlement checks into his client trust fund account.
+   each check was made out to the clients, plaintiff's law office, and defendant's law office as payees.
+   when plaintiff learned of the settlement payment, he sent a log of his time spent on the case and a letter to defendant demanding $4,407 in attorney's fees to be paid to him from the $14,500 settlement amount.
+   in response, defendant offered plaintiff $2,000 for his attorney fees.
+   plaintiff refused that offer and brought the present suit against defendant, the claims adjuster, and the two banks that issued and deposited the settlement checks for fraud, violation of commercial code sections 3110(d) and 3420, negligence, and tortuous interference with prospective economic advantage.
+---commercial code*:3110:1
+   plaintiff never sued his former clients to establish the amount of his lien or that the lien was enforceable.
+   defendant demurred to the second amended complaint on the grounds that plaintiff did not have an enforceable lien because he never established the lien amount or its enforceability in a separate action against the clients.
+   the trial court sustained defendant's demurrer without leave to amend, relying on valenta v. regents of university of california (1991) 231 cal.app.3d 1465, 1470 (valenta), hansen v. jacobsen (1986) 186 cal.app.3d 350, 356 (hansen), and bandy v. mt.
+   diablo unified sch.
+   dist. (1976) 56 cal.app.3d 230, 234 (bandy), all of which hold that a previously discharged attorney must file an independent action against his client in order to enforce a contractual attorney fees lien.
+   discussion
+   plaintiff asserts that the court erred in sustaining the demurrer, arguing that he does not need to file an independent action against his client to enforce the lien and asserting that the trial court's ruling was contrary to case law and public policy.
+   "on appeal from a judgment after a demurrer is sustained without leave to amend, we review the trial court's ruling de novo, exercising our independent judgment on whether the complaint states a cause of action."
+   (lincoln property co., n.c., inc. v. travelers indemnity co. (2006) 137 cal.app.4th 905, 911.)
+   we treat the demurrer as admitting all properly pleaded facts and those that are judicially noticeable, but we do not assume the truth of contentions, deductions or conclusions of fact or law.
+   (howard jarvis taxpayers assn. v. city of la habra (2001) 25 cal.4th 809, 814; breneric associates v. city of del mar (1998) 69 cal.app.4th 166, 180 (breneric).)
+   "we give the complaint a reasonable interpretation, reading it as a whole and its parts in their context, to determine whether the complaint states facts sufficient to constitute a cause of action."
+   (breneric, at p. 180.)
+   1.	plaintiff must establish the existence, amount, and enforceability of the lien in an independent action against his clients
+   at issue is whether plaintiff can enforce an attorney fees lien solely via an action against defendant, who holds the settlement funds in his client trust account.
+   without an enforceable lien, plaintiff cannot prove that he has a right to a portion of the settlement money.
+   unlike other liens, "an attorney's lien is not created by the mere fact that an attorney has performed services in a case."
+   (carroll v. interstate brands corp. (2002) 99 cal.app.4th 1168, 1172 (carroll).)
+   an attorney's lien is created only by an attorney fee contract with an express provision regarding the lien or by implication in a retainer agreement that provides the attorney will be paid for services rendered from the judgment itself.
+   (ibid.)
+   it is well established that "[a]fter the client obtains a judgment, the attorney must bring a separate, independent action against the client to establish the existence of the lien, to determine the amount of the lien, and to enforce it."
+   (brown v. superior court (2004) 116 cal.app.4th 320, 328 (brown) quoting, carroll v. interstate brands corp., supra, 99 cal.app.4th at p. 1173; accord, valenta, supra, 231 cal.app.3d at p. 1470; hansen, supra, 186 cal.app.3d at p. 356; bandy, supra, 56 cal.app.3d at p. 234; hendricks, supra, 197 cal.app.2d at p. 589.)
+   here, plaintiff alleges that he has a contract with terms that would create a lien.
+   nonetheless, plaintiff failed to allege facts establishing that he adjudicated the existence, value, or enforceability of his lien.
+   plaintiff merely asserts that he has a "detailed log stating a lien amount of $4,407.00 based on pre-substitution time and costs expended."
+   a log of plaintiff's time, although useful to adjudicate the reasonable value of plaintiff's services in a separate action against the clients, is insufficient to establish that plaintiff is entitled to a particular amount of the settlement money in his suit against defendant.
+   plaintiff admits that he never brought a separate action against his clients to litigate those issues.
+   therefore, he has yet to establish the value or validity of his purported lien.
+   in asserting that he does not need to bring a separate action against the clients, plaintiff attempts to distinguish his case from valenta, hansen, and bandy.
+   plaintiff states that unlike those cases, plaintiff has not filed a lien or a notice of lien in any pending action, plaintiff's former clients' personal injury matter has been resolved, and plaintiff's attempt to recover his lien is ripe.
+   all of these differences are insignificant and fail to alter the applicability of the central principle conveyed by valenta, hansen, and bandy: the attorney's lien is only enforceable after the attorney adjudicates the value and validity of the lien in a separate action against his client.
+   plaintiff provided the services to the clients, not to defendant.
+   if successful in a declaratory relief action regarding the reasonable value of his services, plaintiff's fees will be paid out of the clients' settlement proceeds.
+   (hendricks, supra, 197 cal.app.2d at p. 589 ["an attorney's contingent fee contract . . . only gives him a lien on his client's recovery."].)
+   plaintiff must thus litigate with the clients to determine the reasonable cost of the services he provided to them.
+   plaintiff has omitted this essential step of establishing his entitlement to a particular portion of the settlement proceeds.
+   to the extent that plaintiff distinguishes the present matter from the above-mentioned case law by asserting that there is no actual dispute between him and his clients regarding the amount owed to him, we conclude that even if this is true, it is irrelevant.
+   the court of appeal addressed this identical issue in brown, supra, 116 cal.app.4th at pages 328-330.
+   there, an attorney sought to establish the priority of his contractual attorney fees lien over the lien of a judgment creditor.
+   (id. at pp. 323-324.)
+   the brown court held that the attorney had to bring an independent action against his client to establish the enforceability and amount of his contractual lien, and could not simply intervene and address that issue in a dispute between the creditor and his client.
+   (id. at p. 324.)
+   notably, the attorney seeking to enforce his lien attempted to distinguish his case from prior cases and avoid suing his client by arguing that those cases involved a dispute between the attorney and the client, and in contrast, his case did not.
+   there, the brown court stated that "[w]hile it may be true that carroll and its predecessors involved attorney-client disputes, the rationale of those cases is not limited to such disputes."
+   (id. at p. 329.)
+   without first establishing a right to any portion of his client's settlement proceeds, plaintiff in this case lacks any basis to assert that defendant fraudulently withheld any money from him.
+   plaintiff further argues that to require an attorney to institute an action against his former clients in order to enforce his lien would "have a chilling effect on attorney-client relationships."
+   the court of appeal also explained why this was incorrect in brown, supra, 116 cal.app.4th at page 333.
+   there, the attorney argued that requiring him to bring a separate action against his client to enforce the lien, when there was no conflict or dispute between him and the client regarding the fees, "would require him to violate the rules of professional conduct and the business and professions code and commit a tort because such an action would be 'without just cause.'"
+   (ibid.)
+   the brown court explained that this was not so: "[b]y requiring [the attorney] to bring a separate action to enforce his lien, we do not mean to suggest that he must sue [his client] for breach of contract."
+   (ibid.)
+   the court stated that given the lack of any controversy between the attorney and client, a declaratory relief action under code of civil procedure section 1060, seeking a declaration of the attorney's rights with respect to his client, was appropriate.
+---code of civil procedure*:1060:1
+   (ibid.)
+   likewise, by seeking a declaration regarding the reasonable value of his services rendered, plaintiff will address the issue without subjecting his former clients to damages.
+   importantly, this procedure also gives the court an opportunity to evaluate the value and quantity of plaintiff's services with the relevant parties: plaintiff and his former clients.
+   despite case law requiring plaintiff to bring a separate declaratory relief action against the clients, plaintiff has not sought such relief.
+   plaintiff therefore has failed to establish the existence, amount, and enforceability of his lien on the settlement money.
+   2.	plaintiff cannot prove damages, an essential element of each cause of action
+   damages is an essential element of fraud, negligence, and tortuous interference with prospective economic advantage (plaintiff's first, fourth, and fifth causes of action).
+   (see gil v. bank of america, n.a. (2006) 138 cal.app.4th 1371, 1381 ["the elements of fraud [include] resulting damage."]; melton v. boustred (2010) 183 cal.app.4th 521, 529 ["the elements of a cause of action for negligence are duty, breach, causation, and damages."]; winchester mystery house, llc v. global asylum, inc. (2012) 210 cal.app.4th 579, 596 ["the elements of a claim of interference with economic advantage and prospective economic advantage [include] economic harm to the plaintiff proximately caused by the acts of the defendant."].)
+   additionally, under commercial code section 3420, a "plaintiff may only recover for that portion of the instrument in which he has an interest."
+---commercial code*:3420:1
+   (stenseth v. wells fargo bank (1995) 41 cal.app.4th 457, 466.)
+   plaintiff never adjudicated his interest in the settlement checks, so he cannot prove that he has any interest to recover in his action against defendant.
+   to the extent that plaintiff attempts to assert a cause of action under commercial code section 3110(d), which identifies the person(s) to whom an instrument is payable, the same rationale applies.
+---commercial code*:3110:1
+   because plaintiff lacks an enforceable interest in the settlement check, he cannot recover any portion of the settlement money under the commercial code, with respect to his second and third causes of action.
+   thus, plaintiff has not alleged sufficient facts to prove damages, a critical element of each cause of action.
+   we therefore affirm the trial court's order sustaining the demurrer to the second amended complaint.
+   3.	the court did not abuse its discretion in denying leave to amend
+   lastly, we address the trial court's denial of leave to amend.
+   "if we see a reasonable possibility that the plaintiff could cure the defect by amendment, then we conclude that the trial court abused its discretion in denying leave to amend. if we determine otherwise, then we conclude it did not."
+   (campbell v. regents of university of california (2005) 35 cal.4th 311, 320.)
+   plaintiff bears the burden of proving that there is a reasonable possibility he can cure the defect by amendment.
+   (maxton v. western states metals (2012) 203 cal.app.4th 81, 95.)
+   to satisfy this burden, plaintiff must show "'"in what manner he can amend his complaint and how that amendment will change the legal effect of his pleading"'" by clearly stating not only the legal basis for the amendment, but also the factual allegations to sufficiently state a cause of action.
+   (ibid.)
+   in support of his argument for leave to amend, plaintiff argues that he "has made sufficient allegations to support a prima facie case for each and every cause of action that is subject to this appeal" and that the second amended complaint was "a good faith effort by appellant to plead his valid claim against [defendant]."
+   plaintiff requests that "[i]f this court believes the allegations against [defendant] are not clear," he be given leave to amend the second amended complaint "in the interest of justice."
+   plaintiff makes no other substantive arguments with regard to this issue.
+   failing to meet his burden, plaintiff does not state how he would amend his complaint to allege sufficient facts to support his alleged causes of action.
+   rather, plaintiff indicates that an amendment would clarify his allegations.
+   the clarity of his allegations is not at issue.
+   short of a declaratory judgment regarding the reasonable value of his services in a separate action against his clients, plaintiff lacks a right to claim any part of the settlement money.
+   because plaintiff has not shown the manner in which he can amend his complaint and how that amendment would change the legal effect of his pleading, we affirm the trial court's denial of leave to amend.
+   disposition
+   the judgment is affirmed.
+   defendant fernando d. vargas is awarded his costs on appeal.
+   certified for partial publication
+   kitching, j.
+   we concur:
+   klein, p. j.
+   aldrich, j.
+   filed 8/8/14 opn filed after rehearing
+   certified for publication
+   in the court of appeal of the state of california
+   second appellate district
+   division three
+   in re isaiah w., a person coming under the juvenile court law.
+   b250231
+   (los angeles county
+   los angeles county department of children and family services,
+   plaintiff and respondent,
+   v.
+   ashlee r.,
+   defendant and appellant.
+   super. ct. no. ck91018)
+   appeal from orders of the superior court of los angeles county, jacqueline h. lewis, judge.
+   affirmed.
+   patti l. dikes, under appointment by the court of appeal, for defendant and appellant.
+   office of the county counsel, john f. krattli, county counsel, james m. owens, assistant county counsel, and tracey f. dodds, principal deputy county counsel, for plaintiff and respondent.
+   ___________________________________________
+   ashlee r. (mother) appeals from the order terminating her parental rights to the now two-year-old isaiah w. she contends that the juvenile court erred in finding that the indian child welfare act (icwa) did not apply.
+   we hold that mother failed to timely appeal the juvenile court's order.
+   factual and procedural background
+   in november 2011, isaiah was born with a positive toxicology for marijuana and exhibited withdrawal symptoms.
+   the department of children and family services (department) filed a petition alleging that mother's and father's illicit drug use placed isaiah at risk of harm.
+   at the detention hearing, the juvenile court removed isaiah from his parents' care and ordered reunification services for them.
+   mother told the juvenile court that she may have american indian ancestry, and the court ordered the department to investigate mother's claim.
+   the department interviewed maternal relatives and reported to the court that maternal grandfather may have had blackfoot ancestry and maternal great-great-grandmother may have been part of a cherokee tribe.
+   at the jurisdictional and dispositional hearing on january 20, 2012, the juvenile court reviewed the department's report and concluded that there was no "reason to know" that isaiah was "an indian child as defined under icwa."
+   accordingly, the court did not order that the department provide notice to any tribe or the bureau of indian affairs.
+   neither mother nor father objected or argued that the icwa was applicable.
+   the court adjudged isaiah a dependent and ordered him placed in foster care.
+   the court ordered the parents to participate in counseling and drug testing.
+   mother did not appeal that order.
+   mother did not attend her scheduled drug tests or drug treatment program.
+   although she visited with isaiah on a weekly basis, she never remained for the full two hours scheduled for the visits.
+   father only visited isaiah two or three times.
+   on september 12, 2012, the juvenile court terminated the parents' reunification services and set a hearing on the termination of parental rights.
+   on november 5, 2012, the department placed isaiah with a prospective adoptive family.
+   on april 10, 2013, the juvenile court terminated mother's and father's parental rights.
+   at the hearing, the court repeated its prior finding that there was no reason to know isaiah was an indian child.
+   on june 5, 2013, mother appealed from the termination of parental rights.
+   contentions
+   mother contends the juvenile court erred in finding that it had no "reason to know" isaiah was an indian child, and in failing to order the department to comply with the icwa's notice requirements.
+   discussion
+   the icwa "protect[s] the best interests of indian children and [] promote[s] the stability and security of indian tribes and families by the establishment of minimum federal standards for the removal of indian children from their families and the placement of such children in foster or adoptive homes which will reflect the unique values of indian culture . . . . " (25 u.s.c. § 1902.)
+---null:1902:1
+   "in general, the icwa applies to any state court proceeding involving the foster care or adoptive placement of, or the termination of parental rights to, an indian child. (25 u.s.c. §§ 1903(1), 1911(a)-(c), 1912-1921.)" (in re jonathon s. (2005) 129 cal.app.4th 334, 338.)
+---null:1903:1
+   an "indian child" is defined as a child who is "either (a) a member of an indian tribe or (b) is eligible for membership in an indian tribe and is the biological child of a member of an indian tribe."
+   (25 u.s.c. § 1903(4).)
+---null:1903:1
+   the icwa provides that "where the court knows or has reason to know that an indian child is involved, the party seeking the foster care placement of, or termination of parental rights to, an indian child shall notify the parent or indian custodian and the indian child's tribe, by registered mail with return receipt requested, of the pending proceedings and of their right of intervention. if the identity or location of the parent or indian custodian and the tribe cannot be determined, such notice shall be given to the secretary [of the interior] in like manner . . . . no foster care placement or termination of parental rights proceeding shall be held until at least ten days after receipt of notice by the parent or indian custodian and the tribe or the secretary . . . . " (25 u.s.c. § 1912(a).)
+---null:1912:1
+   here, mother argues the court had "reason to know" that isaiah was an "indian child," and, thus, should have ordered the department to comply with the icwa's notice requirements.
+   this argument relates to the court's dispositional order of january 2012.
+   at that point, all of the information provided by mother and her relatives about their american indian heritage was before the juvenile court, and the court considered the department's report on its investigation into mother's heritage.
+   therefore, according to mother's argument, because the department should have provided notice under the icwa, it was error for the juvenile court to proceed with its disposition of removal and foster care placement.
+   instead, the court should have continued the dispositional hearing until at least ten days after the department had served notice on the identified tribes or secretary of the interior.
+   (see 25 u.s.c. § 1912(a).)
+---null:1912:1
+   we reject mother's argument.
+   mother had the right to appeal the juvenile court's order at the dispositional hearing.
+   she did not do so, and only challenged the court's failure to provide notice under the icwa approximately one and a half years later which was after the court terminated parental rights.
+   however, the juvenile court's dispositional findings and orders had become final 60 days after the court's announcement of the order.
+   (cal. rules of court, rule 8.406(a)(1).)
+   "appellate jurisdiction to review an appealable order is dependent upon a timely notice of appeal. " (in re elizabeth g. (1988) 205 cal.app.3d 1327, 1331.)
+   "an appeal from the most recent order entered in a dependency matter may not challenge prior orders for which the statutory time for filing an appeal has passed."
+   (in re pedro n. (1995) 35 cal.app.4th 183, 189.)
+   here, because mother failed to timely appeal from the icwa finding in the juvenile court's dispositional order, "she is foreclosed from raising the issue now on appeal from the order terminating her parental rights."
+   (ibid.; see also in re elizabeth g,, supra, 205 cal.app.3d at p. 1331.)
+   although cases such as in re marinna j. (2001) 90 cal.app.4th 731 and dwayne p. v. superior court (2002) 103 cal.app.4th 247 have disagreed with pedro n., we are not persuaded by their reasoning.
+   those cases held that "parental inaction" cannot "excuse the failure of the juvenile court to ensure that notice under the act was provided to the indian tribe named in the proceeding."
+   (in re marinna j., supra, 90 cal.app.4th at p. 739; see also dwayne p., supra, 103 cal.app.4th at p. 261.)
+   we decline to adopt the implied conclusion in marinna j. and dwayne p. that there is no time limit on a parent's right to raise the issue of icwa compliance.
+   to allow a parent unlimited time within which to raise this challenge would violate the child's constitutional right to a stable and permanent home.
+   (see in re jasmon o. (1994) 8 cal.4th 398, 421.)
+   children have a constitutional interest in stability, ibid., and in california, the courts have held that this includes the "right to a reasonably directed early life, unmarked by unnecessary and excessive shifts in custody . . . ."
+   (in re arturo a. (1992) 8 cal.app.4th 229, 241, fn.6.)
+   accordingly, in the context of dependency proceedings, "where a child has formed familial bonds with a de facto family with whom the child was placed owing to a biological parent's unfitness [citation] . . . and where it is shown that the child would be harmed by any severance of those bonds, the child's constitutionally protected interests outweigh those of the biological parents."
+   (in re bridget r. (1996) 41 cal.app.4th 1483, 1506, superseded by statute on another ground as stated in in re santos y. (2001) 92 cal.app.4th 1274, 1311-1312.)
+   in accordance with these principles, we adopt pedro n.'s conclusion that the icwa does not authorize a parent to delay in challenging a trial court's determination on the applicability of icwa until after the disputed decision is final.
+   (in re pedro n., supra, 35 cal.app.4th at p. 190.)
+   in pedro n., the mother informed the juvenile court at the detention hearing for her two children that she was "a full-blooded member of the mono indian tribe."
+   (in re pedro n., supra, 35 cal.app.4th at p. 186.)
+   the department sent icwa notice to the bureau of indian affairs, and the bureau responded that it needed the identity of the reservation or rancheria with which the mother was associated in order to confirm the family's tribal membership.
+   (id. at p. 187.)
+   when county counsel raised this issue at the disposition hearing, the mother volunteered the name "'north fork.'"
+   (ibid.)
+   however, there was no further discussion regarding icwa notice and the juvenile court removed the children from the mother's care at the conclusion of the hearing.
+   (ibid.)
+   after reunification efforts with the mother failed, the court terminated her parental rights.
+   (id. at p. 185.)
+   the mother appealed from the order terminating her parental rights and argued that the department had given inadequate notice under the icwa. (ibid.)
+   the pedro n. court held that the mother was foreclosed from raising icwa compliance issues because she did not raise this challenge until approximately two years after the juvenile court's decision not to proceed under the icwa. (id. at p. 189.)
+   the court also found that congress did not indicate an intent to permit a parent to delay in raising an icwa violation until after the disputed action is final.
+   (id. at p. 190.)
+   the court cited to an icwa provision that "confers standing upon a parent claiming an icwa violation to petition to invalidate a state court dependency action," and noted that this provision does not state that a parent may claim an icwa violation at any point in the proceeding.
+   (ibid. [citing to 25 u.s.c. § 1914].)
+---null:1914:1
+   in fact, in another provision the icwa does authorize a tribe to intervene in a dependency action "at any point in the proceeding."
+   (25 u.s.c. § 1911(c).)
+---null:1911:1
+   accordingly, the pedro n. court concluded that, "we assume from the absence of such language in [the provision authorizing a parent to raise icwa violations], that the congress did not intend to preempt, in the case of appellate review, state law requiring timely notices of appeal from a parent who appeared in the underlying proceedings and who had knowledge of the applicability of the icwa."
+   (in re pedro n., supra, 35 cal.app.4th at p. 190.)
+   "congress's intent to not cause unnecessary delay in dependency proceedings is evidenced by the [icwa] provision allowing a hearing on the termination of parental rights within a relatively short time, 10 days, after the [secretary of the interior] or tribe receives icwa notice. (25 u.s.c. § 1912(a).)" (in re x.v. (2005) 132 cal.app.4th 794, 804.)
+---null:1912:1
+   such an intent is supported by the maxim that "[b]ecause juvenile dependency proceedings 'involve the well-being of children, considerations such as permanency and stability are of paramount importance. (§ 366.26.)'" (ibid.)
+---null:366.26:1
+   in x.v., the parents of a dependent child filed two appeals, each time challenging the department's failure to provide adequate notice under icwa. the court, on the first appeal, remanded the matter for the limited purpose of complying with icwa notice requirements, and, on the second appeal, held that "the parents ha[d] forfeited a second appeal of icwa notice issues."
+   (in re x.v., supra, 132 cal.app.4th at p. 804.)
+   the court reasoned that, "[b]alancing the interests of indian children and tribes under the icwa, and the interests of dependent children to permanency and stability," there must be a limit to a parent's ability to "delay permanence for children" through "numerous belated icwa notice appeals and writs."
+   (id. at pp. 804-805.)
+   the principles enunciated in x.v. support our conclusion that a dependent child's interest in permanency and stability requires that there be a time limit to a parent's right to raise the issue of icwa compliance.
+   in addition, we do not believe congress intended to authorize a parent to wait for over a year before challenging a trial court's decision on the applicability of the icwa. accordingly, we conclude that mother has forfeited her right to raise a challenge to the juvenile court's finding that the icwa did not apply here.
+   however, we note that, as in pedro n., we are only addressing the rights of mother, not the rights of a tribe under the icwa. (in re pedro n., supra, 35 cal.app.4th at p. 191; see also 25 u.s.c. § 1902 [the icwa protects the interests of indian children, their families and indian tribes].)
+---null:1902:1
+   disposition
+   the orders of the juvenile court are affirmed.
+   certified for publication
+   kitching, j.
+   we concur:
+   klein, p. j.
+   aldrich, j.
+   filed 7/17/14; part.
+   pub & mod.
+   order 8/8/14 (see end of opn.)
+   in the court of appeal of the state of california
+   second appellate district
+   division three
+   the people,
+   plaintiff and respondent,
+   v.
+   abelardo soto,
+   defendant and appellant.
+   b249197
+   (los angeles county
+   super. ct. no. va044520)
+   appeal from a judgment of the superior court of los angeles county, william c. ryan, judge.
+   affirmed.
+   cheryl lutz, under appointment by the court of appeal, for defendant and appellant.
+   steven graff levine as amicus curiae for defendant and appellant.
+   michael stone romano for stanford law school three strikes project as amicus curiae on behalf of defendant and appellant.
+   kamala d. harris, attorney general, dane r. gillette, chief assistant attorney general, lance e. winters, assistant attorney general, scott a. taryle, kimberley j. baker-guillemet and noah p. hill, deputy attorneys general, for plaintiff and respondent.
+   jackie lacey, district attorney, beth l. widmark and matthew aaron brown, deputy district attorneys, as amicus curiae on behalf of plaintiff and respondent.
+   appellant abelardo soto filed a petition to recall his sentence pursuant to the provisions of penal code section 1170.126, which was enacted by proposition 36 in 2012.
+---penal code*:1170.126:1
+   the gist of the reform enacted by proposition 36 was to limit sentences of 25 years to life to those defendants who are (or were) convicted of serious or violent felonies.
+   the trial court denied appellant's petition on the ground that he was ineligible because his current offense fell under subdivision (e)(2)(c)(iii) of section 667.
+---penal code:667:1
+   the operative part of subdivision (e)(2)(c)(iii) is clause (iii) which disqualifies a defendant from resentencing if "[d]uring the commission of the current offense, the defendant used a firearm, was armed with a firearm or deadly weapon, or intended to cause great bodily injury to another person."
+   we affirm.
+   procedural history
+   appellant was convicted on march 4, 1998 of possession of a controlled substance (count 1; health & saf. code, § 11350); transportation of a controlled substance (count 2; health saf. code, § 11352, subd. (a)); and possession of a firearm by a felon (count 3; former § 12021, subd. (a)).
+---health and safety code*:11350:1
+---penal code:11352:1
+---penal code:12021:1
+   the jury found true the allegation that in the commission of count 2 appellant was personally armed with a firearm.
+   appellant admitted two prior robbery convictions.
+   appellant was sentenced on count 1 to 25 years to life, plus three years for a firearm enhancement; on count 2 to an identical term but stayed under section 654; on count 3 to a concurrent term of 25 years to life.
+---penal code:654:1
+   in the appeal from this conviction, appellant contended that count 1 had been improperly enhanced, a point that was conceded by the attorney general.
+   this court agreed and remanded for resentencing, noting that the trial court might decide to impose a 25 years to life sentence on count 1.
+   the trial court did just that and struck the enhancement of count 1.
+   the sentences on counts 2 and 3 were the same as those that had been originally imposed, i.e., the sentence on count 2 was again stayed under section 654.
+---penal code:654:1
+   we hold that the trial court correctly concluded that appellant was ineligible for resentencing under section 1170.126.
+---penal code:1170.126:1
+   we first address respondent's contention that the appeal should be dismissed because the order under review is not appealable.
+   discussion
+   1. the order under review is appealable.
+   both parties acknowledge that the courts of appeal are divided on this issue and that it is currently under consideration by our supreme court.
+   people v. hurtado (2013) 216 cal.app.4th 941, review granted july 31, 2013, and people v. wortham (2013) 220 cal.app.4th 1018, held an order finding the defendant ineligible for resentencing to be appealable and people v. leggett (2013) 219 cal.app.4th 846 and teal v. superior court (2013) 217 cal.app.4th 308, review granted july 31, 2013, held to the contrary.
+   in people v. superior court (kaulick) (2013) 215 cal.app.4th 1279, 1294-1295 (kaulick), this court held that the people could appeal from an order resentencing a defendant pursuant to subdivision (f) of section 1170.126.
+---penal code:1170.126:1
+   although kaulick is distinguishable because it involved an appeal by the people from a modification of the original sentence, we noted in that decision that the order resentencing the defendant qualified as an "order made after judgment, affecting the substantial rights of the [p]eople" under subdivision (a)(5) of section 1238 and was therefore appealable.
+---penal code:1238:1
+   (kaulick, supra, 215 cal.app. 4th at p. 1294.)
+   the question is whether an order finding the defendant ineligible for resentencing is an "order made after judgment, affecting the substantial rights of the party" under subdivision (b) of section 1237.
+---penal code:1237:1
+   in concluding that an order that a defendant is ineligible for resentencing under section 1170.126 is not appealable, people v. leggett held that defendants who are not eligible for resentencing under section 1170.126 do not, by definition, have a substantial right under subdivision (b) of section 1237.
+---penal code:1170.126:1
+---penal code:1170.126:1
+---penal code:1237:1
+   (people v. leggett, supra, 219 cal.app.4th at p. 852.)
+   the reasoning is that if one is ineligible, one cannot have a right to be resentenced.
+   the flaw in this is that the merits of a contested issue should not be confused with the procedural question of appealability.
+   (see people v. totari (2002) 28 cal.4th 876, 884.)
+   moreover, to say that a defendant found by the court to be ineligible was always ineligible and therefore has no right to appeal begs the question.
+   in addition, while the question of eligibility is straightforward in quite a few cases (people v. leggett, supra, at p. 853), the case before us shows that this is not invariably true.
+   the better view, in our opinion, is that an order finding a defendant ineligible for resentencing is appealable.
+   respondent's request to dismiss the appeal is therefore denied.
+   2. the stay of the sentence of count 2 has no effect on the conviction
+   appellant concedes that the arming allegation found true under count 2 would disqualify him under subdivision (c)(2)(c)(iii) of section 1170.12 but "because the sentence for that crime [count 2] was stayed, appellant is not 'serving' a sentence for it, and it does not therefore disqualify him from relief."
+---penal code:1170.12:1
+   under subdivision (e) of section 1170.126, an inmate is eligible for resentencing if these conditions are met.
+---penal code:1170.126:1
+   they are: "(1) the inmate is serving an indeterminate term of life imprisonment imposed pursuant to paragraph (2) of subdivision (e) of section 667 or subdivision (c) of section 1170.12 for a conviction of a felony or felonies that are not defined as serious and/or violent felonies by subdivision (c) of section 667.5 or subdivision (c) of section 1192.7. [¶] (2) the inmate's current sentence was not imposed for any of the offenses appearing in clauses (i) to (iii), inclusive, of subparagraph (c) of paragraph (2) of subdivision (e) of section 667 or clauses (i) to (iii), inclusive, of subparagraph (c) of paragraph (2) of subdivision (c) of section 1170.12. [¶] (3) the inmate has no prior convictions for any of the offenses appearing in clause (iv) of subparagraph (c) of paragraph (2) of subdivision (e) of section 667 or clause (iv) of subparagraph (c) of paragraph (2) of subdivision (c) of section 1170.12."
+---penal code:667:1
+---penal code:1170.12:1
+---penal code:667.5:1
+---penal code:1192.7:1
+---penal code:667:1
+---penal code:1170.12:1
+---penal code:667:1
+---penal code:1170.12:1
+   (§ 1170.126, subd. (e).)
+---penal code:1170.126:1
+   it is undisputed that appellant satisfies the first and third conditions.
+   the issue therefore is whether he complies with the second condition.
+   the phrasing of the second condition is fatal to appellant's argument.
+   while the first condition is that the inmate "is serving an indeterminate term," the second condition makes no reference to the inmate "serving" a term.
+   the second condition only states that the "inmate's current sentence was not imposed for any of the offenses" listed in the referenced statutes.
+   in interpreting a statute, words must be given the usual and ordinary meaning of the language used.
+   (people v. ramirez (2009) 45 cal.4th 980, 987.)
+   the ordinary meaning will be given effect if there is no ambiguity.
+   (mays v. city of los angeles (2008) 43 cal.4th 313, 321.)
+   when a word used in a statute has a well-established legal meaning, it will be given that meaning in construing the statute.
+   (arnett v. dal cielo (1996) 14 cal.4th 4, 19.)
+   even though the sentence on count 2 was stayed, the sentence on count 2 is still part of appellant's "current sentence."
+   citing people v. norrell (1996) 13 cal.4th 1, 13-14 (arabian, j. concurring and dissenting), appellant concedes that a sentence that has been stayed under section 654 has nevertheless been imposed.
+---penal code:654:1
+   it is also true that for purposes of three strikes sentencing, a stayed sentence still qualifies as a strike.
+   (people v. benson (1998) 18 cal.4th 24, 29-30.)
+   thus, the stay of the sentence does not expunge the conviction.
+   the usual and ordinary meaning, as well as the legal understanding, of the words "current sentence" necessarily includes the stayed sentence on count 2.
+   while the second condition could have been set forth as stating that "the inmate is serving a sentence that was not imposed" for the listed offenses, this is not what the legislature did.
+   "while a court may consider logic and practical considerations when there is room for interpretation, where the language is so clear that no reasonable mind can differ as to the meaning of the words used, the court has no alternative but must enforce the statute as written. to hold otherwise would be to hold that this court may legislate, which, of course, it cannot."
+   (estate of sahlender (1948) 89 cal.app.2d 329, 346.)
+   appellant is not eligible for resentencing.
+   in light of our disposition, it is unnecessary to consider the further argument that appellant is also ineligible because he was convicted of being in possession of a firearm as a felon.
+   3. appellant should not be resentenced on count 1.
+   appellant also contends that even if he is ineligible for resentencing under counts 2 and 3, he is eligible under count 1 since there is no question that possession of a controlled substance qualifies him for resentencing.
+   the question posed by this contention is whether, in a case involving convictions of multiple counts, a defendant should be resentenced on a count which, if standing alone, would qualify him for resentencing.
+   we reject this argument.
+   taken to its logical conclusion, this argument would result in two-strikes sentences for defendants who otherwise are ineligible for resentencing or, alternatively, resentencing appellant on count 1 would amount to an idle act.
+   addressing the first alternative and adopting appellant's argument for purposes of illustration, appellant would be deemed ineligible for resentencing on counts 2 and 3 but he would be resentenced to a two-strikes sentence on count 1.
+   if the only legally operative conviction and sentence is the new two-strikes sentence on count 1, this defendant would enjoy the benefits of proposition 36 resentencing, even though he is not eligible for resentencing on counts 2 and 3.
+   the flaw in appellant's argument is that it ignores the convictions and resulting sentences on counts 2 and 3.
+   if appellant had only committed the crime of possessing a controlled substance, there would of course be no problem and appellant would be resentenced.
+   but he did more than possessing a controlled substance.
+   he transported a controlled substance while personally armed with a firearm and, as a felon, he was in possession of a firearm and he was found guilty of these two offenses.
+   one cannot pretend that these two convictions and resulting sentences simply did not happen.
+   appellant is not eligible for resentencing on count 2 and possibly not on count 3, either, although, as we point out below, we need not decide this issue.
+   it is important to keep in mind that it is appellant's conviction of count 2 with its armed allegation that makes him ineligible for resentencing and that this conviction remains in effect.
+   this squares with the principle we discussed above that even though a sentence has been stayed under section 654, the sentence has nevertheless been imposed.
+---penal code:654:1
+   that is, a stay of the sentence does not expunge the conviction and resulting sentence.
+   what if appellant is resentenced to a two-strike sentence on count 1 and is denied resentencing on counts 2 and 3 because he is not eligible under section 1170.126? in this event, resentencing on count 1 is a meaningless gesture.
+---penal code:1170.126:1
+   as we pointed out above, appellant's "current sentence" under subdivision (e)(2) of section 1170.126 includes the stayed sentence on count 2.
+---penal code:1170.126:1
+   the conviction of count 2, which remains in effect, renders him ineligible for resentencing under section 1170.126.
+---penal code:1170.126:1
+   thus, resentencing appellant on count 1 changes nothing.
+   in sum, appellant's argument that he should be resentenced on count 1 is without merit.
+   count 2 renders him ineligible for resentencing.
+   appellant also contends that being in possession of a forearm as a felon is not the equivalent of being armed with a firearm and that he is therefore eligible for resentencing on count 3.
+   we need not decide this issue since appellant is ineligible for resentencing on count 2 and therefore cannot avail himself of section 1170.126.
+---penal code:1170.126:1
+   disposition
+   the judgment (order) is affirmed.
+   klein, p. j.
+   we concur:
+   kitching, j.
+   aldrich, j.
+   filed 8/8/14
+   certified for partial publication
+   in the court of appeal of the state of california
+   second appellate district
+   division three
+   the people,
+   plaintiff and respondent,
+   v.
+   abelardo soto,
+   defendant and appellant.
+   b249197
+   (los angeles county
+   super. ct. no. va044520)
+   order modifying opinion
+   and certifying opinion for
+   partial publication
+   no change in judgment
+   the court:
+   it is ordered that the opinion filed herein on july 17, 2014, be modified as follows:
+   1. on page 4, the tenth line from the bottom, the word "these" is corrected to "three," so that the sentence reads: under subdivision (e) of section 1170.126, an inmate is eligible for resentencing if three conditions are met.
+---penal code:1170.126:1
+   2. on page 5, the sixth line from the bottom, "benson" is italicized.
+   3. on page 7, the fourth line from the bottom, the word "forearm" is corrected to read "firearm."
+   there is no change in the judgment.
+   the opinion in the above-entitled matter filed on july 17, 2014, was not certified for publication in the official reports.
+   for good cause it now appears that the opinion should be partially published in the official reports and it is so ordered.
+   pursuant to california rules of court, rules 8.1100 and 8.1110, the opinion is certified for partial publication.
+   the portions of the opinion certified for publication are as follows:
+   the first introductory paragraph on page 2 and the procedural history with the exception of the final sentence.
+   on pages 4, 5, 6 and 7, sections 2 and 3 of the discussion and on page 8, the disposition.
+---penal code:2:1
+   filed 7/9/14
+   certified for publication
+   in the court of appeal of the state of california
+   first appellate district
+   division four
+   in re g.b. et al., a person coming under the juvenile court law.
+   san francisco human services agency,
+   plaintiff and respondent,
+   v.
+   karen r.,
+   defendant and appellant.
+   a140107, a140624
+   (san francisco county
+   super. ct. nos.
+   jd12-3316,
+   jd12-3316a)
+   without holding a hearing, the juvenile court denied two requests by appellant karen r. (mother) to modify an order denying her services to reunify with her son and severely abused infant daughter.
+   later, and after holding a hearing, the court terminated mother's parental rights.
+   on appeal, mother challenges these three orders.
+   she argues that the juvenile court erred in not holding an evidentiary hearing on her modification requests because (1) it initially ordered a hearing on a form order, and (2) a prima facie case was alleged compelling a hearing.
+   she also argues that her parental rights were improperly terminated because her children would benefit from a continuing relationship with her.
+   we conclude that the failure to hold a hearing on mother's modification requests does not amount to reversible error.
+   on the first request, the juvenile court did not abuse its discretion in finding that mother failed to allege a prima facie case.
+   on the second request, any possible abuse of discretion was harmless because mother was given an opportunity to be heard, and the court made findings negating the appropriateness of reunification services.
+   we also conclude that mother's parental rights were properly terminated because substantial evidence supports the juvenile court's finding that the potential benefit to the children from a continuing relationship with mother was outweighed by the benefits of adoption.
+   accordingly, we affirm.
+   i.factual and proceduralbackground
+   respondent san francisco human services agency (agency) initiated these proceedings in november 2012 after mother brought her then seven-month-old daughter s.b. to the hospital, where a medical examination revealed that the infant had 13 fractures in her left femur, shins, left thumb, and ribs.
+   mother and a.b. (father) denied abusing s.b. and offered various explanations for the injuries that were determined to be implausible, such as the possibility that their then three-and-a-half year old son g.b. accidentally hurt s.b. by falling on her.
+   an investigating social worker learned that maternal relatives thought father was "very controlling and possessive of mother" and heard that g.b. may have been abused.
+   the children were removed from their parents' care and placed together with a paternal great-aunt and great-uncle.
+   the agency recommended that the parents be denied reunification services because s.b.'s injuries were severe and likely sustained while s.b. was in their care.
+   both parents nonetheless took the initiative to seek services on their own.
+   they received therapy (both individual and couple's counseling) and took a parenting class, and mother attended domestic-violence counseling and a domestic-violence support group.
+   a social worker acknowledged that the parents had been "diligent in pursuing services and in presenting themselves as concerned, cooperative and motivated parents."
+   they were not, however, fully cooperative.
+   they refused to sign consent forms that would have allowed their service providers to share more information with the social worker, and they declined referrals for psychological evaluations.
+   and although mother seemed open to her therapist's feedback, she did not acknowledge her daughter's physical injuries, and a case manager reported "there definitely need[ed] to be more counseling sessions" for her to understand domestic violence.
+   following a combined jurisdiction-and-disposition hearing, the juvenile court determined in may 2013 that s.b. suffered serious, nonaccidentally inflicted physical harm by a parent (§ 300, subd. (a)), faced a substantial risk of harm (id., subd. (b)), and suffered severe physical abuse by a parent or the parent reasonably should have known that she had suffered such abuse (id., subd. (e)).
+---welfare and institutions code:300:1
+   the court also found that g.b. was a child described by section 300, subdivisions (a) and (b).
+---welfare and institutions code:300:1
+   the court bypassed reunification services for both parents under section 361.5, subdivision (b)(5), which prohibits services in most cases involving severe abuse (§ 300, subd. (e)), because the parents had "not held themselves accountable for the serious injuries suffered by" s.b. services were denied as to g.b. because of his status as the sibling of a severely abused child.
+---welfare and institutions code:361.5:1
+---welfare and institutions code:300:1
+   (§ 361.5, subd. (b)(7).)
+---welfare and institutions code:361.5:1
+   the court then scheduled a selection-and-implementation hearing under section 366.26, to be held on september 16, 2013.
+---welfare and institutions code:366.26:1
+   visits between the parents and their children continued, but the agency soon filed petitions under section 388 to cut them back, alleging that the parents had engaged in "sabotaging behavior."
+---welfare and institutions code:388:1
+   in its brief supporting the petitions, the agency claimed that the parents tried to bribe a relative to assume responsibility for s.b.'s injuries and falsely accused s.b.'s caretakers of the abuse.
+   the juvenile court reduced visits from twice a week to once a week and granted the agency the discretion to temporarily stop them as appropriate.
+   mother eventually changed her mind and agreed to undergo a psychological evaluation.
+   the psychologist's report, dated august 14, 2013, stated that mother had separated from father three weeks before the evaluation, had been diagnosed with "adjustment disorder with depressed mood" by a therapist, was devastated by the loss of her two children, and was beginning to accept and understand the domestic violence she experienced.
+   it stated that, given mother's "cognitive ability and her apparent lack of a psychological disorder along with her willingness to engage in treatment, that she would be amenable to opportunities for further treatment."
+   the report also pointed out, however, that mother continued to deny that either she or father hurt their children and insisted that her family's claims about father's violence toward the children were false.
+   according to the report, mother had a history of staying in an abusive relationship with father, possibly because she was afraid of being alone, and needed to learn to be comfortable with being on her own so that she would not put herself or her children at risk "for the sake of saving a relationship."
+   the report concluded that mother was "'a work in progress'" and "still ha[d] more to learn regarding herself and her relationship" with father.
+   on august 27 (about three weeks before the selection-and-implementation hearing was to be held), mother filed a request under section 388 (the first section 388 petition) for a modification of the may 2013 order denying her reunification services.
+---welfare and institutions code:388:1
+---welfare and institutions code:388:1
+   mother used the standard jv-180 form for the petition and attached the psychological evaluation.
+   she maintained that the evaluation showed that she did not have a psychological disorder and was amenable to treatment, and she alleged that she had separated from father, had begun individual therapy, and had enrolled in a class for parenting children who have experienced trauma.
+   two days after mother filed the first section 388 petition, the juvenile court filed a standard jv-183 form court order.
+---welfare and institutions code:388:1
+   on it, the court checked a box selecting an option stating that a hearing was ordered to consider the petition "because the best interest of the child may be promoted by [it]," and it set a hearing date of september 6, later continued to september 13 (three days before the scheduled selection-and-implementation hearing).
+   at the september 13 hearing, mother's counsel expressed her understanding that "we are on for a setting of [the first section 388 petition]. i understand there is going to be an objection so that the court would set it for a hearing now?" counsel for the agency argued that mother had not met her burden of showing she was entitled to a hearing because she had failed sufficiently to demonstrate changed circumstances or that the petition was in the children's best interests.
+---welfare and institutions code:388:1
+   mother's counsel countered that mother's psychological evaluation showed a change in circumstance and remarked, in an apparent reference to the jv-183 form court order, that "the court has actually already signed off on that there is a prima facie case. so i think—i know the court has already made that decision."
+   the court clarified that it had liberally construed the petition in order to give the parties an opportunity to argue whether there should be a hearing on the first section 388 petition, but that it had not necessarily concluded that mother had established a prima facie case entitling her to a full evidentiary hearing on the petition.
+---welfare and institutions code:388:1
+   the court denied the petition without an evidentiary hearing.
+   it concluded that mother had failed to establish a prima facie case warranting a full hearing in light of the seriousness of s.b.'s abuse and because the children had been in a stable placement for about a year, while mother was "still trying to learn what is domestic violence, how it has affected herself and the children."
+   mother timely appealed the denial of the first section 388 petition.
+---welfare and institutions code:388:1
+   (no. a140107.)
+   around this time, the selection-and-implementation hearing was continued to november 7.
+   on october 28, about six weeks after her first section 388 petition was denied, mother filed a second section 388 petition (the second section 388 petition) again requesting a modification of the may 2013 order denying her reunification services.
+---welfare and institutions code:388:1
+---welfare and institutions code:388:1
+---welfare and institutions code:388:1
+   this time, she alleged that she had "come to the realization that she is the victim of domestic violence and it is more likely than not that [father] abused her daughter."
+   she attached a declaration to the petition attesting that she had been "a battered woman" for the previous eight years, and she had suffered "mental, emotional, verbal and physical abuse."
+   she also reiterated that she had separated from father, and she stated that she was in the process of obtaining a restraining order against him.
+   (mother ultimately filed a restraining order with the juvenile court about a week later.)
+   mother acknowledged that she had stayed in an unhealthy relationship with father, had failed to remove her children from a risk of abuse, and had not protected her children.
+   although mother continued to deny that she abused her children or witnessed anyone else do so, she recognized that she "failed to protect and prevent [her daughter] from obtaining multiple fractures over her body by staying in a relationship that could have been the cause of her injuries."
+   as for whether granting the petition would be in the children's best interests, mother alleged that the children were "closely bonded" to her and would "suffer trauma" if they were separated from her.
+   attached to the second section 388 petition were recent letters and certificates from various service providers stating that mother had made progress in individual therapy, learned about the effects of domestic violence, attended a four-week "trauma psycho-education" class, and completed a parenting program.
+---welfare and institutions code:388:1
+   in response to the second section 388 petition, the juvenile court again used the jv-183 standard form court order and selected the option indicating that the court was ordering a hearing "because the best interest of the child may be promoted by the request."
+---welfare and institutions code:388:1
+   but this time, written notes on the form specifically explained that the hearing was to determine whether mother had made a sufficient prima facie showing warranting a full hearing, citing in re a.m. (2013) 217 cal.app.4th 1067.
+   the agency and the minors opposed the petition.
+   at the start of the selection-and-implementation hearing on november 7, the juvenile court first invited argument on whether mother had made a prima facie case warranting a hearing on the second section 388 petition.
+---welfare and institutions code:388:1
+   after hearing argument, the court acknowledged that mother had made "baby steps to changed circumstances" by moving away from father and beginning to protect herself from domestic violence, such that "there are probably some changed circumstances."
+   but the court concluded that mother had nonetheless failed to make a prima facie showing that the children's best interests would be advanced by granting reunification services.
+   the court cited a letter from a family-resources center attached to the section 388 petition that characterized mother as "emotionally vulnerable," and the court "highly doubt[ed]" that providing reunification services to mother could prevent reabuse within 12 months as contemplated by the statute concerning severely abused children (§ 361.5, subd. (i)(5)).
+---welfare and institutions code:388:1
+---welfare and institutions code:361.5:1
+   the court also noted that both children reportedly were doing "very well" in their current placement.
+   the juvenile court denied mother a hearing on the second section 388 petition.
+---welfare and institutions code:388:1
+   the court immediately proceeded to the selection-and-implementation hearing (§ 366.26).
+---welfare and institutions code:366.26:1
+   the agency recommended that the parents' parental rights be terminated and that the children be placed for adoption.
+   a child welfare worker testified that both children were adoptable.
+   although the paternal great-aunt and great-uncle, with whom the children remained placed and who previously had sought to adopt them, had decided not to pursue adoption because of concerns about parental interference, the agency was assessing both the maternal and paternal grandmothers, who had expressed interest in adopting the children.
+   the children both enjoyed "a very close relationship" with the maternal grandmother and visited with her often.
+   the welfare worker testified that, although visits between the parents and their children went well, both children looked to their great-aunt and great-uncle for nurturing and their daily needs, and they had a "very close bonded relationship" with them.
+   according to the welfare worker, terminating parental rights and allowing the children to be adopted were in both children's best interests because of the severity of s.b.'s injuries and the ongoing instability and dysfunction in the relationship between mother and father.
+   the welfare worker testified that mother's separation from father was a "step in the right direction," but it did not "completely cure the situation."
+   mother's attorney was not prevented from cross-examining the worker about the topics she wished to explore, such as asking about mother's visits with the children and the significance of mother separating from father.
+   mother testified that her children were always "really happy" to see her at supervised visits, and they engaged in activities that allowed them to bond.
+   according to mother, her son, g.b., had "a lot of love" for her, and he approached her "in a way that he looks forward to me healing his emotional trauma because i sense a lot of emotional trauma."
+   mother also enjoyed a "very strong attachment" with s.b., who would grab mother's leg and cry if mother tried to move to a different part of the visitation room.
+   mother further testified that she would remain separated from father "forever."
+   mother was not prevented from testifying about any issues her attorney raised.
+   both parents argued for the application of the beneficial-relationship exception to termination of parental rights.
+   (§ 366.26, subd. (c)(1)(b)(i).)
+---welfare and institutions code:366.26:1
+   but the juvenile court found that the benefits of maintaining parental rights were outweighed by "the benefits from an adoption having the permanency and stability in a home environment where the safety and freedom from physical harm are assured."
+   the court then terminated both mother's and father's parental rights and selected adoption as the children's permanent plan.
+   mother timely appealed (no. a140624), and this court granted her motion to consolidate her two appeals.
+   ii.discussion
+   the denial of mother's section 388 petitions without an evidentiary hearing was not reversible error.
+---welfare and institutions code:388:1
+   the governing legal principles and standard of review.
+   under section 388, a parent may petition to change or set aside a prior order "upon grounds of change of circumstances or new evidence."
+---welfare and institutions code:388:1
+   (§ 388, subd. (a)(1); see also cal. rules of court, rule 5.570(a). ) the juvenile court shall order a hearing where "it appears that the best interests of the child . . . may be promoted" by the new order.
+---welfare and institutions code:388:1
+   (§ 388, subd. (d).)
+---welfare and institutions code:388:1
+   thus, the parent must sufficiently allege both a change in circumstances or new evidence and the promotion of the child's best interests.
+   (in re zachary g. (1999) 77 cal.app.4th 799, 808.)
+   a prima facie case is made if the allegations demonstrate that these two elements are supported by probable cause.
+   (in re aljamie d. (2000) 84 cal.app.4th 424, 432; in re jeremy w. (1992) 3 cal.app.4th 1407, 1414.)
+   it is not made, however, if the allegations would fail to sustain a favorable decision even if they were found to be true at a hearing.
+   (rule 5.570(d)(1); in re anthony w. (2001) 87 cal.app.4th 246, 250.)
+   while the petition must be liberally construed in favor of its sufficiency (in re zachary g., supra, 77 cal.app.4th at p. 806; rule 5.570(a)), the allegations must nonetheless describe specifically how the petition will advance the child's best interests.
+   (anthony w., at p. 250; zachary g., at p. 806.)
+   when a juvenile court bypasses reunification services due to a finding that a child suffered "severe physical abuse" (§ 300, subd. (e)), the focus of the dependency proceedings turns to the child's need for permanence and stability instead of family reunification.
+---welfare and institutions code:300:1
+   (in re a.m., supra, 217 cal.app.4th at pp. 1074-1075.)
+   once severe abuse has been found, a court is "prohibited from granting reunification services 'unless it finds that, based on competent testimony, those services are likely to prevent reabuse . . . or that failure to try reunification will be detrimental to the child because the child is closely and positively attached to that parent.'"
+   (in re a.m., supra, 217 cal.app.4th at pp. 1074-1075, quoting § 361.5, subd. (c).)
+---welfare and institutions code:361.5:1
+   stated another way, in the "comparatively extreme situation[]" when a child is the victim of severe abuse, the legislative presumption is that services are not to be provided to the parent.
+   (in re a.m., at p. 1074.)
+   when this presumption applies, the evidentiary burden is heightened at any hearing to consider a section 388 petition requesting reunification services.
+---welfare and institutions code:388:1
+   in such a case, a juvenile court may modify an order denying reunification services only if there is clear and convincing evidence that the services would be in the child's best interests, and only if it makes the same findings that would have been required to offer services at the disposition hearing instead of bypassing services.
+   (§§ 361.5, subd. (b)(5), 388, subd. (a)(2); rule 5.570(h)(1)(b); in re a.m., at pp. 1075-1077.)
+---welfare and institutions code:361.5:1
+   this court reviews a juvenile court's decision to deny a section 388 petition without a hearing for abuse of discretion.
+---welfare and institutions code:388:1
+   (in re jamika w. (1997) 54 cal.app.4th 1446, 1450.)
+   with these legal standards and principles in mind, we turn to the merits of mother's claim that the juvenile court erred in denying her section 388 petitions without a hearing.
+---welfare and institutions code:388:1
+   the juvenile court did not abuse its discretion in denying mother a hearing on the first section 388 petition.
+---welfare and institutions code:388:1
+   mother argues that the juvenile court improperly denied her an evidentiary hearing on her first section 388 petition for both procedural and substantive reasons.
+---welfare and institutions code:388:1
+   her procedural argument is that the denial was improper because the court initially checked the box on the form order indicating that a hearing would be held "because the best interest of the child may be promoted by the request."
+   her substantive argument is that the petition's allegations sufficiently established a prima facie case requiring an evidentiary hearing.
+   we find neither of these arguments to be persuasive.
+   we begin with the procedural argument.
+   mother is correct in pointing out that a juvenile court is compelled to order a hearing on a section 388 petition when it finds that the best interests of a child may be promoted by a change in the previous order.
+---welfare and institutions code:388:1
+   (§ 388, subd. (d).)
+---welfare and institutions code:388:1
+   but a contextual review of the record here shows that in checking the box on the form order indicating such a finding, the juvenile court was not deciding that a prima facie case had been made but was instead scheduling the matter for the parties to argue the issue—an option not included on the form.
+   when the court heard the parties' oral argument on whether an evidentiary hearing was required, it expressly clarified that it had liberally construed mother's petition "in order to have an opportunity for the parties to argue for a hearing."
+   (italics added.)
+   mother argues that in re lesly g. (2008) 162 cal.app.4th 904 (lesly g.) controls, but we disagree.
+   in that case, the juvenile court used an ambiguous judicial council form (which has since been updated) to rule on a parent's entitlement to a hearing on a section 388 petition requesting the resumption of previously terminated reunification services.
+---welfare and institutions code:388:1
+   (lesly g., at pp. 909 & fn. 8, 918.)
+   on the form, the juvenile court checked three internally inconsistent boxes: one indicating a hearing would be held because the parent had established a prima facie case, one setting a date and time for the hearing, and one indicating a hearing would not be held.
+   (id. at pp. 909, 918.)
+   the clerk also sent a notice to the parties informing them that a hearing had been set.
+   (id. at pp. 909, 919.)
+   the court continued a scheduled selection-and-implementation hearing to review the section 388 petition, and it ordered the social-services agency to address the petition.
+---welfare and institutions code:388:1
+   (lesly g., at p. 910.)
+   at the beginning of what was anticipated to be a combined section 388 hearing and a selection-and-implementation hearing, the juvenile court denied the section 388 petition, apparently without explanation.
+---welfare and institutions code:388:1
+---welfare and institutions code:388:1
+   (lesly g., at pp. 910-911.)
+   in a later written order, the juvenile court simply stated that the proposal to resume reunification services would not promote the children's best interests.
+   (id. at p. 911 & fn. 12.)
+   in assessing this procedural history, lesly g. concluded that the juvenile court's denial of the section 388 hearing violated the parent's due process rights because the form order had already ruled that the section 388 petition stated changed circumstances and might promote the children's best interests.
+---welfare and institutions code:388:1
+---welfare and institutions code:388:1
+   (lesly g., supra, 162 cal.app.4th at p. 912.)
+   the social-service agency conceded on appeal that the ruling on the form order established that the juvenile court had not summarily denied the petition for lack of alleging a prima facie case.
+   (id. at p. 913.)
+   thus, the question facing the court of appeal was whether the juvenile court properly considered the section 388 petition without holding a hearing after it had already concluded that the parent had made a prima facie case for such a hearing.
+---welfare and institutions code:388:1
+   (lesly g., at pp. 913-915.)
+   this is not the question before us.
+   unlike the parties in lesly g., the parties here did not come to court expecting an evidentiary hearing; mother's counsel anticipated only that such a hearing would be set, and she understood that the agency objected.
+   (cf. lesly g., supra, 162 cal.app.4th at p. 913 & fn. 14.)
+   and unlike the juvenile court in lesly g., the juvenile court here explained at the first opportunity that the form order was not intended to be a ruling that mother had made a prima facie case and was entitled to an evidentiary hearing.
+   but even if we were to construe the form as a ruling that mother had stated a prima facie case, we would reject mother's argument that it barred the juvenile court from changing its mind after considering the parties' oral argument.
+   lesly g., supra, 162 cal.app.4th 904 does not stand for the blanket proposition advanced by mother that a juvenile court is forever bound by a box it checks on a form order suggesting a certain finding.
+   a juvenile court has the authority to change, modify, or set aside a previous order sua sponte if it decides that a previous order was "erroneously, inadvertently or improvidently granted."
+   (nickolas f. v. superior court (2006) 144 cal.app.4th 92, 116.)
+   thus, even if the juvenile court here had determined when it checked the box that mother's section 388 petition established a prima facie case, it retained the discretion to change that determination upon further consideration, and it did so.
+---welfare and institutions code:388:1
+   (§ 385.)
+---welfare and institutions code:385:1
+   we next turn to mother's substantive argument that the juvenile court erred in ruling that the petition failed to establish a prima facie showing, and we conclude that it is similarly unpersuasive.
+   in making her argument, mother points to the positive steps she alleged she had taken after her children were removed from her care.
+   but even if these steps were found to be true at a hearing, they would not have established mother's right to reunification services.
+   (in re zachary g., supra, 77 cal.app.4th at p. 806.)
+   some of the alleged steps—such as mother's willingness to engage in services—were already known when the juvenile court denied reunification services in may 2013 and accordingly could not have constituted changed circumstances.
+   and the additional steps mother alleged—separating from father and belatedly undergoing a psychological evaluation—while commendable, were not enough to have allowed the juvenile court to have made the necessary findings that services were likely to prevent reabuse or were in the children's best interests.
+   the evaluation report upon which mother herself relied stated that mother continued to deny any parental role in s.b.'s serious injuries and was still "'a work in progress.'"
+   in light of this denial, mother's steps, even if proven, would not have rebutted the presumption against her receiving services.
+   if mother had abused s.b., she was not owning up to it.
+   if she had not abused s.b., she was not owning up to the role she played in allowing or ignoring father's abuse.
+   either way, the juvenile court would have been unable to make the necessary findings that services were likely to prevent reabuse or were in the children's best interests.
+   thus, the juvenile court did not abuse its discretion in declining to hold an evidentiary hearing on mother's first section 388 petition.
+---welfare and institutions code:388:1
+   any error by the juvenile court in denying mother a hearing on the second section 388 petition was harmless.
+---welfare and institutions code:388:1
+   we also find no reversible error in the juvenile court's decision not to hold a hearing on mother's second section 388 petition.
+---welfare and institutions code:388:1
+   mother argues that a hearing was required because she sufficiently alleged changed circumstances and that reunification services were in her children's best interests.
+   but mother cannot show that she was prejudiced or that a remand is appropriate given all the evidence that the juvenile court heard at the contemporaneous selection-and-implementation hearing, and given the court's subsequent findings.
+   the second section 388 petition was filed about six weeks after the first section 388 petition was denied and on the eve of the selection-and-implementation hearing.
+---welfare and institutions code:388:1
+---welfare and institutions code:388:1
+   mother contends that she should have been given the opportunity to prove the strides she had taken to recognize the role of domestic violence in her life, the steps she had taken to protect herself and her children from father by moving away and filing a restraining order against him, and the trauma the children would suffer by severing their relationship with mother.
+   when the juvenile court denied mother an evidentiary hearing on the second section 388 petition it immediately proceeded to a contested hearing on selecting a permanent plan for the children.
+---welfare and institutions code:388:1
+   it then heard evidence and argument on whether it was in the children's best interests to select adoption as the permanent plan, or whether it would be detrimental to the children to select such a plan because they enjoyed a beneficial relationship with their parents that should not be ended by terminating parental rights (§ 366.26, subd. (c)(1)(b)(i)).
+---welfare and institutions code:366.26:1
+   the social worker testified that "[t]here is a lot of concern around the origins of the—still of the injuries that were sustained by s[.b]. [¶] there is also great concern around the instability and dysfunction of the relationship between the mother and the father in terms of ever-changing stories, pointing fingers at each other, saying things about each other, then backing out and saying that isn't true, and there is a lot of chaos. it is very chaotic. [¶] and in my professional opinion, i don't view that as being very emotionally healthy as well as physically because as i stated, there still hasn't been an adequate explanation for the nonaccidental injuries sustained by s[.b]."
+   mother was given the opportunity to testify about her positive relationship with her children and the reasons it would be beneficial to have a continuing relationship with them, and she testified she would remain separated from father "forever," which would benefit her children as well.
+   she emphasized what she had learned about parenting, asserting: "i will do everything to protect my children from re-abuse or any risk that can cause any type of abuse or damage to my children mentally, emotionally, and physically. [¶] and i will always abide by everything that i have learned, such as all of the parenting skills and ways that i have really came to really install (sic) inside of me so that i can really parent my children by myself and be able to provide them with all—all of their needs."
+   although mother did not testify about the specific documents that were attached to the second section 388 petition relating to her progress in gaining parenting skills and insight into domestic violence, she was not prevented from testifying about what she had learned.
+---welfare and institutions code:388:1
+   at the conclusion of the hearing, the juvenile court acknowledged the hardship in separating children from their biological parents, but concluded that the evidence showed that the benefits from the parent-children relationship here were "certainly outweigh[ed]" by the benefits of adoption, which would ensure the children permanence and stability in a home free from violence.
+   in our view, this finding (which is supported by substantial evidence, post, § ii.b.) rendered harmless any failure to provide a hearing on the second section 388 petition because it negates the possibility that the court could have granted additional reunification services following an evidentiary hearing.
+---welfare and institutions code:388:1
+   (in re edward h., supra, 43 cal.app.4th at p. 594 [denial of § 388 hearing did not prejudice parents because prospect of additional six months of reunification services would not have promoted stability for children and thus would not have promoted their best interests].)
+---welfare and institutions code:388:1
+   mother argues that she "had no opportunity to present evidence, to defend and expand upon the merits of her section 388 petition, or to cross-examine witnesses."
+---welfare and institutions code:388:1
+   but she identifies no additional evidence that she would have presented, let alone how that additional evidence would have demonstrated that reunification services were in her children's best interests.
+   relying on lesly g., supra, 162 cal.app.4th 904, mother claims this court "cannot presume that a hearing would have been fruitless."
+   to the extent that lesly g. suggests that a reviewing court can never conclude it was harmless for a juvenile court to deny a section 388 hearing where a prima facie case was established, we decline to follow it.
+---welfare and institutions code:388:1
+   at the beginning of the hearing at issue in lesly g., counsel for the social-services agency told the juvenile court she planned to enter documents relevant to both the permanency-planning hearing and a contested section 388 hearing and that she understood the evidence would be considered simultaneously.
+---welfare and institutions code:388:1
+   (lesly g., at pp. 910-911, 913, fn. 14.)
+   instead of holding a combined hearing, however, the juvenile court stated it had denied the section 388 petition.
+---welfare and institutions code:388:1
+   (lesly g., at p. 911.)
+   as did the juvenile court here, the juvenile court in lesly g. then proceeded to a contested selection-and-implementation hearing.
+   (ibid.)
+   at the conclusion of this hearing, the juvenile court found that the parents had not progressed to the point where their children could be returned to them, had no significant parental roles in their children's lives, and had failed to demonstrate that the children would be harmed if parental rights were terminated.
+   (id. at pp. 911-912.)
+   the court of appeal in lesly g. reasoned that these findings were no substitute for a section 388 hearing because "the focus [of the proceedings at the selection-and-implementation hearing] changes from potential reunification to permanency," requiring the section 388 petition to be heard first.
+---welfare and institutions code:388:1
+---welfare and institutions code:388:1
+   (lesly g., at p. 916.)
+   but at this stage of proceedings, the focus is always on a child's need for permanence and stability no matter what issues are being considered, and we disagree with lesly g.'s suggestion to the contrary.
+   once reunification services are terminated (or, as in this case, never ordered in the first place), the focus of the proceedings changes from family reunification to the child's interest in permanence and stability.
+   our state supreme court has repeatedly recognized this principle.
+   (in re stephanie m. (1994) 7 cal.4th 295, 317 [when hearing § 388 petition after termination of reunification services, court "must recognize this shift of focus in determining the ultimate question before it, that is, the best interests of the child"]; cynthia d. v. superior court (1993) 5 cal.4th 242, 254 [at this point in proceedings, "the interests of the parent and child have diverged, and the child's interest must be given more weight"]; in re marilyn h. (1993) 5 cal.4th 295, 308-310 [rebuttable presumption after termination of reunification services that continued care is in child's best interests].)
+---welfare and institutions code:388:1
+   and the principle was recently reiterated by division three of the fourth district.
+   (in re j.c. (2014) 226 cal.app.4th 503, 527, petn. for review pending, petn. filed july 1, 2014, s219659.)
+   the focus on the child's best interests remains in place whether or not a parent seeks additional services under section 388.
+---welfare and institutions code:388:1
+   (in re edward h., supra, 43 cal.app.4th at p. 594 [on eve of permanency-planning hearing, children's interest in stability is "court's foremost concern and outweigh[s] any interest in reunification"].)
+   this is why juvenile courts sometimes hold a combined section 388 hearing with the selection-and-implementation hearing in the interest of judicial economy, and it is why the evidence presented on the various issues to be decided may be "substantially the same."
+---welfare and institutions code:388:1
+   (seiser & kumli, supra, supplemental and subsequent petitions, § 2.140[3], p. 2-470, italics added.)
+---welfare and institutions code:2.140:1
+   in concluding that the lower court's procedures violated due process, lesly g. failed to recognize that the issues and relevant evidence often overlap at these two hearings.
+   (162 cal.app.4th at p. 915.)
+   the similarity of issues and relevant evidence was discussed in in re c.j.w. (2007) 157 cal.app.4th 1075, an opinion we find to be instructive.
+   the parents in in re c.j.w. filed section 388 petitions on the eve of a selection-and-implementation hearing to modify the denial of reunification services.
+---welfare and institutions code:388:1
+   (c.j.w., at p. 1079.)
+   using the same ambiguous juvenile council order used in lesly g., the juvenile court checked conflicting boxes indicating that it both would and would not hold a hearing on the petitions.
+   (c.j.w., at p. 1080; lesly g., supra, 162 cal.app.4th at p. 914.)
+   at a hearing, the court first denied the section 388 petitions, then conducted the selection-and-implementation hearing, and then terminated parental rights.
+---welfare and institutions code:388:1
+   (c.j.w., at p. 1079.)
+   the juvenile court did not allow testimony from the parents on their section 388 petitions.
+---welfare and institutions code:388:1
+   (c.j.w., at p. 1080.)
+   on review, the parents complained their due process rights had been violated because "they were not allowed to cross-examine the social workers and present evidence."
+   (id. at p. 1081.)
+   the appellate court disagreed, noting that the parents did not identify what further evidence they wanted to present, and that "[t]he juvenile court's hearing, as conducted by the dependency court, comported with due process."
+   (ibid.)
+   lesly g. found in re c.j.w. to be distinguishable because the juvenile court in lesly g. "neither took testimony nor received documentary evidence, and it denied the [section 388] petition without affording counsel an opportunity to argue the merits of the petition."
+---welfare and institutions code:388:1
+   (lesly g., supra, 162 cal.app.4th at p. 915.)
+   but the evidence presented by the social-services agency at the selection-and-implementation hearing in lesly g. was also relevant to the 388 petition, and there is no indication that this evidence was excluded or ignored by the juvenile court in terminating parental rights.
+   (lesly g., at pp. 910-911.)
+   we agree with in re c.j.w. that when at a selection-and-implementation hearing there was "no showing whatsoever of how the best interests of [the children] would be served by depriving them of a permanent, stable home in exchange for an uncertain future," it is "not reasonably likely additional testimony would have persuaded the court to grant [contemporaneous] section 388 petitions and offer reunification services to parents."
+---welfare and institutions code:388:1
+   (in re c.j.w., supra, 157 cal.app.4th at p. 1081; cf. lesly g., at p. 915.)
+   we conclude that findings supported by sufficient evidence at a selection-and-implementation hearing can inform a review of whether a hearing was required on a contemporaneous section 388 petition.
+---welfare and institutions code:388:1
+   like the parents in in re c.j.w., mother here wholly fails to identify additional evidence she would have presented at an evidentiary hearing that would have established a right to reunification services.
+   (157 cal.app.4th at p. 1081.)
+   just as there was an absence of evidence here to show that terminating mother's parental rights would be detrimental to the children (post, § ii.b.), there was likewise an absence of evidence to show that offering reunification services to mother would benefit them.
+   at best, remanding mother's section 388 petitions would be pointless since the juvenile court could hardly conclude that reunification services will advance the children's best interests after it has already determined that those interests are best advanced by terminating mother's parental rights.
+---welfare and institutions code:388:1
+   at worst, it would be harmful by delaying the children's permanent placement in a safe and stable home.
+   we conclude any error in failing to hold a evidentiary hearing on mother's second section 388 petition was harmless.
+---welfare and institutions code:388:1
+   the juvenile court properly concluded that mother failed to establish that her parental rights could not be terminated due to the beneficial-relationship exception.
+   mother next argues that the juvenile court erred in terminating her parental rights because she established that her children would benefit from continuing their relationship with her under the beneficial-relationship exception.
+   (§ 366.26, subd. (c)(1)(b)(i).)
+---welfare and institutions code:366.26:1
+   we disagree.
+   "at a permanency plan hearing, the court may order one of three alternatives: adoption, guardianship or long-term foster care. if the dependent child is adoptable, there is a strong preference for adoption over the alternative permanency plans."
+   (in re s.b. (2008) 164 cal.app.4th 289, 296-297.)
+   "once the court determines the child is likely to be adopted, the burden shifts to the parent to show that termination of parental rights would be detrimental to the child under one of the exceptions listed in section 366.26, subdivision (c)(1). section 366.26, subdivision (c)(1)(b)(i), provides an exception to termination of parental rights when '[t]he parents have maintained regular visitation and contact with the child and the child would benefit from continuing the relationship.'"
+---welfare and institutions code:366.26:1
+---welfare and institutions code:366.26:1
+   (id. at p. 297.)
+   here, there are no real questions that the children were likely to be adopted and that mother maintained regular visitation and contact with them.
+   (in re s.b., supra, 164 cal.app.4th at pp. 296-297.)
+   thus, the only issue in determining the applicability of the beneficial-relationship exception is whether mother met her burden of proving that the children would benefit enough from a continuing relationship with her.
+   "the 'benefit' prong of the exception requires the parent to prove that his or her relationship with the child 'promotes the well-being of the child to such a degree as to outweigh the well-being the child would gain in a permanent home with new, adoptive parents.' no matter how loving and frequent the contact, and notwithstanding the existence of an 'emotional bond' with the child, 'the parents must show that they occupy "a parental role" in the child's life.' the relationship that gives rise to this exception to the statutory preference for adoption 'characteristically aris[es] from day-to-day interaction, companionship and shared experiences. day-to-day contact is not necessarily required, although it is typical in a parent-child relationship.' moreover, '[b]ecause a section 366.26 hearing occurs only after the court has repeatedly found the parent unable to meet the child's needs, it is only in an extraordinary case that preservation of the parent's rights will prevail over the legislature's preference for adoptive placement.'"
+---welfare and institutions code:366.26:1
+   (in re k.p. (2012) 203 cal.app.4th 614, 621.)
+   "the exception must be examined on a case-by-case basis, taking into account the many variables which affect a parent/child bond. the age of the child, the portion of the child's life spent in the parent's custody, the 'positive' or 'negative' effect of interaction between parent and child, and the child's particular needs are some of the variables which logically affect a parent/child bond."
+   (in re autumn h. (1994) 27 cal.app.4th 567, 575-576.)
+   we review a juvenile court's order on the beneficial-relationship exception for substantial evidence.
+   (e.g., in re s.b., supra, 164 cal.app.4th at pp. 297-298.)
+   we agree with the agency that mother failed to meet her burden.
+   we acknowledge there was evidence, highlighted by mother on appeal, that mother's visits with her children went well and that her children had positive reactions to her during them.
+   (cf. in re l.y.l. (2002) 101 cal.app.4th 942, 947 [appellate court will affirm juvenile court's order if supported by substantial evidence, even if other evidence supports contrary conclusion].)
+   but this evidence fell short of establishing that mother's relationship with her children promoted their well-being to such an extent that it outweighed the well-being the children would gain in a permanent home with adoptive parents.
+   (in re k.p., supra, 203 cal.app.4th at p. 621.)
+   mother's visits with her children were always supervised, mother was only at the beginning stages of working on the effects of domestic violence in her life, and there was still instability and dysfunction surrounding her relationship with father.
+   by contrast, the children were in a secure placement and were bonded with their current and prospective caregivers.
+   mother cares deeply for her children and has begun to gain a healthier understanding of her role in the domestic violence that injured her children and placed them at risk.
+   but she has not shown that the juvenile court erred in terminating her parental rights.
+   iii.disposition
+   the juvenile court's orders are affirmed.
+   _________________________
+   humes, j.
+   we concur:
+   _________________________
+   ruvolo, p. j.
+   _________________________
+   rivera, j.
+   trial court:
+   san francisco county superior court
+   trial judge:
+   honorable charlotte woolard
+   honorable julie tang
+   counsel for appellant:
+   amy j. seff, under appointment by the first district appellate project
+   counsel for respondent:
+   dennis j. herrera, city attorney, kimiko burton, lead attorney; gordon-creed, kelley holl and sugerman, jeremy sugerman and manu pradhan
