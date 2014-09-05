@@ -10,11 +10,16 @@ import org.w3c.dom.*;
 import codesparser.*;
 
 import java.io.*;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.logging.Logger;
 
 import load.InterfacesFactory;
 import opinions.facade.*;
+import opinions.model.courtcase.CaseCitation;
 import opinions.model.courtcase.CodeCitation;
 import opinions.model.courtcase.CourtCase;
 import opinions.model.opinion.*;
@@ -40,15 +45,23 @@ public class OpJpaTest {
 //		opJpa.runUpdateScheduler();
 		CodesInterface codesInterface = InterfacesFactory.getCodesInterface();
 		codesInterface.loadXMLCodes(new File(OpJpaTest.class.getResource(xmlcodes).getFile()));
+		
+
+		opJpa.refreshDownloads();
+		
 //		opJpa.playParse(codesInterface);
 		
+		/*		
+		opJpa.refreshDownloads();
+
+		opJpa.loadAndPersistCases();
+
 		opJpa.testViewModel(
 				opJpa.loadTestCases(),  
 				codesInterface, 
 				true, 
 				2);
-		/*		
-
+++
 		opJpa.testViewModel(
 			opJpa.readCasesFromDatabase(), 
 			codesInterface, 
@@ -57,18 +70,88 @@ public class OpJpaTest {
 */			
 	}
 	
-    private String[] terms = {"section", "§" , "sections", "§§"};
-	public void playParse(CodesInterface codesInterface) {
+	public void refreshDownloads() throws Exception {
+
+		DirectoryStream<Path> files = Files.newDirectoryStream( Paths.get(casesDir) );
+		List<String> fileNames = new ArrayList<String>();
+		Iterator<Path> fit = files.iterator();
+		while (fit.hasNext() ) {
+			fileNames.add(fit.next().toFile().getName());
+		}
+		List<String> fileNamesCopy = new ArrayList<String>(fileNames); 
+		
+		CaseParserInterface onlinecaseParser = InterfacesFactory.getCaseParserInterface();
+		Reader reader = onlinecaseParser.getCaseList();
+		reader = saveCopyOfCaseList(reader);
+		List<CourtCase> onlineCases = onlinecaseParser.parseCaseList(reader);
+		reader.close();
+		
+		DatabaseFacade dbFacade = new DatabaseFacade(em);
+		List<CourtCase> databaseCases = dbFacade.listCases();
+
+		// first to deletes
+		for ( CourtCase ccase: onlineCases ) {
+			if ( fileNames.contains(ccase.getName()+".DOC")) fileNames.remove(ccase.getName()+".DOC");
+			if ( databaseCases.contains(ccase)) databaseCases.remove(ccase);
+		}
+		for ( CourtCase ccase: databaseCases ) {
+			em.remove(ccase);
+		}
+		for ( String caseName: fileNames ) {
+			Path path = Paths.get(casesDir, caseName);
+			if ( Files.exists(path) ) Files.delete(path);
+		}
+		// download and save remaining cases
+		// which are ...
+		for ( String caseName: fileNamesCopy ) {
+			CourtCase ccase = new CourtCase(caseName.replace(".DOC", ""), "title", "Jun 1, 1960", "Jun 1, 1960", "CA/4" );
+			if ( onlineCases.contains(ccase)) onlineCases.remove(ccase);
+		}
+		
+	    CodesInterface codesInterface = InterfacesFactory.getCodesInterface();
+		CodeTitles[] codeTitles = codesInterface.getCodeTitles();
+		CodeCitationParser parser = new CodeCitationParser(codeTitles);
+
+		//		System.out.println(onlineCases);
+		// EntityTransaction tx = em.getTransaction();
+		// tx.begin();
+		for( CourtCase ccase: onlineCases ) {
+			InputStream inputStream = onlinecaseParser.getCaseFile(ccase);
+			inputStream = saveCopyOfCase(casesDir, ccase.getName() + ".DOC", inputStream );
+			parser.parseCase(inputStream, ccase );
+			inputStream.close();
+			em.persist(ccase);
+			System.out.println("Downloaded " + ccase.getName() + ".DOC");
+		}
+		// tx.commit();
+		
+	}
+	
+	public void loadAndPersistCases() throws Exception {
+		List<CourtCase> ccases = loadTestCases();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		for(CourtCase ccase: ccases) {
+			em.persist(ccase);
+		}
+		tx.commit();
+	}
+
+	private String[] terms = {"section", "§" , "sections", "§§"};
+	public void playParse(CodesInterface codesInterface) throws Exception {
 		CodeCitationParser codeCitationParser = new CodeCitationParser(codesInterface.getCodeTitles());
 		String sentence = "(welf. & inst. code, §§ 4501; see also welf. & inst. code, § 4434.)";
-        TreeSet<CodeCitation> citationTree = new TreeSet<CodeCitation>();
-        codeCitationParser.parseSentence(sentence, citationTree);
-        System.out.println(citationTree);
+		CourtCase ccase = new CourtCase("test", "test", "Jun 1, 1960", "Jun 1, 1960", "S");
+        TreeSet<CodeCitation> codeCitationTree = new TreeSet<CodeCitation>();
+        TreeSet<CaseCitation> caseCitationTree = new TreeSet<CaseCitation>();
+        
+        codeCitationParser.parseSentence(ccase, sentence, codeCitationTree, caseCitationTree);
+        System.out.println(codeCitationTree);
 	}
 	
 	public OpJpaTest() throws Exception {
-//		emf = Persistence.createEntityManagerFactory("opjpa");
-//		em = emf.createEntityManager();
+		emf = Persistence.createEntityManagerFactory("opjpa");
+		em = emf.createEntityManager();
 	}
 	
 	
@@ -82,6 +165,9 @@ public class OpJpaTest {
 		OpinionCaseBuilder viewBuilder = new OpinionCaseBuilder(codesInterface); 
 		// copy to ParsedCase 
 		for( CourtCase ccase: cases ) {
+			
+			System.out.println("Case = " + ccase.getName() + " CaseCitations = " + ccase.getCaseCitations().size() + " CodeCitations = " + ccase.getCodeCitations().size());
+//			System.out.println("Case = " + ccase.getName() + " CaseCitations = " + ccase.getCaseCitations());
 
 			OpinionCase viewModelCase = viewBuilder.buildParsedCase(ccase, compressCodeReferences);
 			viewModelCase.trimToLevelOfInterest(levelOfInterest);
@@ -136,7 +222,7 @@ public class OpJpaTest {
 
 			InputStream inputStream = caseParserInterface.getCaseFile(courtCase);
 //			inputStream = saveCopyOfCase(casesDir, courtCase.getName()+".DOC", inputStream);
-			parser.parseCase(courtCase, inputStream);
+			parser.parseCase(inputStream, courtCase );
 			inputStream.close();
 
 		}
@@ -217,17 +303,17 @@ public class OpJpaTest {
 	}
 
 	public List<CourtCase> readCasesFromDatabase() throws Exception {
-	    Calendar cal = GregorianCalendar.getInstance();
-	    cal.set(2014, Calendar.AUGUST, 12 );
 
-	    DatabaseFacade databaseFacade = new DatabaseFacade(em);
-		List<CourtCase> courtCases = databaseFacade.findByPublishDate(cal.getTime());
-		
+	    return new DatabaseFacade(em).listCases();
+/*		
+	    DatabaseFacade databaseFacade = ;
+		List<CourtCase> courtCases = databaseFacade.listCases();
 		for( CourtCase courtCase: courtCases ) {
 			System.out.println("Case = " + courtCase.getName());
 		}
 		
 		return courtCases;
+*/
 	}
 
 }
