@@ -46,12 +46,16 @@ public class OpJpaTest {
 		CodesInterface codesInterface = InterfacesFactory.getCodesInterface();
 		codesInterface.loadXMLCodes(new File(OpJpaTest.class.getResource(xmlcodes).getFile()));
 		
-
-		opJpa.refreshDownloads();
+		opJpa.testViewModel(
+				opJpa.readCasesFromDatabase(), 
+				codesInterface, 
+				true, 
+				2);
 		
-//		opJpa.playParse(codesInterface);
 		
 		/*		
+		opJpa.reloadDatabase();
+
 		opJpa.refreshDownloads();
 
 		opJpa.loadAndPersistCases();
@@ -68,6 +72,35 @@ public class OpJpaTest {
 			true, 
 			2);
 */			
+	}
+
+	public void reloadDatabase() throws Exception {
+
+		CaseParserInterface caseParserInterface = new CATestCases(); 
+
+		Reader reader = caseParserInterface.getCaseList();
+		List<CourtCase> courtCases = caseParserInterface.parseCaseList(reader);
+		reader.close();
+
+		System.out.println("Cases = " + courtCases.size() );
+		// Create the CACodes list
+	    CodesInterface codesInterface = InterfacesFactory.getCodesInterface();
+		
+		CodeTitles[] codeTitles = codesInterface.getCodeTitles();
+		CodeCitationParser parser = new CodeCitationParser(codeTitles);
+
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		
+		for( CourtCase courtCase: courtCases ) {
+			InputStream inputStream = caseParserInterface.getCaseFile(courtCase);
+			parser.parseCase(inputStream, courtCase );
+			inputStream.close();
+			em.persist(courtCase);
+		}
+		
+		tx.commit();
+
 	}
 	
 	public void refreshDownloads() throws Exception {
