@@ -15,7 +15,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
-import java.util.logging.Logger;
 
 import load.InterfacesFactory;
 import opinions.facade.*;
@@ -27,7 +26,7 @@ import opinions.parsers.*;
 
 public class OpJpaTest {
 	
-	private static Logger log = Logger.getLogger(OpJpaTest.class.getName());
+//	private static Logger log = Logger.getLogger(OpJpaTest.class.getName());
 	private EntityManagerFactory emf;
 	private EntityManager em;
 
@@ -133,8 +132,10 @@ public class OpJpaTest {
 		}
 		// download and save remaining cases
 		// which are ...
+		Calendar cal = Calendar.getInstance();
+		cal.set(1960, Calendar.JUNE, 1);
 		for ( String caseName: fileNamesCopy ) {
-			CourtCase ccase = new CourtCase(caseName.replace(".DOC", ""), "title", "Jun 1, 1960", "Jun 1, 1960", "CA/4" );
+			CourtCase ccase = new CourtCase(caseName.replace(".DOC", ""), "title", cal.getTime(), cal.getTime(), "CA/4" );
 			if ( onlineCases.contains(ccase)) onlineCases.remove(ccase);
 		}
 		
@@ -164,11 +165,13 @@ public class OpJpaTest {
 		tx.commit();
 	}
 
-	private String[] terms = {"section", "§" , "sections", "§§"};
+//	private String[] terms = {"section", "§" , "sections", "§§"};
 	public void playParse(CodesInterface codesInterface) throws Exception {
 		CodeCitationParser codeCitationParser = new CodeCitationParser(codesInterface.getCodeTitles());
 		String sentence = "(welf. & inst. code, §§ 4501; see also welf. & inst. code, § 4434.)";
-		CourtCase ccase = new CourtCase("test", "test", "Jun 1, 1960", "Jun 1, 1960", "S");
+		Calendar cal = Calendar.getInstance();
+		cal.set(1960, Calendar.JUNE, 1);
+		CourtCase ccase = new CourtCase("test", "test", cal.getTime(), cal.getTime(), "S");
         TreeSet<CodeCitation> codeCitationTree = new TreeSet<CodeCitation>();
         TreeSet<CaseCitation> caseCitationTree = new TreeSet<CaseCitation>();
         
