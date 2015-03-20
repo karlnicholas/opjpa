@@ -32,7 +32,6 @@ public class OpJpaTest {
 	private EntityManager em;
 
 	public final static String caseListFile = "html/60days.html";
-	public final static String casesDir = "cases/";
 	public final static String encoding = "UTF-8";
 	public final static String xmlcodes = "/xmlcodes"; 
 	
@@ -93,9 +92,7 @@ public class OpJpaTest {
 		tx.begin();
 		
 		for( CourtCase courtCase: courtCases ) {
-			InputStream inputStream = caseParserInterface.getCaseFile(courtCase);
-			parser.parseCase(inputStream, courtCase );
-			inputStream.close();
+			parser.parseCase(caseParserInterface.getCaseFile(courtCase, false), courtCase );
 			em.persist(courtCase);
 		}
 		
@@ -105,7 +102,7 @@ public class OpJpaTest {
 	
 	public void refreshDownloads() throws Exception {
 
-		DirectoryStream<Path> files = Files.newDirectoryStream( Paths.get(casesDir) );
+		DirectoryStream<Path> files = Files.newDirectoryStream( Paths.get(CATestCases.casesDir) );
 		List<String> fileNames = new ArrayList<String>();
 		Iterator<Path> fit = files.iterator();
 		while (fit.hasNext() ) {
@@ -131,7 +128,7 @@ public class OpJpaTest {
 			em.remove(ccase);
 		}
 		for ( String caseName: fileNames ) {
-			Path path = Paths.get(casesDir, caseName);
+			Path path = Paths.get(CATestCases.casesDir, caseName);
 			if ( Files.exists(path) ) Files.delete(path);
 		}
 		// download and save remaining cases
@@ -149,10 +146,7 @@ public class OpJpaTest {
 		// EntityTransaction tx = em.getTransaction();
 		// tx.begin();
 		for( CourtCase ccase: onlineCases ) {
-			InputStream inputStream = onlinecaseParser.getCaseFile(ccase);
-			inputStream = saveCopyOfCase(casesDir, ccase.getName() + ".DOC", inputStream );
-			parser.parseCase(inputStream, ccase );
-			inputStream.close();
+			parser.parseCase(onlinecaseParser.getCaseFile(ccase, true), ccase );
 			em.persist(ccase);
 			System.out.println("Downloaded " + ccase.getName() + ".DOC");
 		}
@@ -233,7 +227,7 @@ public class OpJpaTest {
 			if ( DEBUGFILE != null && !DEBUGFILE.equals("ALL") ) {
 				if ( !ccase.getName().equals(DEBUGFILE)) ccit.remove();
 			} else if (DEBUGFILE != null && DEBUGFILE.equals("ALL")) {
-				File tFile = new File(casesDir + ccase.getName() + ".DOC");
+				File tFile = new File(CATestCases.casesDir + ccase.getName() + ".DOC");
 				if ( !tFile.exists() ) ccit.remove();
 			} else {
 				Date cDate = ccase.getPublishDate();
@@ -253,11 +247,7 @@ public class OpJpaTest {
 		for( CourtCase courtCase: courtCases ) {
 			System.out.println("Case = " + courtCase.getName());
 
-			InputStream inputStream = caseParserInterface.getCaseFile(courtCase);
-//			inputStream = saveCopyOfCase(casesDir, courtCase.getName()+".DOC", inputStream);
-			parser.parseCase(inputStream, courtCase );
-			inputStream.close();
-
+			parser.parseCase(caseParserInterface.getCaseFile(courtCase, false), courtCase );
 		}
 		// persist
 		return courtCases;
@@ -291,29 +281,6 @@ public class OpJpaTest {
 	    transformer.transform(source, result);
 
 	    result.getOutputStream().close();
-	}
-
-	private static InputStream saveCopyOfCase(String directory, String fileName, InputStream inputStream ) throws Exception {
-		
-	    File file = new File(directory + "/" + fileName);
-	    file.createNewFile();
-	    
-	    OutputStream out = new FileOutputStream( file );
-	    ByteArrayOutputStream baos = new ByteArrayOutputStream(); 
-	    try {
-	    	byte[] bytes = new byte[2^13];
-	    	int len;
-	    	while ( (len = inputStream.read(bytes, 0, bytes.length)) != -1 ) {
-	    		out.write(bytes, 0, len);
-	    		baos.write(bytes, 0, len);
-	    	}
-	    	out.close();
-	    	baos.close();
-	        return new BufferedInputStream(new ByteArrayInputStream(baos.toByteArray()));
-
-	    } finally {
-	    	inputStream.close();
-	    }
 	}
 
 	private static Reader saveCopyOfCaseList(Reader reader) throws Exception {
