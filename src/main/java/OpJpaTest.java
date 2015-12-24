@@ -18,10 +18,9 @@ import java.util.*;
 
 import load.InterfacesFactory;
 import opinions.facade.*;
-import opinions.model.courtcase.CaseCitation;
-import opinions.model.courtcase.CodeCitation;
-import opinions.model.courtcase.CourtCase;
-import opinions.model.opinion.*;
+import opinions.model.OpinionSummary;
+import opinions.model.StatuteCitation;
+import opinions.view.*;
 import opinions.parsers.*;
 
 public class OpJpaTest {
@@ -77,7 +76,7 @@ public class OpJpaTest {
 		CaseParserInterface caseParserInterface = new CATestCases(); 
 
 		Reader reader = caseParserInterface.getCaseList();
-		List<CourtCase> courtCases = caseParserInterface.parseCaseList(reader);
+		List<OpinionSummary> courtCases = caseParserInterface.parseCaseList(reader);
 		reader.close();
 
 		System.out.println("Cases = " + courtCases.size() );
@@ -90,8 +89,10 @@ public class OpJpaTest {
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 		
-		for( CourtCase courtCase: courtCases ) {
-			parser.parseCase(caseParserInterface.getCaseFile(courtCase, false), courtCase );
+		DatabaseFacade dbFacade = new DatabaseFacade(em);
+		
+		for( OpinionSummary courtCase: courtCases ) {
+			parser.parseCase(dbFacade, caseParserInterface.getCaseFile(courtCase, false), courtCase );
 			em.persist(courtCase);
 		}
 		
@@ -112,19 +113,19 @@ public class OpJpaTest {
 		CaseParserInterface onlinecaseParser = InterfacesFactory.getCaseParserInterface();
 		Reader reader = onlinecaseParser.getCaseList();
 		reader = saveCopyOfCaseList(reader);
-		List<CourtCase> onlineCases = onlinecaseParser.parseCaseList(reader);
+		List<OpinionSummary> onlineCases = onlinecaseParser.parseCaseList(reader);
 		reader.close();
 		
 		DatabaseFacade dbFacade = new DatabaseFacade(em);
-		List<CourtCase> databaseCases = dbFacade.listCases();
+		List<OpinionSummary> databaseCases = dbFacade.listCases();
 
 		// first to deletes
-		for ( CourtCase ccase: onlineCases ) {
-			if ( fileNames.contains(ccase.getName()+".DOC")) fileNames.remove(ccase.getName()+".DOC");
-			if ( databaseCases.contains(ccase)) databaseCases.remove(ccase);
+		for ( OpinionSummary opinionSummary: onlineCases ) {
+			if ( fileNames.contains(opinionSummary.getName()+".DOC")) fileNames.remove(opinionSummary.getName()+".DOC");
+			if ( databaseCases.contains(opinionSummary)) databaseCases.remove(opinionSummary);
 		}
-		for ( CourtCase ccase: databaseCases ) {
-			em.remove(ccase);
+		for ( OpinionSummary opinionSummary: databaseCases ) {
+			em.remove(opinionSummary);
 		}
 		for ( String caseName: fileNames ) {
 			Path path = Paths.get(CATestCases.casesDir, caseName);
@@ -135,8 +136,8 @@ public class OpJpaTest {
 		Calendar cal = Calendar.getInstance();
 		cal.set(1960, Calendar.JUNE, 1);
 		for ( String caseName: fileNamesCopy ) {
-			CourtCase ccase = new CourtCase(caseName.replace(".DOC", ""), "title", cal.getTime(), cal.getTime(), "CA/4" );
-			if ( onlineCases.contains(ccase)) onlineCases.remove(ccase);
+			OpinionSummary opinionSummary = new OpinionSummary(caseName.replace(".DOC", ""), "title", cal.getTime(), cal.getTime(), "CA/4" );
+			if ( onlineCases.contains(opinionSummary)) onlineCases.remove(opinionSummary);
 		}
 		
 	    CodesInterface codesInterface = InterfacesFactory.getCodesInterface();
@@ -146,21 +147,21 @@ public class OpJpaTest {
 		//		System.out.println(onlineCases);
 		// EntityTransaction tx = em.getTransaction();
 		// tx.begin();
-		for( CourtCase ccase: onlineCases ) {
-			parser.parseCase(onlinecaseParser.getCaseFile(ccase, true), ccase );
-			em.persist(ccase);
-			System.out.println("Downloaded " + ccase.getName() + ".DOC");
+		for( OpinionSummary opinionSummary: onlineCases ) {
+			parser.parseCase(dbFacade, onlinecaseParser.getCaseFile(opinionSummary, true), opinionSummary );
+			em.persist(opinionSummary);
+			System.out.println("Downloaded " + opinionSummary.getName() + ".DOC");
 		}
 		// tx.commit();
 		
 	}
 	
 	public void loadAndPersistCases() throws Exception {
-		List<CourtCase> ccases = loadTestCases();
+		List<OpinionSummary> ccases = loadTestCases();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
-		for(CourtCase ccase: ccases) {
-			em.persist(ccase);
+		for(OpinionSummary opinionSummary: ccases) {
+			em.persist(opinionSummary);
 		}
 		tx.commit();
 	}
@@ -171,11 +172,11 @@ public class OpJpaTest {
 		String sentence = "(welf. & inst. code, §§ 4501; see also welf. & inst. code, § 4434.)";
 		Calendar cal = Calendar.getInstance();
 		cal.set(1960, Calendar.JUNE, 1);
-		CourtCase ccase = new CourtCase("test", "test", cal.getTime(), cal.getTime(), "S");
-        TreeSet<CodeCitation> codeCitationTree = new TreeSet<CodeCitation>();
-        TreeSet<CaseCitation> caseCitationTree = new TreeSet<CaseCitation>();
+		OpinionSummary opinionSummary = new OpinionSummary("test", "test", cal.getTime(), cal.getTime(), "S");
+        TreeSet<StatuteCitation> codeCitationTree = new TreeSet<StatuteCitation>();
+        TreeSet<OpinionSummary> caseCitationTree = new TreeSet<OpinionSummary>();
         
-        codeCitationParser.parseSentence(ccase, sentence, codeCitationTree, caseCitationTree);
+        codeCitationParser.parseSentence(opinionSummary, sentence, codeCitationTree, caseCitationTree);
         System.out.println(codeCitationTree);
 	}
 	
@@ -186,7 +187,7 @@ public class OpJpaTest {
 	
 	
 	public void testViewModel(
-			List<CourtCase> cases, 	
+			List<OpinionSummary> cases, 	
 			CodesInterface codesInterface, 
 			boolean compressCodeReferences, 
 			int levelOfInterest
@@ -194,13 +195,13 @@ public class OpJpaTest {
 		List<OpinionCase> viewModelCases = new ArrayList<OpinionCase>();
 		OpinionCaseBuilder viewBuilder = new OpinionCaseBuilder(codesInterface); 
 		// copy to ParsedCase 
-		for( CourtCase ccase: cases ) {
+		for( OpinionSummary opinionSummary: cases ) {
 			
-			System.out.println("Case = " + ccase.getName() + " CaseCitations = " + ccase.getCaseCitations().size() + " CodeCitations = " + ccase.getCodeCitations().size());
-//			System.out.println("Case = " + ccase.getName() + " CaseCitations = " + ccase.getCaseCitations());
+			System.out.println("Case = " + opinionSummary.getName() + " CaseCitations = " + opinionSummary.getOpinionCitationKeys().size() + " CodeCitations = " + opinionSummary.getStatuteCitationKeys().size());
+//			System.out.println("Case = " + opinionSummary.getName() + " CaseCitations = " + opinionSummary.getCaseCitations());
 
-			OpinionCase viewModelCase = viewBuilder.buildParsedCase(ccase, compressCodeReferences);
-			viewModelCase.trimToLevelOfInterest(levelOfInterest);
+			OpinionCase viewModelCase = viewBuilder.buildParsedCase(opinionSummary, compressCodeReferences);
+			viewModelCase.trimToLevelOfInterest(levelOfInterest, false);
 			viewModelCases.add(viewModelCase);
 		}
 
@@ -210,7 +211,7 @@ public class OpJpaTest {
 	}
 
 
-	public List<CourtCase> loadTestCases() throws Exception {
+	public List<OpinionSummary> loadTestCases() throws Exception {
 	    // Test case
 	    Calendar cal = GregorianCalendar.getInstance();
 	    cal.set(2014, Calendar.JULY, 7, 0, 0, 0 );
@@ -220,20 +221,20 @@ public class OpJpaTest {
 		CaseParserInterface caseParserInterface = new CATestCases(); 
 
 		Reader reader = caseParserInterface.getCaseList();
-		List<CourtCase> courtCases = caseParserInterface.parseCaseList(reader);
+		List<OpinionSummary> courtCases = caseParserInterface.parseCaseList(reader);
 		reader.close();
 
 		// trim list to available test cases
-		Iterator<CourtCase> ccit = courtCases.iterator();
+		Iterator<OpinionSummary> ccit = courtCases.iterator();
 		while ( ccit.hasNext() ) {
-			CourtCase ccase = ccit.next();
+			OpinionSummary opinionSummary = ccit.next();
 			if ( DEBUGFILE != null && !DEBUGFILE.equals("ALL") ) {
-				if ( !ccase.getName().equals(DEBUGFILE)) ccit.remove();
+				if ( !opinionSummary.getName().equals(DEBUGFILE)) ccit.remove();
 			} else if (DEBUGFILE != null && DEBUGFILE.equals("ALL")) {
-				File tFile = new File(CATestCases.casesDir + ccase.getName() + ".DOC");
+				File tFile = new File(CATestCases.casesDir + opinionSummary.getName() + ".DOC");
 				if ( !tFile.exists() ) ccit.remove();
 			} else {
-				Date cDate = ccase.getPublishDate();
+				Date cDate = opinionSummary.getPublishDate();
 				if ( cDate.compareTo(cal.getTime()) != 0 ) {
 					ccit.remove();
 				}
@@ -247,7 +248,7 @@ public class OpJpaTest {
 		CodeTitles[] codeTitles = codesInterface.getCodeTitles();
 		CodeCitationParser parser = new CodeCitationParser(codeTitles);
 		
-		for( CourtCase courtCase: courtCases ) {
+		for( OpinionSummary courtCase: courtCases ) {
 			System.out.println("Case = " + courtCase.getName());
 
 			parser.parseCase(caseParserInterface.getCaseFile(courtCase, false), courtCase );
@@ -269,8 +270,8 @@ public class OpJpaTest {
 	    rootElement = xmlDoc.createElement("cases");
 	    xmlDoc.appendChild(rootElement);
 
-	    for( CourtCase ccase: cases ) {
-	        rootElement.appendChild( ccase.createXML(xmlDoc) );
+	    for( OpinionSummary opinionSummary: cases ) {
+	        rootElement.appendChild( opinionSummary.createXML(xmlDoc) );
 	    }
 
 	    // write the content into xml file
@@ -293,7 +294,7 @@ public class OpJpaTest {
 	    
 	    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter( new FileOutputStream( file ), encoding));
 	    CharArrayWriter cWriter = new CharArrayWriter(); 
-		char[] cbuf = new char[2^13];
+		char[] cbuf = new char[8192];
 		int len;
 		while ( (len = reader.read(cbuf, 0, cbuf.length)) != -1 ) {
 			writer.write(cbuf, 0, len);
@@ -305,13 +306,13 @@ public class OpJpaTest {
 	    return new BufferedReader( new CharArrayReader(cWriter.toCharArray()) );
 	}
 
-	public List<CourtCase> readCasesFromDatabase() throws Exception {
+	public List<OpinionSummary> readCasesFromDatabase() throws Exception {
 
 	    return new DatabaseFacade(em).listCases();
 /*		
 	    DatabaseFacade databaseFacade = ;
-		List<CourtCase> courtCases = databaseFacade.listCases();
-		for( CourtCase courtCase: courtCases ) {
+		List<OpinionSummary> courtCases = databaseFacade.listCases();
+		for( OpinionSummary courtCase: courtCases ) {
 			System.out.println("Case = " + courtCase.getName());
 		}
 		

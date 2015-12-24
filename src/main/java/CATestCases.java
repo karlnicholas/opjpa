@@ -5,7 +5,7 @@ import java.io.*;
 import org.apache.poi.hwpf.HWPFDocument;
 
 import opcalifornia.*;
-import opinions.model.courtcase.CourtCase;
+import opinions.model.OpinionSummary;
 import opinions.parsers.ParserDocument;
 
 public class CATestCases extends CACaseParser {
@@ -18,10 +18,10 @@ public class CATestCases extends CACaseParser {
 
 	@SuppressWarnings("resource")
 	@Override
-	public ParserDocument getCaseFile(CourtCase ccase, boolean debugCopy) throws Exception {
-		InputStream inputStream = new FileInputStream(new File( casesDir + ccase.getName() +".DOC" ));
+	public ParserDocument getCaseFile(OpinionSummary opinionSummary, boolean debugCopy) throws Exception {
+		InputStream inputStream = new FileInputStream(new File( casesDir + opinionSummary.getName() +".DOC" ));
 		if ( debugCopy ) {
-			inputStream = saveCopyOfCase(casesDir, ccase.getName() + ".DOC", inputStream );
+			inputStream = saveCopyOfCase(casesDir, opinionSummary.getName() + ".DOC", inputStream );
 		}
 		try {
 			return new ParserDocument( new HWPFDocument(inputStream));
@@ -38,7 +38,7 @@ public class CATestCases extends CACaseParser {
 	    OutputStream out = new FileOutputStream( file );
 	    ByteArrayOutputStream baos = new ByteArrayOutputStream(); 
 	    try {
-	    	byte[] bytes = new byte[2^13];
+	    	byte[] bytes = new byte[8192];
 	    	int len;
 	    	while ( (len = inputStream.read(bytes, 0, bytes.length)) != -1 ) {
 	    		out.write(bytes, 0, len);
