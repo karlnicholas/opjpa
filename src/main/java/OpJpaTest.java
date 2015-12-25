@@ -1,11 +1,5 @@
 
 import javax.persistence.*;
-import javax.xml.parsers.*;
-import javax.xml.transform.*;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-
-import org.w3c.dom.*;
 
 import codesparser.*;
 
@@ -17,9 +11,13 @@ import java.nio.file.Paths;
 import java.util.*;
 
 import load.InterfacesFactory;
+import opinions.dao.OpinionDao;
+import opinions.dao.StatuteDao;
 import opinions.facade.*;
+import opinions.model.OpinionCitationKey;
 import opinions.model.OpinionSummary;
 import opinions.model.StatuteCitation;
+import opinions.model.StatuteCitationKey;
 import opinions.view.*;
 import opinions.parsers.*;
 
@@ -89,11 +87,9 @@ public class OpJpaTest {
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 		
-		DatabaseFacade dbFacade = new DatabaseFacade(em);
-		
-		for( OpinionSummary courtCase: courtCases ) {
-			parser.parseCase(dbFacade, caseParserInterface.getCaseFile(courtCase, false), courtCase );
-			em.persist(courtCase);
+		for( OpinionSummary opinionSummary: courtCases ) {
+			parser.parseCase(caseParserInterface.getCaseFile(opinionSummary, false), opinionSummary );
+			em.persist(opinionSummary);
 		}
 		
 		tx.commit();
@@ -121,7 +117,7 @@ public class OpJpaTest {
 
 		// first to deletes
 		for ( OpinionSummary opinionSummary: onlineCases ) {
-			if ( fileNames.contains(opinionSummary.getName()+".DOC")) fileNames.remove(opinionSummary.getName()+".DOC");
+			if ( fileNames.contains(opinionSummary.getFileName()+".DOC")) fileNames.remove(opinionSummary.getFileName()+".DOC");
 			if ( databaseCases.contains(opinionSummary)) databaseCases.remove(opinionSummary);
 		}
 		for ( OpinionSummary opinionSummary: databaseCases ) {
@@ -136,7 +132,7 @@ public class OpJpaTest {
 		Calendar cal = Calendar.getInstance();
 		cal.set(1960, Calendar.JUNE, 1);
 		for ( String caseName: fileNamesCopy ) {
-			OpinionSummary opinionSummary = new OpinionSummary(caseName.replace(".DOC", ""), "title", cal.getTime(), cal.getTime(), "CA/4" );
+			OpinionSummary opinionSummary = new OpinionSummary(null, caseName.replace(".DOC", ""), "title", cal.getTime(), cal.getTime(), "CA/4" );
 			if ( onlineCases.contains(opinionSummary)) onlineCases.remove(opinionSummary);
 		}
 		
@@ -148,9 +144,9 @@ public class OpJpaTest {
 		// EntityTransaction tx = em.getTransaction();
 		// tx.begin();
 		for( OpinionSummary opinionSummary: onlineCases ) {
-			parser.parseCase(dbFacade, onlinecaseParser.getCaseFile(opinionSummary, true), opinionSummary );
+			parser.parseCase(onlinecaseParser.getCaseFile(opinionSummary, true), opinionSummary );
 			em.persist(opinionSummary);
-			System.out.println("Downloaded " + opinionSummary.getName() + ".DOC");
+			System.out.println("Downloaded " + opinionSummary.getFileName() + ".DOC");
 		}
 		// tx.commit();
 		
@@ -172,7 +168,7 @@ public class OpJpaTest {
 		String sentence = "(welf. & inst. code, §§ 4501; see also welf. & inst. code, § 4434.)";
 		Calendar cal = Calendar.getInstance();
 		cal.set(1960, Calendar.JUNE, 1);
-		OpinionSummary opinionSummary = new OpinionSummary("test", "test", cal.getTime(), cal.getTime(), "S");
+		OpinionSummary opinionSummary = new OpinionSummary(null, "test", "test", cal.getTime(), cal.getTime(), "S");
         TreeSet<StatuteCitation> codeCitationTree = new TreeSet<StatuteCitation>();
         TreeSet<OpinionSummary> caseCitationTree = new TreeSet<OpinionSummary>();
         
@@ -192,20 +188,33 @@ public class OpJpaTest {
 			boolean compressCodeReferences, 
 			int levelOfInterest
 	) throws Exception {
-		List<OpinionCase> viewModelCases = new ArrayList<OpinionCase>();
-		OpinionCaseBuilder viewBuilder = new OpinionCaseBuilder(codesInterface); 
+		List<OpinionView> viewModelCases = new ArrayList<OpinionView>();
+		OpinionViewBuilder viewBuilder = new OpinionViewBuilder(codesInterface); 
 		// copy to ParsedCase 
 		for( OpinionSummary opinionSummary: cases ) {
 			
-			System.out.println("Case = " + opinionSummary.getName() + " CaseCitations = " + opinionSummary.getOpinionCitationKeys().size() + " CodeCitations = " + opinionSummary.getStatuteCitationKeys().size());
+			System.out.println("Case = " + opinionSummary.getFileName() + " CaseCitations = " + opinionSummary.getOpinionCitationKeys().size() + " CodeCitations = " + opinionSummary.getStatuteCitationKeys().size());
 //			System.out.println("Case = " + opinionSummary.getName() + " CaseCitations = " + opinionSummary.getCaseCitations());
+			ParserResults parserResults = new ParserResults(opinionSummary, new ParserResults.PersistenceLookup() {
+				OpinionDao opinionDao = new OpinionDao(em);
+				StatuteDao statuteDao = new StatuteDao(em);
 
-			OpinionCase viewModelCase = viewBuilder.buildParsedCase(opinionSummary, compressCodeReferences);
+				@Override
+				public StatuteCitation findStatute(StatuteCitationKey statuteKey) {
+					return statuteDao.find(statuteKey);
+				}
+				
+				@Override
+				public OpinionSummary findOpinion(OpinionCitationKey opinionKey) {
+					return opinionDao.find(opinionKey);
+				}
+			});
+			OpinionView viewModelCase = viewBuilder.buildOpinionView(opinionSummary, parserResults, compressCodeReferences);
 			viewModelCase.trimToLevelOfInterest(levelOfInterest, false);
 			viewModelCases.add(viewModelCase);
 		}
 
-		writeReportXML("xml/DocumentReport.xml", viewModelCases);
+//		writeReportXML("xml/DocumentReport.xml", viewModelCases);
 		
 		
 	}
@@ -229,9 +238,9 @@ public class OpJpaTest {
 		while ( ccit.hasNext() ) {
 			OpinionSummary opinionSummary = ccit.next();
 			if ( DEBUGFILE != null && !DEBUGFILE.equals("ALL") ) {
-				if ( !opinionSummary.getName().equals(DEBUGFILE)) ccit.remove();
+				if ( !opinionSummary.getFileName().equals(DEBUGFILE)) ccit.remove();
 			} else if (DEBUGFILE != null && DEBUGFILE.equals("ALL")) {
-				File tFile = new File(CATestCases.casesDir + opinionSummary.getName() + ".DOC");
+				File tFile = new File(CATestCases.casesDir + opinionSummary.getFileName() + ".DOC");
 				if ( !tFile.exists() ) ccit.remove();
 			} else {
 				Date cDate = opinionSummary.getPublishDate();
@@ -248,16 +257,17 @@ public class OpJpaTest {
 		CodeTitles[] codeTitles = codesInterface.getCodeTitles();
 		CodeCitationParser parser = new CodeCitationParser(codeTitles);
 		
-		for( OpinionSummary courtCase: courtCases ) {
-			System.out.println("Case = " + courtCase.getName());
+		for( OpinionSummary opinionSummary: courtCases ) {
+			System.out.println("Case = " + opinionSummary.getFileName());
 
-			parser.parseCase(caseParserInterface.getCaseFile(courtCase, false), courtCase );
+			parser.parseCase(caseParserInterface.getCaseFile(opinionSummary, false), opinionSummary );
 		}
 		// persist
 		return courtCases;
 	}
 
-	public static void writeReportXML(String fileName, List<OpinionCase> cases)
+/*
+	public static void writeReportXML(String fileName, List<OpinionView> cases)
 	        throws ParserConfigurationException,
 	        TransformerException,
 	        IOException
@@ -286,6 +296,7 @@ public class OpJpaTest {
 
 	    result.getOutputStream().close();
 	}
+*/
 
 	private static Reader saveCopyOfCaseList(Reader reader) throws Exception {
 		
@@ -312,8 +323,8 @@ public class OpJpaTest {
 /*		
 	    DatabaseFacade databaseFacade = ;
 		List<OpinionSummary> courtCases = databaseFacade.listCases();
-		for( OpinionSummary courtCase: courtCases ) {
-			System.out.println("Case = " + courtCase.getName());
+		for( OpinionSummary opinionSummary: courtCases ) {
+			System.out.println("Case = " + opinionSummary.getName());
 		}
 		
 		return courtCases;

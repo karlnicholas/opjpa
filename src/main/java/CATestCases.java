@@ -19,9 +19,9 @@ public class CATestCases extends CACaseParser {
 	@SuppressWarnings("resource")
 	@Override
 	public ParserDocument getCaseFile(OpinionSummary opinionSummary, boolean debugCopy) throws Exception {
-		InputStream inputStream = new FileInputStream(new File( casesDir + opinionSummary.getName() +".DOC" ));
+		InputStream inputStream = new FileInputStream(new File( casesDir + opinionSummary.getFileName() +".DOC" ));
 		if ( debugCopy ) {
-			inputStream = saveCopyOfCase(casesDir, opinionSummary.getName() + ".DOC", inputStream );
+			inputStream = saveCopyOfCase(casesDir, opinionSummary.getFileName() + ".DOC", inputStream );
 		}
 		try {
 			return new ParserDocument( new HWPFDocument(inputStream));
