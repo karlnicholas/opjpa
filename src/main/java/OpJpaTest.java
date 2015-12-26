@@ -195,20 +195,7 @@ public class OpJpaTest {
 			
 			System.out.println("Case = " + opinionSummary.getFileName() + " CaseCitations = " + opinionSummary.getOpinionCitationKeys().size() + " CodeCitations = " + opinionSummary.getStatuteCitationKeys().size());
 //			System.out.println("Case = " + opinionSummary.getName() + " CaseCitations = " + opinionSummary.getCaseCitations());
-			ParserResults parserResults = new ParserResults(opinionSummary, new ParserResults.PersistenceLookup() {
-				OpinionDao opinionDao = new OpinionDao(em);
-				StatuteDao statuteDao = new StatuteDao(em);
-
-				@Override
-				public StatuteCitation findStatute(StatuteCitationKey statuteKey) {
-					return statuteDao.find(statuteKey);
-				}
-				
-				@Override
-				public OpinionSummary findOpinion(OpinionCitationKey opinionKey) {
-					return opinionDao.find(opinionKey);
-				}
-			});
+			ParserResults parserResults = new ParserResults();
 			OpinionView viewModelCase = viewBuilder.buildOpinionView(opinionSummary, parserResults, compressCodeReferences);
 			viewModelCase.trimToLevelOfInterest(levelOfInterest, false);
 			viewModelCases.add(viewModelCase);
