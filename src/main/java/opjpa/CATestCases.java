@@ -1,3 +1,4 @@
+package opjpa;
 
 
 import java.io.*;
@@ -5,7 +6,7 @@ import java.io.*;
 import org.apache.poi.hwpf.HWPFDocument;
 
 import opcalifornia.*;
-import opinions.model.OpinionSummary;
+import opinions.model.SlipOpinion;
 import opinions.parsers.ParserDocument;
 
 public class CATestCases extends CACaseParser {
@@ -16,13 +17,14 @@ public class CATestCases extends CACaseParser {
         return new BufferedReader( new InputStreamReader( new FileInputStream( OpJpaTest.caseListFile ), OpJpaTest.encoding) );
 	}
 
-	@SuppressWarnings("resource")
 	@Override
-	public ParserDocument getCaseFile(OpinionSummary opinionSummary, boolean debugCopy) throws Exception {
-		InputStream inputStream = new FileInputStream(new File( casesDir + opinionSummary.getFileName() +".DOC" ));
+	public ParserDocument getCaseFile(SlipOpinion slipOpinion, boolean debugCopy) throws Exception {
+		InputStream inputStream = new FileInputStream(new File( casesDir + slipOpinion.getKey() +".DOC" ));
+/*		
 		if ( debugCopy ) {
-			inputStream = saveCopyOfCase(casesDir, opinionSummary.getFileName() + ".DOC", inputStream );
+			inputStream = saveCopyOfCase(casesDir, slipOpinion.getKey() + ".DOC", inputStream );
 		}
+*/		
 		try {
 			return new ParserDocument( new HWPFDocument(inputStream));
 		} finally {

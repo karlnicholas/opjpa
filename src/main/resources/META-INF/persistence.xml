@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 	<persistence-unit name="opjpa" transaction-type="RESOURCE_LOCAL">
-		<properties>
-			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/op"/>
-			<property name="javax.persistence.jdbc.user" value="adminnzbaxcv"/>
-			<property name="javax.persistence.jdbc.password" value="1Qtt3m3npNiS"/>
-			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-		</properties>
+	<class>opinions.model.OpinionBase</class>
+	<class>opinions.model.OpinionSummary</class>
+	<class>opinions.model.OpinionSummaryKey</class>
+	<class>opinions.model.SlipOpinion</class>
+	<class>opinions.model.SlipOpinionKey</class>
+	<class>opinions.model.StatuteCitation</class>
+	<class>opinions.model.StatuteCitationKey</class>
+	<properties>
+		<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/op" />
+		<property name="javax.persistence.jdbc.user" value="adminwg1gkjx" />
+		<property name="javax.persistence.jdbc.password" value="P79Z7WItQ2aH" />
+		<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
+	</properties>
 	</persistence-unit>
 </persistence>
