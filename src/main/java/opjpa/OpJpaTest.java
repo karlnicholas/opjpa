@@ -15,6 +15,7 @@ import java.nio.file.Paths;
 import java.util.*;
 
 import load.InterfacesFactory;
+import opinions.dao.SlipOpinionDao;
 import opinions.facade.*;
 import opinions.model.OpinionSummary;
 import opinions.model.SlipOpinion;
@@ -269,13 +270,25 @@ public class OpJpaTest {
 		CodeCitationParser parser = new CodeCitationParser(codeTitles);
 		
 		DatabaseFacade dbFacade = new DatabaseFacade(em);
+//		SlipOpinionDao slipOpinionDao = new SlipOpinionDao(em);
 		EntityTransaction tx = em.getTransaction();
 		for( SlipOpinion slipOpinion: opinions ) {
 			System.out.println("Case = " + slipOpinion.getKey());
 			ParserResults parserResults = parser.parseCase(caseParserInterface.getCaseFile(slipOpinion, false), slipOpinion, slipOpinion.getOpinionSummaryKey() );
 			tx.begin();
         	parserResults.persist(slipOpinion, dbFacade);
-			em.persist(slipOpinion);
+        	em.persist(slipOpinion);
+/*        	
+        	SlipOpinion existingOpinion = slipOpinionDao.find(slipOpinion.getOpinionSummaryKey());
+            if (  existingOpinion != null ) {
+            	// i guess it should never get here.
+                existingOpinion.addModifications(slipOpinion, parserResults);
+                existingOpinion.addOpinionSummaryReferredFrom(slipOpinion.getOpinionSummaryKey());
+                slipOpinionDao.merge(existingOpinion);
+            } else {
+            	slipOpinionDao.persist(slipOpinion);
+            }
+*/            
 			tx.commit();
 		}
 		// persist
