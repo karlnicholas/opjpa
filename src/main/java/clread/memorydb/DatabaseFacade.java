@@ -94,9 +94,10 @@ public class DatabaseFacade implements PersistenceInterface {
 	}
 
 	@Override
-	public void mergeStatute(StatuteCitation statuteCitation) {
+	public StatuteCitation mergeStatute(StatuteCitation statuteCitation) {
 		// merge has already happened in the object itself
 		dataBase.getStatuteTable().add(statuteCitation);
+		return statuteCitation;
 	}
 
 	@Override
@@ -113,8 +114,9 @@ public class DatabaseFacade implements PersistenceInterface {
 	}
 
 	@Override
-	public void mergeOpinion(OpinionSummary opinionSummary) {
+	public OpinionSummary mergeOpinion(OpinionSummary opinionSummary) {
 		dataBase.getOpinionTable().add(opinionSummary);
+		return opinionSummary;
 	}
 
 	public ConcurrentSkipListSet<OpinionSummary> getAllOpinions() {

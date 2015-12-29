@@ -51,7 +51,7 @@ public class InterfacesFactory {
 		// For gscalifornia
 		File codesDir = new File("c:/users/karl/code");
 
-		File xmlcodes = new File("c:/users/karl/scsb/opinions/src/main/resources/xmlcodes");
+		File xmlcodes = new File("c:/users/karl/scsb/opjpa/src/main/resources/xmlcodes");
 		
 		loader.createXMLCodes(codesDir, xmlcodes );
 	}

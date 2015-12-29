@@ -1,10 +1,7 @@
 package opjpa;
 
 import javax.persistence.*;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
 
-import clread.OpinionReport;
 import codesparser.*;
 
 import java.io.*;
@@ -15,7 +12,6 @@ import java.nio.file.Paths;
 import java.util.*;
 
 import load.InterfacesFactory;
-import opinions.dao.SlipOpinionDao;
 import opinions.facade.*;
 import opinions.model.OpinionSummary;
 import opinions.model.SlipOpinion;
@@ -78,7 +74,7 @@ public class OpJpaTest {
 	    CodesInterface codesInterface = InterfacesFactory.getCodesInterface();
 		DatabaseFacade dbFacade = new DatabaseFacade(em);
 		StatuteCitation maxWelfare = dbFacade.findStatute(new StatuteCitationKey("civil code", "1750"));
-	    clread.StatuteReport.printCodeCitation(codesInterface, dbFacade, maxWelfare);
+	    opjpa.StatuteReport.printCodeCitation(codesInterface, dbFacade, maxWelfare);
 	}
 
 	public void reloadDatabase() throws Exception {
@@ -132,7 +128,7 @@ public class OpJpaTest {
 		reader.close();
 		
 		DatabaseFacade dbFacade = new DatabaseFacade(em);
-		List<SlipOpinion> databaseCases = dbFacade.listCases();
+		List<SlipOpinion> databaseCases = dbFacade.listSlipOpinions();
 
 		// first to deletes
 		for ( SlipOpinion slipOpinion: onlineCases ) {
@@ -325,19 +321,5 @@ public class OpJpaTest {
 	    result.getOutputStream().close();
 	}
 */
-
-	public List<SlipOpinion> readCasesFromDatabase() throws Exception {
-
-	    return new DatabaseFacade(em).listCases();
-/*		
-	    DatabaseFacade databaseFacade = ;
-		List<SlipOpinion> opinions = databaseFacade.listCases();
-		for( SlipOpinion slipOpinion: opinions ) {
-			System.out.println("Case = " + slipOpinion.getName());
-		}
-		
-		return opinions;
-*/
-	}
 
 }

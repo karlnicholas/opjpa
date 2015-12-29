@@ -1,4 +1,4 @@
-package clread;
+package opjpa;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -6,25 +6,37 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import clread.database.DatabaseFacade;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
 import code.CACodes;
 import codesparser.CodeReference;
 import codesparser.CodesInterface;
 import codesparser.SectionNumber;
 import opinions.model.OpinionSummaryKey;
+import opinions.facade.DatabaseFacade;
 import opinions.model.OpinionSummary;
 import opinions.model.StatuteCitation;
 import opinions.parsers.ParserResults.PersistenceInterface;
 
 public class StatuteReport {
 
+	private EntityManagerFactory emf;
+	private EntityManager em;
+
 	public static void main(String[] args) throws Exception {
 		new StatuteReport().run();
 	}
 
+	public StatuteReport() {
+		emf = Persistence.createEntityManagerFactory("opjpa");
+		em = emf.createEntityManager();
+	}
+
 	private void run() throws Exception {
 		
-		DatabaseFacade databaseFacade = new DatabaseFacade();
+		DatabaseFacade databaseFacade = new DatabaseFacade(em);
 
 //      String iface = "code.CACodes";
 //      CodesInterface codesInterface = (CodesInterface) Class.forName(iface).newInstance();
