@@ -4,7 +4,6 @@ import java.io.File;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 import code.CACodes;
@@ -36,7 +35,9 @@ public class LoadOpinions {
         codesInterface.loadXMLCodes(new File(LoadOpinions.class.getResource("/xmlcodes").getFile()));
 
         LoadHistoricalOpinions load = new LoadHistoricalOpinions(databaseFacade, codesInterface);
-        load.initializeDB(em);
+        em.getTransaction().begin();
+        load.initializeDB();
+        em.getTransaction().commit();
 //        DatabaseFacade.getInstance().writeToXML();
 
 	}

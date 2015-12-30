@@ -49,15 +49,15 @@ public class StatuteReport {
 
         System.out.println("statuteTable size = " + databaseFacade.getCount());
         
-		List<StatuteCitation> statutesForCode = databaseFacade.selectForCode("civil code");
+		List<StatuteCitation> statutesForCode = databaseFacade.selectForCode("welfare");
         StatuteCitation maxWelfare = getCodeCitationMaxCaseReferrors(statutesForCode );
         printCodeCitation(codesInterface, databaseFacade, maxWelfare);
         
-//        printCodeCitation(codesInterface, databaseFacade, databaseFacade.findStatuteByCodeSection("welfare", "200"));
+        printCodeCitation(codesInterface, databaseFacade, databaseFacade.findStatuteByCodeSection("welfare", "200"));
 
-//        printCodeCitation(codesInterface, databaseFacade, databaseFacade.findStatuteByCodeSection("family code", "4058"));
+        printCodeCitation(codesInterface, databaseFacade, databaseFacade.findStatuteByCodeSection("family code", "4058"));
 
-//        printCodeCitation(codesInterface, databaseFacade, databaseFacade.findStatuteByCodeSection("family code", "300"));
+        printCodeCitation(codesInterface, databaseFacade, databaseFacade.findStatuteByCodeSection("family code", "300"));
         
 	}
 	

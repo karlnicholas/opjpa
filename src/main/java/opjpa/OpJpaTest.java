@@ -66,8 +66,9 @@ public class OpJpaTest {
 			codesInterface, 
 			true, 
 			2);
-*/
+
 		opJpa.statuteReport(); 
+*/
 	}
 	
 	private void statuteReport() throws Exception {

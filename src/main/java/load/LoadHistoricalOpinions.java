@@ -9,9 +9,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.function.Consumer;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
-
 import org.apache.commons.compress.archivers.tar.TarArchiveEntry;
 import org.apache.commons.compress.archivers.tar.TarArchiveInputStream;
 import org.apache.commons.compress.compressors.gzip.GzipCompressorInputStream;
@@ -44,13 +41,12 @@ public class LoadHistoricalOpinions {
     	this.codesInterface = codesInterface;
     }
 
-    public void initializeDB(EntityManager em) throws Exception {
-        readStream(em, "c:/users/karl/downloads/calctapp.tar.gz");
-        readStream(em, "c:/users/karl/downloads/cal.tar.gz");
+    public void initializeDB() throws Exception {
+        readStream("c:/users/karl/downloads/calctapp.tar.gz");
+        readStream("c:/users/karl/downloads/cal.tar.gz");
     }
 
     private void readStream(
-    	EntityManager em, 
         String fileName 
     ) throws Exception {
       ObjectMapper om = new ObjectMapper();
@@ -83,7 +79,6 @@ public class LoadHistoricalOpinions {
 
                   clOps.add(op);
                   if ( clOps.size() == 1000 ) {
-                      em.getTransaction().begin();
                       clOps.parallelStream().forEach(new Consumer<CourtListenerOpinion>() {
                           @Override
                           public void accept(CourtListenerOpinion op) {
@@ -96,13 +91,10 @@ public class LoadHistoricalOpinions {
                       });
                       // remove processed cases from the list
                       clOps.clear();
-                      em.getTransaction().commit();
-                	  em.clear();
                   }
               }
           }
           if ( clOps.size() > 0 ) {
-              em.getTransaction().begin();
               clOps.parallelStream().forEach(new Consumer<CourtListenerOpinion>() {
                   @Override
                   public void accept(CourtListenerOpinion op) {
@@ -116,8 +108,6 @@ public class LoadHistoricalOpinions {
              
               });
               clOps.clear();
-              em.getTransaction().commit();
-        	  em.clear();
           }
       } finally {
           tarIn.close();

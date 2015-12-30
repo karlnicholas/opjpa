@@ -55,6 +55,7 @@ public class OpinionReport {
 //        DatabaseFacade.getInstance().initFromXML();
 
         SlipOpinion opinion = databaseFacade.findSlipOpinionBySummaryKey(new OpinionSummaryKey("1 Slip.Op 10287300"));
+//        OpinionSummary opinion = databaseFacade.findOpinion(new OpinionSummaryKey("5 Cal.4th 295"));
         
         class MyPersistenceLookup implements ParserResults.PersistenceLookup {
         	DatabaseFacade databaseFacade;
