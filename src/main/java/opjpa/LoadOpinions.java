@@ -26,19 +26,20 @@ public class LoadOpinions {
 	}
 
 	private void run() throws Exception {
-		
-		DatabaseFacade databaseFacade = new DatabaseFacade(em);
-
-//      String iface = "code.CACodes";
-//      CodesInterface codesInterface = (CodesInterface) Class.forName(iface).newInstance();
-	    CodesInterface codesInterface = new CACodes();
-        codesInterface.loadXMLCodes(new File(LoadOpinions.class.getResource("/xmlcodes").getFile()));
-
-        LoadHistoricalOpinions load = new LoadHistoricalOpinions(databaseFacade, codesInterface);
-        em.getTransaction().begin();
-        load.initializeDB();
-        em.getTransaction().commit();
-//        DatabaseFacade.getInstance().writeToXML();
+		try {
+			DatabaseFacade databaseFacade = new DatabaseFacade(em);
+	
+	//      String iface = "code.CACodes";
+	//      CodesInterface codesInterface = (CodesInterface) Class.forName(iface).newInstance();
+		    CodesInterface codesInterface = new CACodes();
+	        codesInterface.loadXMLCodes(new File(LoadOpinions.class.getResource("/xmlcodes").getFile()));
+	
+	        LoadHistoricalOpinions load = new LoadHistoricalOpinions(databaseFacade, codesInterface);
+	        load.initializeDB(em);
+	//        DatabaseFacade.getInstance().writeToXML();
+		} finally {
+			emf.close();
+		}
 
 	}
         

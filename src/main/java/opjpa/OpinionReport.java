@@ -13,13 +13,13 @@ import javax.persistence.Persistence;
 
 import code.CACodes;
 import codesparser.CodesInterface;
-import opinions.model.OpinionSummaryKey;
+import opinions.model.OpinionKey;
 import opinions.model.SlipOpinion;
 import opinions.facade.DatabaseFacade;
 import opinions.model.OpinionBase;
 import opinions.model.OpinionSummary;
 import opinions.model.StatuteCitation;
-import opinions.model.StatuteCitationKey;
+import opinions.model.StatuteKey;
 import opinions.parsers.ParserResults;
 import opinions.view.OpinionView;
 import opinions.view.OpinionViewBuilder;
@@ -42,45 +42,51 @@ public class OpinionReport {
 	}
 
     private void run() throws Exception {
+    	
+    	try {
         
-		DatabaseFacade databaseFacade = new DatabaseFacade(em);
-
-//        String iface = "code.CACodes";
-//        CodesInterface codesInterface = (CodesInterface) Class.forName(iface).newInstance();
-        CodesInterface codesInterface = new CACodes();
-        codesInterface.loadXMLCodes(new File(StatuteReport.class.getResource("/xmlcodes").getFile()));
-
-//        DatabaseFacade.getInstance().initializeDB(codesInterface);
-//        DatabaseFacade.getInstance().writeToXML();
-//        DatabaseFacade.getInstance().initFromXML();
-
-        SlipOpinion opinion = databaseFacade.findSlipOpinionBySummaryKey(new OpinionSummaryKey("1 Slip.Op 10287300"));
-//        OpinionSummary opinion = databaseFacade.findOpinion(new OpinionSummaryKey("5 Cal.4th 295"));
-        
-        class MyPersistenceLookup implements ParserResults.PersistenceLookup {
-        	DatabaseFacade databaseFacade;
-        	public MyPersistenceLookup(DatabaseFacade databaseFacade) {
-        		this.databaseFacade = databaseFacade;
-        	}
-			@Override
-			public StatuteCitation findStatute(StatuteCitationKey statuteKey) {
-				return databaseFacade.findStatute(statuteKey);
-			}
-			@Override
-			public OpinionSummary findOpinion(OpinionSummaryKey opinionKey) {
-				return databaseFacade.findOpinion(opinionKey);
-			}
-        }
-        
-        ParserResults parserResults = new ParserResults(opinion, new MyPersistenceLookup(databaseFacade));
-        printOpinionReport(codesInterface, parserResults, opinion );
-        
-//        for ( OpinionSummary op: persistenceFacade.getAllOpinions() ) {
-//            if (op.getStatutesReferredTo().size() > 10 ) System.out.println(op.getName() +":" + op.getStatutesReferredTo().size());
-//        }
+			DatabaseFacade databaseFacade = new DatabaseFacade(em);
+	
+	//        String iface = "code.CACodes";
+	//        CodesInterface codesInterface = (CodesInterface) Class.forName(iface).newInstance();
+	        CodesInterface codesInterface = new CACodes();
+	        codesInterface.loadXMLCodes(new File(StatuteReport.class.getResource("/xmlcodes").getFile()));
+	
+	//        DatabaseFacade.getInstance().initializeDB(codesInterface);
+	//        DatabaseFacade.getInstance().writeToXML();
+	//        DatabaseFacade.getInstance().initFromXML();
+	        
+	        SlipOpinion opinion = databaseFacade.findSlipOpinionBySummaryKey(new OpinionKey("1 Slip.Op 10287300"));
+	//        OpinionSummary opinion = databaseFacade.findOpinion(new OpinionSummaryKey("5 Cal.4th 295"));
+	        
+	        class MyPersistenceLookup implements ParserResults.PersistenceLookup {
+	        	DatabaseFacade databaseFacade;
+	        	public MyPersistenceLookup(DatabaseFacade databaseFacade) {
+	        		this.databaseFacade = databaseFacade;
+	        	}
+				@Override
+				public StatuteCitation statuteExists(StatuteKey statuteKey) {
+					return databaseFacade.findStatute(statuteKey);
+				}
+				@Override
+				public OpinionSummary opinionExists(OpinionKey opinionKey) {
+					return databaseFacade.findOpinion(opinionKey);
+				}
+	        }
+	        
+	        ParserResults parserResults = new ParserResults(opinion, new MyPersistenceLookup(databaseFacade));
+	        printOpinionReport(codesInterface, parserResults, opinion );
+	        
+	//        for ( OpinionSummary op: persistenceFacade.getAllOpinions() ) {
+	//            if (op.getStatutesReferredTo().size() > 10 ) System.out.println(op.getName() +":" + op.getStatutesReferredTo().size());
+	//        }
+    	} finally {
+    		em.close();
+    		emf.close();
+    	}
     }
     
-    public static void printOpinionReport(
+    public void printOpinionReport(
     		CodesInterface codesInterface, 
     		ParserResults parserResults, 
     		OpinionBase opinionBase
@@ -116,10 +122,10 @@ public class OpinionReport {
 			}
         }
         List<OpinionSummaryPrint> opinionsCited = new ArrayList<OpinionSummaryPrint>();
-        for ( OpinionSummaryKey opinionKey: opinionBase.getOpinionCitationKeys()) {
+        for ( OpinionKey opinionKey: opinionBase.getOpinionCitationKeys()) {
         	OpinionSummary opinionCited = parserResults.findOpinion(opinionKey);
         	int countRefs = 0;
-        	for ( StatuteCitationKey statuteKey: opinionBase.getStatuteCitationKeys() ) {
+        	for ( StatuteKey statuteKey: opinionBase.getStatuteCitationKeys() ) {
         		StatuteCitation statuteCite = parserResults.findStatute(statuteKey);
         		countRefs += statuteCite.getRefCount(opinionKey);
 //        		System.out.print(":" + statuteCite.getRefCount(opinionKey));
@@ -135,11 +141,11 @@ public class OpinionReport {
 			}
         });
         for ( OpinionSummaryPrint opPrint: opinionsCited) {
-        	System.out.println(opPrint.opinionCited.getKey().toString() + ":" + opPrint.opinionCited.getCountOpinionsReferredFrom()+":"+opPrint.countRefs);
+        	System.out.println(opPrint.opinionCited.getOpinionKey().toString() + ":" + opPrint.opinionCited.getCountOpinionsReferredFrom()+":"+opPrint.countRefs);
         }
     }
     
-    private static List<String> checkPrintTitle(SectionView section, List<String> currentTitle) {
+    private List<String> checkPrintTitle(SectionView section, List<String> currentTitle) {
 		ArrayList<String> fullTitle = new ArrayList<String>(Arrays.asList(section.getCodeReference().getFullTitle(":").split("[:]")));
 		fullTitle.remove(fullTitle.size()-1);
 		if ( currentTitle == null || fullTitle.size() != currentTitle.size() ) {
@@ -155,14 +161,14 @@ public class OpinionReport {
 		}
     	return fullTitle;
     }
-	private static void printFullTitle(List<String> fullTitle) {
+	private void printFullTitle(List<String> fullTitle) {
 		String indent = "  ";
 		for ( int i=1, j = fullTitle.size(); i<j; ++i) {
 			System.out.println(indent + fullTitle.get(i));
 			indent = indent + "  ";
 		}
 	}
-    private static List<SectionView> sortSubcodes(StatuteView opinionCode) {
+    private List<SectionView> sortSubcodes(StatuteView opinionCode) {
     	List<SectionView> sortedSections = new ArrayList<SectionView>();
     	sortedSections.sort(new Comparator<SectionView>() {
 			@Override
@@ -174,13 +180,13 @@ public class OpinionReport {
     	});
     	return sortedSections;
     }
-    private static void handleSubcode(List<SectionView> sortedSubcodes, ViewReference reference) {
+    private void handleSubcode(List<SectionView> sortedSubcodes, ViewReference reference) {
 		handleSections(sortedSubcodes, reference);
     	for ( ViewReference subcode: reference.getSubcodes() ) {
     		handleSubcode(sortedSubcodes, subcode);
     	}
     }
-    private static void handleSections(List<SectionView> sortedSubcodes, ViewReference reference) {
+    private void handleSections(List<SectionView> sortedSubcodes, ViewReference reference) {
 		for ( SectionView section: reference.getSections() ) {
 			sortedSubcodes.add(section); 
 		}

@@ -19,7 +19,7 @@ public class CATestCases extends CACaseParser {
 
 	@Override
 	public ParserDocument getCaseFile(SlipOpinion slipOpinion, boolean debugCopy) throws Exception {
-		InputStream inputStream = new FileInputStream(new File( casesDir + slipOpinion.getKey() +".DOC" ));
+		InputStream inputStream = new FileInputStream(new File( casesDir + slipOpinion.getFileName() +".DOC" ));
 /*		
 		if ( debugCopy ) {
 			inputStream = saveCopyOfCase(casesDir, slipOpinion.getKey() + ".DOC", inputStream );

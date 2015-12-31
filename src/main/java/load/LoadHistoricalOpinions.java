@@ -9,6 +9,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.function.Consumer;
 
+import javax.persistence.EntityManager;
+
 import org.apache.commons.compress.archivers.tar.TarArchiveEntry;
 import org.apache.commons.compress.archivers.tar.TarArchiveInputStream;
 import org.apache.commons.compress.compressors.gzip.GzipCompressorInputStream;
@@ -21,7 +23,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import clread.jsonmodel.CourtListenerOpinion;
 import codesparser.CodesInterface;
-import opinions.model.OpinionSummaryKey;
+import opinions.model.OpinionKey;
 import opinions.model.OpinionSummary;
 import opinions.parsers.CodeCitationParser;
 import opinions.parsers.ParserDocument;
@@ -41,12 +43,13 @@ public class LoadHistoricalOpinions {
     	this.codesInterface = codesInterface;
     }
 
-    public void initializeDB() throws Exception {
-        readStream("c:/users/karl/downloads/calctapp.tar.gz");
-        readStream("c:/users/karl/downloads/cal.tar.gz");
+    public void initializeDB(EntityManager em) throws Exception {
+        readStream(em, "c:/users/karl/downloads/calctapp.tar.gz");
+        readStream(em, "c:/users/karl/downloads/cal.tar.gz");
     }
 
     private void readStream(
+    	EntityManager em, 
         String fileName 
     ) throws Exception {
       ObjectMapper om = new ObjectMapper();
@@ -79,6 +82,7 @@ public class LoadHistoricalOpinions {
 
                   clOps.add(op);
                   if ( clOps.size() == 1000 ) {
+                	  em.getTransaction().begin();
                       clOps.parallelStream().forEach(new Consumer<CourtListenerOpinion>() {
                           @Override
                           public void accept(CourtListenerOpinion op) {
@@ -89,16 +93,20 @@ public class LoadHistoricalOpinions {
                               }
                           }
                       });
+                	  em.getTransaction().commit();
+                	  em.clear();
+                	  System.out.println("1000 cases processed and saved");
                       // remove processed cases from the list
                       clOps.clear();
                   }
               }
           }
           if ( clOps.size() > 0 ) {
+        	  em.getTransaction().begin();
               clOps.parallelStream().forEach(new Consumer<CourtListenerOpinion>() {
                   @Override
                   public void accept(CourtListenerOpinion op) {
-
+                	  em.getTransaction().begin();
                       try {
                           processCourtListener(op, parser, codesInterface, lock);
                       } catch (Exception e) {
@@ -107,6 +115,9 @@ public class LoadHistoricalOpinions {
                   }
              
               });
+        	  em.getTransaction().commit();
+        	  em.clear();
+        	  System.out.println(clOps.size() + " cases processed and saved");
               clOps.clear();
           }
       } finally {
@@ -141,18 +152,19 @@ public class LoadHistoricalOpinions {
         if ( name != null ) {
             name = name.toLowerCase().replace(". ", ".").replace("app.", "App.").replace("cal.", "Cal.").replace("supp.", "Supp.");
             OpinionSummary opinionSummary = new OpinionSummary(
-                    new OpinionSummaryKey(name),
+                    new OpinionKey(name),
                     op.getCitation().getCaseName(),
+                    dateFiled, 
                     dateFiled, 
                     ""
                 );
-        	ParserResults parserResults = parser.parseCase(parserDocument, opinionSummary, opinionSummary.getKey());
+        	ParserResults parserResults = parser.parseCase(parserDocument, opinionSummary, opinionSummary.getOpinionKey());
             synchronized(lock) {
             	parserResults.persist(opinionSummary, persistence);
-        		OpinionSummary existingOpinion = persistence.findOpinion(opinionSummary.getOpinionSummaryKey());
+        		OpinionSummary existingOpinion = persistence.opinionExists(opinionSummary.getOpinionKey());
                 if (  existingOpinion != null ) {
                     existingOpinion.addModifications(opinionSummary, parserResults);
-                    existingOpinion.addOpinionSummaryReferredFrom(opinionSummary.getOpinionSummaryKey());
+                    existingOpinion.addOpinionSummaryReferredFrom(opinionSummary.getOpinionKey());
                     persistence.mergeOpinion(existingOpinion);
                 } else {
                 	persistence.persistOpinion(opinionSummary);

@@ -16,7 +16,6 @@ import opinions.facade.*;
 import opinions.model.OpinionSummary;
 import opinions.model.SlipOpinion;
 import opinions.model.StatuteCitation;
-import opinions.model.StatuteCitationKey;
 import opinions.view.*;
 import opinions.parsers.*;
 
@@ -52,7 +51,7 @@ public class OpJpaTest {
 
 //		opJpa.refreshDownloads();
 
-//		opJpa.loadAndPersistCases();
+		opJpa.loadAndPersistCases();
 
 /*		
 		opJpa.testViewModel(
@@ -67,17 +66,9 @@ public class OpJpaTest {
 			true, 
 			2);
 
-		opJpa.statuteReport(); 
 */
 	}
 	
-	private void statuteReport() throws Exception {
-	    CodesInterface codesInterface = InterfacesFactory.getCodesInterface();
-		DatabaseFacade dbFacade = new DatabaseFacade(em);
-		StatuteCitation maxWelfare = dbFacade.findStatute(new StatuteCitationKey("civil code", "1750"));
-	    opjpa.StatuteReport.printCodeCitation(codesInterface, dbFacade, maxWelfare);
-	}
-
 	public void reloadDatabase() throws Exception {
 
 		CaseParserInterface caseParserInterface = new CATestCases(); 
@@ -98,7 +89,7 @@ public class OpJpaTest {
 		
 		for( SlipOpinion slipOpinion: opinions ) {
 			ParserDocument parserDocument = caseParserInterface.getCaseFile(slipOpinion, false);
-			parser.parseCase(parserDocument, slipOpinion, slipOpinion.getOpinionSummaryKey() );
+			parser.parseCase(parserDocument, slipOpinion, slipOpinion.getOpinionKey() );
         	// look for details
         	// after a summaryParagraph is found, don't check any further .. (might have to change)
 			
@@ -133,7 +124,7 @@ public class OpJpaTest {
 
 		// first to deletes
 		for ( SlipOpinion slipOpinion: onlineCases ) {
-			if ( fileNames.contains(slipOpinion.getKey()+".DOC")) fileNames.remove(slipOpinion.getKey()+".DOC");
+			if ( fileNames.contains(slipOpinion.getFileName()+".DOC")) fileNames.remove(slipOpinion.getFileName()+".DOC");
 			if ( databaseCases.contains(slipOpinion)) databaseCases.remove(slipOpinion);
 		}
 		for ( SlipOpinion slipOpinion: databaseCases ) {
@@ -162,10 +153,10 @@ public class OpJpaTest {
 		
 		for( SlipOpinion slipOpinion: onlineCases ) {
 			ParserDocument parserDoc = onlinecaseParser.getCaseFile(slipOpinion, true);
-			ParserResults parserResults = parser.parseCase(parserDoc, slipOpinion, slipOpinion.getOpinionSummaryKey() );
+			ParserResults parserResults = parser.parseCase(parserDoc, slipOpinion, slipOpinion.getOpinionKey() );
         	parserResults.persist(slipOpinion, dbFacade);
 //			em.persist(slipOpinion);
-			System.out.println("Downloaded " + slipOpinion.getKey() + ".DOC");
+			System.out.println("Downloaded " + slipOpinion.getFileName() + ".DOC");
 		}
 		// tx.commit();
 		
@@ -181,7 +172,7 @@ public class OpJpaTest {
         TreeSet<StatuteCitation> codeCitationTree = new TreeSet<StatuteCitation>();
         TreeSet<OpinionSummary> caseCitationTree = new TreeSet<OpinionSummary>();
         
-        codeCitationParser.parseSentence(slipOpinion.getOpinionSummaryKey(), sentence, codeCitationTree, caseCitationTree, null);
+        codeCitationParser.parseSentence(slipOpinion.getOpinionKey(), sentence, codeCitationTree, caseCitationTree, null);
         System.out.println(codeCitationTree);
 	}
 	
@@ -204,7 +195,7 @@ public class OpJpaTest {
 		for( SlipOpinion slipOpinion: cases ) {
 			
 			System.out.println(
-				"Case = " + slipOpinion.getKey() 
+				"Case = " + slipOpinion.getFileName() 
 				+ " CaseCitations = " + slipOpinion.getOpinionCitationKeys().size() 
 				+ " CaseReferrees = " + slipOpinion.getCountOpinionsReferredFrom()
 				+ " CodeCitations = " + slipOpinion.getStatuteCitationKeys().size()
@@ -231,64 +222,70 @@ public class OpJpaTest {
 
 	public void loadAndPersistCases() throws Exception {
 	    // Test case
-	    Calendar cal = GregorianCalendar.getInstance();
-	    cal.set(2014, Calendar.JULY, 7, 0, 0, 0 );
-	    cal.set(Calendar.MILLISECOND, 0);
-	    
-//		CaseParserInterface caseParserInterface = InterfacesFactory.getCaseParserInterface(); 
-		CaseParserInterface caseParserInterface = new CATestCases(); 
-
-		Reader reader = caseParserInterface.getCaseList();
-		List<SlipOpinion> opinions = caseParserInterface.parseCaseList(reader);
-		reader.close();
-
-		// trim list to available test cases
-		Iterator<SlipOpinion> ccit = opinions.iterator();
-		while ( ccit.hasNext() ) {
-			SlipOpinion slipOpinion = ccit.next();
-			if ( DEBUGFILE != null && !DEBUGFILE.equals("ALL") ) {
-				if ( !slipOpinion.getKey().equals(DEBUGFILE)) ccit.remove();
-			} else if (DEBUGFILE != null && DEBUGFILE.equals("ALL")) {
-				File tFile = new File(CATestCases.casesDir + slipOpinion.getKey() + ".DOC");
-				if ( !tFile.exists() ) ccit.remove();
-			} else {
-				Date cDate = slipOpinion.getPublishDate();
-				if ( cDate.compareTo(cal.getTime()) != 0 ) {
-					ccit.remove();
+		try {
+		    Calendar cal = GregorianCalendar.getInstance();
+		    cal.set(2014, Calendar.JULY, 7, 0, 0, 0 );
+		    cal.set(Calendar.MILLISECOND, 0);
+		    
+	//		CaseParserInterface caseParserInterface = InterfacesFactory.getCaseParserInterface(); 
+			CaseParserInterface caseParserInterface = new CATestCases(); 
+	
+			Reader reader = caseParserInterface.getCaseList();
+			List<SlipOpinion> opinions = caseParserInterface.parseCaseList(reader);
+			reader.close();
+	
+			// trim list to available test cases
+			Iterator<SlipOpinion> ccit = opinions.iterator();
+			while ( ccit.hasNext() ) {
+				SlipOpinion slipOpinion = ccit.next();
+				if ( DEBUGFILE != null && !DEBUGFILE.equals("ALL") ) {
+					if ( !slipOpinion.getFileName().equals(DEBUGFILE)) ccit.remove();
+				} else if (DEBUGFILE != null && DEBUGFILE.equals("ALL")) {
+					File tFile = new File(CATestCases.casesDir + slipOpinion.getFileName() + ".DOC");
+					if ( !tFile.exists() ) ccit.remove();
+				} else {
+					Date cDate = slipOpinion.getPublishDate();
+					if ( cDate.compareTo(cal.getTime()) != 0 ) {
+						ccit.remove();
+					}
 				}
 			}
-		}
-		System.out.println("Cases = " + opinions.size() );
-		// Create the CACodes list
-	    CodesInterface codesInterface = InterfacesFactory.getCodesInterface();
-		
-//	    QueueUtility queue = new QueueUtility(compressSections);  // true is compress references within individual titles
-		CodeTitles[] codeTitles = codesInterface.getCodeTitles();
-		CodeCitationParser parser = new CodeCitationParser(codeTitles);
-		
-		DatabaseFacade dbFacade = new DatabaseFacade(em);
-//		SlipOpinionDao slipOpinionDao = new SlipOpinionDao(em);
-		EntityTransaction tx = em.getTransaction();
-		for( SlipOpinion slipOpinion: opinions ) {
-			System.out.println("Case = " + slipOpinion.getKey());
-			ParserResults parserResults = parser.parseCase(caseParserInterface.getCaseFile(slipOpinion, false), slipOpinion, slipOpinion.getOpinionSummaryKey() );
+			System.out.println("Cases = " + opinions.size() );
+			// Create the CACodes list
+		    CodesInterface codesInterface = InterfacesFactory.getCodesInterface();
+			
+	//	    QueueUtility queue = new QueueUtility(compressSections);  // true is compress references within individual titles
+			CodeTitles[] codeTitles = codesInterface.getCodeTitles();
+			CodeCitationParser parser = new CodeCitationParser(codeTitles);
+			
+			DatabaseFacade dbFacade = new DatabaseFacade(em);
+	//		SlipOpinionDao slipOpinionDao = new SlipOpinionDao(em);
+			EntityTransaction tx = em.getTransaction();
 			tx.begin();
-        	parserResults.persist(slipOpinion, dbFacade);
-        	em.persist(slipOpinion);
-/*        	
-        	SlipOpinion existingOpinion = slipOpinionDao.find(slipOpinion.getOpinionSummaryKey());
-            if (  existingOpinion != null ) {
-            	// i guess it should never get here.
-                existingOpinion.addModifications(slipOpinion, parserResults);
-                existingOpinion.addOpinionSummaryReferredFrom(slipOpinion.getOpinionSummaryKey());
-                slipOpinionDao.merge(existingOpinion);
-            } else {
-            	slipOpinionDao.persist(slipOpinion);
-            }
-*/            
+			for( SlipOpinion slipOpinion: opinions ) {
+				System.out.println("Case = " + slipOpinion.getFileName());
+//				if ( slipOpinion.getFileName().contains("143650") ) {
+					ParserResults parserResults = parser.parseCase(caseParserInterface.getCaseFile(slipOpinion, false), slipOpinion, slipOpinion.getOpinionKey() );
+		        	parserResults.persist(slipOpinion, dbFacade);
+		        	em.persist(slipOpinion);
+//				}
+	/*        	
+	        	SlipOpinion existingOpinion = slipOpinionDao.find(slipOpinion.getOpinionSummaryKey());
+	            if (  existingOpinion != null ) {
+	            	// i guess it should never get here.
+	                existingOpinion.addModifications(slipOpinion, parserResults);
+	                existingOpinion.addOpinionSummaryReferredFrom(slipOpinion.getOpinionSummaryKey());
+	                slipOpinionDao.merge(existingOpinion);
+	            } else {
+	            	slipOpinionDao.persist(slipOpinion);
+	            }
+	*/            
+			}
 			tx.commit();
+			// persist
+		} finally {
+			emf.close();
 		}
-		// persist
 	}
 
 /*

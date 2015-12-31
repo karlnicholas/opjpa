@@ -29,10 +29,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import clread.jsonmodel.CourtListenerOpinion;
 import codesparser.CodesInterface;
-import opinions.model.OpinionSummaryKey;
+import opinions.model.OpinionKey;
 import opinions.model.OpinionSummary;
 import opinions.model.StatuteCitation;
-import opinions.model.StatuteCitationKey;
+import opinions.model.StatuteKey;
 import opinions.parsers.CodeCitationParser;
 import opinions.parsers.ParserDocument;
 import opinions.parsers.ParserResults;
@@ -61,8 +61,8 @@ public class DatabaseFacade implements PersistenceInterface {
         dataBase.getStatuteTable().parallelStream().filter(new Predicate<StatuteCitation>() {
             @Override
             public boolean test(StatuteCitation codeCitation) {
-            	if ( codeCitation.getKey().getCode() == null ) return false;
-                return codeCitation.getKey().getCode().contains(code);
+            	if ( codeCitation.getStatuteKey().getCode() == null ) return false;
+                return codeCitation.getStatuteKey().getCode().contains(code);
             }
         }).forEach(new Consumer<StatuteCitation>() {
             @Override
@@ -74,11 +74,11 @@ public class DatabaseFacade implements PersistenceInterface {
     }
 
     public StatuteCitation findStatuteByCodeSection(String code, String sectionNumber) {
-        return findStatute(new StatuteCitationKey(code, sectionNumber));
+        return statuteExists(new StatuteKey(code, sectionNumber));
     }
 
 	@Override
-	public StatuteCitation findStatute(StatuteCitationKey key) {
+	public StatuteCitation statuteExists(StatuteKey key) {
 		return findStatuteByStatute(new StatuteCitation(key));
 	}
 
@@ -101,7 +101,7 @@ public class DatabaseFacade implements PersistenceInterface {
 	}
 
 	@Override
-	public OpinionSummary findOpinion(OpinionSummaryKey key) {
+	public OpinionSummary opinionExists(OpinionKey key) {
         OpinionSummary tempOpinion = new OpinionSummary(key);
         if ( dataBase.getOpinionTable().contains(tempOpinion))
         	return dataBase.getOpinionTable().floor(tempOpinion);
@@ -278,18 +278,19 @@ public class DatabaseFacade implements PersistenceInterface {
         if ( name != null ) {
             name = name.toLowerCase().replace(". ", ".").replace("app.", "App.").replace("cal.", "Cal.").replace("supp.", "Supp.");
             OpinionSummary opinionSummary = new OpinionSummary(
-                    new OpinionSummaryKey(name),
+                    new OpinionKey(name),
                     op.getCitation().getCaseName(),
                     dateFiled, 
-                    op.getCourt()
+                    dateFiled, 
+                    null
                 );
-        	ParserResults parserResults = parser.parseCase(parserDocument, opinionSummary, opinionSummary.getKey());
+        	ParserResults parserResults = parser.parseCase(parserDocument, opinionSummary, opinionSummary.getOpinionKey());
             synchronized(lock) {
             	parserResults.persist(opinionSummary, this);
-        		OpinionSummary existingOpinion = findOpinion(opinionSummary.getOpinionSummaryKey());
+        		OpinionSummary existingOpinion = opinionExists(opinionSummary.getOpinionKey());
                 if (  existingOpinion != null ) {
                     existingOpinion.addModifications(opinionSummary, parserResults);
-                    existingOpinion.addOpinionSummaryReferredFrom(opinionSummary.getOpinionSummaryKey());
+                    existingOpinion.addOpinionSummaryReferredFrom(opinionSummary.getOpinionKey());
                     mergeOpinion(existingOpinion);
                 } else {
                 	persistOpinion(opinionSummary);

@@ -14,11 +14,10 @@ import code.CACodes;
 import codesparser.CodeReference;
 import codesparser.CodesInterface;
 import codesparser.SectionNumber;
-import opinions.model.OpinionSummaryKey;
+import opinions.model.OpinionKey;
 import opinions.facade.DatabaseFacade;
 import opinions.model.OpinionSummary;
 import opinions.model.StatuteCitation;
-import opinions.parsers.ParserResults.PersistenceInterface;
 
 public class StatuteReport {
 
@@ -61,7 +60,7 @@ public class StatuteReport {
         
 	}
 	
-	public static StatuteCitation getCodeCitationMaxCaseReferrors(
+	private StatuteCitation getCodeCitationMaxCaseReferrors(
 		List<StatuteCitation> statutesForCode
 	) {
         if ( statutesForCode.size() == 0 ) return null;
@@ -74,24 +73,23 @@ public class StatuteReport {
         return statutesForCode.get(statutesForCode.size()-1);
 	}
 	
-	public static void printCodeCitation(
+	private void printCodeCitation(
 	    CodesInterface codesInterface,
-	    PersistenceInterface persistence, 
+	    DatabaseFacade databaseFacade, 
 	    StatuteCitation statuteCitation
 	) {
 	    if ( statuteCitation == null ) {
 	        return; 
 	    }
-        CodeReference reference = codesInterface.findReference(statuteCitation.getKey().getCode(), new SectionNumber(-1, statuteCitation.getKey().getSectionNumber()));
+        CodeReference reference = codesInterface.findReference(statuteCitation.getStatuteKey().getCode(), new SectionNumber(-1, statuteCitation.getStatuteKey().getSectionNumber()));
         if ( reference == null ) return;
         System.out.println("Total refereeCount = " + statuteCitation.getReferringCaseMap().size());
         boolean first = true;
         String indent = new String();
         int printed = 0;
         List<OpinionSummary> referringOpinions = new ArrayList<OpinionSummary>();
-        for ( OpinionSummaryKey caseCitationKey: statuteCitation.getReferringCaseMap().keySet() ) {
-            OpinionSummary opinionSummary = persistence.findOpinion(caseCitationKey);
-            if ( opinionSummary == null ) continue;
+        for ( OpinionKey caseCitationKey: statuteCitation.getReferringCaseMap().keySet() ) {
+            OpinionSummary opinionSummary = databaseFacade.findOpinion(caseCitationKey);
             // don't print anything with less than 3 referees
             if ( opinionSummary.getCountOpinionsReferredFrom() < 3 ) continue;
             if ( first ) {
@@ -100,7 +98,7 @@ public class StatuteReport {
                     System.out.println(indent + title);
                     indent = indent + "  ";
                 }
-                System.out.println(indent+"§"+statuteCitation.getKey().getSectionNumber());
+                System.out.println(indent+"§"+statuteCitation.getStatuteKey().getSectionNumber());
                 indent = indent + "  ";
                 first = false;
             }
@@ -110,16 +108,16 @@ public class StatuteReport {
             @Override
             public int compare(OpinionSummary o1, OpinionSummary o2) {
                 if ( o1.getCountOpinionsReferredFrom() == o2.getCountOpinionsReferredFrom() ) {
-                    int o1TimesCaseReferredTo = statuteCitation.getRefCount(o1.getKey());
-                    int o2TimesCaseReferredTo = statuteCitation.getRefCount(o2.getKey());
+                    int o1TimesCaseReferredTo = statuteCitation.getRefCount(o1.getOpinionKey());
+                    int o2TimesCaseReferredTo = statuteCitation.getRefCount(o2.getOpinionKey());
                     return o1TimesCaseReferredTo - o2TimesCaseReferredTo; 
                 }
                 return o1.getCountOpinionsReferredFrom() - o2.getCountOpinionsReferredFrom();
             }
         });
         for (OpinionSummary opinionSummary: referringOpinions ) {
-            int timesCaseReferredTo = statuteCitation.getRefCount(opinionSummary.getKey());
-            System.out.println( indent + opinionSummary.getKey().toString()+":"+timesCaseReferredTo+":"+opinionSummary.getCountOpinionsReferredFrom());
+            int timesCaseReferredTo = statuteCitation.getRefCount(opinionSummary.getOpinionKey());
+            System.out.println( indent + opinionSummary.getOpinionKey().toString()+":"+timesCaseReferredTo+":"+opinionSummary.getCountOpinionsReferredFrom());
             printed++;
         }
         System.out.println("Printed refereeCount = " + printed);
