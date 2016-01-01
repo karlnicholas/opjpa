@@ -9,6 +9,7 @@ import javax.persistence.Persistence;
 import code.CACodes;
 import codesparser.CodesInterface;
 import load.LoadHistoricalOpinions;
+import load.LoadOpinionsThreaded;
 import opinions.facade.DatabaseFacade;
 
 public class LoadOpinions {
@@ -26,21 +27,18 @@ public class LoadOpinions {
 	}
 
 	private void run() throws Exception {
-		try {
-			DatabaseFacade databaseFacade = new DatabaseFacade(em);
 	
-	//      String iface = "code.CACodes";
-	//      CodesInterface codesInterface = (CodesInterface) Class.forName(iface).newInstance();
-		    CodesInterface codesInterface = new CACodes();
-	        codesInterface.loadXMLCodes(new File(LoadOpinions.class.getResource("/xmlcodes").getFile()));
-	
-	        LoadHistoricalOpinions load = new LoadHistoricalOpinions(databaseFacade, codesInterface);
-	        load.initializeDB(em);
-	//        DatabaseFacade.getInstance().writeToXML();
-		} finally {
-			emf.close();
-		}
-
+//      String iface = "code.CACodes";
+//      CodesInterface codesInterface = (CodesInterface) Class.forName(iface).newInstance();
+	    CodesInterface codesInterface = new CACodes();
+        codesInterface.loadXMLCodes(new File(LoadOpinions.class.getResource("/xmlcodes").getFile()));
+        DatabaseFacade facade = new DatabaseFacade(em);
+        LoadHistoricalOpinions load = new LoadHistoricalOpinions(facade, codesInterface);
+        try {
+        	load.initializeDB(em);
+        } finally {
+        	emf.close();
+        }
 	}
         
 }
