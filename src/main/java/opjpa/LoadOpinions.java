@@ -1,4 +1,4 @@
-package load;
+package opjpa;
 
 import java.io.File;
 
@@ -7,6 +7,7 @@ import javax.persistence.Persistence;
 
 import code.CACodes;
 import codesparser.CodesInterface;
+import load.LoadHistoricalOpinions;
 
 public class LoadOpinions {
 
@@ -24,7 +25,7 @@ public class LoadOpinions {
 	
 	    CodesInterface codesInterface = new CACodes();
         codesInterface.loadXMLCodes(new File(LoadOpinions.class.getResource("/xmlcodes").getFile()));
-        NewLoadOpinions load = new NewLoadOpinions(emf, codesInterface);
+        LoadHistoricalOpinions load = new LoadHistoricalOpinions(emf, codesInterface);
         try {
         	load.initializeDB();
         } finally {
