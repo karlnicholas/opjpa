@@ -35,29 +35,34 @@ public class StatuteReport {
 
 	private void run() throws Exception {
 		
-		DatabaseFacade databaseFacade = new DatabaseFacade(em);
-
-//      String iface = "code.CACodes";
-//      CodesInterface codesInterface = (CodesInterface) Class.forName(iface).newInstance();
-	    CodesInterface codesInterface = new CACodes();
-        codesInterface.loadXMLCodes(new File(StatuteReport.class.getResource("/xmlcodes").getFile()));
-
-//        databaseFacade.initializeDB(codesInterface);
-//        DatabaseFacade.getInstance().writeToXML();
-//        DatabaseFacade.getInstance().initFromXML();
-
-        System.out.println("statuteTable size = " + databaseFacade.getCount());
-        
-		List<StatuteCitation> statutesForCode = databaseFacade.selectForCode("welfare");
-        StatuteCitation maxWelfare = getCodeCitationMaxCaseReferrors(statutesForCode );
-        printCodeCitation(codesInterface, databaseFacade, maxWelfare);
-        
-        printCodeCitation(codesInterface, databaseFacade, databaseFacade.findStatuteByCodeSection("welfare", "200"));
-
-        printCodeCitation(codesInterface, databaseFacade, databaseFacade.findStatuteByCodeSection("family code", "4058"));
-
-        printCodeCitation(codesInterface, databaseFacade, databaseFacade.findStatuteByCodeSection("family code", "300"));
-        
+		try {
+		
+			DatabaseFacade databaseFacade = new DatabaseFacade(em);
+	
+	//      String iface = "code.CACodes";
+	//      CodesInterface codesInterface = (CodesInterface) Class.forName(iface).newInstance();
+		    CodesInterface codesInterface = new CACodes();
+	        codesInterface.loadXMLCodes(new File(StatuteReport.class.getResource("/xmlcodes").getFile()));
+	
+	//        databaseFacade.initializeDB(codesInterface);
+	//        DatabaseFacade.getInstance().writeToXML();
+	//        DatabaseFacade.getInstance().initFromXML();
+	
+	        System.out.println("statuteTable size = " + databaseFacade.getCount());
+	        
+			List<StatuteCitation> statutesForCode = databaseFacade.selectForCode("welfare");
+	        StatuteCitation maxWelfare = getCodeCitationMaxCaseReferrors(statutesForCode );
+	        printCodeCitation(codesInterface, databaseFacade, maxWelfare);
+	        
+	        printCodeCitation(codesInterface, databaseFacade, databaseFacade.testStatuteByCodeSection("welfare", "200"));
+	
+	        printCodeCitation(codesInterface, databaseFacade, databaseFacade.testStatuteByCodeSection("family code", "4058"));
+	
+	        printCodeCitation(codesInterface, databaseFacade, databaseFacade.testStatuteByCodeSection("family code", "300"));
+		} finally {
+			em.close();
+			emf.close();
+		}
 	}
 	
 	private StatuteCitation getCodeCitationMaxCaseReferrors(

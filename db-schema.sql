@@ -49,8 +49,8 @@
     );
     create table OpinionSummary_statuteCitationKeys (
         OpinionSummary_id int8 not null,
-        code TEXT NOT NULL,
-        sectionNumber TEXT NOT NULL
+        code varchar(32) not null,
+        sectionNumber varchar(32) not null
     );
     create table SlipOpinion (
         id int8 not null,
@@ -62,7 +62,7 @@
         publishDate date,
         title TEXT,
         disposition TEXT,
-        fileName TEXT NOT NULL UNIQUE,
+        fileName TEXT,
         summary TEXT,
         primary key (id)
     );
@@ -80,14 +80,14 @@
     );
     create table SlipOpinion_statuteCitationKeys (
         SlipOpinion_id int8 not null,
-        code TEXT NOT NULL,
-        sectionNumber TEXT NOT NULL
+        code varchar(32) not null,
+        sectionNumber varchar(32) not null
     );
     create table StatuteCitation (
         id int8 not null,
         designated boolean not null,
-        code TEXT NOT NULL,
-        sectionNumber TEXT NOT NULL,
+        code varchar(32) not null,
+        sectionNumber varchar(32) not null,
         primary key (id)
     );
     create table StatuteCitation_referringCaseMap (

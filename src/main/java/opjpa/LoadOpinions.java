@@ -8,9 +8,7 @@ import javax.persistence.Persistence;
 
 import code.CACodes;
 import codesparser.CodesInterface;
-import load.LoadHistoricalOpinions;
-import load.LoadOpinionsThreaded;
-import opinions.facade.DatabaseFacade;
+import load.NewLoadOpinions;
 
 public class LoadOpinions {
 
@@ -32,10 +30,12 @@ public class LoadOpinions {
 //      CodesInterface codesInterface = (CodesInterface) Class.forName(iface).newInstance();
 	    CodesInterface codesInterface = new CACodes();
         codesInterface.loadXMLCodes(new File(LoadOpinions.class.getResource("/xmlcodes").getFile()));
-        DatabaseFacade facade = new DatabaseFacade(em);
-        LoadHistoricalOpinions load = new LoadHistoricalOpinions(facade, codesInterface);
+        NewLoadOpinions load = new NewLoadOpinions(emf, codesInterface);
         try {
-        	load.initializeDB(em);
+//        	load.initializeDB(em);
+//        	load.readStream("c:/users/karl/downloads/calctapp.tar.gz");
+        	load.readStream("c:/users/karl/downloads/cal.tar.gz");
+        	
         } finally {
         	emf.close();
         }
