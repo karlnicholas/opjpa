@@ -1,4 +1,4 @@
-package clread.memorydb;
+package memorydb;
 
 import java.util.ArrayList;
 import java.util.Collections;

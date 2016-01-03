@@ -13,10 +13,10 @@ import javax.persistence.Persistence;
 
 import code.CACodes;
 import codesparser.CodesInterface;
+import opinions.model.OpinionBase;
 import opinions.model.OpinionKey;
 import opinions.model.SlipOpinion;
 import opinions.facade.DatabaseFacade;
-import opinions.model.OpinionBase;
 import opinions.model.OpinionSummary;
 import opinions.model.StatuteCitation;
 import opinions.model.StatuteKey;
@@ -56,8 +56,8 @@ public class OpinionReport {
 	//        DatabaseFacade.getInstance().writeToXML();
 	//        DatabaseFacade.getInstance().initFromXML();
 	        
-	        SlipOpinion opinion = databaseFacade.findSlipOpinionBySummaryKey(new OpinionKey("1 Slip.Op 10287300"));
-//	        OpinionSummary opinion = databaseFacade.findOpinion(new OpinionKey("5 Cal.4th 295"));
+//	        SlipOpinion opinion = databaseFacade.findSlipOpinionBySummaryKey(new OpinionKey("1 Slip.Op 10287300"));
+	        OpinionSummary opinion = databaseFacade.findOpinion(new OpinionKey("5 Cal.4th 295"));
 	        
 	        class MyPersistenceLookup implements ParserResults.PersistenceLookup {
 	        	DatabaseFacade databaseFacade;
@@ -75,7 +75,8 @@ public class OpinionReport {
 	        }
 	        
 	        ParserResults parserResults = new ParserResults(opinion, new MyPersistenceLookup(databaseFacade));
-	        printOpinionReport(codesInterface, parserResults, opinion );
+//        	printSlipOpinionReport(codesInterface, parserResults, opinion );
+        	printOpinionSummaryReport(codesInterface, parserResults, opinion );
 	        
 	//        for ( OpinionSummary op: persistenceFacade.getAllOpinions() ) {
 	//            if (op.getStatutesReferredTo().size() > 10 ) System.out.println(op.getName() +":" + op.getStatutesReferredTo().size());
@@ -86,15 +87,37 @@ public class OpinionReport {
     	}
     }
     
-    public void printOpinionReport(
+    private void printSlipOpinionReport(
     		CodesInterface codesInterface, 
     		ParserResults parserResults, 
-    		OpinionBase opinionBase
+    		SlipOpinion slipOpinion
 	) throws Exception {
-        if ( opinionBase == null ) return;
+        if ( slipOpinion == null ) return;
         OpinionViewBuilder opinionCaseBuilder = new OpinionViewBuilder(codesInterface);
         //
-        OpinionView opinionCase = opinionCaseBuilder.buildOpinionView(opinionBase, parserResults, true);
+        OpinionView opinionCase = opinionCaseBuilder.buildSlipOpinionView(slipOpinion, parserResults, true);
+
+    	printOpinionReport(parserResults, slipOpinion, opinionCase);
+    }
+
+    private void printOpinionSummaryReport(
+    		CodesInterface codesInterface, 
+    		ParserResults parserResults, 
+    		OpinionSummary opinionSummary
+	) throws Exception {
+        if ( opinionSummary == null ) return;
+        OpinionViewBuilder opinionCaseBuilder = new OpinionViewBuilder(codesInterface);
+        //
+        OpinionView opinionCase = opinionCaseBuilder.buildOpinionSummaryView(opinionSummary, parserResults, true);
+
+    	printOpinionReport(parserResults, opinionSummary, opinionCase);
+    }
+
+    private void printOpinionReport(
+    		ParserResults parserResults, 
+    		OpinionBase opinionBase, 
+    		OpinionView opinionCase
+	) throws Exception {
         opinionCase.trimToLevelOfInterest(2, true);
         System.out.println("Opinion: " + opinionCase);
         System.out.println("--------- STATUTES -----------");
@@ -162,11 +185,19 @@ public class OpinionReport {
     	return fullTitle;
     }
 	private void printFullTitle(List<String> fullTitle) {
+/*		
 		String indent = "  ";
 		for ( int i=1, j = fullTitle.size(); i<j; ++i) {
 			System.out.println(indent + fullTitle.get(i));
 			indent = indent + "  ";
 		}
+*/		
+		if ( fullTitle.size() < 2 ) return;
+		System.out.print("  ");
+		for ( int i=1, j = fullTitle.size(); i<j; ++i) {
+			System.out.print(fullTitle.get(i)+", ");
+		}
+		System.out.println();
 	}
     private List<SectionView> sortSubcodes(StatuteView opinionCode) {
     	List<SectionView> sortedSections = new ArrayList<SectionView>();

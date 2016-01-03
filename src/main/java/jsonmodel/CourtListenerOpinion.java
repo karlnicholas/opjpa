@@ -1,4 +1,4 @@
-package clread.jsonmodel;
+package jsonmodel;
 
 import java.util.HashMap;
 import java.util.Map;

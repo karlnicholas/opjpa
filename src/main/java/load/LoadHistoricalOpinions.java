@@ -27,9 +27,9 @@ import org.jsoup.select.Elements;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import clread.jsonmodel.CourtListenerOpinion;
-import clread.memorydb.MemoryDBFacade;
 import codesparser.CodesInterface;
+import jsonmodel.CourtListenerOpinion;
+import memorydb.MemoryDBFacade;
 import opinions.facade.DatabaseFacade;
 import opinions.model.OpinionKey;
 import opinions.model.OpinionSummary;

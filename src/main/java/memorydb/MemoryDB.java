@@ -1,4 +1,4 @@
-package clread.memorydb;
+package memorydb;
 
 import java.util.TreeSet;
 import java.util.concurrent.ConcurrentSkipListSet;

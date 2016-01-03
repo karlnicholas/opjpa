@@ -2,7 +2,6 @@ package opjpa;
 
 import javax.persistence.*;
 
-import clread.memorydb.MemoryDBFacade;
 import codesparser.*;
 
 import java.io.*;
@@ -10,6 +9,7 @@ import java.util.*;
 
 import load.InterfacesFactory;
 import load.LoadHistoricalOpinions;
+import memorydb.MemoryDBFacade;
 import opinions.facade.*;
 import opinions.model.SlipOpinion;
 import opinions.parsers.*;
