@@ -1,31 +1,32 @@
 
     alter table OpinionSummary_opinionCitationKeys 
         drop constraint FK_8ycg7rdhrg5do1fgtldrfijn8;
-    alter table OpinionSummary_opinionsReferredFrom 
-        drop constraint FK_mrj5i06k2t1y2x7erymouw7em;
+    alter table OpinionSummary_referringOpinions 
+        drop constraint FK_o7oesopyeys7rmvos6brdm1ps;
     alter table OpinionSummary_statuteCitationKeys 
         drop constraint FK_buf7gufi4w7x4shj5dltoyly;
     alter table SlipOpinion_opinionCitationKeys 
         drop constraint FK_rgla4u9lffkvokqt72jljxm5u;
-    alter table SlipOpinion_opinionsReferredFrom 
-        drop constraint FK_lyuim0bu7lwrxfg13s5rewno7;
+    alter table SlipOpinion_referringOpinions 
+        drop constraint FK_3e5akqak78f37yjuwlct63unh;
     alter table SlipOpinion_statuteCitationKeys 
         drop constraint FK_6hlbsk6raw3yk4s02gqj26gox;
-    alter table StatuteCitation_referringCaseMap 
-        drop constraint FK_95d4ya2l1b0ox0tbprvtgy2rg;
+    alter table StatuteCitation_referringOpinionCount 
+        drop constraint FK_n7io7ja2sk6bo74057n0786hu;
     drop table if exists OpinionSummary cascade;
     drop table if exists OpinionSummary_opinionCitationKeys cascade;
-    drop table if exists OpinionSummary_opinionsReferredFrom cascade;
+    drop table if exists OpinionSummary_referringOpinions cascade;
     drop table if exists OpinionSummary_statuteCitationKeys cascade;
     drop table if exists SlipOpinion cascade;
     drop table if exists SlipOpinion_opinionCitationKeys cascade;
-    drop table if exists SlipOpinion_opinionsReferredFrom cascade;
+    drop table if exists SlipOpinion_referringOpinions cascade;
     drop table if exists SlipOpinion_statuteCitationKeys cascade;
     drop table if exists StatuteCitation cascade;
-    drop table if exists StatuteCitation_referringCaseMap cascade;
+    drop table if exists StatuteCitation_referringOpinionCount cascade;
     drop sequence hibernate_sequence;
     create table OpinionSummary (
         id int8 not null,
+        countReferringOpinions int4 not null,
         court TEXT,
         opinionDate date,
         page int8 not null,
@@ -41,7 +42,7 @@
         volume int4 not null,
         vset int4 not null
     );
-    create table OpinionSummary_opinionsReferredFrom (
+    create table OpinionSummary_referringOpinions (
         OpinionSummary_id int8 not null,
         page int8 not null,
         volume int4 not null,
@@ -54,6 +55,7 @@
     );
     create table SlipOpinion (
         id int8 not null,
+        countReferringOpinions int4 not null,
         court TEXT,
         opinionDate date,
         page int8 not null,
@@ -72,7 +74,7 @@
         volume int4 not null,
         vset int4 not null
     );
-    create table SlipOpinion_opinionsReferredFrom (
+    create table SlipOpinion_referringOpinions (
         SlipOpinion_id int8 not null,
         page int8 not null,
         volume int4 not null,
@@ -90,9 +92,9 @@
         sectionNumber TEXT,
         primary key (id)
     );
-    create table StatuteCitation_referringCaseMap (
+    create table StatuteCitation_referringOpinionCount (
         StatuteCitation_id int8 not null,
-        referringCaseMap int4,
+        referringOpinionCount int4,
         page int8 not null,
         volume int4 not null,
         vset int4 not null,
@@ -105,8 +107,8 @@
         add constraint FK_8ycg7rdhrg5do1fgtldrfijn8 
         foreign key (OpinionSummary_id) 
         references OpinionSummary;
-    alter table OpinionSummary_opinionsReferredFrom 
-        add constraint FK_mrj5i06k2t1y2x7erymouw7em 
+    alter table OpinionSummary_referringOpinions 
+        add constraint FK_o7oesopyeys7rmvos6brdm1ps 
         foreign key (OpinionSummary_id) 
         references OpinionSummary;
     alter table OpinionSummary_statuteCitationKeys 
@@ -117,16 +119,16 @@
         add constraint FK_rgla4u9lffkvokqt72jljxm5u 
         foreign key (SlipOpinion_id) 
         references SlipOpinion;
-    alter table SlipOpinion_opinionsReferredFrom 
-        add constraint FK_lyuim0bu7lwrxfg13s5rewno7 
+    alter table SlipOpinion_referringOpinions 
+        add constraint FK_3e5akqak78f37yjuwlct63unh 
         foreign key (SlipOpinion_id) 
         references SlipOpinion;
     alter table SlipOpinion_statuteCitationKeys 
         add constraint FK_6hlbsk6raw3yk4s02gqj26gox 
         foreign key (SlipOpinion_id) 
         references SlipOpinion;
-    alter table StatuteCitation_referringCaseMap 
-        add constraint FK_95d4ya2l1b0ox0tbprvtgy2rg 
+    alter table StatuteCitation_referringOpinionCount 
+        add constraint FK_n7io7ja2sk6bo74057n0786hu 
         foreign key (StatuteCitation_id) 
         references StatuteCitation;
     create sequence hibernate_sequence;

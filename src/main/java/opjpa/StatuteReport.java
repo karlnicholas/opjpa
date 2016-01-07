@@ -14,7 +14,6 @@ import code.CACodes;
 import codesparser.CodeReference;
 import codesparser.CodesInterface;
 import codesparser.SectionNumber;
-import opinions.model.OpinionKey;
 import opinions.facade.DatabaseFacade;
 import opinions.model.OpinionSummary;
 import opinions.model.StatuteCitation;
@@ -72,7 +71,7 @@ public class StatuteReport {
         Collections.sort(statutesForCode, new Comparator<StatuteCitation>() {
             @Override
             public int compare(StatuteCitation o1, StatuteCitation o2) {
-                return o1.getReferringCaseMap().size() - o2.getReferringCaseMap().size();
+                return o1.getReferringOpinionCount().size() - o2.getReferringOpinionCount().size();
             }
         });
         return statutesForCode.get(statutesForCode.size()-1);
@@ -88,15 +87,19 @@ public class StatuteReport {
 	    }
         CodeReference reference = codesInterface.findReference(statuteCitation.getStatuteKey().getCode(), new SectionNumber(-1, statuteCitation.getStatuteKey().getSectionNumber()));
         if ( reference == null ) return;
-        System.out.println("Total refereeCount = " + statuteCitation.getReferringCaseMap().size());
+        System.out.println("Total refereeCount = " + statuteCitation.getReferringOpinionCount().size());
         boolean first = true;
         String indent = new String();
         int printed = 0;
+        List<OpinionSummary> foundOpinions = databaseFacade.getOpinions(statuteCitation.getReferringOpinionCount().keySet());
         List<OpinionSummary> referringOpinions = new ArrayList<OpinionSummary>();
-        for ( OpinionKey caseCitationKey: statuteCitation.getReferringCaseMap().keySet() ) {
-            OpinionSummary opinionSummary = databaseFacade.findOpinion(caseCitationKey);
+        
+//        for ( OpinionKey caseCitationKey: statuteCitation.getReferringOpinionCount().keySet() ) {
+//        	if ( caseCitationKey.isSlipOpinion() ) continue;
+//            OpinionSummary opinionSummary = databaseFacade.findOpinion(caseCitationKey);
+      for ( OpinionSummary opinionSummary: foundOpinions ) {
             // don't print anything with less than 3 referees
-            if ( opinionSummary.getCountOpinionsReferredFrom() < 3 ) continue;
+            if ( opinionSummary.getCountReferringOpinions() < 3 ) continue;
             if ( first ) {
                 String[] titles = reference.getFullTitle(":").split("[:]");
                 for ( String title: titles ) {
@@ -112,17 +115,17 @@ public class StatuteReport {
         Collections.sort(referringOpinions, new Comparator<OpinionSummary>() {
             @Override
             public int compare(OpinionSummary o1, OpinionSummary o2) {
-                if ( o1.getCountOpinionsReferredFrom() == o2.getCountOpinionsReferredFrom() ) {
+                if ( o1.getCountReferringOpinions() == o2.getCountReferringOpinions() ) {
                     int o1TimesCaseReferredTo = statuteCitation.getRefCount(o1.getOpinionKey());
                     int o2TimesCaseReferredTo = statuteCitation.getRefCount(o2.getOpinionKey());
                     return o1TimesCaseReferredTo - o2TimesCaseReferredTo; 
                 }
-                return o1.getCountOpinionsReferredFrom() - o2.getCountOpinionsReferredFrom();
+                return o1.getCountReferringOpinions() - o2.getCountReferringOpinions();
             }
         });
         for (OpinionSummary opinionSummary: referringOpinions ) {
             int timesCaseReferredTo = statuteCitation.getRefCount(opinionSummary.getOpinionKey());
-            System.out.println( indent + opinionSummary.getOpinionKey().toString()+":"+timesCaseReferredTo+":"+opinionSummary.getCountOpinionsReferredFrom());
+            System.out.println( indent + opinionSummary.getOpinionKey().toString()+":"+timesCaseReferredTo+":"+opinionSummary.getCountReferringOpinions());
             printed++;
         }
         System.out.println("Printed refereeCount = " + printed);

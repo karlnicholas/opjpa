@@ -38,6 +38,7 @@ public class OpJpaTest {
 //		opJpa.runUpdateScheduler();
 		CodesInterface codesInterface = InterfacesFactory.getCodesInterface();
 		codesInterface.loadXMLCodes(new File(OpJpaTest.class.getResource(xmlcodes).getFile()));
+		
 /*		
 		opJpa.testViewModel(
 				opJpa.readCasesFromDatabase(), 
@@ -51,7 +52,9 @@ public class OpJpaTest {
 
 //		opJpa.refreshDownloads();
 
-		opJpa.loadAndPersistCases();
+//		opJpa.loadAndPersistCases();
+		
+		opJpa.runAllSlipOpinions();
 
 /*		
 		opJpa.testViewModel(
@@ -67,6 +70,7 @@ public class OpJpaTest {
 			2);
 
 */
+		
 	}
 	
 	public void reloadDatabase() throws Exception {
@@ -197,7 +201,7 @@ public class OpJpaTest {
 			System.out.println(
 				"Case = " + slipOpinion.getFileName() 
 				+ " CaseCitations = " + slipOpinion.getOpinionCitationKeys().size() 
-				+ " CaseReferrees = " + slipOpinion.getCountOpinionsReferredFrom()
+				+ " CaseReferrees = " + slipOpinion.getCountReferringOpinions()
 				+ " CodeCitations = " + slipOpinion.getStatuteCitationKeys().size()
 			);
 //			System.out.println("Case = " + slipOpinion.getName() + " CaseCitations = " + slipOpinion.getCaseCitations());
@@ -288,6 +292,71 @@ public class OpJpaTest {
 		}
 	}
 
+	public void runAllSlipOpinions() throws Exception {
+	    // Test case
+		try {
+		    Calendar cal = GregorianCalendar.getInstance();
+		    cal.set(2014, Calendar.JULY, 7, 0, 0, 0 );
+		    cal.set(Calendar.MILLISECOND, 0);
+		    
+	//		CaseParserInterface caseParserInterface = InterfacesFactory.getCaseParserInterface(); 
+			CaseParserInterface caseParserInterface = new CATestCases(); 
+
+			Reader reader = caseParserInterface.getCaseList();
+			List<SlipOpinion> opinions = caseParserInterface.parseCaseList(reader);
+			reader.close();
+
+			// trim list to available test cases
+			Iterator<SlipOpinion> ccit = opinions.iterator();
+			while ( ccit.hasNext() ) {
+				SlipOpinion slipOpinion = ccit.next();
+				if ( DEBUGFILE != null && !DEBUGFILE.equals("ALL") ) {
+					if ( !slipOpinion.getFileName().equals(DEBUGFILE)) ccit.remove();
+				} else if (DEBUGFILE != null && DEBUGFILE.equals("ALL")) {
+					File tFile = new File(CATestCases.casesDir + slipOpinion.getFileName() + ".DOC");
+					if ( !tFile.exists() ) ccit.remove();
+				} else {
+					Date cDate = slipOpinion.getPublishDate();
+					if ( cDate.compareTo(cal.getTime()) != 0 ) {
+						ccit.remove();
+					}
+				}
+			}
+
+			System.out.println("Cases = " + opinions.size() );
+			Date startTime = new Date();
+			
+			// Create the CACodes list
+		    CodesInterface codesInterface = InterfacesFactory.getCodesInterface();
+			
+	//	    QueueUtility queue = new QueueUtility(compressSections);  // true is compress references within individual titles
+			CodeTitles[] codeTitles = codesInterface.getCodeTitles();
+			CodeCitationParser parser = new CodeCitationParser(codeTitles);
+			
+			PrintOpinionReport opinionReport = new PrintOpinionReport();
+			
+			for( SlipOpinion slipOpinion: opinions ) {
+				if ( slipOpinion.getFileName().equals("C071776") ) continue;
+				if ( slipOpinion.getFileName().equals("B264460") ) continue;
+				if ( slipOpinion.getFileName().equals("D066715") ) continue;
+				if ( slipOpinion.getFileName().equals("A142502") ) continue;
+				if ( slipOpinion.getFileName().equals("A143043N") ) continue;
+				if ( slipOpinion.getFileName().equals("A143043M") ) continue;
+				if ( slipOpinion.getFileName().equals("A142485") ) continue;
+								
+//				System.out.println("Case = " + slipOpinion.getFileName());
+				opinionReport.printOpinionReport(codesInterface, em, slipOpinion.getOpinionKey());
+//				if ( slipOpinion.getFileName().contains("143650") ) {
+//					ParserResults parserResults = parser.parseCase(caseParserInterface.getCaseFile(slipOpinion, false), slipOpinion, slipOpinion.getOpinionKey() );
+//				}
+			}
+			// persist
+			System.out.println("Processed " + opinions.size() + " cases in " + (new Date().getTime() - startTime.getTime())/1000 + " seconds.");
+		} finally {
+			em.close();
+			emf.close();
+		}
+	}
 /*
 	public static void writeReportXML(String fileName, List<OpinionView> cases)
 	        throws ParserConfigurationException,

@@ -1,6 +1,7 @@
 package memorydb;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -97,13 +98,30 @@ public class MemoryDBFacade implements PersistenceInterface {
 		dataBase.getOpinionTable().add(opinionSummary);
 		return opinionSummary;
 	}
+	@Override
+	public List<StatuteCitation> getStatutes(Collection<StatuteKey> statuteKeys) {
+		List<StatuteCitation> list = new ArrayList<StatuteCitation>();
+		for (StatuteKey key: statuteKeys ) {
+			StatuteCitation statute = statuteExists(key);
+			if ( statute != null ) list.add(statute);
+		}
+		return list;
+	}
 
+	@Override
+	public List<OpinionSummary> getOpinions(Collection<OpinionKey> opinionKeys) {
+		List<OpinionSummary> list = new ArrayList<OpinionSummary>();
+		for (OpinionKey key: opinionKeys ) {
+			OpinionSummary opinion = opinionExists(key);
+			if ( opinion != null ) list.add(opinion);
+		}
+		return list;
+	}
 	public Set<OpinionSummary> getAllOpinions() {
         return dataBase.getOpinionTable();
     }
 	public Set<StatuteCitation> getAllStatutes() {
         return dataBase.getStatuteTable();
 	}
-
 
 }

@@ -284,6 +284,8 @@ public class LoadHistoricalOpinions {
 	    	DatabaseFacade database = new DatabaseFacade(em);
 	    	Date startTime = new Date();
 	    	for(OpinionSummary opinion: opinions ) {
+// This causes a NPE !?!?	    		
+//	    		opinion.checkCountReferringOpinions();
 	    		OpinionSummary existingOpinion = database.opinionExists(opinion.getOpinionKey());
 				if ( existingOpinion == null ) {
 					persistOpinions.add(opinion);
