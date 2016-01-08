@@ -495,7 +495,6 @@ public class LoadHistoricalOpinions {
 			                    new OpinionKey(name),
 			                    op.getCitation().getCaseName(),
 			                    dateFiled, 
-			                    dateFiled, 
 			                    ""
 			                );
 			        	ParserResults parserResults = parser.parseCase(parserDocument, opinionSummary, opinionSummary.getOpinionKey());

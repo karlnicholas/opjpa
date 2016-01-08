@@ -65,7 +65,7 @@ public class LoadNewSlipOpinions {
 					File tFile = new File(CATestCases.casesDir + slipOpinion.getFileName() + ".DOC");
 					if ( !tFile.exists() ) ccit.remove();
 				} else {
-					Date cDate = slipOpinion.getPublishDate();
+					Date cDate = slipOpinion.getOpinionDate();
 					if ( cDate.compareTo(cal.getTime()) != 0 ) {
 						ccit.remove();
 					}

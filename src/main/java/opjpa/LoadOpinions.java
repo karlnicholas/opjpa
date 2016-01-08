@@ -20,12 +20,12 @@ public class LoadOpinions {
 	public LoadOpinions() {
 		emf = Persistence.createEntityManagerFactory("opjpa");
 	}
-
+	
 	private void run() throws Exception {
 	
 	    CodesInterface codesInterface = new CACodes();
         codesInterface.loadXMLCodes(new File(LoadOpinions.class.getResource("/xmlcodes").getFile()));
-        LoadHistoricalOpinions load = new LoadHistoricalOpinions(emf, codesInterface);
+    	LoadHistoricalOpinions load = new LoadHistoricalOpinions(emf, codesInterface);
         try {
         	load.initializeDB();
         } finally {

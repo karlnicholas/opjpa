@@ -143,7 +143,7 @@ public class OpJpaTest {
 		Calendar cal = Calendar.getInstance();
 		cal.set(1960, Calendar.JUNE, 1);
 		for ( String caseName: fileNamesCopy ) {
-			SlipOpinion slipOpinion = new SlipOpinion(caseName.replace(".DOC", ""), "title", cal.getTime(), cal.getTime(), "CA/4" );
+			SlipOpinion slipOpinion = new SlipOpinion(caseName.replace(".DOC", ""), "title", cal.getTime(), "CA/4" );
 			if ( onlineCases.contains(slipOpinion)) onlineCases.remove(slipOpinion);
 		}
 		
@@ -172,7 +172,7 @@ public class OpJpaTest {
 		String sentence = "(welf. & inst. code, §§ 4501; see also welf. & inst. code, § 4434.)";
 		Calendar cal = Calendar.getInstance();
 		cal.set(1960, Calendar.JUNE, 1);
-		SlipOpinion slipOpinion = new SlipOpinion("test", "test", cal.getTime(), cal.getTime(), "S");
+		SlipOpinion slipOpinion = new SlipOpinion("test", "test", cal.getTime(), "S");
         TreeSet<StatuteCitation> codeCitationTree = new TreeSet<StatuteCitation>();
         TreeSet<OpinionSummary> caseCitationTree = new TreeSet<OpinionSummary>();
         
@@ -193,19 +193,19 @@ public class OpJpaTest {
 			int levelOfInterest
 	) throws Exception {
 //		List<OpinionView> viewModelCases = new ArrayList<OpinionView>();
-		OpinionViewBuilder viewBuilder = new OpinionViewBuilder(codesInterface);
-		DatabaseFacade dbFacade = new DatabaseFacade(em);
+//		OpinionViewBuilder viewBuilder = new OpinionViewBuilder(codesInterface);
+//		DatabaseFacade dbFacade = new DatabaseFacade(em);
 		// copy to ParsedCase 
 		for( SlipOpinion slipOpinion: cases ) {
 			
 			System.out.println(
 				"Case = " + slipOpinion.getFileName() 
-				+ " CaseCitations = " + slipOpinion.getOpinionCitationKeys().size() 
+				+ " CaseCitations = " + slipOpinion.getOpinionCitations().size() 
 				+ " CaseReferrees = " + slipOpinion.getCountReferringOpinions()
 				+ " CodeCitations = " + slipOpinion.getStatuteCitationKeys().size()
 			);
 //			System.out.println("Case = " + slipOpinion.getName() + " CaseCitations = " + slipOpinion.getCaseCitations());
-			ParserResults parserResults = new ParserResults(slipOpinion, dbFacade);
+//			ParserResults parserResults = new ParserResults(slipOpinion, dbFacade);
 //			OpinionView viewModelCase = viewBuilder.buildOpinionView(slipOpinion, parserResults, compressCodeReferences);
 //			viewModelCase.trimToLevelOfInterest(levelOfInterest, false);
 //			viewModelCases.add(viewModelCase);
@@ -248,7 +248,7 @@ public class OpJpaTest {
 					File tFile = new File(CATestCases.casesDir + slipOpinion.getFileName() + ".DOC");
 					if ( !tFile.exists() ) ccit.remove();
 				} else {
-					Date cDate = slipOpinion.getPublishDate();
+					Date cDate = slipOpinion.getOpinionDate();
 					if ( cDate.compareTo(cal.getTime()) != 0 ) {
 						ccit.remove();
 					}
@@ -316,7 +316,7 @@ public class OpJpaTest {
 					File tFile = new File(CATestCases.casesDir + slipOpinion.getFileName() + ".DOC");
 					if ( !tFile.exists() ) ccit.remove();
 				} else {
-					Date cDate = slipOpinion.getPublishDate();
+					Date cDate = slipOpinion.getOpinionDate();
 					if ( cDate.compareTo(cal.getTime()) != 0 ) {
 						ccit.remove();
 					}
@@ -330,8 +330,8 @@ public class OpJpaTest {
 		    CodesInterface codesInterface = InterfacesFactory.getCodesInterface();
 			
 	//	    QueueUtility queue = new QueueUtility(compressSections);  // true is compress references within individual titles
-			CodeTitles[] codeTitles = codesInterface.getCodeTitles();
-			CodeCitationParser parser = new CodeCitationParser(codeTitles);
+			// CodeTitles[] codeTitles = codesInterface.getCodeTitles();
+			// CodeCitationParser parser = new CodeCitationParser(codeTitles);
 			
 			PrintOpinionReport opinionReport = new PrintOpinionReport();
 			

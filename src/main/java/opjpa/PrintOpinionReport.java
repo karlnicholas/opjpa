@@ -119,7 +119,7 @@ public class PrintOpinionReport {
 			}
         }
         List<OpinionSummaryPrint> opinionsCited = new ArrayList<OpinionSummaryPrint>();
-        for ( OpinionKey opinionKey: opinionBase.getOpinionCitationKeys()) {
+        for ( OpinionKey opinionKey: opinionBase.getOpinionCitations()) {
         	OpinionSummary opinionCited = parserResults.findOpinion(opinionKey);
         	int countRefs = 0;
         	for ( StatuteKey statuteKey: opinionBase.getStatuteCitationKeys() ) {

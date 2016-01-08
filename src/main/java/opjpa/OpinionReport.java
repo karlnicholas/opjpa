@@ -1,12 +1,6 @@
 package opjpa;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -14,19 +8,8 @@ import javax.persistence.Persistence;
 
 import code.CACodes;
 import codesparser.CodesInterface;
-import opinions.model.OpinionBase;
 import opinions.model.OpinionKey;
-import opinions.model.SlipOpinion;
 import opinions.facade.DatabaseFacade;
-import opinions.model.OpinionSummary;
-import opinions.model.StatuteCitation;
-import opinions.model.StatuteKey;
-import opinions.parsers.ParserResults;
-import opinions.view.OpinionView;
-import opinions.view.OpinionViewBuilder;
-import opinions.view.StatuteView;
-import opinions.view.ViewReference;
-import opinions.view.SectionView;
 
 public class OpinionReport {
 
