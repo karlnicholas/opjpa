@@ -1,6 +1,7 @@
 package load;
 
-import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ResourceBundle;
 
 import opinions.parsers.CaseParserInterface;
@@ -49,9 +50,9 @@ public class InterfacesFactory {
 		LoadInterface loader = getLoadInterface();
 
 		// For gscalifornia
-		File codesDir = new File("c:/users/karl/code");
+		Path codesDir = Paths.get("c:/users/karl/code");
 
-		File xmlcodes = new File("c:/users/karl/scsb/opjpa/src/main/resources/xmlcodes");
+		Path xmlcodes = Paths.get("c:/users/karl/scsb/opjpa/src/main/resources/xmlcodes");
 		
 		loader.createXMLCodes(codesDir, xmlcodes );
 	}
