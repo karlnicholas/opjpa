@@ -6,8 +6,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import code.CACodes;
 import codesparser.CodesInterface;
+import gscalifornia.code.CALoadXMLStatutes;
+import gscalifornia.factory.CAStatutesFactory;
 import opinions.model.OpinionKey;
 import opinions.facade.DatabaseFacade;
 
@@ -33,8 +34,8 @@ public class OpinionReport {
 	
 	//        String iface = "code.CACodes";
 	//        CodesInterface codesInterface = (CodesInterface) Class.forName(iface).newInstance();
-	        CodesInterface codesInterface = new CACodes();
-	        codesInterface.loadXMLCodes(new File(StatuteReport.class.getResource("/xmlcodes").getFile()));
+	        CodesInterface codesInterface = CAStatutesFactory.getInstance().getCodesInterface(true);
+
 	
 	//        DatabaseFacade.getInstance().initializeDB(codesInterface);
 	//        DatabaseFacade.getInstance().writeToXML();

@@ -1,6 +1,5 @@
 package opjpa;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -10,10 +9,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import code.CACodes;
 import codesparser.CodeReference;
 import codesparser.CodesInterface;
 import codesparser.SectionNumber;
+import gscalifornia.factory.CAStatutesFactory;
 import opinions.facade.DatabaseFacade;
 import opinions.model.OpinionSummary;
 import opinions.model.StatuteCitation;
@@ -40,8 +39,7 @@ public class StatuteReport {
 	
 	//      String iface = "code.CACodes";
 	//      CodesInterface codesInterface = (CodesInterface) Class.forName(iface).newInstance();
-		    CodesInterface codesInterface = new CACodes();
-	        codesInterface.loadXMLCodes(new File(StatuteReport.class.getResource("/xmlcodes").getFile()));
+		    CodesInterface codesInterface = CAStatutesFactory.getInstance().getCodesInterface(true);
 	
 	//        databaseFacade.initializeDB(codesInterface);
 	//        DatabaseFacade.getInstance().writeToXML();

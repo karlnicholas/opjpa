@@ -3,11 +3,12 @@ package opjpa;
 import javax.persistence.*;
 
 import codesparser.*;
+import gscalifornia.factory.CAStatutesFactory;
 
 import java.io.*;
+import java.nio.file.Paths;
 import java.util.*;
 
-import load.InterfacesFactory;
 import load.LoadHistoricalOpinions;
 import memorydb.MemoryDBFacade;
 import opinions.facade.*;
@@ -30,8 +31,7 @@ public class LoadNewSlipOpinions {
 	public static void main(String[] args) throws Exception {
 		LoadNewSlipOpinions opJpa = new LoadNewSlipOpinions();
 //		opJpa.runUpdateScheduler();
-		CodesInterface codesInterface = InterfacesFactory.getCodesInterface();
-		codesInterface.loadXMLCodes(new File(LoadNewSlipOpinions.class.getResource(xmlcodes).getFile()));
+		CAStatutesFactory.getInstance().getCodesInterface(true);
 		opJpa.loadAndPersistCases();
 
 	}
@@ -73,7 +73,7 @@ public class LoadNewSlipOpinions {
 			}
 			System.out.println("Cases = " + opinions.size() );
 			// Create the CACodes list
-		    CodesInterface codesInterface = InterfacesFactory.getCodesInterface();
+		    CodesInterface codesInterface = CAStatutesFactory.getInstance().getCodesInterface(true);
 			
 	//	    QueueUtility queue = new QueueUtility(compressSections);  // true is compress references within individual titles
 			CodeTitles[] codeTitles = codesInterface.getCodeTitles();

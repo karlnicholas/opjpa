@@ -3,6 +3,8 @@ package opjpa;
 import javax.persistence.*;
 
 import codesparser.*;
+import gscalifornia.factory.CAStatutesFactory;
+import opcalifornia.CaseInterfacesService;
 
 import java.io.*;
 import java.nio.file.DirectoryStream;
@@ -11,7 +13,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 
-import load.InterfacesFactory;
 import opinions.facade.*;
 import opinions.model.OpinionSummary;
 import opinions.model.SlipOpinion;
@@ -36,8 +37,8 @@ public class OpJpaTest {
 	public static void main(String[] args) throws Exception {
 		OpJpaTest opJpa = new OpJpaTest();
 //		opJpa.runUpdateScheduler();
-		CodesInterface codesInterface = InterfacesFactory.getCodesInterface();
-		codesInterface.loadXMLCodes(new File(OpJpaTest.class.getResource(xmlcodes).getFile()));
+		// force loading of XML files
+		CAStatutesFactory.getInstance().getCodesInterface(true);
 		
 /*		
 		opJpa.testViewModel(
@@ -83,7 +84,7 @@ public class OpJpaTest {
 
 		System.out.println("Cases = " + opinions.size() );
 		// Create the CACodes list
-	    CodesInterface codesInterface = InterfacesFactory.getCodesInterface();
+	    CodesInterface codesInterface = CAStatutesFactory.getInstance().getCodesInterface(true);
 		
 		CodeTitles[] codeTitles = codesInterface.getCodeTitles();
 		CodeCitationParser parser = new CodeCitationParser(codeTitles);
@@ -117,7 +118,10 @@ public class OpJpaTest {
 		}
 		List<String> fileNamesCopy = new ArrayList<String>(fileNames); 
 		
-		CaseParserInterface onlinecaseParser = InterfacesFactory.getCaseParserInterface();
+		CaseInterfacesService casesInterface = new CaseInterfacesService();
+		casesInterface.initialize(false);		//TODO make a singleton out of this .. pattern after gscalifornia.
+
+		CaseParserInterface onlinecaseParser = casesInterface.getCaseParserInterface();
 		Reader reader = onlinecaseParser.getCaseList();
 //		reader = saveCopyOfCaseList(reader);
 		List<SlipOpinion> onlineCases = onlinecaseParser.parseCaseList(reader);
@@ -147,7 +151,7 @@ public class OpJpaTest {
 			if ( onlineCases.contains(slipOpinion)) onlineCases.remove(slipOpinion);
 		}
 		
-	    CodesInterface codesInterface = InterfacesFactory.getCodesInterface();
+	    CodesInterface codesInterface = CAStatutesFactory.getInstance().getCodesInterface(true);
 		CodeTitles[] codeTitles = codesInterface.getCodeTitles();
 		CodeCitationParser parser = new CodeCitationParser(codeTitles);
 
@@ -256,7 +260,7 @@ public class OpJpaTest {
 			}
 			System.out.println("Cases = " + opinions.size() );
 			// Create the CACodes list
-		    CodesInterface codesInterface = InterfacesFactory.getCodesInterface();
+		    CodesInterface codesInterface = CAStatutesFactory.getInstance().getCodesInterface(true);
 			
 	//	    QueueUtility queue = new QueueUtility(compressSections);  // true is compress references within individual titles
 			CodeTitles[] codeTitles = codesInterface.getCodeTitles();
@@ -327,7 +331,7 @@ public class OpJpaTest {
 			Date startTime = new Date();
 			
 			// Create the CACodes list
-		    CodesInterface codesInterface = InterfacesFactory.getCodesInterface();
+		    CodesInterface codesInterface = CAStatutesFactory.getInstance().getCodesInterface(true);
 			
 	//	    QueueUtility queue = new QueueUtility(compressSections);  // true is compress references within individual titles
 			// CodeTitles[] codeTitles = codesInterface.getCodeTitles();
