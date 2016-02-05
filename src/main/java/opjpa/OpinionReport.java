@@ -7,7 +7,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import codesparser.CodesInterface;
-import gscalifornia.code.CALoadXMLStatutes;
+import gscalifornia.code.CALoadStatutes;
 import gscalifornia.factory.CAStatutesFactory;
 import opinions.model.OpinionKey;
 import opinions.facade.DatabaseFacade;
