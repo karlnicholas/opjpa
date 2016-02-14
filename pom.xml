@@ -54,12 +54,12 @@
     <dependency>
       <groupId>codesparser</groupId>
       <artifactId>codesparser</artifactId>
-      <version>0.3.0-SNAPSHOT</version>
+      <version>0.3.1-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>gscalifornia</groupId>
       <artifactId>gscalifornia</artifactId>
-      <version>0.1.1-SNAPSHOT</version>
+      <version>0.1.2-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.apache.poi</groupId>
