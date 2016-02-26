@@ -1,5 +1,42 @@
-in re G.B.
-Jul 7
-A140107
+create table OpinionSummary (id bigint not null auto_increment, countReferringOpinions integer not null, court TEXT, opinionDate date, page bigint not null, volume integer not null, vset integer not null, title TEXT, primary key (id)) ENGINE=InnoDB
+create table OpinionSummary_opinionCitations (OpinionSummary_id bigint not null, page bigint not null, volume integer not null, vset integer not null) ENGINE=InnoDB
+create table OpinionSummary_referringOpinions (OpinionSummary_id bigint not null, page bigint not null, volume integer not null, vset integer not null) ENGINE=InnoDB
+create table OpinionSummary_statuteCitations (OpinionSummary_id bigint not null, code varchar(255), sectionNumber varchar(255)) ENGINE=InnoDB
+create table role (id bigint not null auto_increment, role varchar(255) not null, primary key (id)) ENGINE=InnoDB
+create table SlipOpinion (id bigint not null auto_increment, countReferringOpinions integer not null, court TEXT, opinionDate date, page bigint not null, volume integer not null, vset integer not null, title TEXT, disposition TEXT, fileName TEXT, summary TEXT, primary key (id)) ENGINE=InnoDB
+create table SlipOpinion_opinionCitations (SlipOpinion_id bigint not null, page bigint not null, volume integer not null, vset integer not null) ENGINE=InnoDB
+create table SlipOpinion_referringOpinions (SlipOpinion_id bigint not null, page bigint not null, volume integer not null, vset integer not null) ENGINE=InnoDB
+create table SlipOpinion_statuteCitations (SlipOpinion_id bigint not null, code varchar(255), sectionNumber varchar(255)) ENGINE=InnoDB
+create table StatuteCitation (id bigint not null auto_increment, designated bit not null, code varchar(255), sectionNumber varchar(255), primary key (id)) ENGINE=InnoDB
+create table StatuteCitation_referringOpinionCount (StatuteCitation_id bigint not null, referringOpinionCount integer, page bigint not null, volume integer not null, vset integer not null, primary key (StatuteCitation_id, page, volume, vset)) ENGINE=InnoDB
+create table user (id bigint not null auto_increment, codes tinyblob, createDate datetime, email varchar(255) not null, emailUpdates bit not null, firstName varchar(255), lastName varchar(255), locale varchar(255), password varchar(255), updateDate datetime, verified bit not null, verifyCount integer not null, verifyErrors integer not null, verifyKey varchar(255), primary key (id)) ENGINE=InnoDB
+create table user_role (User_id bigint not null, roles_id bigint not null) ENGINE=InnoDB
+create index IDX64jpr2briakrjulgpgcjmis6g on OpinionSummary (volume, vset, page)
+alter table role add constraint UK_bjxn5ii7v7ygwx39et0wawu0q unique (role)
+create index IDX9pp4c9r1gw6o0yt1j75n7fvrw on SlipOpinion (volume, vset, page)
+create index IDXtpaoq400m551d2ckksm65mlor on StatuteCitation (code, sectionNumber)
+alter table user add constraint UKob8kqyqqgmefl0aco34akdtpe unique (email)
+alter table OpinionSummary_opinionCitations add constraint FKspqbogdd95myovey0xs5ioysa foreign key (OpinionSummary_id) references OpinionSummary (id)
+alter table OpinionSummary_referringOpinions add constraint FKhsrc08f03gle4vgi6qr7r9hrr foreign key (OpinionSummary_id) references OpinionSummary (id)
+alter table OpinionSummary_statuteCitations add constraint FKna5b0ghv3k0fjhcvdamq7igel foreign key (OpinionSummary_id) references OpinionSummary (id)
+alter table SlipOpinion_opinionCitations add constraint FKqd08d7fefjpsedhhufeq0wi7g foreign key (SlipOpinion_id) references SlipOpinion (id)
+alter table SlipOpinion_referringOpinions add constraint FKal5wffk2xcmt5ktvoq8t0oewl foreign key (SlipOpinion_id) references SlipOpinion (id)
+alter table SlipOpinion_statuteCitations add constraint FKcmaj8y1n8meujvaookpr8xe7j foreign key (SlipOpinion_id) references SlipOpinion (id)
+alter table StatuteCitation_referringOpinionCount add constraint FKbuy3l2xjs63xa1jjijh8jpoow foreign key (StatuteCitation_id) references StatuteCitation (id)
+alter table user_role add constraint FKeog8p06nu33ihk13roqnrp1y6 foreign key (roles_id) references role (id)
+alter table user_role add constraint FKs51iigign85r46j35s8npjs02 foreign key (User_id) references user (id)
 
- 
+
+    select 
+        phones0_.Person_id as Person_id1_0_0_, 
+        phones0_.phones_id as phones2_1_0_, 
+        phones0_.phone_type as phone_ty3_0_, 
+        phone1_.id as id1_3_1_, 
+        phone1_.person_id as person_id3_3_1_, 
+        phone1_.name as name2_3_1_, 
+        person2_.id as id1_0_2_, 
+        person2_.name as name2_0_2_ 
+    from Person_Phone phones0_ 
+        inner join Phone phone1_ on phones0_.phones_id=phone1_.id 
+        left outer join Person person2_ on phone1_.person_id=person2_.id 
+    where phones0_.Person_id=?

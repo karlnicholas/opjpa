@@ -10,11 +10,12 @@
     <class>opinions.model.StatuteCitation</class>
     <class>opinions.model.StatuteKey</class>
     <properties>
-      <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
-      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/op" />
-      <property name="javax.persistence.jdbc.user" value="adminwg1gkjx" />
-      <property name="javax.persistence.jdbc.password" value="P79Z7WItQ2aH" />
-      <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
+            <property name="hibernate.archive.autodetection" value="class" />
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/opee" />
+      <property name="javax.persistence.jdbc.user" value="opee" />
+      <property name="javax.persistence.jdbc.password" value="opee" />
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
     </properties>
   </persistence-unit>
 </persistence>

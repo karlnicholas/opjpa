@@ -9,25 +9,28 @@ public class Factory {
 	
 	List<I> iCache = new ArrayList<I>();
 
-	abstract class ClassA {}
-	abstract class ClassB {}
+	class ClassA {}
+	class ClassB {}
 	
-	class Class1 extends ClassA implements I {}
-	class Class2 extends ClassB implements I {}
+	abstract class Class1 extends ClassA implements I { abstract public void Do1Thing(); }
+	abstract class Class2 extends ClassB implements I { abstract public void Do2Thing(); }
+	
+	class ImplTypeA extends Class1{ public void Do1Thing(){} }
+	class ImplTypeB extends Class2{ public void Do2Thing(){} }
 
 	I getOrCreateTypeA() { 
 		for( I cls: iCache ) {
-			if( cls instanceof ClassA ) return cls;
+			if( cls instanceof Class1 ) return cls;
 		}
-		Class1 cls = new Class1();
+		ImplTypeA cls = new ImplTypeA();
 		iCache.add(cls);
 		return cls;
 	}
 	I getOrCreateTypeB() { 
 		for( I cls: iCache ) {
-			if( cls instanceof ClassB ) return cls;
+			if( cls instanceof Class2 ) return cls;
 		}
-		Class2 cls = new Class2();
+		ImplTypeB cls = new ImplTypeB();
 		iCache.add(cls);
 		return cls;
 	}
