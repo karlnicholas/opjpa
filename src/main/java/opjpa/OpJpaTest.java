@@ -5,6 +5,7 @@ import javax.persistence.*;
 import codesparser.*;
 import gscalifornia.factory.CAStatutesFactory;
 import opcalifornia.CaseInterfacesService;
+import opinion.data.SlipOpinionRepository;
 
 import java.io.*;
 import java.nio.file.DirectoryStream;
@@ -13,12 +14,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 
-import opinions.facade.*;
-import opinions.model.OpinionSummary;
-import opinions.model.SlipOpinion;
-import opinions.model.StatuteCitation;
-import opinions.view.*;
-import opinions.parsers.*;
+import opinion.model.OpinionSummary;
+import opinion.model.SlipOpinion;
+import opinion.model.StatuteCitation;
+import opinion.parsers.*;
 
 public class OpJpaTest {
 	
@@ -119,7 +118,7 @@ public class OpJpaTest {
 		List<String> fileNamesCopy = new ArrayList<String>(fileNames); 
 		
 		CaseInterfacesService casesInterface = new CaseInterfacesService();
-		casesInterface.initialize(false);		//TODO make a singleton out of this .. pattern after gscalifornia.
+		casesInterface.initialize(false);
 
 		CaseParserInterface onlinecaseParser = casesInterface.getCaseParserInterface();
 		Reader reader = onlinecaseParser.getCaseList();
@@ -127,8 +126,9 @@ public class OpJpaTest {
 		List<SlipOpinion> onlineCases = onlinecaseParser.parseCaseList(reader);
 		reader.close();
 		
-		DatabaseFacade dbFacade = new DatabaseFacade(em);
-		List<SlipOpinion> databaseCases = dbFacade.listSlipOpinions();
+		SlipOpinionRepository slipOpinionRepository = new SlipOpinionRepository();
+		slipOpinionRepository.setEntityManager(em);
+		List<SlipOpinion> databaseCases = slipOpinionRepository.listSlipOpinions();
 
 		// first to deletes
 		for ( SlipOpinion slipOpinion: onlineCases ) {
@@ -162,7 +162,7 @@ public class OpJpaTest {
 		for( SlipOpinion slipOpinion: onlineCases ) {
 			ParserDocument parserDoc = onlinecaseParser.getCaseFile(slipOpinion, true);
 			ParserResults parserResults = parser.parseCase(parserDoc, slipOpinion, slipOpinion.getOpinionKey() );
-        	parserResults.persist(slipOpinion, dbFacade);
+        	parserResults.persist(slipOpinion, slipOpinionRepository.getPersistenceInterface());
 //			em.persist(slipOpinion);
 			System.out.println("Downloaded " + slipOpinion.getFileName() + ".DOC");
 		}
@@ -198,7 +198,7 @@ public class OpJpaTest {
 	) throws Exception {
 //		List<OpinionView> viewModelCases = new ArrayList<OpinionView>();
 //		OpinionViewBuilder viewBuilder = new OpinionViewBuilder(codesInterface);
-//		DatabaseFacade dbFacade = new DatabaseFacade(em);
+//		OpinionQueries dbFacade = new OpinionQueries(em);
 		// copy to ParsedCase 
 		for( SlipOpinion slipOpinion: cases ) {
 			
@@ -266,7 +266,10 @@ public class OpJpaTest {
 			CodeTitles[] codeTitles = codesInterface.getCodeTitles();
 			CodeCitationParser parser = new CodeCitationParser(codeTitles);
 			
-			DatabaseFacade dbFacade = new DatabaseFacade(em);
+//			OpinionQueries dbFacade = new OpinionQueries(em);
+			SlipOpinionRepository slipOpinionRepository = new SlipOpinionRepository();
+			slipOpinionRepository.setEntityManager(em);
+			
 	//		SlipOpinionDao slipOpinionDao = new SlipOpinionDao(em);
 			EntityTransaction tx = em.getTransaction();
 			tx.begin();
@@ -274,7 +277,7 @@ public class OpJpaTest {
 				System.out.println("Case = " + slipOpinion.getFileName());
 //				if ( slipOpinion.getFileName().contains("143650") ) {
 					ParserResults parserResults = parser.parseCase(caseParserInterface.getCaseFile(slipOpinion, false), slipOpinion, slipOpinion.getOpinionKey() );
-		        	parserResults.persist(slipOpinion, dbFacade);
+		        	parserResults.persist(slipOpinion, slipOpinionRepository.getPersistenceInterface());
 		        	em.persist(slipOpinion);
 //				}
 	/*        	

@@ -9,8 +9,8 @@ import javax.persistence.Persistence;
 import codesparser.CodesInterface;
 import gscalifornia.code.CALoadStatutes;
 import gscalifornia.factory.CAStatutesFactory;
-import opinions.model.OpinionKey;
-import opinions.facade.DatabaseFacade;
+import opinion.data.SlipOpinionRepository;
+import opinion.model.OpinionKey;
 
 public class OpinionReport {
 
@@ -29,17 +29,15 @@ public class OpinionReport {
     private void run() throws Exception {
     	
     	try {
-        
-    		DatabaseFacade databaseFacade = new DatabaseFacade(em);
 	
 	//        String iface = "code.CACodes";
 	//        CodesInterface codesInterface = (CodesInterface) Class.forName(iface).newInstance();
 	        CodesInterface codesInterface = CAStatutesFactory.getInstance().getCodesInterface(true);
 
 	
-	//        DatabaseFacade.getInstance().initializeDB(codesInterface);
-	//        DatabaseFacade.getInstance().writeToXML();
-	//        DatabaseFacade.getInstance().initFromXML();
+	//        OpinionQueries.getInstance().initializeDB(codesInterface);
+	//        OpinionQueries.getInstance().writeToXML();
+	//        OpinionQueries.getInstance().initFromXML();
 	        
 //	        OpinionSummary opinion = databaseFacade.findOpinion(new OpinionKey("5 Cal.4th 295"));
 //        	printOpinionSummaryReport(codesInterface, parserResults, opinion );

@@ -6,14 +6,12 @@ import codesparser.*;
 import gscalifornia.factory.CAStatutesFactory;
 
 import java.io.*;
-import java.nio.file.Paths;
 import java.util.*;
 
 import load.LoadHistoricalOpinions;
 import memorydb.MemoryDBFacade;
-import opinions.facade.*;
-import opinions.model.SlipOpinion;
-import opinions.parsers.*;
+import opinion.model.SlipOpinion;
+import opinion.parsers.*;
 
 public class LoadNewSlipOpinions {
 	

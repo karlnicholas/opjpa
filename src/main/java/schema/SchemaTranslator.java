@@ -2,12 +2,12 @@ package schema;
 
 import java.io.*;
 
-import opinions.model.OpinionKey;
-import opinions.model.SlipOpinion;
-import opinions.model.OpinionBase;
-import opinions.model.OpinionSummary;
-import opinions.model.StatuteCitation;
-import opinions.model.StatuteKey;
+import opinion.model.OpinionKey;
+import opinion.model.SlipOpinion;
+import opinion.model.OpinionBase;
+import opinion.model.OpinionSummary;
+import opinion.model.StatuteCitation;
+import opinion.model.StatuteKey;
 
 import org.hibernate.cfg.*;
 import org.hibernate.dialect.Dialect;

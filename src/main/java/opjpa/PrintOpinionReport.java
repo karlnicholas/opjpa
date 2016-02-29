@@ -2,7 +2,6 @@ package opjpa;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -10,45 +9,22 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import codesparser.CodesInterface;
-import opinions.facade.DatabaseFacade;
-import opinions.model.OpinionBase;
-import opinions.model.OpinionKey;
-import opinions.model.OpinionSummary;
-import opinions.model.SlipOpinion;
-import opinions.model.StatuteCitation;
-import opinions.model.StatuteKey;
-import opinions.parsers.ParserResults;
-import opinions.view.OpinionView;
-import opinions.view.OpinionViewBuilder;
-import opinions.view.SectionView;
-import opinions.view.StatuteView;
-import opinions.view.ViewReference;
+import opinion.data.SlipOpinionRepository;
+import opinion.model.OpinionBase;
+import opinion.model.OpinionKey;
+import opinion.model.OpinionSummary;
+import opinion.model.SlipOpinion;
+import opinion.model.StatuteCitation;
+import opinion.model.StatuteKey;
+import opinion.parsers.ParserResults;
+import opinion.view.OpinionView;
+import opinion.view.OpinionViewBuilder;
+import opinion.view.SectionView;
+import opinion.view.StatuteView;
+import opinion.view.ViewReference;
 
 public class PrintOpinionReport {
 
-    private class MyPersistenceLookup implements ParserResults.PersistenceLookup {
-    	DatabaseFacade databaseFacade;
-    	public MyPersistenceLookup(DatabaseFacade databaseFacade) {
-    		this.databaseFacade = databaseFacade;
-    	}
-		@Override
-		public StatuteCitation statuteExists(StatuteKey statuteKey) {
-			return databaseFacade.findStatute(statuteKey);
-		}
-		@Override
-		public OpinionSummary opinionExists(OpinionKey opinionKey) {
-			return databaseFacade.findOpinion(opinionKey);
-		}
-		@Override
-		public List<StatuteCitation> getStatutes(Collection<StatuteKey> statuteKeys) {					
-			return databaseFacade.getStatutes(statuteKeys);
-		}
-		@Override
-		public List<OpinionSummary> getOpinions(Collection<OpinionKey> opinionKeys) {
-			return databaseFacade.getOpinions(opinionKeys);
-		}
-    }
-    
 	public void printOpinionReport(
     		CodesInterface codesInterface,
     		EntityManager em, 
@@ -56,10 +32,11 @@ public class PrintOpinionReport {
 	) throws Exception {
 // Date startDate = new Date();
         
-		DatabaseFacade databaseFacade = new DatabaseFacade(em);
-		SlipOpinion slipOpinion = databaseFacade.slipOpinionExists(opinionKey);
+    	SlipOpinionRepository slipOpinionRepository = new SlipOpinionRepository();
+    	slipOpinionRepository.setEntityManager(em);
+		SlipOpinion slipOpinion = slipOpinionRepository.slipOpinionExists(opinionKey);
 		if ( slipOpinion != null ) {
-	    	ParserResults parserResults = new ParserResults(slipOpinion, new MyPersistenceLookup(databaseFacade));
+	    	ParserResults parserResults = new ParserResults(slipOpinion, slipOpinionRepository.getPersistenceLookup());
 
 	    	OpinionViewBuilder opinionCaseBuilder = new OpinionViewBuilder(codesInterface);
 	        //
@@ -71,9 +48,9 @@ public class PrintOpinionReport {
 // System.out.println("TIMING: " + (new Date().getTime()-startDate.getTime()));
 	    	return;
 		}
-        OpinionSummary opinionSummary = databaseFacade.opinionExists(opinionKey);
+        OpinionSummary opinionSummary = slipOpinionRepository.opinionExists(opinionKey);
 		if ( opinionSummary != null ) {
-	    	ParserResults parserResults = new ParserResults(opinionSummary, new MyPersistenceLookup(databaseFacade));
+	    	ParserResults parserResults = new ParserResults(opinionSummary, slipOpinionRepository.getPersistenceLookup());
 	        OpinionViewBuilder opinionCaseBuilder = new OpinionViewBuilder(codesInterface);
 	        //
 	        OpinionView opinionCase = opinionCaseBuilder.buildOpinionSummaryView(opinionSummary, parserResults, true);
