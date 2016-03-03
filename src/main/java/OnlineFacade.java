@@ -7,8 +7,8 @@ import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.persistence.*;
 
-import opinion.model.SlipOpinion;
-import opinion.parsers.*;
+import opca.model.SlipOpinion;
+import opca.parsers.*;
 
 public class OnlineFacade {
 	private static final Logger log = Logger.getLogger(OnlineFacade.class.getName());

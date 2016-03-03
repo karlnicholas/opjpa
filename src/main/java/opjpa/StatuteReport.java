@@ -13,9 +13,9 @@ import codesparser.CodeReference;
 import codesparser.CodesInterface;
 import codesparser.SectionNumber;
 import gscalifornia.factory.CAStatutesFactory;
-import opinion.data.SlipOpinionRepository;
-import opinion.model.OpinionSummary;
-import opinion.model.StatuteCitation;
+import opca.model.OpinionSummary;
+import opca.model.StatuteCitation;
+import opca.service.SlipOpinionService;
 
 public class StatuteReport {
 
@@ -35,8 +35,8 @@ public class StatuteReport {
 		
 		try {
 		
-			SlipOpinionRepository slipOpinionRepository = new SlipOpinionRepository();
-			slipOpinionRepository.setEntityManager(em);
+			SlipOpinionService slipOpinionService = new SlipOpinionService();
+			slipOpinionService.setEntityManager(em);
 	//      String iface = "code.CACodes";
 	//      CodesInterface codesInterface = (CodesInterface) Class.forName(iface).newInstance();
 		    CodesInterface codesInterface = CAStatutesFactory.getInstance().getCodesInterface(true);
@@ -45,17 +45,17 @@ public class StatuteReport {
 	//        OpinionQueries.getInstance().writeToXML();
 	//        OpinionQueries.getInstance().initFromXML();
 	
-	        System.out.println("statuteTable size = " + slipOpinionRepository.getCount());
+	        System.out.println("statuteTable size = " + slipOpinionService.getCount());
 	        
-			List<StatuteCitation> statutesForCode = slipOpinionRepository.selectForCode("welfare");
+			List<StatuteCitation> statutesForCode = slipOpinionService.selectForCode("welfare");
 	        StatuteCitation maxWelfare = getCodeCitationMaxCaseReferrors(statutesForCode );
-	        printCodeCitation(codesInterface, slipOpinionRepository, maxWelfare);
+	        printCodeCitation(codesInterface, slipOpinionService, maxWelfare);
 	        
-	        printCodeCitation(codesInterface, slipOpinionRepository, slipOpinionRepository.testStatuteByCodeSection("welfare", "200"));
+	        printCodeCitation(codesInterface, slipOpinionService, slipOpinionService.testStatuteByCodeSection("welfare", "200"));
 	
-	        printCodeCitation(codesInterface, slipOpinionRepository, slipOpinionRepository.testStatuteByCodeSection("family code", "4058"));
+	        printCodeCitation(codesInterface, slipOpinionService, slipOpinionService.testStatuteByCodeSection("family code", "4058"));
 	
-	        printCodeCitation(codesInterface, slipOpinionRepository, slipOpinionRepository.testStatuteByCodeSection("family code", "300"));
+	        printCodeCitation(codesInterface, slipOpinionService, slipOpinionService.testStatuteByCodeSection("family code", "300"));
 		} finally {
 			em.close();
 			emf.close();
@@ -77,7 +77,7 @@ public class StatuteReport {
 	
 	private void printCodeCitation(
 	    CodesInterface codesInterface,
-	    SlipOpinionRepository slipOpinionRepository, 
+	    SlipOpinionService slipOpinionService, 
 	    StatuteCitation statuteCitation
 	) {
 	    if ( statuteCitation == null ) {
@@ -89,7 +89,7 @@ public class StatuteReport {
         boolean first = true;
         String indent = new String();
         int printed = 0;
-        List<OpinionSummary> foundOpinions = slipOpinionRepository.getOpinions(statuteCitation.getReferringOpinionCount().keySet());
+        List<OpinionSummary> foundOpinions = slipOpinionService.getOpinions(statuteCitation.getReferringOpinionCount().keySet());
         List<OpinionSummary> referringOpinions = new ArrayList<OpinionSummary>();
         
 //        for ( OpinionKey caseCitationKey: statuteCitation.getReferringOpinionCount().keySet() ) {

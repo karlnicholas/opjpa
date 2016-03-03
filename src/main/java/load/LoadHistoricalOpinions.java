@@ -30,13 +30,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import codesparser.CodesInterface;
 import jsonmodel.CourtListenerOpinion;
 import memorydb.MemoryDBFacade;
-import opinion.data.SlipOpinionRepository;
-import opinion.model.OpinionKey;
-import opinion.model.OpinionSummary;
-import opinion.model.StatuteCitation;
-import opinion.parsers.CodeCitationParser;
-import opinion.parsers.ParserDocument;
-import opinion.parsers.ParserResults;
+import opca.model.OpinionKey;
+import opca.model.OpinionSummary;
+import opca.model.StatuteCitation;
+import opca.parsers.CodeCitationParser;
+import opca.parsers.ParserDocument;
+import opca.parsers.ParserResults;
+import opca.service.SlipOpinionService;
 
 public class LoadHistoricalOpinions {
 	EntityManagerFactory emf;
@@ -281,17 +281,17 @@ public class LoadHistoricalOpinions {
     	@Override
     	public void run() {
 	    	EntityManager em = emf.createEntityManager();
-	    	SlipOpinionRepository slipOpinionRepository = new SlipOpinionRepository();
-	    	slipOpinionRepository.setEntityManager(em);
+	    	SlipOpinionService slipOpinionService = new SlipOpinionService();
+	    	slipOpinionService.setEntityManager(em);
 	    	Date startTime = new Date();
 	    	for(OpinionSummary opinion: opinions ) {
 // This causes a NPE !?!?	    		
 //	    		opinion.checkCountReferringOpinions();
-	    		OpinionSummary existingOpinion = slipOpinionRepository.opinionExists(opinion.getOpinionKey());
+	    		OpinionSummary existingOpinion = slipOpinionService.opinionExists(opinion.getOpinionKey());
 				if ( existingOpinion == null ) {
 					persistOpinions.add(opinion);
 				} else {
-					existingOpinion.addModifications(opinion, slipOpinionRepository.getPersistenceLookup());
+					existingOpinion.addModifications(opinion, slipOpinionService.getPersistenceLookup());
 					//opinion referred to itself?
 //                    existingOpinion.addOpinionSummaryReferredFrom(opinion.getOpinionKey());
 					mergeOpinions.add(existingOpinion);
@@ -360,12 +360,12 @@ public class LoadHistoricalOpinions {
     	@Override
     	public void run() {
 	    	EntityManager em = emf.createEntityManager();
-	    	SlipOpinionRepository slipOpinionRepository = new SlipOpinionRepository();
-	    	slipOpinionRepository.setEntityManager(em);
+	    	SlipOpinionService slipOpinionService = new SlipOpinionService();
+	    	slipOpinionService.setEntityManager(em);
 	    	int count = statutes.size();
 	    	Date startTime = new Date();
 	    	for(StatuteCitation statute: statutes ) {
-	    		StatuteCitation existingStatute = slipOpinionRepository.statuteExists(statute.getStatuteKey());
+	    		StatuteCitation existingStatute = slipOpinionService.statuteExists(statute.getStatuteKey());
 				if ( existingStatute == null ) {
 					persistStatutes.add(statute);
 				} else {

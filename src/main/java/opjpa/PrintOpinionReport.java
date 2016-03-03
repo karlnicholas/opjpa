@@ -9,19 +9,19 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import codesparser.CodesInterface;
-import opinion.data.SlipOpinionRepository;
-import opinion.model.OpinionBase;
-import opinion.model.OpinionKey;
-import opinion.model.OpinionSummary;
-import opinion.model.SlipOpinion;
-import opinion.model.StatuteCitation;
-import opinion.model.StatuteKey;
-import opinion.parsers.ParserResults;
-import opinion.view.OpinionView;
-import opinion.view.OpinionViewBuilder;
-import opinion.view.SectionView;
-import opinion.view.StatuteView;
-import opinion.view.ViewReference;
+import opca.model.OpinionBase;
+import opca.model.OpinionKey;
+import opca.model.OpinionSummary;
+import opca.model.SlipOpinion;
+import opca.model.StatuteCitation;
+import opca.model.StatuteKey;
+import opca.parsers.ParserResults;
+import opca.service.SlipOpinionService;
+import opca.view.OpinionView;
+import opca.view.OpinionViewBuilder;
+import opca.view.SectionView;
+import opca.view.StatuteView;
+import opca.view.ViewReference;
 
 public class PrintOpinionReport {
 
@@ -32,11 +32,11 @@ public class PrintOpinionReport {
 	) throws Exception {
 // Date startDate = new Date();
         
-    	SlipOpinionRepository slipOpinionRepository = new SlipOpinionRepository();
-    	slipOpinionRepository.setEntityManager(em);
-		SlipOpinion slipOpinion = slipOpinionRepository.slipOpinionExists(opinionKey);
+		SlipOpinionService slipOpinionService = new SlipOpinionService();
+		slipOpinionService.setEntityManager(em);
+		SlipOpinion slipOpinion = slipOpinionService.slipOpinionExists(opinionKey);
 		if ( slipOpinion != null ) {
-	    	ParserResults parserResults = new ParserResults(slipOpinion, slipOpinionRepository.getPersistenceLookup());
+	    	ParserResults parserResults = new ParserResults(slipOpinion, slipOpinionService.getPersistenceLookup());
 
 	    	OpinionViewBuilder opinionCaseBuilder = new OpinionViewBuilder(codesInterface);
 	        //
@@ -48,9 +48,9 @@ public class PrintOpinionReport {
 // System.out.println("TIMING: " + (new Date().getTime()-startDate.getTime()));
 	    	return;
 		}
-        OpinionSummary opinionSummary = slipOpinionRepository.opinionExists(opinionKey);
+        OpinionSummary opinionSummary = slipOpinionService.opinionExists(opinionKey);
 		if ( opinionSummary != null ) {
-	    	ParserResults parserResults = new ParserResults(opinionSummary, slipOpinionRepository.getPersistenceLookup());
+	    	ParserResults parserResults = new ParserResults(opinionSummary, slipOpinionService.getPersistenceLookup());
 	        OpinionViewBuilder opinionCaseBuilder = new OpinionViewBuilder(codesInterface);
 	        //
 	        OpinionView opinionCase = opinionCaseBuilder.buildOpinionSummaryView(opinionSummary, parserResults, true);

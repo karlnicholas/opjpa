@@ -2,16 +2,16 @@ package schema;
 
 import java.io.*;
 
-import opinion.model.OpinionKey;
-import opinion.model.SlipOpinion;
-import opinion.model.OpinionBase;
-import opinion.model.OpinionSummary;
-import opinion.model.StatuteCitation;
-import opinion.model.StatuteKey;
-
 import org.hibernate.cfg.*;
 import org.hibernate.dialect.Dialect;
 import org.hibernate.engine.jdbc.internal.*;
+
+import opca.model.OpinionBase;
+import opca.model.OpinionKey;
+import opca.model.OpinionSummary;
+import opca.model.SlipOpinion;
+import opca.model.StatuteCitation;
+import opca.model.StatuteKey;
 
 public class SchemaTranslator {
 	private Configuration config = null;

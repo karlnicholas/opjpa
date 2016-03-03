@@ -8,11 +8,11 @@ import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-import opinion.model.OpinionKey;
-import opinion.model.OpinionSummary;
-import opinion.model.StatuteCitation;
-import opinion.model.StatuteKey;
-import opinion.parsers.ParserResults.PersistenceInterface;
+import opca.model.OpinionKey;
+import opca.model.OpinionSummary;
+import opca.model.StatuteCitation;
+import opca.model.StatuteKey;
+import opca.parsers.ParserResults.PersistenceInterface;
 
 public class MemoryDBFacade implements PersistenceInterface {
     

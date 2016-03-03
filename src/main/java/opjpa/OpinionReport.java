@@ -1,16 +1,12 @@
 package opjpa;
 
-import java.io.File;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import codesparser.CodesInterface;
-import gscalifornia.code.CALoadStatutes;
 import gscalifornia.factory.CAStatutesFactory;
-import opinion.data.SlipOpinionRepository;
-import opinion.model.OpinionKey;
+import opca.model.OpinionKey;
 
 public class OpinionReport {
 

@@ -4,8 +4,12 @@ import javax.persistence.*;
 
 import codesparser.*;
 import gscalifornia.factory.CAStatutesFactory;
+import opca.model.OpinionSummary;
+import opca.model.SlipOpinion;
+import opca.model.StatuteCitation;
+import opca.parsers.*;
+import opca.service.SlipOpinionService;
 import opcalifornia.CaseInterfacesService;
-import opinion.data.SlipOpinionRepository;
 
 import java.io.*;
 import java.nio.file.DirectoryStream;
@@ -13,11 +17,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
-
-import opinion.model.OpinionSummary;
-import opinion.model.SlipOpinion;
-import opinion.model.StatuteCitation;
-import opinion.parsers.*;
 
 public class OpJpaTest {
 	
@@ -126,9 +125,9 @@ public class OpJpaTest {
 		List<SlipOpinion> onlineCases = onlinecaseParser.parseCaseList(reader);
 		reader.close();
 		
-		SlipOpinionRepository slipOpinionRepository = new SlipOpinionRepository();
-		slipOpinionRepository.setEntityManager(em);
-		List<SlipOpinion> databaseCases = slipOpinionRepository.listSlipOpinions();
+		SlipOpinionService slipOpinionService = new SlipOpinionService();
+		slipOpinionService.setEntityManager(em);
+		List<SlipOpinion> databaseCases = slipOpinionService.listSlipOpinions();
 
 		// first to deletes
 		for ( SlipOpinion slipOpinion: onlineCases ) {
@@ -162,7 +161,7 @@ public class OpJpaTest {
 		for( SlipOpinion slipOpinion: onlineCases ) {
 			ParserDocument parserDoc = onlinecaseParser.getCaseFile(slipOpinion, true);
 			ParserResults parserResults = parser.parseCase(parserDoc, slipOpinion, slipOpinion.getOpinionKey() );
-        	parserResults.persist(slipOpinion, slipOpinionRepository.getPersistenceInterface());
+        	parserResults.persist(slipOpinion, slipOpinionService.getPersistenceInterface());
 //			em.persist(slipOpinion);
 			System.out.println("Downloaded " + slipOpinion.getFileName() + ".DOC");
 		}
@@ -267,8 +266,8 @@ public class OpJpaTest {
 			CodeCitationParser parser = new CodeCitationParser(codeTitles);
 			
 //			OpinionQueries dbFacade = new OpinionQueries(em);
-			SlipOpinionRepository slipOpinionRepository = new SlipOpinionRepository();
-			slipOpinionRepository.setEntityManager(em);
+			SlipOpinionService slipOpinionService = new SlipOpinionService();
+			slipOpinionService.setEntityManager(em);
 			
 	//		SlipOpinionDao slipOpinionDao = new SlipOpinionDao(em);
 			EntityTransaction tx = em.getTransaction();
@@ -277,7 +276,7 @@ public class OpJpaTest {
 				System.out.println("Case = " + slipOpinion.getFileName());
 //				if ( slipOpinion.getFileName().contains("143650") ) {
 					ParserResults parserResults = parser.parseCase(caseParserInterface.getCaseFile(slipOpinion, false), slipOpinion, slipOpinion.getOpinionKey() );
-		        	parserResults.persist(slipOpinion, slipOpinionRepository.getPersistenceInterface());
+		        	parserResults.persist(slipOpinion, slipOpinionService.getPersistenceInterface());
 		        	em.persist(slipOpinion);
 //				}
 	/*        	

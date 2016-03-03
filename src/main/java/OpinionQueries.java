@@ -5,12 +5,12 @@ import java.util.*;
 import javax.inject.Inject;
 import javax.persistence.*;
 
-import opinion.model.OpinionKey;
-import opinion.model.OpinionSummary;
-import opinion.model.SlipOpinion;
-import opinion.model.StatuteCitation;
-import opinion.model.StatuteKey;
-import opinion.parsers.ParserResults.PersistenceInterface;
+import opca.model.OpinionKey;
+import opca.model.OpinionSummary;
+import opca.model.SlipOpinion;
+import opca.model.StatuteCitation;
+import opca.model.StatuteKey;
+import opca.parsers.ParserResults.PersistenceInterface;
 
 public class OpinionQueries implements PersistenceInterface {
 

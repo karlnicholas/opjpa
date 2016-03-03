@@ -1,12 +1,9 @@
 package opjpa;
 
-import java.io.File;
-
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import codesparser.CodesInterface;
-import gscalifornia.code.CALoadStatutes;
 import gscalifornia.factory.CAStatutesFactory;
 import load.LoadHistoricalOpinions;
 

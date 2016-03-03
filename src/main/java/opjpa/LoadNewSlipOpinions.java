@@ -10,8 +10,8 @@ import java.util.*;
 
 import load.LoadHistoricalOpinions;
 import memorydb.MemoryDBFacade;
-import opinion.model.SlipOpinion;
-import opinion.parsers.*;
+import opca.model.SlipOpinion;
+import opca.parsers.*;
 
 public class LoadNewSlipOpinions {
 	

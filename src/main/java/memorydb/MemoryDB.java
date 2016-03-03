@@ -5,8 +5,8 @@ import java.util.concurrent.ConcurrentSkipListSet;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-import opinion.model.OpinionSummary;
-import opinion.model.StatuteCitation;
+import opca.model.OpinionSummary;
+import opca.model.StatuteCitation;
 
 import javax.xml.bind.annotation.XmlElement;
 

@@ -5,9 +5,9 @@ import java.io.*;
 
 import org.apache.poi.hwpf.HWPFDocument;
 
+import opca.model.SlipOpinion;
+import opca.parsers.ParserDocument;
 import opcalifornia.*;
-import opinion.model.SlipOpinion;
-import opinion.parsers.ParserDocument;
 
 public class CATestCases extends CACaseParser {
 	public final static String casesDir = "cases/";

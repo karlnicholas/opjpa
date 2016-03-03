@@ -37,11 +37,6 @@
       <artifactId>hibernate-entitymanager</artifactId>
     </dependency>
     <dependency>
-      <groupId>opcalifornia</groupId>
-      <artifactId>opcalifornia</artifactId>
-      <version>0.1.0-SNAPSHOT</version>
-    </dependency>
-    <dependency>
       <groupId>codesparser</groupId>
       <artifactId>codesparser</artifactId>
       <version>0.3.1-SNAPSHOT</version>
