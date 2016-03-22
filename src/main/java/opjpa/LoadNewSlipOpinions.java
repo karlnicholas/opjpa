@@ -83,7 +83,10 @@ public class LoadNewSlipOpinions {
 
 			for( SlipOpinion slipOpinion: opinions ) {
 				System.out.println("Case = " + slipOpinion.getFileName());
-				ParserResults parserResults = parser.parseCase(caseParserInterface.getCaseFile(slipOpinion, false), slipOpinion, slipOpinion.getOpinionKey() );
+				ParserDocument parserDocument = caseParserInterface.getCaseFile(slipOpinion, false);
+				ParserResults parserResults = parser.parseCase(parserDocument, slipOpinion, slipOpinion.getOpinionKey() );
+	    		parser.checkSlipOpinionDetails(slipOpinion, parserDocument);
+
 	        	parserResults.persist(slipOpinion, memoryDB);
 			}
 			
@@ -99,7 +102,7 @@ public class LoadNewSlipOpinions {
 			}
 			tx.commit();
 			em.close();
-			
+
 			// persist
 		} finally {
 			emf.close();

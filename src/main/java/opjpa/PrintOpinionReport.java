@@ -25,7 +25,7 @@ import opca.view.ViewReference;
 
 public class PrintOpinionReport {
 
-	public void printOpinionReport(
+	public void printSlipOpinionReport(
     		CodesInterface codesInterface,
     		EntityManager em, 
     		OpinionKey opinionKey
@@ -48,6 +48,8 @@ public class PrintOpinionReport {
 // System.out.println("TIMING: " + (new Date().getTime()-startDate.getTime()));
 	    	return;
 		}
+		throw new RuntimeException("SlipOpinion not found for key:" + opinionKey);
+/*		
         OpinionSummary opinionSummary = slipOpinionService.opinionExists(opinionKey);
 		if ( opinionSummary != null ) {
 	    	ParserResults parserResults = new ParserResults(opinionSummary, slipOpinionService.getPersistenceLookup());
@@ -61,7 +63,7 @@ public class PrintOpinionReport {
 // System.out.println("TIMING: " + (new Date().getTime()-startDate.getTime()));
 	    	return;
 		}
-
+*/
     }
     
 
@@ -72,7 +74,7 @@ public class PrintOpinionReport {
 	) throws Exception {
         System.out.println("Opinion: " + opinionCase);
         System.out.println("--------- STATUTES -----------");
-        for ( StatuteView opinionCode: opinionCase.getCodes() ) {
+        for ( StatuteView opinionCode: opinionCase.getStatutes() ) {
         	System.out.println(opinionCode.getCodeReference().getTitle(false).toUpperCase());
         	List<SectionView> sorted = sortSubcodes(opinionCode);
         	handleSubcode(sorted, opinionCode);
@@ -99,7 +101,7 @@ public class PrintOpinionReport {
         for ( OpinionKey opinionKey: opinionBase.getOpinionCitations()) {
         	OpinionSummary opinionCited = parserResults.findOpinion(opinionKey);
         	int countRefs = 0;
-        	for ( StatuteKey statuteKey: opinionBase.getStatuteCitationKeys() ) {
+        	for ( StatuteKey statuteKey: opinionBase.getStatuteCitations() ) {
         		StatuteCitation statuteCited = parserResults.findStatute(statuteKey);
         		countRefs += statuteCited.getRefCount(opinionKey);
 //        		System.out.print(":" + statuteCite.getRefCount(opinionKey));

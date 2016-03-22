@@ -12,6 +12,8 @@ import opca.model.OpinionSummary;
 import opca.model.SlipOpinion;
 import opca.model.StatuteCitation;
 import opca.model.StatuteKey;
+import opca.model.User;
+import opca.model.Role;
 
 public class SchemaTranslator {
 	private Configuration config = null;
@@ -79,13 +81,15 @@ public class SchemaTranslator {
 				OpinionSummary.class, 
 				OpinionKey.class, 
 				StatuteCitation.class, 
-				StatuteKey.class
+				StatuteKey.class, 
+				User.class, 
+				Role.class
 			};
 
 //		translator.setDialect("org.hibernate.dialect.HSQLDialect")
 //		translator.setDialect("org.hibernate.dialect.PostgreSQL82Dialect")
 		
-		translator.setDialect("org.hibernate.dialect.PostgreSQLDialect")
+		translator.setDialect("org.hibernate.dialect.MySQL5InnoDBDialect")
 			.addAnnotatedClasses(entityClasses)
 			.translate(new FileOutputStream(new File("db-schema.sql")));
 

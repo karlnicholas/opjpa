@@ -40,7 +40,7 @@ public class OpinionReport {
 	        
 	        PrintOpinionReport opinionReport = new PrintOpinionReport();
 	        
-	        opinionReport.printOpinionReport(codesInterface, em, new OpinionKey("1 Slip.Op 10287300"));
+	        opinionReport.printSlipOpinionReport(codesInterface, em, new OpinionKey("1 Slip.Op 10287300"));
 	        
 	//        for ( OpinionSummary op: persistenceFacade.getAllOpinions() ) {
 	//            if (op.getStatutesReferredTo().size() > 10 ) System.out.println(op.getName() +":" + op.getStatutesReferredTo().size());

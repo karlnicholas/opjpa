@@ -168,7 +168,7 @@ public class OpJpaTest {
 		// tx.commit();
 		
 	}
-	
+/*	
 //	private String[] terms = {"section", "§" , "sections", "§§"};
 	public void playParse(CodesInterface codesInterface) throws Exception {
 		CodeCitationParser codeCitationParser = new CodeCitationParser(codesInterface.getCodeTitles());
@@ -182,7 +182,7 @@ public class OpJpaTest {
         codeCitationParser.parseSentence(slipOpinion.getOpinionKey(), sentence, codeCitationTree, caseCitationTree, null);
         System.out.println(codeCitationTree);
 	}
-	
+*/	
 	public OpJpaTest() throws Exception {
 		emf = Persistence.createEntityManagerFactory("opjpa");
 		em = emf.createEntityManager();
@@ -205,7 +205,7 @@ public class OpJpaTest {
 				"Case = " + slipOpinion.getFileName() 
 				+ " CaseCitations = " + slipOpinion.getOpinionCitations().size() 
 				+ " CaseReferrees = " + slipOpinion.getCountReferringOpinions()
-				+ " CodeCitations = " + slipOpinion.getStatuteCitationKeys().size()
+				+ " CodeCitations = " + slipOpinion.getStatuteCitations().size()
 			);
 //			System.out.println("Case = " + slipOpinion.getName() + " CaseCitations = " + slipOpinion.getCaseCitations());
 //			ParserResults parserResults = new ParserResults(slipOpinion, dbFacade);
@@ -351,7 +351,7 @@ public class OpJpaTest {
 				if ( slipOpinion.getFileName().equals("A142485") ) continue;
 								
 //				System.out.println("Case = " + slipOpinion.getFileName());
-				opinionReport.printOpinionReport(codesInterface, em, slipOpinion.getOpinionKey());
+				opinionReport.printSlipOpinionReport(codesInterface, em, slipOpinion.getOpinionKey());
 //				if ( slipOpinion.getFileName().contains("143650") ) {
 //					ParserResults parserResults = parser.parseCase(caseParserInterface.getCaseFile(slipOpinion, false), slipOpinion, slipOpinion.getOpinionKey() );
 //				}
