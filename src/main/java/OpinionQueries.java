@@ -10,7 +10,7 @@ import opca.model.OpinionSummary;
 import opca.model.SlipOpinion;
 import opca.model.StatuteCitation;
 import opca.model.StatuteKey;
-import opca.parsers.ParserResults.PersistenceInterface;
+import opca.parser.ParserResults.PersistenceInterface;
 
 public class OpinionQueries implements PersistenceInterface {
 

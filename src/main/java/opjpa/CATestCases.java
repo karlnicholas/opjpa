@@ -6,19 +6,19 @@ import java.io.*;
 import org.apache.poi.hwpf.HWPFDocument;
 
 import opca.model.SlipOpinion;
-import opca.parsers.ParserDocument;
-import opcalifornia.*;
+import opca.parser.ParserDocument;
+import opca.parser.ca.*;
 
 public class CATestCases extends CACaseParser {
 	public final static String casesDir = "cases/";
 	
 	@Override
-	public Reader getCaseList() throws Exception {
+	public Reader getCaseList() throws IOException {
         return new BufferedReader( new InputStreamReader( new FileInputStream( OpJpaTest.caseListFile ), OpJpaTest.encoding) );
 	}
 
 	@Override
-	public ParserDocument getCaseFile(SlipOpinion slipOpinion, boolean debugCopy) throws Exception {
+	public ParserDocument getCaseFile(SlipOpinion slipOpinion, boolean debugCopy) throws IOException {
 		InputStream inputStream = new FileInputStream(new File( casesDir + slipOpinion.getFileName() +".DOC" ));
 /*		
 		if ( debugCopy ) {

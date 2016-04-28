@@ -9,9 +9,12 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.regex.Pattern;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -27,18 +30,21 @@ import org.jsoup.select.Elements;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import apimodel.ApiOpinion;
+import apimodel.Cluster;
 import codesparser.CodesInterface;
-import jsonmodel.CourtListenerOpinion;
+import loadmodel.LoadOpinion;
 import memorydb.MemoryDBFacade;
 import opca.model.OpinionKey;
 import opca.model.OpinionSummary;
 import opca.model.StatuteCitation;
-import opca.parsers.CodeCitationParser;
-import opca.parsers.ParserDocument;
-import opca.parsers.ParserResults;
+import opca.parser.CodeCitationParser;
+import opca.parser.ParserDocument;
+import opca.parser.ParserResults;
 import opca.service.SlipOpinionService;
 
 public class LoadHistoricalOpinions {
+	private static final Pattern pattern = Pattern.compile("/");
 	EntityManagerFactory emf;
 	CodeCitationParser parser;
 	
@@ -53,8 +59,9 @@ public class LoadHistoricalOpinions {
     public void initializeDB() throws Exception {
     	Date startTime = new Date();
     	MemoryDBFacade memoryDB = MemoryDBFacade.getInstance();
-    	readStream(memoryDB, "c:/users/karl/downloads/calctapp.tar.gz");
-    	readStream(memoryDB, "c:/users/karl/downloads/cal.tar.gz");
+    	//
+    	readStream(memoryDB, "c:/users/karl/downloads/calctapp-opinions.tar.gz", "c:/users/karl/downloads/calctapp-clusters.tar.gz");
+    	readStream(memoryDB, "c:/users/karl/downloads/cal-opinions.tar.gz", "c:/users/karl/downloads/cal-clusters.tar.gz");
     	processesOpinions(memoryDB); 
     	processesStatutes(memoryDB); 
 		System.out.println("count " + memoryDB.getAllOpinions().size() + " : " + (new Date().getTime()-startTime.getTime())/1000);
@@ -63,13 +70,42 @@ public class LoadHistoricalOpinions {
 
     private void readStream(
 		MemoryDBFacade memoryDB, 
-		String fileName
+		String opinionsFileName, 
+		String clustersFileName
     ) throws Exception {
     	int processors = Runtime.getRuntime().availableProcessors();
     	int number = 1000;
     	int total = 0;
+		//
     	ObjectMapper om = new ObjectMapper();
-    	TarArchiveInputStream tarIn = new TarArchiveInputStream(new GzipCompressorInputStream(new BufferedInputStream(new FileInputStream(fileName))));
+		Map<Long, LoadOpinion> mapLoadOpinions = new TreeMap<Long, LoadOpinion>();
+
+    	TarArchiveInputStream tarIn = new TarArchiveInputStream(new GzipCompressorInputStream(new BufferedInputStream(new FileInputStream(clustersFileName))));
+    	TarArchiveEntry entry;
+        while ( (entry = tarIn.getNextTarEntry()) != null ) {
+	        if (tarIn.canReadEntryData(entry)) {
+	            int entrySize = (int) entry.getSize();
+	            byte[] content = new byte[entrySize];
+	            int offset = 0;
+	
+	            while ((offset += tarIn.read(content, offset, (entrySize - offset) )) != -1) {
+	                if (entrySize - offset == 0)
+	                    break;
+	            }
+//	            System.out.println("Content:" +  new String(content));
+	            // http://www.courtlistener.com/api/rest/v3/clusters/1361768/
+	            Cluster cluster = om.readValue(content, Cluster.class);
+	            if ( cluster.getPrecedential_status() != null && cluster.getPrecedential_status().equals("Published") ) {
+		            LoadOpinion loadOpinion = new LoadOpinion(cluster);
+		            if( loadOpinion.getCaseName() != null || !loadOpinion.getCaseName().trim().isEmpty() ) {
+			            mapLoadOpinions.put(loadOpinion.getId(), loadOpinion);
+		            }
+	            }
+	        }
+        }
+		tarIn.close();
+		//
+    	tarIn = new TarArchiveInputStream(new GzipCompressorInputStream(new BufferedInputStream(new FileInputStream(opinionsFileName))));
     	ExecutorService es = Executors.newFixedThreadPool(processors);
     	List<Callable<Object>> tasks = new ArrayList<Callable<Object>>();
 		try {
@@ -77,7 +113,7 @@ public class LoadHistoricalOpinions {
     	  while ( working ) {
     		  tasks.clear();
         	  for ( int i=0; i < processors; ++i ) {
-        		  List<CourtListenerOpinion> clOps = getCases(tarIn, om, number);
+        		  List<LoadOpinion> clOps = getCases(tarIn, om, mapLoadOpinions, number);
         		  if ( clOps.size() == 0 ) {
         			  working = false;
         			  break;
@@ -420,14 +456,15 @@ public class LoadHistoricalOpinions {
     	}
     }
 
-    private List<CourtListenerOpinion> getCases(
+    private List<LoadOpinion> getCases(
 		TarArchiveInputStream tarIn, 
 		ObjectMapper om, 
+		Map<Long, LoadOpinion> mapLoadOpinions, 
 		int number
 	) throws Exception {
     	TarArchiveEntry entry;
     	int count = 0;
-        List<CourtListenerOpinion> clOps = new ArrayList<CourtListenerOpinion>(250); 
+        List<LoadOpinion> clOps = new ArrayList<LoadOpinion>(number); 
         while ( (entry = tarIn.getNextTarEntry()) != null ) {
 	        if (tarIn.canReadEntryData(entry)) {
 	            int entrySize = (int) entry.getSize();
@@ -438,7 +475,23 @@ public class LoadHistoricalOpinions {
 	                if (entrySize - offset == 0)
 	                    break;
 	            }
-	            CourtListenerOpinion op = om.readValue(content, CourtListenerOpinion.class);
+//	            System.out.println("Content:" +  new String(content));
+	            ApiOpinion op = om.readValue(content, ApiOpinion.class);
+	            
+	            Long id = new Long(pattern.split(op.getResource_uri())[7]);
+	            LoadOpinion loadOpinion = mapLoadOpinions.get(id);
+	            if ( loadOpinion != null  ) {
+	            	if ( op.getHtml_lawbox() != null ) {
+		            	loadOpinion.setHtml_lawbox(op.getHtml_lawbox());
+		            	loadOpinion.setOpinions_cited(op.getOpinions_cited());
+	    	            clOps.add(loadOpinion);
+	            	}
+    	            mapLoadOpinions.remove(id);
+	            }
+/*	            
+	            if( op.getPrecedentialStatus() == null ) {
+	            	continue;
+	            }
 	            if (op.getPrecedentialStatus().toLowerCase().equals("unpublished")) {
 	                continue;
 	            }
@@ -449,8 +502,8 @@ public class LoadHistoricalOpinions {
 	            	System.out.print('T');
 	                continue;
 	            }
+*/	            
 	
-	            clOps.add(op);
 	            if ( ++count >= number ) break;
 	        }
         }
@@ -458,12 +511,12 @@ public class LoadHistoricalOpinions {
     }
     
     class BuildMemoryDB implements Runnable {
-		List<CourtListenerOpinion> clOps;  
+		List<LoadOpinion> clOps;  
     	MemoryDBFacade persistence;
     	DateFormat clFormat;
     	
 		public BuildMemoryDB(    	
-			List<CourtListenerOpinion> clOps,  
+			List<LoadOpinion> clOps,  
 	    	MemoryDBFacade persistence
 		)  {
 			this.clOps = clOps;
@@ -473,9 +526,9 @@ public class LoadHistoricalOpinions {
     	@Override
 		public void run() {
 			try {
-		    	for ( CourtListenerOpinion op: clOps ) {
+		    	for ( LoadOpinion op: clOps ) {
 			        
-			        Document lawBox = Parser.parse(op.getHtmlLawbox(), "");
+			        Document lawBox = Parser.parse(op.getHtml_lawbox(), "");
 			        Elements ps = lawBox.getElementsByTag("p");
 			
 			        ParserDocument parserDocument = new ParserDocument();
@@ -488,14 +541,14 @@ public class LoadHistoricalOpinions {
 			            else
 			                parserDocument.paragraphs.add(text);
 			        }
-			        Date dateFiled = clFormat.parse(op.getDateFiled());
-			        String name = op.getCitation().getStateCiteOne();
-			        if ( name != null && name.contains("Rptr.") ) name = op.getCitation().getStateCiteTwo();
+			        Date dateFiled = op.getDateFiled();
+			        String name = op.getCitation();
+//			        if ( name != null && name.contains("Rptr.") ) name = op.getCitation();
 			        if ( name != null ) {
-			            name = name.toLowerCase().replace(". ", ".").replace("app.", "App.").replace("cal.", "Cal.").replace("supp.", "Supp.");
+//			            name = name.toLowerCase().replace(". ", ".").replace("app.", "App.").replace("cal.", "Cal.").replace("supp.", "Supp.");
 			            OpinionSummary opinionSummary = new OpinionSummary(
 			                    new OpinionKey(name),
-			                    op.getCitation().getCaseName(),
+			                    op.getCaseName(),
 			                    dateFiled, 
 			                    ""
 			                );

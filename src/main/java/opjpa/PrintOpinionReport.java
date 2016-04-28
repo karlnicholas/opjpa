@@ -15,7 +15,7 @@ import opca.model.OpinionSummary;
 import opca.model.SlipOpinion;
 import opca.model.StatuteCitation;
 import opca.model.StatuteKey;
-import opca.parsers.ParserResults;
+import opca.parser.ParserResults;
 import opca.service.SlipOpinionService;
 import opca.view.OpinionView;
 import opca.view.OpinionViewBuilder;
@@ -72,7 +72,7 @@ public class PrintOpinionReport {
     		OpinionBase opinionBase, 
     		OpinionView opinionCase
 	) throws Exception {
-        System.out.println("Opinion: " + opinionCase);
+        System.out.println("ApiOpinion: " + opinionCase);
         System.out.println("--------- STATUTES -----------");
         for ( StatuteView opinionCode: opinionCase.getStatutes() ) {
         	System.out.println(opinionCode.getCodeReference().getTitle(false).toUpperCase());

@@ -11,14 +11,15 @@ import java.util.*;
 import load.LoadHistoricalOpinions;
 import memorydb.MemoryDBFacade;
 import opca.model.SlipOpinion;
-import opca.parsers.*;
+import opca.parser.*;
+import opca.parser.ca.CACaseParser;
 
 public class LoadNewSlipOpinions {
 	
 //	private static Logger log = Logger.getLogger(OpJpaTest.class.getName());
 	private EntityManagerFactory emf;
 
-	public final static String caseListFile = "html/60days.html";
+//	public final static String caseListFile = "html/60days.html";
 	public final static String encoding = "UTF-8";
 	public final static String xmlcodes = "/xmlcodes"; 
 	
@@ -46,7 +47,7 @@ public class LoadNewSlipOpinions {
 		    cal.set(2014, Calendar.JULY, 7, 0, 0, 0 );
 		    cal.set(Calendar.MILLISECOND, 0);
 		    
-	//		CaseParserInterface caseParserInterface = InterfacesFactory.getCaseParserInterface(); 
+//			CaseParserInterface caseParserInterface = new CACaseParser(); // InterfacesFactory.getCaseParserInterface(); 
 			CaseParserInterface caseParserInterface = new CATestCases(); 
 	
 			Reader reader = caseParserInterface.getCaseList();

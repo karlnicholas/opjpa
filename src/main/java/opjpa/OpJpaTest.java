@@ -4,12 +4,10 @@ import javax.persistence.*;
 
 import codesparser.*;
 import gscalifornia.factory.CAStatutesFactory;
-import opca.model.OpinionSummary;
 import opca.model.SlipOpinion;
-import opca.model.StatuteCitation;
-import opca.parsers.*;
+import opca.parser.*;
+import opca.parser.ca.CACaseParser;
 import opca.service.SlipOpinionService;
-import opcalifornia.CaseInterfacesService;
 
 import java.io.*;
 import java.nio.file.DirectoryStream;
@@ -36,7 +34,7 @@ public class OpJpaTest {
 		OpJpaTest opJpa = new OpJpaTest();
 //		opJpa.runUpdateScheduler();
 		// force loading of XML files
-		CAStatutesFactory.getInstance().getCodesInterface(true);
+//		CAStatutesFactory.getInstance().getCodesInterface(true);
 		
 /*		
 		opJpa.testViewModel(
@@ -49,11 +47,11 @@ public class OpJpaTest {
 
 //		opJpa.reloadDatabase();
 
-//		opJpa.refreshDownloads();
+		opJpa.refreshDownloads();	// good for download all new slipOpinions
 
 //		opJpa.loadAndPersistCases();
 		
-		opJpa.runAllSlipOpinions();
+//		opJpa.runAllSlipOpinions();
 
 /*		
 		opJpa.testViewModel(
@@ -116,12 +114,13 @@ public class OpJpaTest {
 		}
 		List<String> fileNamesCopy = new ArrayList<String>(fileNames); 
 		
-		CaseInterfacesService casesInterface = new CaseInterfacesService();
-		casesInterface.initialize(false);
+//		CaseInterfacesService casesInterface = new CaseInterfacesService();
+//		casesInterface.initialize(false);
 
-		CaseParserInterface onlinecaseParser = casesInterface.getCaseParserInterface();
+//		CaseParserInterface onlinecaseParser = casesInterface.getCaseParserInterface();
+		CaseParserInterface onlinecaseParser = new CACaseParser(); 
 		Reader reader = onlinecaseParser.getCaseList();
-//		reader = saveCopyOfCaseList(reader);
+		reader = saveCopyOfCaseList(reader);
 		List<SlipOpinion> onlineCases = onlinecaseParser.parseCaseList(reader);
 		reader.close();
 		
@@ -168,7 +167,19 @@ public class OpJpaTest {
 		// tx.commit();
 		
 	}
-/*	
+	
+	
+	private Reader saveCopyOfCaseList(Reader reader) throws IOException {
+		BufferedWriter writer = Files.newBufferedWriter(Paths.get(caseListFile));
+		char[] chars = new char[1024];
+		int count;
+		while ( (count = reader.read(chars)) != -1 ) {
+			writer.write(chars, 0, count);
+		}
+		return Files.newBufferedReader(Paths.get(caseListFile));
+	}
+
+	/*	
 //	private String[] terms = {"section", "§" , "sections", "§§"};
 	public void playParse(CodesInterface codesInterface) throws Exception {
 		CodeCitationParser codeCitationParser = new CodeCitationParser(codesInterface.getCodeTitles());
