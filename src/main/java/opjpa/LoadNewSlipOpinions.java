@@ -9,18 +9,15 @@ import java.io.*;
 import java.util.*;
 
 import load.LoadHistoricalOpinions;
-import memorydb.MemoryDBFacade;
+import opca.memorydb.MemoryPersistance;
 import opca.model.SlipOpinion;
 import opca.parser.*;
-import opca.parser.ca.CACaseParser;
 
 public class LoadNewSlipOpinions {
 	
 //	private static Logger log = Logger.getLogger(OpJpaTest.class.getName());
 	private EntityManagerFactory emf;
 
-//	public final static String caseListFile = "html/60days.html";
-	public final static String encoding = "UTF-8";
 	public final static String xmlcodes = "/xmlcodes"; 
 	
 //    private final static int levelOfInterest = 2;
@@ -47,12 +44,10 @@ public class LoadNewSlipOpinions {
 		    cal.set(2014, Calendar.JULY, 7, 0, 0, 0 );
 		    cal.set(Calendar.MILLISECOND, 0);
 		    
-//			CaseParserInterface caseParserInterface = new CACaseParser(); // InterfacesFactory.getCaseParserInterface(); 
-			CaseParserInterface caseParserInterface = new CATestCases(); 
+//			CaseScraperInterface caseScraper = new CACaseScraper(); // InterfacesFactory.getCaseParserInterface(); 
+			CaseScraperInterface caseScraper = new TestCACaseScraper(false); 
 	
-			Reader reader = caseParserInterface.getCaseList();
-			List<SlipOpinion> opinions = caseParserInterface.parseCaseList(reader);
-			reader.close();
+			List<SlipOpinion> opinions = caseScraper.getCaseList();
 	
 			// trim list to available test cases
 			Iterator<SlipOpinion> ccit = opinions.iterator();
@@ -61,7 +56,7 @@ public class LoadNewSlipOpinions {
 				if ( DEBUGFILE != null && !DEBUGFILE.equals("ALL") ) {
 					if ( !slipOpinion.getFileName().equals(DEBUGFILE)) ccit.remove();
 				} else if (DEBUGFILE != null && DEBUGFILE.equals("ALL")) {
-					File tFile = new File(CATestCases.casesDir + slipOpinion.getFileName() + ".DOC");
+					File tFile = new File(TestCACaseScraper.casesDir + slipOpinion.getFileName() + ".DOC");
 					if ( !tFile.exists() ) ccit.remove();
 				} else {
 					Date cDate = slipOpinion.getOpinionDate();
@@ -80,15 +75,14 @@ public class LoadNewSlipOpinions {
 			
 			System.out.println("There are " + opinions.size() + " SlipOpinions to process");
 
-			MemoryDBFacade memoryDB = MemoryDBFacade.getInstance();
+			MemoryPersistance memoryDB = MemoryPersistance.getInstance();
 
-			for( SlipOpinion slipOpinion: opinions ) {
-				System.out.println("Case = " + slipOpinion.getFileName());
-				ParserDocument parserDocument = caseParserInterface.getCaseFile(slipOpinion, false);
-				ParserResults parserResults = parser.parseCase(parserDocument, slipOpinion, slipOpinion.getOpinionKey() );
-	    		parser.checkSlipOpinionDetails(slipOpinion, parserDocument);
+			List<ParserDocument> parserDocuments = caseScraper.getCaseFiles(opinions);
+			for( ParserDocument parserDocument: parserDocuments ) {
+				ParserResults parserResults = parser.parseCase(parserDocument, parserDocument.opinionBase, parserDocument.opinionBase.getOpinionKey() );
+	    		parser.checkSlipOpinionDetails((SlipOpinion) parserDocument.opinionBase, parserDocument);
 
-	        	parserResults.persist(slipOpinion, memoryDB);
+	        	parserResults.persist(parserDocument.opinionBase, memoryDB);
 			}
 			
 			LoadHistoricalOpinions loadOpinions = new LoadHistoricalOpinions(emf, codesInterface);

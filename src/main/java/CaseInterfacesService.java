@@ -7,7 +7,7 @@ import java.util.ResourceBundle;
 import javax.xml.bind.JAXBException;
 
 import codesparser.*;
-import opca.parser.CaseParserInterface;
+import opca.parser.CaseScraperInterface;
 
 public class CaseInterfacesService {
 
@@ -16,7 +16,7 @@ public class CaseInterfacesService {
 	private static final String caseparserinterfaceKey = "opinions.caseparserinterface";	
 
 	private CodesInterface codesInterface = null;
-	private CaseParserInterface caseParserInterface = null;
+	private CaseScraperInterface caseScraper = null;
 	
 	public CaseInterfacesService initialize(boolean loadXMLCodes) throws InstantiationException, IllegalAccessException, ClassNotFoundException, IOException, JAXBException, URISyntaxException {
 		ResourceBundle rb = ResourceBundle.getBundle(interfaces);
@@ -24,7 +24,7 @@ public class CaseInterfacesService {
 		codesInterface = (CodesInterface) Class.forName(iface).newInstance();
 		if ( loadXMLCodes ) codesInterface.loadStatutes();
 		iface = rb.getString(caseparserinterfaceKey);
-		caseParserInterface = (CaseParserInterface) Class.forName(iface).newInstance();
+		caseScraper = (CaseScraperInterface) Class.forName(iface).newInstance();
 		return this;
 	}
 	
@@ -36,8 +36,8 @@ public class CaseInterfacesService {
 		return codesInterface.getCodeTitles();
 	}
 
-	public CaseParserInterface getCaseParserInterface() {
-		return caseParserInterface;
+	public CaseScraperInterface getCaseParserInterface() {
+		return caseScraper;
 	}
     
 }

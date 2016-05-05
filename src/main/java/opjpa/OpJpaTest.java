@@ -6,7 +6,7 @@ import codesparser.*;
 import gscalifornia.factory.CAStatutesFactory;
 import opca.model.SlipOpinion;
 import opca.parser.*;
-import opca.parser.ca.CACaseParser;
+import opca.scraper.CACaseScraper;
 import opca.service.SlipOpinionService;
 
 import java.io.*;
@@ -22,7 +22,6 @@ public class OpJpaTest {
 	private EntityManagerFactory emf;
 	private EntityManager em;
 
-	public final static String caseListFile = "html/60days.html";
 	public final static String encoding = "UTF-8";
 	public final static String xmlcodes = "/xmlcodes"; 
 	
@@ -72,11 +71,9 @@ public class OpJpaTest {
 	
 	public void reloadDatabase() throws Exception {
 
-		CaseParserInterface caseParserInterface = new CATestCases(); 
+		CaseScraperInterface caseParser = new TestCACaseScraper(false); 
 
-		Reader reader = caseParserInterface.getCaseList();
-		List<SlipOpinion> opinions = caseParserInterface.parseCaseList(reader);
-		reader.close();
+		List<SlipOpinion> opinions = caseParser.getCaseList();
 
 		System.out.println("Cases = " + opinions.size() );
 		// Create the CACodes list
@@ -88,16 +85,16 @@ public class OpJpaTest {
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 		
-		for( SlipOpinion slipOpinion: opinions ) {
-			ParserDocument parserDocument = caseParserInterface.getCaseFile(slipOpinion, false);
-			parser.parseCase(parserDocument, slipOpinion, slipOpinion.getOpinionKey() );
+		List<ParserDocument> parserDocuments = caseParser.getCaseFiles(opinions);
+		for( ParserDocument parserDocument: parserDocuments ) {
+			parser.parseCase(parserDocument, parserDocument.opinionBase, parserDocument.opinionBase.getOpinionKey() );
         	// look for details
         	// after a summaryParagraph is found, don't check any further .. (might have to change)
 			
 			// look for summary and disposition 
-    		parser.checkSlipOpinionDetails(slipOpinion, parserDocument);
+    		parser.checkSlipOpinionDetails((SlipOpinion) parserDocument.opinionBase, parserDocument);
 
-			em.persist(slipOpinion);
+			em.persist((SlipOpinion) parserDocument.opinionBase);
 		}
 		
 		tx.commit();
@@ -106,7 +103,7 @@ public class OpJpaTest {
 	
 	public void refreshDownloads() throws Exception {
 
-		DirectoryStream<Path> files = Files.newDirectoryStream( Paths.get(CATestCases.casesDir) );
+		DirectoryStream<Path> files = Files.newDirectoryStream( Paths.get(TestCACaseScraper.casesDir) );
 		List<String> fileNames = new ArrayList<String>();
 		Iterator<Path> fit = files.iterator();
 		while (fit.hasNext() ) {
@@ -114,15 +111,8 @@ public class OpJpaTest {
 		}
 		List<String> fileNamesCopy = new ArrayList<String>(fileNames); 
 		
-//		CaseInterfacesService casesInterface = new CaseInterfacesService();
-//		casesInterface.initialize(false);
-
-//		CaseParserInterface onlinecaseParser = casesInterface.getCaseParserInterface();
-		CaseParserInterface onlinecaseParser = new CACaseParser(); 
-		Reader reader = onlinecaseParser.getCaseList();
-		reader = saveCopyOfCaseList(reader);
-		List<SlipOpinion> onlineCases = onlinecaseParser.parseCaseList(reader);
-		reader.close();
+		CaseScraperInterface caseScaper = new CACaseScraper(true); 
+		List<SlipOpinion> onlineCases = caseScaper.getCaseList();
 		
 		SlipOpinionService slipOpinionService = new SlipOpinionService();
 		slipOpinionService.setEntityManager(em);
@@ -137,7 +127,7 @@ public class OpJpaTest {
 			em.remove(slipOpinion);
 		}
 		for ( String caseName: fileNames ) {
-			Path path = Paths.get(CATestCases.casesDir, caseName);
+			Path path = Paths.get(TestCACaseScraper.casesDir, caseName);
 			if ( Files.exists(path) ) Files.delete(path);
 		}
 		// download and save remaining cases
@@ -157,28 +147,18 @@ public class OpJpaTest {
 		// EntityTransaction tx = em.getTransaction();
 		// tx.begin();
 		
-		for( SlipOpinion slipOpinion: onlineCases ) {
-			ParserDocument parserDoc = onlinecaseParser.getCaseFile(slipOpinion, true);
-			ParserResults parserResults = parser.parseCase(parserDoc, slipOpinion, slipOpinion.getOpinionKey() );
-        	parserResults.persist(slipOpinion, slipOpinionService.getPersistenceInterface());
+		List<ParserDocument> parserDocs = caseScaper.getCaseFiles(onlineCases);
+		for( ParserDocument parserDoc: parserDocs ) {
+			ParserResults parserResults = parser.parseCase(parserDoc, parserDoc.opinionBase, parserDoc.opinionBase.getOpinionKey() );
+        	parserResults.persist(parserDoc.opinionBase, slipOpinionService.getPersistenceInterface());
 //			em.persist(slipOpinion);
-			System.out.println("Downloaded " + slipOpinion.getFileName() + ".DOC");
+			System.out.println("Downloaded " + ((SlipOpinion)parserDoc.opinionBase).getFileName() + ".DOC");
 		}
 		// tx.commit();
 		
 	}
 	
 	
-	private Reader saveCopyOfCaseList(Reader reader) throws IOException {
-		BufferedWriter writer = Files.newBufferedWriter(Paths.get(caseListFile));
-		char[] chars = new char[1024];
-		int count;
-		while ( (count = reader.read(chars)) != -1 ) {
-			writer.write(chars, 0, count);
-		}
-		return Files.newBufferedReader(Paths.get(caseListFile));
-	}
-
 	/*	
 //	private String[] terms = {"section", "§" , "sections", "§§"};
 	public void playParse(CodesInterface codesInterface) throws Exception {
@@ -245,21 +225,18 @@ public class OpJpaTest {
 		    cal.set(2014, Calendar.JULY, 7, 0, 0, 0 );
 		    cal.set(Calendar.MILLISECOND, 0);
 		    
-	//		CaseParserInterface caseParserInterface = InterfacesFactory.getCaseParserInterface(); 
-			CaseParserInterface caseParserInterface = new CATestCases(); 
-	
-			Reader reader = caseParserInterface.getCaseList();
-			List<SlipOpinion> opinions = caseParserInterface.parseCaseList(reader);
-			reader.close();
+	//		CaseScraperInterface caseScraper = InterfacesFactory.getCaseParserInterface(); 
+			CaseScraperInterface caseParser = new TestCACaseScraper(false); 
+			List<SlipOpinion> onlineCases = caseParser.getCaseList();
 	
 			// trim list to available test cases
-			Iterator<SlipOpinion> ccit = opinions.iterator();
+			Iterator<SlipOpinion> ccit = onlineCases.iterator();
 			while ( ccit.hasNext() ) {
 				SlipOpinion slipOpinion = ccit.next();
 				if ( DEBUGFILE != null && !DEBUGFILE.equals("ALL") ) {
 					if ( !slipOpinion.getFileName().equals(DEBUGFILE)) ccit.remove();
 				} else if (DEBUGFILE != null && DEBUGFILE.equals("ALL")) {
-					File tFile = new File(CATestCases.casesDir + slipOpinion.getFileName() + ".DOC");
+					File tFile = new File(TestCACaseScraper.casesDir + slipOpinion.getFileName() + ".DOC");
 					if ( !tFile.exists() ) ccit.remove();
 				} else {
 					Date cDate = slipOpinion.getOpinionDate();
@@ -268,7 +245,7 @@ public class OpJpaTest {
 					}
 				}
 			}
-			System.out.println("Cases = " + opinions.size() );
+			System.out.println("Cases = " + onlineCases.size() );
 			// Create the CACodes list
 		    CodesInterface codesInterface = CAStatutesFactory.getInstance().getCodesInterface(true);
 			
@@ -283,12 +260,13 @@ public class OpJpaTest {
 	//		SlipOpinionDao slipOpinionDao = new SlipOpinionDao(em);
 			EntityTransaction tx = em.getTransaction();
 			tx.begin();
-			for( SlipOpinion slipOpinion: opinions ) {
-				System.out.println("Case = " + slipOpinion.getFileName());
+			
+			List<ParserDocument> parserDocuments = caseParser.getCaseFiles(onlineCases);
+			for( ParserDocument parserDocument: parserDocuments ) {
 //				if ( slipOpinion.getFileName().contains("143650") ) {
-					ParserResults parserResults = parser.parseCase(caseParserInterface.getCaseFile(slipOpinion, false), slipOpinion, slipOpinion.getOpinionKey() );
-		        	parserResults.persist(slipOpinion, slipOpinionService.getPersistenceInterface());
-		        	em.persist(slipOpinion);
+					ParserResults parserResults = parser.parseCase(parserDocument, parserDocument.opinionBase, parserDocument.opinionBase.getOpinionKey() );
+		        	parserResults.persist(parserDocument.opinionBase, slipOpinionService.getPersistenceInterface());
+		        	em.persist((SlipOpinion)parserDocument.opinionBase);
 //				}
 	/*        	
 	        	SlipOpinion existingOpinion = slipOpinionDao.find(slipOpinion.getOpinionSummaryKey());
@@ -316,21 +294,18 @@ public class OpJpaTest {
 		    cal.set(2014, Calendar.JULY, 7, 0, 0, 0 );
 		    cal.set(Calendar.MILLISECOND, 0);
 		    
-	//		CaseParserInterface caseParserInterface = InterfacesFactory.getCaseParserInterface(); 
-			CaseParserInterface caseParserInterface = new CATestCases(); 
-
-			Reader reader = caseParserInterface.getCaseList();
-			List<SlipOpinion> opinions = caseParserInterface.parseCaseList(reader);
-			reader.close();
+	//		CaseScraperInterface caseScraper = InterfacesFactory.getCaseParserInterface(); 
+			CaseScraperInterface caseParser = new TestCACaseScraper(false); 
+			List<SlipOpinion> onlineCases = caseParser.getCaseList();
 
 			// trim list to available test cases
-			Iterator<SlipOpinion> ccit = opinions.iterator();
+			Iterator<SlipOpinion> ccit = onlineCases.iterator();
 			while ( ccit.hasNext() ) {
 				SlipOpinion slipOpinion = ccit.next();
 				if ( DEBUGFILE != null && !DEBUGFILE.equals("ALL") ) {
 					if ( !slipOpinion.getFileName().equals(DEBUGFILE)) ccit.remove();
 				} else if (DEBUGFILE != null && DEBUGFILE.equals("ALL")) {
-					File tFile = new File(CATestCases.casesDir + slipOpinion.getFileName() + ".DOC");
+					File tFile = new File(TestCACaseScraper.casesDir + slipOpinion.getFileName() + ".DOC");
 					if ( !tFile.exists() ) ccit.remove();
 				} else {
 					Date cDate = slipOpinion.getOpinionDate();
@@ -340,7 +315,7 @@ public class OpJpaTest {
 				}
 			}
 
-			System.out.println("Cases = " + opinions.size() );
+			System.out.println("Cases = " + onlineCases.size() );
 			Date startTime = new Date();
 			
 			// Create the CACodes list
@@ -352,7 +327,7 @@ public class OpJpaTest {
 			
 			PrintOpinionReport opinionReport = new PrintOpinionReport();
 			
-			for( SlipOpinion slipOpinion: opinions ) {
+			for( SlipOpinion slipOpinion: onlineCases ) {
 				if ( slipOpinion.getFileName().equals("C071776") ) continue;
 				if ( slipOpinion.getFileName().equals("B264460") ) continue;
 				if ( slipOpinion.getFileName().equals("D066715") ) continue;
@@ -364,11 +339,11 @@ public class OpJpaTest {
 //				System.out.println("Case = " + slipOpinion.getFileName());
 				opinionReport.printSlipOpinionReport(codesInterface, em, slipOpinion.getOpinionKey());
 //				if ( slipOpinion.getFileName().contains("143650") ) {
-//					ParserResults parserResults = parser.parseCase(caseParserInterface.getCaseFile(slipOpinion, false), slipOpinion, slipOpinion.getOpinionKey() );
+//					ParserResults parserResults = parser.parseCase(caseScraper.getCaseFile(slipOpinion, false), slipOpinion, slipOpinion.getOpinionKey() );
 //				}
 			}
 			// persist
-			System.out.println("Processed " + opinions.size() + " cases in " + (new Date().getTime() - startTime.getTime())/1000 + " seconds.");
+			System.out.println("Processed " + onlineCases.size() + " cases in " + (new Date().getTime() - startTime.getTime())/1000 + " seconds.");
 		} finally {
 			em.close();
 			emf.close();

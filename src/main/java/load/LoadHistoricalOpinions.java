@@ -34,7 +34,7 @@ import apimodel.ApiOpinion;
 import apimodel.Cluster;
 import codesparser.CodesInterface;
 import loadmodel.LoadOpinion;
-import memorydb.MemoryDBFacade;
+import opca.memorydb.MemoryPersistance;
 import opca.model.OpinionKey;
 import opca.model.OpinionSummary;
 import opca.model.StatuteCitation;
@@ -58,7 +58,7 @@ public class LoadHistoricalOpinions {
 	
     public void initializeDB() throws Exception {
     	Date startTime = new Date();
-    	MemoryDBFacade memoryDB = MemoryDBFacade.getInstance();
+    	MemoryPersistance memoryDB = MemoryPersistance.getInstance();
     	//
     	readStream(memoryDB, "c:/users/karl/downloads/calctapp-opinions.tar.gz", "c:/users/karl/downloads/calctapp-clusters.tar.gz");
     	readStream(memoryDB, "c:/users/karl/downloads/cal-opinions.tar.gz", "c:/users/karl/downloads/cal-clusters.tar.gz");
@@ -69,7 +69,7 @@ public class LoadHistoricalOpinions {
     }
 
     private void readStream(
-		MemoryDBFacade memoryDB, 
+		MemoryPersistance memoryDB, 
 		String opinionsFileName, 
 		String clustersFileName
     ) throws Exception {
@@ -131,7 +131,7 @@ public class LoadHistoricalOpinions {
     }
     
     public void processesOpinions(
-		MemoryDBFacade memoryDB 
+		MemoryPersistance memoryDB 
     ) throws Exception {
 		int processors = Runtime.getRuntime().availableProcessors();
 		int number = 1000;
@@ -216,7 +216,7 @@ public class LoadHistoricalOpinions {
     }
 
     public void processesStatutes(
-		MemoryDBFacade memoryDB 
+		MemoryPersistance memoryDB 
     ) throws Exception {
 		int processors = Runtime.getRuntime().availableProcessors();
 		int number = 1000;
@@ -512,12 +512,12 @@ public class LoadHistoricalOpinions {
     
     class BuildMemoryDB implements Runnable {
 		List<LoadOpinion> clOps;  
-    	MemoryDBFacade persistence;
+    	MemoryPersistance persistence;
     	DateFormat clFormat;
     	
 		public BuildMemoryDB(    	
 			List<LoadOpinion> clOps,  
-	    	MemoryDBFacade persistence
+	    	MemoryPersistance persistence
 		)  {
 			this.clOps = clOps;
 			this.persistence = persistence;
@@ -530,16 +530,17 @@ public class LoadHistoricalOpinions {
 			        
 			        Document lawBox = Parser.parse(op.getHtml_lawbox(), "");
 			        Elements ps = lawBox.getElementsByTag("p");
+			    	List<String> paragraphs = new ArrayList<String>(); 
+			    	List<String> footnotes = new ArrayList<String>();
 			
-			        ParserDocument parserDocument = new ParserDocument();
 			        for (Element p : ps) {
 			            String text = p.text();
 			            if (text.length() == 0)
 			                continue;
 			            if (text.charAt(0) == '[' || text.charAt(0) == '(')
-			                parserDocument.footnotes.add(text);
+			                footnotes.add(text);
 			            else
-			                parserDocument.paragraphs.add(text);
+			                paragraphs.add(text);
 			        }
 			        Date dateFiled = op.getDateFiled();
 			        String name = op.getCitation();
@@ -552,6 +553,9 @@ public class LoadHistoricalOpinions {
 			                    dateFiled, 
 			                    ""
 			                );
+				        ParserDocument parserDocument = new ParserDocument(opinionSummary);
+				        parserDocument.footnotes = footnotes; 
+				        parserDocument.paragraphs = paragraphs; 
 			        	ParserResults parserResults = parser.parseCase(parserDocument, opinionSummary, opinionSummary.getOpinionKey());
 			        	synchronized(persistence) {
 			            	parserResults.persist(opinionSummary, persistence);

@@ -1,38 +1,30 @@
 
 
-import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.logging.Logger;
 
-import javax.inject.Inject;
-import javax.persistence.*;
-
 import opca.model.SlipOpinion;
-import opca.parser.*;
+import opca.parser.CaseScraperInterface;
 
 public class OnlineFacade {
 	private static final Logger log = Logger.getLogger(OnlineFacade.class.getName());
-	@Inject
 	private OpinionQueries opinionQueries;
 	
-//	private EntityManager em;
-	private CaseParserInterface caseParserInterface;
-//	private CodesInterface codesInterface;
+	private CaseScraperInterface caseParser;
 	
 	public OnlineFacade(
-			EntityManager em, 
-			CaseParserInterface caseParserInterface //, 
-//			CodesInterface codesInterface
+			CaseScraperInterface caseParser//, 
 	) {
-//		this.em = em;
-		this.caseParserInterface = caseParserInterface;
-//		this.codesInterface = codesInterface;
+		this.caseParser = caseParser;
 	}
 	
 	public synchronized void updateDatabase() {
 //		OpinionQueries dbFacade = new OpinionQueries(em);
 		
-		List<SlipOpinion> onlineCases = listOnlineCases();
+		List<SlipOpinion> onlineCases = caseParser.getCaseList();
+
 		if ( onlineCases == null || onlineCases.size() == 0 ) {
 			log.info("No cases found online: returning.");
 			return;
@@ -78,7 +70,7 @@ public class OnlineFacade {
 					if ( --count <= 0 ) break;
 				}
 				try{
-					downloadCases(tenCases);
+//TODO:Was this way					downloadCases(tenCases);
 					log.info("Persisting " + tenCases.size() + " cases." );
 					opinionQueries.mergeAndPersistSlipOpinions(tenCases);
 				} catch ( Throwable t ) {
@@ -91,30 +83,10 @@ public class OnlineFacade {
 		}
 	}
 	
-	private List<SlipOpinion> listOnlineCases() {
-		Reader reader = null;
-		try {
-	    	reader = caseParserInterface.getCaseList();
-	    	List<SlipOpinion> courtCases = caseParserInterface.parseCaseList(reader);
-	    	reader.close();
-	    	return courtCases;
-		} catch ( Exception e) {
-			throw new RuntimeException(e);
-		} finally {
-			if ( reader != null ) {
-				try {
-					reader.close();
-				} catch (IOException e) {
-					throw new RuntimeException(e);
-				}
-			}
-		}
-	}
 	
 	/**
 	 * Not thread safe, so synchronized. I don't think anyone would 
 	 * be calling it expect internally, but making the point anyway.
-	 */
 	private void downloadCases(List<SlipOpinion> cases) {
 		try {
 	    	// Create the CACodes list
@@ -124,11 +96,12 @@ public class OnlineFacade {
 			for( SlipOpinion slipOpinion: cases ) {
 				log.info("Downloading Case: " + slipOpinion.getFileName());
 //				parser.parseCase(caseParserInterface.getCaseFile(courtCase, false), courtCase);
-				caseParserInterface.getCaseFile(slipOpinion, false);
+				caseParser.getCaseFile(slipOpinion);
 			}
 		} catch (Exception e) {
 			throw new RuntimeException( e );
 		} 
 	}
+	 */
 
 }
