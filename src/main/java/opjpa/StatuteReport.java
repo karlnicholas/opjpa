@@ -113,17 +113,22 @@ public class StatuteReport {
         Collections.sort(referringOpinions, new Comparator<OpinionSummary>() {
             @Override
             public int compare(OpinionSummary o1, OpinionSummary o2) {
+            	long v1 = (o1.getCountReferringOpinions() * o1.getCountReferringOpinions()) * statuteCitation.getRefCount(o1.getOpinionKey());
+            	long v2 = (o2.getCountReferringOpinions() * o1.getCountReferringOpinions()) * statuteCitation.getRefCount(o2.getOpinionKey());
+            	return (int)(v1 - v2);
+/*            	
                 if ( o1.getCountReferringOpinions() == o2.getCountReferringOpinions() ) {
                     int o1TimesCaseReferredTo = statuteCitation.getRefCount(o1.getOpinionKey());
                     int o2TimesCaseReferredTo = statuteCitation.getRefCount(o2.getOpinionKey());
                     return o1TimesCaseReferredTo - o2TimesCaseReferredTo; 
                 }
                 return o1.getCountReferringOpinions() - o2.getCountReferringOpinions();
+*/                
             }
         });
         for (OpinionSummary opinionSummary: referringOpinions ) {
             int timesCaseReferredTo = statuteCitation.getRefCount(opinionSummary.getOpinionKey());
-            System.out.println( indent + opinionSummary.getOpinionKey().toString()+":"+timesCaseReferredTo+":"+opinionSummary.getCountReferringOpinions());
+            System.out.println( indent + opinionSummary.getOpinionKey().toString()+":"+timesCaseReferredTo+":"+opinionSummary.getCountReferringOpinions()+":"+timesCaseReferredTo*opinionSummary.getCountReferringOpinions());
             printed++;
         }
         System.out.println("Printed refereeCount = " + printed);

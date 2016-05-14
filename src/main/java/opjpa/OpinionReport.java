@@ -35,12 +35,12 @@ public class OpinionReport {
 	//        OpinionQueries.getInstance().writeToXML();
 	//        OpinionQueries.getInstance().initFromXML();
 	        
-//	        OpinionSummary opinion = databaseFacade.findOpinion(new OpinionKey("5 Cal.4th 295"));
+//	        OpinionSummary opinion = databaseFacade.findOpinion(new OpinionKey("211 Cal.App.4th 13"));
 //        	printOpinionSummaryReport(codesInterface, parserResults, opinion );
 	        
-	        PrintOpinionReport opinionReport = new PrintOpinionReport();
+//	        PrintOpinionReport opinionReport = new PrintOpinionReport();
 	        
-	        opinionReport.printSlipOpinionReport(codesInterface, em, new OpinionKey("1 Slip.Op 10287300"));
+//	        opinionReport.printSlipOpinionReport(codesInterface, em, new OpinionKey("1 Slip.Op 10287300"));
 	        
 	//        for ( OpinionSummary op: persistenceFacade.getAllOpinions() ) {
 	//            if (op.getStatutesReferredTo().size() > 10 ) System.out.println(op.getName() +":" + op.getStatutesReferredTo().size());
