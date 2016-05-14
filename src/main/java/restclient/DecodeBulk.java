@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.regex.Pattern;
 
 import org.apache.commons.compress.archivers.tar.TarArchiveEntry;
 import org.apache.commons.compress.archivers.tar.TarArchiveInputStream;
@@ -16,11 +15,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import apimodel.Cluster;
-import apimodel.ApiOpinion;
 import loadmodel.LoadOpinion;
 
 public class DecodeBulk {
-	private static final Pattern pattern = Pattern.compile("/");
 	public static void main(String... strings) throws Exception {
 		new DecodeBulk().run();
 	}

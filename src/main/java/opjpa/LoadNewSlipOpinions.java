@@ -9,7 +9,7 @@ import java.io.*;
 import java.util.*;
 
 import load.LoadHistoricalOpinions;
-import opca.memorydb.MemoryPersistance;
+import opca.memorydb.CitationStore;
 import opca.model.SlipOpinion;
 import opca.parser.*;
 
@@ -44,8 +44,8 @@ public class LoadNewSlipOpinions {
 		    cal.set(2014, Calendar.JULY, 7, 0, 0, 0 );
 		    cal.set(Calendar.MILLISECOND, 0);
 		    
-//			CaseScraperInterface caseScraper = new CACaseScraper(); // InterfacesFactory.getCaseParserInterface(); 
-			CaseScraperInterface caseScraper = new TestCACaseScraper(false); 
+//			OpinionScraperInterface caseScraper = new CACaseScraper(); // InterfacesFactory.getCaseParserInterface(); 
+			OpinionScraperInterface caseScraper = new TestCACaseScraper(false); 
 	
 			List<SlipOpinion> opinions = caseScraper.getCaseList();
 	
@@ -71,23 +71,23 @@ public class LoadNewSlipOpinions {
 			
 	//	    QueueUtility queue = new QueueUtility(compressSections);  // true is compress references within individual titles
 			CodeTitles[] codeTitles = codesInterface.getCodeTitles();
-			CodeCitationParser parser = new CodeCitationParser(codeTitles);
+			OpinionDocumentParser parser = new OpinionDocumentParser(codeTitles);
 			
 			System.out.println("There are " + opinions.size() + " SlipOpinions to process");
 
-			MemoryPersistance memoryDB = MemoryPersistance.getInstance();
+			CitationStore citationStore = CitationStore.getInstance();
 
-			List<ParserDocument> parserDocuments = caseScraper.getCaseFiles(opinions);
-			for( ParserDocument parserDocument: parserDocuments ) {
-				ParserResults parserResults = parser.parseCase(parserDocument, parserDocument.opinionBase, parserDocument.opinionBase.getOpinionKey() );
-	    		parser.checkSlipOpinionDetails((SlipOpinion) parserDocument.opinionBase, parserDocument);
+			List<ScrapedOpinionDocument> parserDocuments = caseScraper.scrapeOpinionFiles(opinions);
+			for( ScrapedOpinionDocument parserDocument: parserDocuments ) {
+				ParsedOpinionResults parserResults = parser.parseOpinionDocument(parserDocument, parserDocument.opinionBase, parserDocument.opinionBase.getOpinionKey() );
+	    		parser.parseSlipOpinionDetails((SlipOpinion) parserDocument.opinionBase, parserDocument);
 
-	        	parserResults.persist(parserDocument.opinionBase, memoryDB);
+	    		citationStore.mergeParsedDocumentCitations(parserDocument.opinionBase, parserResults);
 			}
 			
 			LoadHistoricalOpinions loadOpinions = new LoadHistoricalOpinions(emf, codesInterface);
-			loadOpinions.processesOpinions(memoryDB);
-			loadOpinions.processesStatutes(memoryDB);
+			loadOpinions.processesOpinions(citationStore);
+			loadOpinions.processesStatutes(citationStore);
 
 			EntityManager em = emf.createEntityManager();
 			EntityTransaction tx = em.getTransaction();

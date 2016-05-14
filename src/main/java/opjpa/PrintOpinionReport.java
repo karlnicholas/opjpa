@@ -15,7 +15,7 @@ import opca.model.OpinionSummary;
 import opca.model.SlipOpinion;
 import opca.model.StatuteCitation;
 import opca.model.StatuteKey;
-import opca.parser.ParserResults;
+import opca.parser.ParsedOpinionResults;
 import opca.service.SlipOpinionService;
 import opca.view.OpinionView;
 import opca.view.OpinionViewBuilder;
@@ -36,7 +36,7 @@ public class PrintOpinionReport {
 		slipOpinionService.setEntityManager(em);
 		SlipOpinion slipOpinion = slipOpinionService.slipOpinionExists(opinionKey);
 		if ( slipOpinion != null ) {
-	    	ParserResults parserResults = new ParserResults(slipOpinion, slipOpinionService.getPersistenceLookup());
+	    	ParsedOpinionResults parserResults = new ParsedOpinionResults(slipOpinion, slipOpinionService.getPersistenceLookup());
 
 	    	OpinionViewBuilder opinionCaseBuilder = new OpinionViewBuilder(codesInterface);
 	        //
@@ -52,7 +52,7 @@ public class PrintOpinionReport {
 /*		
         OpinionSummary opinionSummary = slipOpinionService.opinionExists(opinionKey);
 		if ( opinionSummary != null ) {
-	    	ParserResults parserResults = new ParserResults(opinionSummary, slipOpinionService.getPersistenceLookup());
+	    	ParsedOpinionResults parserResults = new ParsedOpinionResults(opinionSummary, slipOpinionService.getPersistenceLookup());
 	        OpinionViewBuilder opinionCaseBuilder = new OpinionViewBuilder(codesInterface);
 	        //
 	        OpinionView opinionCase = opinionCaseBuilder.buildOpinionSummaryView(opinionSummary, parserResults, true);
@@ -68,7 +68,7 @@ public class PrintOpinionReport {
     
 
     private void printBaseOpinionReport(
-    		ParserResults parserResults, 
+    		ParsedOpinionResults parserResults, 
     		OpinionBase opinionBase, 
     		OpinionView opinionCase
 	) throws Exception {

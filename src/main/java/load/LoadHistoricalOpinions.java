@@ -14,6 +14,7 @@ import java.util.TreeMap;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 import javax.persistence.EntityManager;
@@ -34,42 +35,43 @@ import apimodel.ApiOpinion;
 import apimodel.Cluster;
 import codesparser.CodesInterface;
 import loadmodel.LoadOpinion;
-import opca.memorydb.MemoryPersistance;
+import opca.memorydb.CitationStore;
 import opca.model.OpinionKey;
 import opca.model.OpinionSummary;
 import opca.model.StatuteCitation;
-import opca.parser.CodeCitationParser;
-import opca.parser.ParserDocument;
-import opca.parser.ParserResults;
+import opca.parser.OpinionDocumentParser;
+import opca.parser.ScrapedOpinionDocument;
+import opca.parser.ParsedOpinionResults;
 import opca.service.SlipOpinionService;
 
 public class LoadHistoricalOpinions {
+	private static Logger logger = Logger.getLogger(LoadHistoricalOpinions.class.getName());
 	private static final Pattern pattern = Pattern.compile("/");
 	EntityManagerFactory emf;
-	CodeCitationParser parser;
+	OpinionDocumentParser parser;
 	
 	public LoadHistoricalOpinions(
 		EntityManagerFactory emf, 
 		CodesInterface codesInterface 
 	) {
 		this.emf = emf;
-		parser = new CodeCitationParser(codesInterface.getCodeTitles());
+		parser = new OpinionDocumentParser(codesInterface.getCodeTitles());
 	}
 	
     public void initializeDB() throws Exception {
     	Date startTime = new Date();
-    	MemoryPersistance memoryDB = MemoryPersistance.getInstance();
+    	CitationStore citationStore = CitationStore.getInstance();
     	//
-    	readStream(memoryDB, "c:/users/karl/downloads/calctapp-opinions.tar.gz", "c:/users/karl/downloads/calctapp-clusters.tar.gz");
-    	readStream(memoryDB, "c:/users/karl/downloads/cal-opinions.tar.gz", "c:/users/karl/downloads/cal-clusters.tar.gz");
-    	processesOpinions(memoryDB); 
-    	processesStatutes(memoryDB); 
-		System.out.println("count " + memoryDB.getAllOpinions().size() + " : " + (new Date().getTime()-startTime.getTime())/1000);
-//    	persistMemory(memoryDB);
+    	readStream(citationStore, "c:/users/karl/downloads/calctapp-opinions.tar.gz", "c:/users/karl/downloads/calctapp-clusters.tar.gz");
+    	readStream(citationStore, "c:/users/karl/downloads/cal-opinions.tar.gz", "c:/users/karl/downloads/cal-clusters.tar.gz");
+    	processesOpinions(citationStore); 
+    	processesStatutes(citationStore); 
+		System.out.println("count " + citationStore.getAllOpinions().size() + " : " + (new Date().getTime()-startTime.getTime())/1000);
+//    	persistMemory(citationStore);
     }
 
     private void readStream(
-		MemoryPersistance memoryDB, 
+		CitationStore citationStore, 
 		String opinionsFileName, 
 		String clustersFileName
     ) throws Exception {
@@ -119,7 +121,7 @@ public class LoadHistoricalOpinions {
         			  break;
         		  }
         		  total = total + clOps.size();
-        		  tasks.add(Executors.callable(new BuildMemoryDB(clOps, memoryDB)));
+        		  tasks.add(Executors.callable(new BuildMemoryDB(clOps, citationStore)));
         	  }
 			  es.invokeAll(tasks);
 			  System.out.println("computed "+processors+"x"+number+" : Total = " + total);
@@ -131,7 +133,7 @@ public class LoadHistoricalOpinions {
     }
     
     public void processesOpinions(
-		MemoryPersistance memoryDB 
+		CitationStore citationStore 
     ) throws Exception {
 		int processors = Runtime.getRuntime().availableProcessors();
 		int number = 1000;
@@ -139,8 +141,8 @@ public class LoadHistoricalOpinions {
 		ExecutorService es = Executors.newFixedThreadPool(processors);
 		try {
 			List<Callable<Object>> tasks = new ArrayList<Callable<Object>>();
-			OpinionSummary[] opArray = new OpinionSummary[memoryDB.getAllOpinions().size()];    	
-			memoryDB.getAllOpinions().toArray(opArray);
+			OpinionSummary[] opArray = new OpinionSummary[citationStore.getAllOpinions().size()];    	
+			citationStore.getAllOpinions().toArray(opArray);
 			List<OpinionSummary> opinions = Arrays.asList(opArray);
 			List<OpinionSummary> persistOpinions = Collections.synchronizedList(new ArrayList<OpinionSummary>());
 			List<OpinionSummary> mergeOpinions = Collections.synchronizedList(new ArrayList<OpinionSummary>());
@@ -216,7 +218,7 @@ public class LoadHistoricalOpinions {
     }
 
     public void processesStatutes(
-		MemoryPersistance memoryDB 
+		CitationStore citationStore 
     ) throws Exception {
 		int processors = Runtime.getRuntime().availableProcessors();
 		int number = 1000;
@@ -224,8 +226,8 @@ public class LoadHistoricalOpinions {
 		ExecutorService es = Executors.newFixedThreadPool(processors);
 		try {
 			List<Callable<Object>> tasks = new ArrayList<Callable<Object>>();
-			StatuteCitation[] stArray = new StatuteCitation[memoryDB.getAllStatutes().size()];    	
-			memoryDB.getAllStatutes().toArray(stArray);
+			StatuteCitation[] stArray = new StatuteCitation[citationStore.getAllStatutes().size()];    	
+			citationStore.getAllStatutes().toArray(stArray);
 			List<StatuteCitation> statutes = Arrays.asList(stArray);
 			List<StatuteCitation> persistStatutes = Collections.synchronizedList(new ArrayList<StatuteCitation>());
 			List<StatuteCitation> mergeStatutes = Collections.synchronizedList(new ArrayList<StatuteCitation>());
@@ -323,14 +325,21 @@ public class LoadHistoricalOpinions {
 	    	for(OpinionSummary opinion: opinions ) {
 // This causes a NPE !?!?	    		
 //	    		opinion.checkCountReferringOpinions();
+	    		// this checks the database .. so, it won't be true unless this is a published modification 
 	    		OpinionSummary existingOpinion = slipOpinionService.opinionExists(opinion.getOpinionKey());
 				if ( existingOpinion == null ) {
 					persistOpinions.add(opinion);
 				} else {
-					existingOpinion.addModifications(opinion, slipOpinionService.getPersistenceLookup());
+					// first time through, this never happens ... all duplicates have been merged
+//					existingOpinion.mergeCourtModifications(opinion, slipOpinionService.getPersistenceLookup());
 					//opinion referred to itself?
+					// Was there a problem with an opinion referring to itself?
+					// what about the entire collection of referred from?
+					// in other words, it's a modification already in memory DB
+					// and now its another modification during save?
 //                    existingOpinion.addOpinionSummaryReferredFrom(opinion.getOpinionKey());
 					mergeOpinions.add(existingOpinion);
+					throw new RuntimeException("Merge on DivideOpinionsFromMemory");					
 				}
 	    	}
 	    	em.close();
@@ -405,8 +414,11 @@ public class LoadHistoricalOpinions {
 				if ( existingStatute == null ) {
 					persistStatutes.add(statute);
 				} else {
-					existingStatute.addModifications(statute);
+// need to do addModifications again in case it already exists in the database
+// should never happen in first load
+//					existingStatute.addModificationsFromTempStatute(statute);
 					mergeStatutes.add(existingStatute);
+					throw new RuntimeException("Merge on DivideStatutesFromMemory");					
 				}
 	    	}
 	    	em.close();
@@ -510,14 +522,20 @@ public class LoadHistoricalOpinions {
         return clOps;
     }
     
+    /**
+     * Create new OpinionSummaries from LoadOpinion types, add to citationStore.
+     * Merging?
+     * @author karl
+     *
+     */
     class BuildMemoryDB implements Runnable {
 		List<LoadOpinion> clOps;  
-    	MemoryPersistance persistence;
+    	CitationStore persistence;
     	DateFormat clFormat;
     	
 		public BuildMemoryDB(    	
 			List<LoadOpinion> clOps,  
-	    	MemoryPersistance persistence
+	    	CitationStore persistence
 		)  {
 			this.clOps = clOps;
 			this.persistence = persistence;
@@ -553,18 +571,25 @@ public class LoadHistoricalOpinions {
 			                    dateFiled, 
 			                    ""
 			                );
-				        ParserDocument parserDocument = new ParserDocument(opinionSummary);
+				        ScrapedOpinionDocument parserDocument = new ScrapedOpinionDocument(opinionSummary);
 				        parserDocument.footnotes = footnotes; 
 				        parserDocument.paragraphs = paragraphs; 
-			        	ParserResults parserResults = parser.parseCase(parserDocument, opinionSummary, opinionSummary.getOpinionKey());
+			        	ParsedOpinionResults parserResults = parser.parseOpinionDocument(parserDocument, opinionSummary, opinionSummary.getOpinionKey());
 			        	synchronized(persistence) {
-			            	parserResults.persist(opinionSummary, persistence);
+			        		// managed the opinionCitations and statuteCitations referred to
+			        		// add this opinionSummary as a referring opinion.
+			        		persistence.mergeParsedDocumentCitations(opinionSummary, parserResults);
+			            	// when loading big datafile, opinions might already exist if the court has issued a modification
 			        		OpinionSummary existingOpinion = persistence.opinionExists(opinionSummary.getOpinionKey());
 			                if (  existingOpinion != null ) {
-			                    existingOpinion.addModifications(opinionSummary, persistence);
+			                	// this can only be a modification?
+			                	// does the source already handle modifications? Let's hope not.
+			                	// so, what about referring opinions?
+			                    existingOpinion.mergePublishedOpinion(opinionSummary);
 			                    // opinion referred to itself?
 //			                    existingOpinion.addOpinionSummaryReferredFrom(opinionSummary.getOpinionKey());
-			                    persistence.mergeOpinion(existingOpinion);
+			                    // in case of citationStore, merge does same thing as persist (as does EntityManager)
+// don't need this, it's already there		persistence.mergeOpinion(existingOpinion);
 			                } else {
 			                	persistence.persistOpinion(opinionSummary);
 			                }

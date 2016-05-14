@@ -6,16 +6,16 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import opca.model.SlipOpinion;
-import opca.parser.CaseScraperInterface;
+import opca.parser.OpinionScraperInterface;
 
 public class OnlineFacade {
 	private static final Logger log = Logger.getLogger(OnlineFacade.class.getName());
 	private OpinionQueries opinionQueries;
 	
-	private CaseScraperInterface caseParser;
+	private OpinionScraperInterface caseParser;
 	
 	public OnlineFacade(
-			CaseScraperInterface caseParser//, 
+			OpinionScraperInterface caseParser//, 
 	) {
 		this.caseParser = caseParser;
 	}
@@ -91,7 +91,7 @@ public class OnlineFacade {
 		try {
 	    	// Create the CACodes list
 //			CodeTitles[] codeTitles = codesInterface.getCodeTitles();
-//			CodeCitationParser parser = new CodeCitationParser(codeTitles);
+//			OpinionDocumentParser parser = new OpinionDocumentParser(codeTitles);
 			// loop and download each case
 			for( SlipOpinion slipOpinion: cases ) {
 				log.info("Downloading Case: " + slipOpinion.getFileName());

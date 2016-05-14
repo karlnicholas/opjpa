@@ -10,9 +10,8 @@ import opca.model.OpinionSummary;
 import opca.model.SlipOpinion;
 import opca.model.StatuteCitation;
 import opca.model.StatuteKey;
-import opca.parser.ParserResults.PersistenceInterface;
 
-public class OpinionQueries implements PersistenceInterface {
+public class OpinionQueries {
 
 	@Inject private EntityManager em;
 /*	
@@ -52,7 +51,6 @@ public class OpinionQueries implements PersistenceInterface {
 	}
 
 	// StatuteCitation
-	@Override
 	public StatuteCitation statuteExists(StatuteKey key) {
 		List<StatuteCitation> list = em.createNamedQuery("StatuteCitation.findByCodeSection", StatuteCitation.class)
 				.setParameter("code", key.getCode())
@@ -62,15 +60,14 @@ public class OpinionQueries implements PersistenceInterface {
 		return null;
 	}
 
-	@Override
 	public List<StatuteCitation> getStatutes(Collection<StatuteKey> statuteKeys) {
 		return em.createNamedQuery("StatuteCitation.findStatutesForKeys", StatuteCitation.class).setParameter("keys", statuteKeys).getResultList();
 	}
-	@Override
+
 	public void persistStatute(StatuteCitation statute) {
 		em.persist(statute);
 	}
-	@Override
+
 	public StatuteCitation mergeStatute(StatuteCitation statute) {
 		return em.merge(statute);
 	}
@@ -89,21 +86,22 @@ public class OpinionQueries implements PersistenceInterface {
     }
 
 	// OpinionSummary
-	@Override
+
 	public OpinionSummary opinionExists(OpinionKey key) {
 		List<OpinionSummary> list = em.createNamedQuery("OpinionSummary.findByOpinionKey", OpinionSummary.class).setParameter("key", key).getResultList();
 		if ( list.size() > 0 ) return list.get(0);
 		return null;
 	}
-	@Override
+
 	public List<OpinionSummary> getOpinions(Collection<OpinionKey> opinionKeys) {
 		return em.createNamedQuery("OpinionSummary.findOpinionsForKeys", OpinionSummary.class).setParameter("keys", opinionKeys).getResultList();
 	}
-	@Override
+
 	public void persistOpinion(OpinionSummary opinion) {
+		
 		em.persist(opinion);
 	}
-	@Override
+
 	public OpinionSummary mergeOpinion(OpinionSummary opinion) {
 		return em.merge(opinion);
 	}

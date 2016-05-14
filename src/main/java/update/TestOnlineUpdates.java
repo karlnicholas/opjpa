@@ -5,9 +5,14 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-import opca.parser.CaseScraperInterface;
+import org.hibernate.SessionFactory;
+import org.hibernate.jpa.HibernateEntityManagerFactory;
+import org.hibernate.jpa.internal.EntityManagerImpl;
+
+import opca.parser.OpinionScraperInterface;
 import opca.scraper.CACaseScraper;
-import opca.service.CAScraperService;
+import opca.service.CAOnlineUpdateService;
+import opca.service.OpinionViewCache;
 import opjpa.TestCACaseScraper;
 
 public class TestOnlineUpdates {
@@ -22,17 +27,17 @@ public class TestOnlineUpdates {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("opjpa");
 		em = emf.createEntityManager();
 		try {
-//			CaseScraperInterface caseScraper = new CACaseScraper(false);
-			CaseScraperInterface caseScraper = new TestCACaseScraper(false);
-			EntityTransaction tx = em.getTransaction();
-			tx.begin();
+//			OpinionScraperInterface caseScraper = new CACaseScraper(true);
+			OpinionScraperInterface caseScraper = new TestCACaseScraper(false);
+//			EntityTransaction tx = em.getTransaction();
 			try {
-				new CAScraperService(em).updateDatabase(caseScraper);
+//				tx.begin();
+				new CAOnlineUpdateService(em).updateDatabase(caseScraper);
 			} catch (Exception ex) {
 				ex.printStackTrace();
-				tx.rollback();
+//				tx.rollback();
 			}
-			tx.commit();
+//			tx.commit();
 			em.close();
 		} finally {
 			emf.close();

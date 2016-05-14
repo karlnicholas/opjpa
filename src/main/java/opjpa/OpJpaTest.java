@@ -71,7 +71,7 @@ public class OpJpaTest {
 	
 	public void reloadDatabase() throws Exception {
 
-		CaseScraperInterface caseParser = new TestCACaseScraper(false); 
+		OpinionScraperInterface caseParser = new TestCACaseScraper(false); 
 
 		List<SlipOpinion> opinions = caseParser.getCaseList();
 
@@ -80,19 +80,19 @@ public class OpJpaTest {
 	    CodesInterface codesInterface = CAStatutesFactory.getInstance().getCodesInterface(true);
 		
 		CodeTitles[] codeTitles = codesInterface.getCodeTitles();
-		CodeCitationParser parser = new CodeCitationParser(codeTitles);
+		OpinionDocumentParser parser = new OpinionDocumentParser(codeTitles);
 
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 		
-		List<ParserDocument> parserDocuments = caseParser.getCaseFiles(opinions);
-		for( ParserDocument parserDocument: parserDocuments ) {
-			parser.parseCase(parserDocument, parserDocument.opinionBase, parserDocument.opinionBase.getOpinionKey() );
+		List<ScrapedOpinionDocument> parserDocuments = caseParser.scrapeOpinionFiles(opinions);
+		for( ScrapedOpinionDocument parserDocument: parserDocuments ) {
+			parser.parseOpinionDocument(parserDocument, parserDocument.opinionBase, parserDocument.opinionBase.getOpinionKey() );
         	// look for details
         	// after a summaryParagraph is found, don't check any further .. (might have to change)
 			
 			// look for summary and disposition 
-    		parser.checkSlipOpinionDetails((SlipOpinion) parserDocument.opinionBase, parserDocument);
+    		parser.parseSlipOpinionDetails((SlipOpinion) parserDocument.opinionBase, parserDocument);
 
 			em.persist((SlipOpinion) parserDocument.opinionBase);
 		}
@@ -111,7 +111,7 @@ public class OpJpaTest {
 		}
 		List<String> fileNamesCopy = new ArrayList<String>(fileNames); 
 		
-		CaseScraperInterface caseScaper = new CACaseScraper(true); 
+		OpinionScraperInterface caseScaper = new CACaseScraper(true); 
 		List<SlipOpinion> onlineCases = caseScaper.getCaseList();
 		
 		SlipOpinionService slipOpinionService = new SlipOpinionService();
@@ -141,18 +141,19 @@ public class OpJpaTest {
 		
 	    CodesInterface codesInterface = CAStatutesFactory.getInstance().getCodesInterface(true);
 		CodeTitles[] codeTitles = codesInterface.getCodeTitles();
-		CodeCitationParser parser = new CodeCitationParser(codeTitles);
+		OpinionDocumentParser parser = new OpinionDocumentParser(codeTitles);
 
 		//		System.out.println(onlineCases);
 		// EntityTransaction tx = em.getTransaction();
 		// tx.begin();
 		
-		List<ParserDocument> parserDocs = caseScaper.getCaseFiles(onlineCases);
-		for( ParserDocument parserDoc: parserDocs ) {
-			ParserResults parserResults = parser.parseCase(parserDoc, parserDoc.opinionBase, parserDoc.opinionBase.getOpinionKey() );
-        	parserResults.persist(parserDoc.opinionBase, slipOpinionService.getPersistenceInterface());
+		List<ScrapedOpinionDocument> parserDocs = caseScaper.scrapeOpinionFiles(onlineCases);
+		for( ScrapedOpinionDocument parserDoc: parserDocs ) {
+			ParsedOpinionResults parserResults = parser.parseOpinionDocument(parserDoc, parserDoc.opinionBase, parserDoc.opinionBase.getOpinionKey() );
+//        	parserResults.mergeParsedDocumentCitationsToMemoryDB(slipOpinionService.getPersistenceInterface(), parserDoc.opinionBase);
 //			em.persist(slipOpinion);
 			System.out.println("Downloaded " + ((SlipOpinion)parserDoc.opinionBase).getFileName() + ".DOC");
+			throw new RuntimeException("this was changed");
 		}
 		// tx.commit();
 		
@@ -162,7 +163,7 @@ public class OpJpaTest {
 	/*	
 //	private String[] terms = {"section", "§" , "sections", "§§"};
 	public void playParse(CodesInterface codesInterface) throws Exception {
-		CodeCitationParser codeCitationParser = new CodeCitationParser(codesInterface.getCodeTitles());
+		OpinionDocumentParser codeCitationParser = new OpinionDocumentParser(codesInterface.getCodeTitles());
 		String sentence = "(welf. & inst. code, §§ 4501; see also welf. & inst. code, § 4434.)";
 		Calendar cal = Calendar.getInstance();
 		cal.set(1960, Calendar.JUNE, 1);
@@ -199,7 +200,7 @@ public class OpJpaTest {
 				+ " CodeCitations = " + slipOpinion.getStatuteCitations().size()
 			);
 //			System.out.println("Case = " + slipOpinion.getName() + " CaseCitations = " + slipOpinion.getCaseCitations());
-//			ParserResults parserResults = new ParserResults(slipOpinion, dbFacade);
+//			ParsedOpinionResults parserResults = new ParsedOpinionResults(slipOpinion, dbFacade);
 //			OpinionView viewModelCase = viewBuilder.buildOpinionView(slipOpinion, parserResults, compressCodeReferences);
 //			viewModelCase.trimToLevelOfInterest(levelOfInterest, false);
 //			viewModelCases.add(viewModelCase);
@@ -225,8 +226,8 @@ public class OpJpaTest {
 		    cal.set(2014, Calendar.JULY, 7, 0, 0, 0 );
 		    cal.set(Calendar.MILLISECOND, 0);
 		    
-	//		CaseScraperInterface caseScraper = InterfacesFactory.getCaseParserInterface(); 
-			CaseScraperInterface caseParser = new TestCACaseScraper(false); 
+	//		OpinionScraperInterface caseScraper = InterfacesFactory.getCaseParserInterface(); 
+			OpinionScraperInterface caseParser = new TestCACaseScraper(false); 
 			List<SlipOpinion> onlineCases = caseParser.getCaseList();
 	
 			// trim list to available test cases
@@ -251,7 +252,7 @@ public class OpJpaTest {
 			
 	//	    QueueUtility queue = new QueueUtility(compressSections);  // true is compress references within individual titles
 			CodeTitles[] codeTitles = codesInterface.getCodeTitles();
-			CodeCitationParser parser = new CodeCitationParser(codeTitles);
+			OpinionDocumentParser parser = new OpinionDocumentParser(codeTitles);
 			
 //			OpinionQueries dbFacade = new OpinionQueries(em);
 			SlipOpinionService slipOpinionService = new SlipOpinionService();
@@ -261,12 +262,13 @@ public class OpJpaTest {
 			EntityTransaction tx = em.getTransaction();
 			tx.begin();
 			
-			List<ParserDocument> parserDocuments = caseParser.getCaseFiles(onlineCases);
-			for( ParserDocument parserDocument: parserDocuments ) {
+			List<ScrapedOpinionDocument> parserDocuments = caseParser.scrapeOpinionFiles(onlineCases);
+			for( ScrapedOpinionDocument parserDocument: parserDocuments ) {
 //				if ( slipOpinion.getFileName().contains("143650") ) {
-					ParserResults parserResults = parser.parseCase(parserDocument, parserDocument.opinionBase, parserDocument.opinionBase.getOpinionKey() );
-		        	parserResults.persist(parserDocument.opinionBase, slipOpinionService.getPersistenceInterface());
+					ParsedOpinionResults parserResults = parser.parseOpinionDocument(parserDocument, parserDocument.opinionBase, parserDocument.opinionBase.getOpinionKey() );
+//		        	parserResults.mergeParsedDocumentCitationsToMemoryDB(slipOpinionService.getPersistenceInterface(), parserDocument.opinionBase);
 		        	em.persist((SlipOpinion)parserDocument.opinionBase);
+					throw new RuntimeException("this was changed");
 //				}
 	/*        	
 	        	SlipOpinion existingOpinion = slipOpinionDao.find(slipOpinion.getOpinionSummaryKey());
@@ -294,8 +296,8 @@ public class OpJpaTest {
 		    cal.set(2014, Calendar.JULY, 7, 0, 0, 0 );
 		    cal.set(Calendar.MILLISECOND, 0);
 		    
-	//		CaseScraperInterface caseScraper = InterfacesFactory.getCaseParserInterface(); 
-			CaseScraperInterface caseParser = new TestCACaseScraper(false); 
+	//		OpinionScraperInterface caseScraper = InterfacesFactory.getCaseParserInterface(); 
+			OpinionScraperInterface caseParser = new TestCACaseScraper(false); 
 			List<SlipOpinion> onlineCases = caseParser.getCaseList();
 
 			// trim list to available test cases
@@ -323,7 +325,7 @@ public class OpJpaTest {
 			
 	//	    QueueUtility queue = new QueueUtility(compressSections);  // true is compress references within individual titles
 			// CodeTitles[] codeTitles = codesInterface.getCodeTitles();
-			// CodeCitationParser parser = new CodeCitationParser(codeTitles);
+			// OpinionDocumentParser parser = new OpinionDocumentParser(codeTitles);
 			
 			PrintOpinionReport opinionReport = new PrintOpinionReport();
 			
@@ -339,7 +341,7 @@ public class OpJpaTest {
 //				System.out.println("Case = " + slipOpinion.getFileName());
 				opinionReport.printSlipOpinionReport(codesInterface, em, slipOpinion.getOpinionKey());
 //				if ( slipOpinion.getFileName().contains("143650") ) {
-//					ParserResults parserResults = parser.parseCase(caseScraper.getCaseFile(slipOpinion, false), slipOpinion, slipOpinion.getOpinionKey() );
+//					ParsedOpinionResults parserResults = parser.parseCase(caseScraper.getCaseFile(slipOpinion, false), slipOpinion, slipOpinion.getOpinionKey() );
 //				}
 			}
 			// persist

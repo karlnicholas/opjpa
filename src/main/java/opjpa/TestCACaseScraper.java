@@ -9,7 +9,7 @@ import java.util.List;
 import org.apache.poi.hwpf.HWPFDocument;
 
 import opca.model.SlipOpinion;
-import opca.parser.ParserDocument;
+import opca.parser.ScrapedOpinionDocument;
 import opca.scraper.*;
 
 public class TestCACaseScraper extends CACaseScraper {
@@ -21,7 +21,7 @@ public class TestCACaseScraper extends CACaseScraper {
 	@Override
 	public List<SlipOpinion> getCaseList() {
 		try {
-			return parseCaseList(new BufferedReader( new InputStreamReader( new FileInputStream( CACaseScraper.caseListFile ), "UTF-8") ));
+			return parseCaseList(new FileInputStream( CACaseScraper.caseListFile ));
 		} catch (IOException e) {
 			e.printStackTrace();
 			return null;
@@ -29,11 +29,11 @@ public class TestCACaseScraper extends CACaseScraper {
 	}
 
 	@Override
-	public List<ParserDocument> getCaseFiles(List<SlipOpinion> opinions) {
-		List<ParserDocument> documents = new ArrayList<ParserDocument>();
+	public List<ScrapedOpinionDocument> scrapeOpinionFiles(List<SlipOpinion> opinions) {
+		List<ScrapedOpinionDocument> documents = new ArrayList<ScrapedOpinionDocument>();
 		for (SlipOpinion slipOpinion: opinions ) {
 			try ( InputStream inputStream = Files.newInputStream( Paths.get(casesDir + slipOpinion.getFileName() +".DOC" )) ) {
-				documents.add( new ParserDocument( slipOpinion, new HWPFDocument(inputStream)) );
+				documents.add( new ScrapedOpinionDocument( slipOpinion, new HWPFDocument(inputStream)) );
 				inputStream.close();
 			} catch (IOException e) {
 				e.printStackTrace();
