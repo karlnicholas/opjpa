@@ -13,7 +13,7 @@ import opca.parser.OpinionScraperInterface;
 import opca.scraper.CACaseScraper;
 import opca.service.CAOnlineUpdateService;
 import opca.service.OpinionViewCache;
-import opjpa.TestCACaseScraper;
+import scraper.TestCACaseScraper;
 
 public class TestOnlineUpdates {
 	private EntityManager em;

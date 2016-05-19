@@ -12,6 +12,7 @@ import load.LoadHistoricalOpinions;
 import opca.memorydb.CitationStore;
 import opca.model.SlipOpinion;
 import opca.parser.*;
+import scraper.TestCACaseScraper;
 
 public class LoadNewSlipOpinions {
 	

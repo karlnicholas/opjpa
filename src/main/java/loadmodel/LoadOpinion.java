@@ -1,5 +1,7 @@
 package loadmodel;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Pattern;
 
@@ -16,15 +18,19 @@ public class LoadOpinion {
 	//
     private String html_lawbox;
     private String[] opinions_cited;
+    //
+    private DateFormat dateFormat;
+    //
+    private String clusterSource;
     public LoadOpinion() {}
     public LoadOpinion(Cluster cluster) {
         // http://www.courtlistener.com/api/rest/v3/clusters/1361768/
     	id = new Long(pattern.split(cluster.getResource_uri())[7]);
-
+    	clusterSource = cluster.getSource();
 		dateFiled = cluster.getDate_filed();
 		String citeOne = cluster.getState_cite_one().replace(". ", "."); 
 		String citeTwo = cluster.getState_cite_two().replace(". ", "."); 
-		String citeThree = cluster.getState_cite_three().replace(". ", "."); 
+		String citeThree = cluster.getState_cite_three().replace(". ", ".");
 		if ( citeOne.contains("Cal.App.") ) {
 			citation = citeOne;
     	} else if ( citeTwo.contains("Cal.App.") ) {
@@ -38,7 +44,14 @@ public class LoadOpinion {
     	} else if ( citeThree.contains("Cal.") && !citeThree.contains("Rptr") ) {
 			citation = citeThree;
     	}
-
+/*		
+		if ( citation == null ) {
+			if ( citeOne != null && !citeOne.trim().isEmpty() ) System.out.println(citeOne);
+			if ( citeTwo != null && !citeTwo.trim().isEmpty() ) System.out.println(citeTwo);
+			if ( citeThree != null && !citeThree.trim().isEmpty() ) System.out.println(citeThree);
+//			System.out.println(++total);
+		}
+*/
 		caseName = cluster.getCase_name();
 		fullCaseName = cluster.getCase_name_full();
 		shortCaseName = cluster.getCase_name_short();
@@ -91,5 +104,15 @@ public class LoadOpinion {
 	}
 	public void setCaseName(String caseName) {
 		this.caseName = caseName;
+	}
+	public String getClusterSource() {
+		return clusterSource;
+	}
+	@Override
+	public String toString() {
+		if ( dateFormat == null ) {
+			dateFormat = new SimpleDateFormat("MMM dd, yyyy");
+		}
+		return new StringBuilder("LoadOpinion: ").append(caseName).append(" (").append(citation).append(") ").append(dateFormat.format(dateFiled)).toString();
 	}
 }

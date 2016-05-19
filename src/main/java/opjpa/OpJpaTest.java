@@ -8,6 +8,7 @@ import opca.model.SlipOpinion;
 import opca.parser.*;
 import opca.scraper.CACaseScraper;
 import opca.service.SlipOpinionService;
+import scraper.TestCACaseScraper;
 
 import java.io.*;
 import java.nio.file.DirectoryStream;
