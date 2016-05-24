@@ -103,8 +103,13 @@ public class LoadCourtListenerCallback implements CourtListenerCallback {
 						continue;
 					if (text.charAt(0) == '[' || text.charAt(0) == '(')
 						footnotes.add(text);
-					else
-						paragraphs.add(text);
+					else {
+						Elements bs = p.getElementsByTag("span");
+						for ( Element b: bs) {
+							b.remove();
+						}
+						paragraphs.add(p.text());
+					}
 				}
 				String name = op.getCitation();
 				// if ( name != null && name.contains("Rptr.") ) name =

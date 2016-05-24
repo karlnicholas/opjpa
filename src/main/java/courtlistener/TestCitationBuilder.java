@@ -200,8 +200,13 @@ public class TestCitationBuilder {
 						continue;
 					if (text.charAt(0) == '[' || text.charAt(0) == '(')
 						footnotes.add(text);
-					else
-						paragraphs.add(text);
+					else {
+						Elements bs = p.getElementsByTag("span");
+						for ( Element b: bs) {
+							b.remove();
+						}
+						paragraphs.add(p.text());
+					}
 				}
 				Date dateFiled = op.getDateFiled();
 				String name = op.getCitation();
@@ -212,6 +217,9 @@ public class TestCitationBuilder {
 					// ".").replace("app.", "App.").replace("cal.",
 					// "Cal.").replace("supp.", "Supp.");
 					OpinionSummary opinionSummary = new OpinionSummary(new OpinionKey(name), op.getCaseName(), dateFiled, "");
+					if ( opinionSummary.getOpinionKey().toString().equals("57 Cal.App.2d 892") ) {
+						System.out.println(opinionSummary);
+					}
 					ScrapedOpinionDocument parserDocument = new ScrapedOpinionDocument(opinionSummary);
 					parserDocument.footnotes = footnotes;
 					parserDocument.paragraphs = paragraphs;

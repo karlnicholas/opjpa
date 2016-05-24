@@ -3,8 +3,10 @@ package courtlistener;
 import java.io.BufferedWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -63,23 +65,27 @@ public class TestCourtListenerFiles {
 	    	System.out.println("newlyLoaded = " + newlyLoaded + " notNewlyLoaded = " + notNewlyLoaded);
 	    	System.out.println("titled = " + titled + " notTitled = " + notTitled);
 	    	System.out.println("citations = " + citationStore.getAllOpinions().size());
+	    	Map<String, Integer> mapCitations = new HashMap<String, Integer>();
 
 	    	try ( BufferedWriter writer = Files.newBufferedWriter(Paths.get("not-titled.txt"))) {
-	    		citationStore.getAllOpinions().forEach( op->{
-		    		try {
-			    		if ( !op.isNewlyLoadedOpinion() ) {
-							writer.write(op.getOpinionKey().toString());
-							writer.write(" Cited By: ");
-							writer.write(op.getReferringOpinions().toString());
-							writer.newLine();
-			    		}
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+				for ( OpinionSummary op: citationStore.getAllOpinions() ) {
+					if ( op.isNewlyLoadedOpinion()) 
+						continue;
+					String vSet = op.getOpinionKey().getVSetAsString();
+					if ( mapCitations.containsKey(vSet) ) {
+						Integer cv = mapCitations.get(vSet);
+						mapCitations.put(vSet, cv+1);
+					} else {
+						mapCitations.put(vSet, new Integer(1));
 					}
-	    		});
+					writer.write(op.getOpinionKey().toString());
+					writer.write(" Cited By: ");
+					writer.write(op.getReferringOpinions().toString());
+					writer.newLine();
+	    		}
 	    	    writer.close();
 	    	}
+	    	System.out.println(mapCitations);
 //	    	System.out.println("total1 = " + total1 + " total2 = " + total2);
 
 /*	    	

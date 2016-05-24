@@ -15,6 +15,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 
 import codesparser.CodesInterface;
+import gscalifornia.factory.CAStatutesFactory;
 import opca.memorydb.CitationStore;
 import opca.model.OpinionSummary;
 import opca.model.StatuteCitation;
@@ -23,7 +24,6 @@ import opca.service.SlipOpinionService;
 public class LoadHistoricalOpinions {
 	private static Logger logger = Logger.getLogger(LoadHistoricalOpinions.class.getName());
 	EntityManagerFactory emf;
-	private final CourtListenerCallback courtListenerCallback;
 	private final CitationStore citationStore;
 //	OpinionDocumentParser parser;
 	
@@ -33,17 +33,23 @@ public class LoadHistoricalOpinions {
 	) {
 		this.emf = emf;
     	citationStore = CitationStore.getInstance();
-		this.courtListenerCallback = new LoadCourtListenerCallback(citationStore, codesInterface);
 //		parser = new OpinionDocumentParser(codesInterface.getCodeTitles());
 	}
 	
     public void initializeDB() throws Exception {
     	Date startTime = new Date();
     	//
-    	LoadCourtListenerFiles loadCourtListenerFiles = new LoadCourtListenerFiles(courtListenerCallback);
-    	loadCourtListenerFiles.loadFiles("c:/users/karl/downloads/calctapp-opinions.tar.gz", "c:/users/karl/downloads/calctapp-clusters.tar.gz", 1000);
-    	loadCourtListenerFiles.loadFiles("c:/users/karl/downloads/cal-opinions.tar.gz", "c:/users/karl/downloads/cal-clusters.tar.gz", 1000);
-    	processesOpinions(citationStore); 
+	    CodesInterface codesInterface = CAStatutesFactory.getInstance().getCodesInterface(true);
+
+	    LoadCourtListenerCallback cb1 = new LoadCourtListenerCallback(citationStore, codesInterface);
+	    LoadCourtListenerFiles file1 = new LoadCourtListenerFiles(cb1);
+	    file1.loadFiles("c:/users/karl/downloads/calctapp-opinions.tar.gz", "c:/users/karl/downloads/calctapp-clusters.tar.gz", 1000);
+
+	    LoadCourtListenerCallback cb2 = new LoadCourtListenerCallback(citationStore, codesInterface);
+	    LoadCourtListenerFiles file2 = new LoadCourtListenerFiles(cb2);
+	    file2.loadFiles("c:/users/karl/downloads/cal-opinions.tar.gz", "c:/users/karl/downloads/cal-clusters.tar.gz", 1000);
+
+	    processesOpinions(citationStore); 
     	processesStatutes(citationStore); 
 		logger.info("count " + citationStore.getAllOpinions().size() + " : " + (new Date().getTime()-startTime.getTime())/1000);
 //    	persistMemory(citationStore);

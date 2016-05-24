@@ -5,14 +5,10 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-import org.hibernate.SessionFactory;
-import org.hibernate.jpa.HibernateEntityManagerFactory;
-import org.hibernate.jpa.internal.EntityManagerImpl;
 
 import opca.parser.OpinionScraperInterface;
 import opca.scraper.CACaseScraper;
 import opca.service.CAOnlineUpdateService;
-import opca.service.OpinionViewCache;
 import scraper.TestCACaseScraper;
 
 public class TestOnlineUpdates {
@@ -29,15 +25,15 @@ public class TestOnlineUpdates {
 		try {
 //			OpinionScraperInterface caseScraper = new CACaseScraper(true);
 			OpinionScraperInterface caseScraper = new TestCACaseScraper(false);
-//			EntityTransaction tx = em.getTransaction();
+			EntityTransaction tx = em.getTransaction();
 			try {
-//				tx.begin();
+				tx.begin();
 				new CAOnlineUpdateService(em).updateDatabase(caseScraper);
 			} catch (Exception ex) {
 				ex.printStackTrace();
-//				tx.rollback();
+				tx.rollback();
 			}
-//			tx.commit();
+			tx.commit();
 			em.close();
 		} finally {
 			emf.close();
