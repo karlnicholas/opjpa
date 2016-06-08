@@ -1,22 +1,22 @@
 
     alter table OpinionSummary_opinionCitations 
         drop 
-        foreign key FK_7taix86q3mc0xl8tqvm4cs777;
+        foreign key FK_fiqjvfyvejiodoadc2w8v7j0f;
     alter table OpinionSummary_referringOpinions 
         drop 
-        foreign key FK_o7oesopyeys7rmvos6brdm1ps;
+        foreign key FK_t26c4pw08towjawdo0obefqr9;
     alter table OpinionSummary_statuteCitations 
         drop 
-        foreign key FK_mt3ehxifatmti8pt8ul1rctfx;
+        foreign key FK_amwg5re7cs2ivp7botmhqn8ii;
     alter table SlipOpinion_opinionCitations 
         drop 
-        foreign key FK_nfsnm7y4d1rt4u5jxmcombor8;
+        foreign key FK_hb6yf2nvholf698w4va6rc3hr;
     alter table SlipOpinion_referringOpinions 
         drop 
-        foreign key FK_3e5akqak78f37yjuwlct63unh;
+        foreign key FK_ec6goeexo8oalo51cl16nyome;
     alter table SlipOpinion_statuteCitations 
         drop 
-        foreign key FK_1hg79w4owc4lebrdrh57calf4;
+        foreign key FK_k3ywsgrky4qju2hrd0l0gp3n1;
     alter table StatuteCitation_referringOpinionCount 
         drop 
         foreign key FK_n7io7ja2sk6bo74057n0786hu;
@@ -40,61 +40,75 @@
     drop table if exists user;
     drop table if exists user_role;
     create table OpinionSummary (
-        id bigint not null auto_increment,
-        countReferringOpinions integer not null,
-        court TEXT,
-        opinionDate date,
         page bigint not null,
         volume integer not null,
         vset integer not null,
+        countReferringOpinions integer not null,
+        court TEXT,
+        opinionDate date,
         title TEXT,
-        primary key (id)
+        primary key (page, volume, vset)
     ) ENGINE=InnoDB;
     create table OpinionSummary_opinionCitations (
-        OpinionSummary_id bigint not null,
+        OpinionSummary_page bigint not null,
+        OpinionSummary_volume integer not null,
+        OpinionSummary_vset integer not null,
         page bigint not null,
         volume integer not null,
-        vset integer not null
+        vset integer not null,
+        primary key (OpinionSummary_page, OpinionSummary_volume, OpinionSummary_vset, page, volume, vset)
     ) ENGINE=InnoDB;
     create table OpinionSummary_referringOpinions (
-        OpinionSummary_id bigint not null,
+        OpinionSummary_page bigint not null,
+        OpinionSummary_volume integer not null,
+        OpinionSummary_vset integer not null,
         page bigint not null,
         volume integer not null,
-        vset integer not null
+        vset integer not null,
+        primary key (OpinionSummary_page, OpinionSummary_volume, OpinionSummary_vset, page, volume, vset)
     ) ENGINE=InnoDB;
     create table OpinionSummary_statuteCitations (
-        OpinionSummary_id bigint not null,
+        OpinionSummary_page bigint not null,
+        OpinionSummary_volume integer not null,
+        OpinionSummary_vset integer not null,
         code varchar(255),
         sectionNumber varchar(255)
     ) ENGINE=InnoDB;
     create table SlipOpinion (
-        id bigint not null auto_increment,
-        countReferringOpinions integer not null,
-        court TEXT,
-        opinionDate date,
         page bigint not null,
         volume integer not null,
         vset integer not null,
+        countReferringOpinions integer not null,
+        court TEXT,
+        opinionDate date,
         title TEXT,
         disposition TEXT,
         fileName TEXT,
         summary TEXT,
-        primary key (id)
+        primary key (page, volume, vset)
     ) ENGINE=InnoDB;
     create table SlipOpinion_opinionCitations (
-        SlipOpinion_id bigint not null,
+        SlipOpinion_page bigint not null,
+        SlipOpinion_volume integer not null,
+        SlipOpinion_vset integer not null,
         page bigint not null,
         volume integer not null,
-        vset integer not null
+        vset integer not null,
+        primary key (SlipOpinion_page, SlipOpinion_volume, SlipOpinion_vset, page, volume, vset)
     ) ENGINE=InnoDB;
     create table SlipOpinion_referringOpinions (
-        SlipOpinion_id bigint not null,
+        SlipOpinion_page bigint not null,
+        SlipOpinion_volume integer not null,
+        SlipOpinion_vset integer not null,
         page bigint not null,
         volume integer not null,
-        vset integer not null
+        vset integer not null,
+        primary key (SlipOpinion_page, SlipOpinion_volume, SlipOpinion_vset, page, volume, vset)
     ) ENGINE=InnoDB;
     create table SlipOpinion_statuteCitations (
-        SlipOpinion_id bigint not null,
+        SlipOpinion_page bigint not null,
+        SlipOpinion_volume integer not null,
+        SlipOpinion_vset integer not null,
         code varchar(255),
         sectionNumber varchar(255)
     ) ENGINE=InnoDB;
@@ -147,29 +161,29 @@
     alter table user 
         add constraint UK_ob8kqyqqgmefl0aco34akdtpe  unique (email);
     alter table OpinionSummary_opinionCitations 
-        add constraint FK_7taix86q3mc0xl8tqvm4cs777 
-        foreign key (OpinionSummary_id) 
-        references OpinionSummary (id);
+        add constraint FK_fiqjvfyvejiodoadc2w8v7j0f 
+        foreign key (OpinionSummary_page, OpinionSummary_volume, OpinionSummary_vset) 
+        references OpinionSummary (page, volume, vset);
     alter table OpinionSummary_referringOpinions 
-        add constraint FK_o7oesopyeys7rmvos6brdm1ps 
-        foreign key (OpinionSummary_id) 
-        references OpinionSummary (id);
+        add constraint FK_t26c4pw08towjawdo0obefqr9 
+        foreign key (OpinionSummary_page, OpinionSummary_volume, OpinionSummary_vset) 
+        references OpinionSummary (page, volume, vset);
     alter table OpinionSummary_statuteCitations 
-        add constraint FK_mt3ehxifatmti8pt8ul1rctfx 
-        foreign key (OpinionSummary_id) 
-        references OpinionSummary (id);
+        add constraint FK_amwg5re7cs2ivp7botmhqn8ii 
+        foreign key (OpinionSummary_page, OpinionSummary_volume, OpinionSummary_vset) 
+        references OpinionSummary (page, volume, vset);
     alter table SlipOpinion_opinionCitations 
-        add constraint FK_nfsnm7y4d1rt4u5jxmcombor8 
-        foreign key (SlipOpinion_id) 
-        references SlipOpinion (id);
+        add constraint FK_hb6yf2nvholf698w4va6rc3hr 
+        foreign key (SlipOpinion_page, SlipOpinion_volume, SlipOpinion_vset) 
+        references SlipOpinion (page, volume, vset);
     alter table SlipOpinion_referringOpinions 
-        add constraint FK_3e5akqak78f37yjuwlct63unh 
-        foreign key (SlipOpinion_id) 
-        references SlipOpinion (id);
+        add constraint FK_ec6goeexo8oalo51cl16nyome 
+        foreign key (SlipOpinion_page, SlipOpinion_volume, SlipOpinion_vset) 
+        references SlipOpinion (page, volume, vset);
     alter table SlipOpinion_statuteCitations 
-        add constraint FK_1hg79w4owc4lebrdrh57calf4 
-        foreign key (SlipOpinion_id) 
-        references SlipOpinion (id);
+        add constraint FK_k3ywsgrky4qju2hrd0l0gp3n1 
+        foreign key (SlipOpinion_page, SlipOpinion_volume, SlipOpinion_vset) 
+        references SlipOpinion (page, volume, vset);
     alter table StatuteCitation_referringOpinionCount 
         add constraint FK_n7io7ja2sk6bo74057n0786hu 
         foreign key (StatuteCitation_id) 

@@ -29,11 +29,11 @@ public class TestOnlineUpdates {
 			try {
 				tx.begin();
 				new CAOnlineUpdateService(em).updateDatabase(caseScraper);
+				tx.commit();
 			} catch (Exception ex) {
 				ex.printStackTrace();
 				tx.rollback();
 			}
-			tx.commit();
 			em.close();
 		} finally {
 			emf.close();
