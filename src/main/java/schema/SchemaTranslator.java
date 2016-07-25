@@ -20,6 +20,8 @@ public class SchemaTranslator {
 
 	public SchemaTranslator() {
 		config = new Configuration();
+		config.setProperty("hibernate.implicit_naming_strategy", "opca.xxx.util.ImprovedImplicitNamingStrategy");
+		config.setProperty("hibernate.physical_naming_strategy", "opca.ejb.util.ImprovedNamingStrategy");
 	}
 
 	public SchemaTranslator setDialect(String dialect) {
@@ -47,13 +49,13 @@ public class SchemaTranslator {
 	public SchemaTranslator translate(FileOutputStream outputStream) throws IOException {
 		Dialect requiredDialect = Dialect.getDialect(config.getProperties());
 		String[] query = null;
-
+/*
 		query = config.generateDropSchemaScript(requiredDialect);
 		write(outputStream, query, FormatStyle.DDL.getFormatter());
 
 		query = config.generateSchemaCreationScript(requiredDialect);
 		write(outputStream, query, FormatStyle.DDL.getFormatter());
-
+*/
 		return this;
 	}
 

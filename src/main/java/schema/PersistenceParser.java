@@ -21,8 +21,12 @@ public class PersistenceParser {
 
 	        Configuration cfg = new Configuration();
 	        cfg.setProperty("hibernate.hbm2ddl.auto", "create");
-	        cfg.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
+	        cfg.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5InnoDBDialect");
 	        cfg.setProperty("hibernate.id.new_generator_mappings", "true");
+//	        cfg.setProperty("hibernate.physical_naming_strategy", "opca.ejb.util.PhysicalNamingStrategyImpl");
+	        cfg.setProperty("hibernate.implicit_naming_strateg", "opca.ejb.util.ImprovedImplicitNamingStrategy");
+	        cfg.setProperty("hibernate.physical_naming_strategy", "opca.ejb.util.ImprovedNamingStrategy");
+
 
 	        List<String> managedClassNames = descriptor.getManagedClassNames();
 	        for (String className : managedClassNames) {
