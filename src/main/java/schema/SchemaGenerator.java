@@ -80,8 +80,7 @@ public class SchemaGenerator {
 		Map<String, String> settings = new HashMap<String, String>();
 		settings.put("hibernate.hbm2ddl.auto", "create");
 		settings.put("hibernate.dialect", "org.hibernate.dialect.MySQL5InnoDBDialect");
-		settings.put("hibernate.id.new_generator_mappings", "true");
-		settings.put("hibernate.implicit_naming_strateg", "opca.ejb.util.ImprovedImplicitNamingStrategy");
+//		settings.put("hibernate.implicit_naming_strategy", "opca.ejb.util.ImprovedImplicitNamingStrategy");
 		settings.put("hibernate.physical_naming_strategy", "opca.ejb.util.ImprovedNamingStrategy");
 
         
