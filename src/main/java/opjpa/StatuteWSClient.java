@@ -19,6 +19,7 @@ package opjpa;
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
 
+import codesparser.SectionNumber;
 import statutews.StatuteKey;
 import statutews.StatuteKeyArray;
 import statutews.StatuteViewArray;
@@ -44,8 +45,9 @@ public class StatuteWSClient {
             StatuteWS proxy = service.getPort(StatuteWS.class);
 
             StatuteKey key = new StatuteKey();
-            key.setCode("CODE");
-            key.setSectionNumber("SECTION NUMBER");
+            
+            key.setCode("California Penal Code");
+            key.setSectionNumber("625");
             StatuteKeyArray statuteKeyArray = new StatuteKeyArray();
             statuteKeyArray.getItem().add(key);
             StatuteViewArray viewArray = proxy.echo(statuteKeyArray);
