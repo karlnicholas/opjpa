@@ -17,10 +17,6 @@ import javax.xml.stream.XMLStreamWriter;
 import org.codehaus.jettison.mapped.Configuration;
 import org.codehaus.jettison.mapped.MappedNamespaceConvention;
 import org.codehaus.jettison.mapped.MappedXMLStreamWriter;
-import org.hibernate.SessionFactory;
-import org.hibernate.StatelessSession;
-import org.hibernate.jpa.HibernateEntityManagerFactory;
-import org.hibernate.jpa.internal.EntityManagerImpl;
 
 import codesparser.Section;
 import opca.dto.OpinionViews;
@@ -39,15 +35,10 @@ public class SlipOpinionJson {
 	private void run() {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("opjpa");
 		EntityManager em = emf.createEntityManager();
-		EntityManagerImpl emImpl = (EntityManagerImpl)em;
-		HibernateEntityManagerFactory factory = emImpl.getFactory();
-		SessionFactory sessionFactory = factory.getSessionFactory();
-		StatelessSession statelessSession = sessionFactory.openStatelessSession();
 		try {
 			OpinionViewCache slipOpinionData = new OpinionViewCache();
-			slipOpinionData.setSessionFactory(sessionFactory);
+			slipOpinionData.setEntityManager(em);
 			slipOpinionData.buildCache();
-			statelessSession.close();
 			em.close();
 
 			List<Date[]> dates = slipOpinionData.getReportDates();

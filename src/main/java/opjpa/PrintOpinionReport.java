@@ -38,9 +38,9 @@ public class PrintOpinionReport {
 		if ( slipOpinion != null ) {
 	    	ParsedOpinionResults parserResults = new ParsedOpinionResults(slipOpinion, slipOpinionService.getPersistenceLookup());
 
-	    	OpinionViewBuilder opinionCaseBuilder = new OpinionViewBuilder(codesInterface);
-	        //
-	        OpinionView opinionCase = opinionCaseBuilder.buildSlipOpinionView(slipOpinion, parserResults, true);
+	    	OpinionViewBuilder opinionCaseBuilder = new OpinionViewBuilder();
+	        //TODO:FIX FOR STATUTESERVICE
+	        OpinionView opinionCase = opinionCaseBuilder.buildSlipOpinionView(slipOpinion, parserResults, null);
 	        opinionCase.trimToLevelOfInterest(2, true);
 
 	    	printBaseOpinionReport(parserResults, slipOpinion, opinionCase);

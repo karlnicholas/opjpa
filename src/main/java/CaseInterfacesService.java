@@ -6,7 +6,8 @@ import java.util.ResourceBundle;
 
 import javax.xml.bind.JAXBException;
 
-import codesparser.*;
+import codesparser.CodeTitles;
+import codesparser.CodesInterface;
 import opca.parser.OpinionScraperInterface;
 
 public class CaseInterfacesService {

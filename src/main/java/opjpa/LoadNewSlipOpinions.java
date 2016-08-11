@@ -2,7 +2,8 @@ package opjpa;
 
 import javax.persistence.*;
 
-import codesparser.*;
+import codesparser.CodeTitles;
+import codesparser.CodesInterface;
 import gscalifornia.factory.CAStatutesFactory;
 
 import java.io.*;
