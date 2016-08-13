@@ -16,13 +16,16 @@
  */
 package opjpa;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
 
-import codesparser.SectionNumber;
+import statutes.StatutesBaseClass;
+import statutes.StatutesBaseClassArray;
 import statutews.StatuteKey;
 import statutews.StatuteKeyArray;
-import statutews.StatuteViewArray;
 import statutews.StatuteWS;
 
 import java.lang.System;
@@ -33,9 +36,26 @@ import java.net.URL;
  * @author rsearls@redhat.com
  */
 public class StatuteWSClient {
+	private Marshaller jaxbMarshaller;
+    public static void main(String[] args) {
+    	new StatuteWSClient().run();
+    }
 
-    public static void main(String[] args)
-    {
+	public StatuteWSClient() {
+		try {
+			JAXBContext jaxbContext = JAXBContext.newInstance("statutes");
+			jaxbMarshaller = jaxbContext.createMarshaller();
+
+			// marshalled XML data is formatted with linefeeds and indentation
+			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+			// specify the xsi:schemaLocation attribute value
+		} catch (JAXBException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	private void run() {
         String endPointAddress = "http://localhost:8080/statutews-endpoint/StatuteWS";
         QName serviceName = new QName("http://statutews/", "StatuteWSService");
 
@@ -50,8 +70,16 @@ public class StatuteWSClient {
             key.setSectionNumber("625");
             StatuteKeyArray statuteKeyArray = new StatuteKeyArray();
             statuteKeyArray.getItem().add(key);
-            StatuteViewArray viewArray = proxy.echo(statuteKeyArray);
-            System.out.println(viewArray);
+            StatutesBaseClassArray statutesArray = proxy.echo(statuteKeyArray);
+            System.out.println(statutesArray);
+            for (StatutesBaseClass statutesBaseClass: statutesArray.getItem() )
+    		try {
+				jaxbMarshaller.marshal(statutesBaseClass, System.out);
+			} catch (JAXBException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+            
         } catch (Exception e) {
             System.out.println(e);
         }

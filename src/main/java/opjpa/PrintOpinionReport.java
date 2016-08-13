@@ -40,7 +40,7 @@ public class PrintOpinionReport {
 
 	    	OpinionViewBuilder opinionCaseBuilder = new OpinionViewBuilder();
 	        //TODO:FIX FOR STATUTESERVICE
-	        OpinionView opinionCase = opinionCaseBuilder.buildSlipOpinionView(slipOpinion, parserResults, null);
+	        OpinionView opinionCase = opinionCaseBuilder.buildSlipOpinionView(slipOpinion, parserResults);
 	        opinionCase.trimToLevelOfInterest(2, true);
 
 	    	printBaseOpinionReport(parserResults, slipOpinion, opinionCase);

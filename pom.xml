@@ -144,5 +144,10 @@
       <artifactId>javacv</artifactId>
       <version>1.1</version>
     </dependency>
+    <dependency>
+      <groupId>statutes</groupId>
+      <artifactId>statutes</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+    </dependency>
   </dependencies>
 </project>

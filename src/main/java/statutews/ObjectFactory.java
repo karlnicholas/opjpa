@@ -45,20 +45,4 @@ public class ObjectFactory {
         return new StatuteKey();
     }
 
-    /**
-     * Create an instance of {@link StatuteViewArray }
-     * 
-     */
-    public StatuteViewArray createStatuteViewArray() {
-        return new StatuteViewArray();
-    }
-
-    /**
-     * Create an instance of {@link StatuteView }
-     * 
-     */
-    public StatuteView createStatuteView() {
-        return new StatuteView();
-    }
-
 }
