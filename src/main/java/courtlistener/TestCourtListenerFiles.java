@@ -10,14 +10,14 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-import codesparser.CodesInterface;
-import gscalifornia.factory.CAStatutesFactory;
 import load.CourtListenerCallback;
 import load.LoadCourtListenerCallback;
 import load.LoadCourtListenerFiles;
 import loadmodel.LoadOpinion;
 import opca.memorydb.CitationStore;
 import opca.model.OpinionSummary;
+import parser.ParserInterface;
+import statutesca.factory.CAStatutesFactory;
 
 public class TestCourtListenerFiles {
 	public static void main(String...strings) {
@@ -41,7 +41,7 @@ public class TestCourtListenerFiles {
     		int notNewlyLoaded = 0;    		
     		int titled = 0;
     		int notTitled= 0;    		
-    	    CodesInterface codesInterface = CAStatutesFactory.getInstance().getCodesInterface(true);
+    	    ParserInterface codesInterface = CAStatutesFactory.getInstance().getParserInterface(true);
     	    LoadCourtListenerCallback cb1 = new LoadCourtListenerCallback(citationStore, codesInterface);
     	    LoadCourtListenerFiles file1 = new LoadCourtListenerFiles(cb1);
     	    file1.loadFiles("c:/users/karl/downloads/calctapp-opinions.tar.gz", "c:/users/karl/downloads/calctapp-clusters.tar.gz", 1000);

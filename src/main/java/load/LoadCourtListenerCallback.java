@@ -13,7 +13,6 @@ import org.jsoup.nodes.Element;
 import org.jsoup.parser.Parser;
 import org.jsoup.select.Elements;
 
-import codesparser.CodesInterface;
 import loadmodel.LoadOpinion;
 import opca.memorydb.CitationStore;
 import opca.model.OpinionKey;
@@ -21,19 +20,20 @@ import opca.model.OpinionSummary;
 import opca.parser.OpinionDocumentParser;
 import opca.parser.ParsedOpinionResults;
 import opca.parser.ScrapedOpinionDocument;
+import parser.ParserInterface;
 
 public class LoadCourtListenerCallback implements CourtListenerCallback {
 	private final Logger logger;
 	private final CitationStore citationStore;
-	private final CodesInterface codesInterface;
+	private final ParserInterface parserInterface;
 	private final int processors;
 	private final List<Callable<Object>> tasks;
 	private final ExecutorService es;
 	
 
-	public LoadCourtListenerCallback(CitationStore citationStore, CodesInterface codesInterface) {
+	public LoadCourtListenerCallback(CitationStore citationStore, ParserInterface parserInterface) {
 		this.citationStore = citationStore;
-		this.codesInterface = codesInterface;
+		this.parserInterface = parserInterface;
 		logger = Logger.getLogger(LoadCourtListenerCallback.class.getName());
 		processors = Runtime.getRuntime().availableProcessors();
 		es = Executors.newFixedThreadPool(processors);
@@ -45,7 +45,7 @@ public class LoadCourtListenerCallback implements CourtListenerCallback {
 	 */
 	@Override
 	public void callBack(List<LoadOpinion> clOps) {
-		tasks.add(Executors.callable(new BuildCitationStore(clOps, citationStore, codesInterface)));
+		tasks.add(Executors.callable(new BuildCitationStore(clOps, citationStore, parserInterface)));
 		if ( tasks.size() >= processors ) {
 			try {
 				es.invokeAll(tasks);
@@ -82,10 +82,10 @@ public class LoadCourtListenerCallback implements CourtListenerCallback {
 		CitationStore citationStore;
 		private final OpinionDocumentParser parser;
 
-		public BuildCitationStore(List<LoadOpinion> clOps, CitationStore persistence, CodesInterface codesInterface) {
+		public BuildCitationStore(List<LoadOpinion> clOps, CitationStore persistence, ParserInterface parserInterface) {
 			this.clOps = clOps;
 			this.citationStore = persistence;
-			parser = new OpinionDocumentParser(codesInterface.getCodeTitles());
+			parser = new OpinionDocumentParser(parserInterface.getStatutesTitles());
 		}
 
 		@Override

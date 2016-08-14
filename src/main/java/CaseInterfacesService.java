@@ -6,35 +6,35 @@ import java.util.ResourceBundle;
 
 import javax.xml.bind.JAXBException;
 
-import codesparser.CodeTitles;
-import codesparser.CodesInterface;
+import statutes.StatutesTitles;
+import parser.ParserInterface;
 import opca.parser.OpinionScraperInterface;
 
 public class CaseInterfacesService {
 
 	private static final String interfaces = "application";
-	private static final String codesinterfaceKey = "codesparser.codesinterface";
+	private static final String codesinterfaceKey = "statutes.codesinterface";
 	private static final String caseparserinterfaceKey = "opinions.caseparserinterface";	
 
-	private CodesInterface codesInterface = null;
+	private ParserInterface parserInterface = null;
 	private OpinionScraperInterface caseScraper = null;
 	
 	public CaseInterfacesService initialize(boolean loadXMLCodes) throws InstantiationException, IllegalAccessException, ClassNotFoundException, IOException, JAXBException, URISyntaxException {
 		ResourceBundle rb = ResourceBundle.getBundle(interfaces);
 		String iface = rb.getString(codesinterfaceKey);
-		codesInterface = (CodesInterface) Class.forName(iface).newInstance();
-		if ( loadXMLCodes ) codesInterface.loadStatutes();
+		parserInterface = (ParserInterface) Class.forName(iface).newInstance();
+		if ( loadXMLCodes ) parserInterface.loadStatutes();
 		iface = rb.getString(caseparserinterfaceKey);
 		caseScraper = (OpinionScraperInterface) Class.forName(iface).newInstance();
 		return this;
 	}
 	
-	public CodesInterface getCodesInterface() {
-		return codesInterface;
+	public ParserInterface getParserInterface() {
+		return parserInterface;
 	}
 	
-	public CodeTitles[] getCodeTitles() {
-		return codesInterface.getCodeTitles();
+	public StatutesTitles[] getStatutesTitles() {
+		return parserInterface.getStatutesTitles();
 	}
 
 	public OpinionScraperInterface getCaseParserInterface() {

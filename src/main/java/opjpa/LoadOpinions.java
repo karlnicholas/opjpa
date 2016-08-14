@@ -3,9 +3,9 @@ package opjpa;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import codesparser.CodesInterface;
-import gscalifornia.factory.CAStatutesFactory;
 import load.LoadHistoricalOpinions;
+import parser.ParserInterface;
+import statutesca.factory.CAStatutesFactory;
 
 public class LoadOpinions {
 
@@ -21,8 +21,8 @@ public class LoadOpinions {
 	
 	private void run() throws Exception {
 	
-	    CodesInterface codesInterface = CAStatutesFactory.getInstance().getCodesInterface(true);
-    	LoadHistoricalOpinions load = new LoadHistoricalOpinions(emf, codesInterface);
+	    ParserInterface parserInterface = CAStatutesFactory.getInstance().getParserInterface(true);
+    	LoadHistoricalOpinions load = new LoadHistoricalOpinions(emf, parserInterface);
         try {
         	load.initializeDB();
         } finally {

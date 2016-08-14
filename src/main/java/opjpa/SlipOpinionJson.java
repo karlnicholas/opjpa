@@ -18,8 +18,8 @@ import org.codehaus.jettison.mapped.Configuration;
 import org.codehaus.jettison.mapped.MappedNamespaceConvention;
 import org.codehaus.jettison.mapped.MappedXMLStreamWriter;
 
-import codesparser.Section;
 import opca.dto.OpinionViews;
+import opca.dto.Section;
 import opca.service.OpinionViewCache;
 import opca.view.OpinionView;
 import opca.view.SectionView;

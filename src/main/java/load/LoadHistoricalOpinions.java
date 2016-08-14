@@ -14,12 +14,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 
-import codesparser.CodesInterface;
-import gscalifornia.factory.CAStatutesFactory;
 import opca.memorydb.CitationStore;
 import opca.model.OpinionSummary;
 import opca.model.StatuteCitation;
 import opca.service.SlipOpinionService;
+import parser.ParserInterface;
+import statutesca.factory.CAStatutesFactory;
 
 public class LoadHistoricalOpinions {
 	private static Logger logger = Logger.getLogger(LoadHistoricalOpinions.class.getName());
@@ -29,23 +29,23 @@ public class LoadHistoricalOpinions {
 	
 	public LoadHistoricalOpinions(
 		EntityManagerFactory emf, 
-		CodesInterface codesInterface 
+		ParserInterface parserInterface 
 	) {
 		this.emf = emf;
     	citationStore = CitationStore.getInstance();
-//		parser = new OpinionDocumentParser(codesInterface.getCodeTitles());
+//		parser = new OpinionDocumentParser(parserInterface.getCodeTitles());
 	}
 	
     public void initializeDB() throws Exception {
     	Date startTime = new Date();
     	//
-	    CodesInterface codesInterface = CAStatutesFactory.getInstance().getCodesInterface(true);
+	    ParserInterface parserInterface = CAStatutesFactory.getInstance().getParserInterface(true);
 
-	    LoadCourtListenerCallback cb1 = new LoadCourtListenerCallback(citationStore, codesInterface);
+	    LoadCourtListenerCallback cb1 = new LoadCourtListenerCallback(citationStore, parserInterface);
 	    LoadCourtListenerFiles file1 = new LoadCourtListenerFiles(cb1);
 	    file1.loadFiles("c:/users/karl/downloads/calctapp-opinions.tar.gz", "c:/users/karl/downloads/calctapp-clusters.tar.gz", 1000);
 
-	    LoadCourtListenerCallback cb2 = new LoadCourtListenerCallback(citationStore, codesInterface);
+	    LoadCourtListenerCallback cb2 = new LoadCourtListenerCallback(citationStore, parserInterface);
 	    LoadCourtListenerFiles file2 = new LoadCourtListenerFiles(cb2);
 	    file2.loadFiles("c:/users/karl/downloads/cal-opinions.tar.gz", "c:/users/karl/downloads/cal-clusters.tar.gz", 1000);
 

@@ -10,8 +10,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import codesparser.CodesInterface;
-import gscalifornia.factory.CAStatutesFactory;
 import opca.model.OpinionKey;
 import opca.model.OpinionSummary;
 import opca.model.SlipOpinion;
@@ -19,6 +17,8 @@ import opca.model.StatuteCitation;
 import opca.model.StatuteKey;
 import opca.parser.ParsedOpinionResults;
 import opca.service.SlipOpinionService;
+import parser.ParserInterface;
+import statutesca.factory.CAStatutesFactory;
 
 public class OpinionsReport {
 
@@ -39,16 +39,16 @@ public class OpinionsReport {
     	try {
 	
 	//        String iface = "code.CACodes";
-	//        CodesInterface codesInterface = (CodesInterface) Class.forName(iface).newInstance();
-	        CodesInterface codesInterface = CAStatutesFactory.getInstance().getCodesInterface(true);
+	//        ParserInterface parserInterface = (ParserInterface) Class.forName(iface).newInstance();
+	        ParserInterface parserInterface = CAStatutesFactory.getInstance().getParserInterface(true);
 
 	
-	//        OpinionQueries.getInstance().initializeDB(codesInterface);
+	//        OpinionQueries.getInstance().initializeDB(parserInterface);
 	//        OpinionQueries.getInstance().writeToXML();
 	//        OpinionQueries.getInstance().initFromXML();
 	        
 //	        OpinionSummary opinion = databaseFacade.findOpinion(new OpinionKey("211 Cal.App.4th 13"));
-//        	printOpinionSummaryReport(codesInterface, parserResults, opinion );
+//        	printOpinionSummaryReport(parserInterface, parserResults, opinion );
 	        
 	        PrintOpinionReport opinionReport = new PrintOpinionReport();
 			SlipOpinionService slipOpinionService = new SlipOpinionService();
@@ -88,7 +88,7 @@ public class OpinionsReport {
 		        }
 		        writer.close();
 	        }
-//	        opinionReport.printSlipOpinionReport(codesInterface, em, new OpinionKey("1 Slip.Op 100423586"));	        	        
+//	        opinionReport.printSlipOpinionReport(parserInterface, em, new OpinionKey("1 Slip.Op 100423586"));	        	        
 	        
 	//        for ( OpinionSummary op: persistenceFacade.getAllOpinions() ) {
 	//            if (op.getStatutesReferredTo().size() > 10 ) System.out.println(op.getName() +":" + op.getStatutesReferredTo().size());

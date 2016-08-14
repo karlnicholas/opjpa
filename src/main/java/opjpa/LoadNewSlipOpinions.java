@@ -2,10 +2,6 @@ package opjpa;
 
 import javax.persistence.*;
 
-import codesparser.CodeTitles;
-import codesparser.CodesInterface;
-import gscalifornia.factory.CAStatutesFactory;
-
 import java.io.*;
 import java.util.*;
 
@@ -13,7 +9,10 @@ import load.LoadHistoricalOpinions;
 import opca.memorydb.CitationStore;
 import opca.model.SlipOpinion;
 import opca.parser.*;
+import parser.ParserInterface;
 import scraper.TestCACaseScraper;
+import statutes.StatutesTitles;
+import statutesca.factory.CAStatutesFactory;
 
 public class LoadNewSlipOpinions {
 	
@@ -29,7 +28,7 @@ public class LoadNewSlipOpinions {
 	public static void main(String[] args) throws Exception {
 		LoadNewSlipOpinions opJpa = new LoadNewSlipOpinions();
 //		opJpa.runUpdateScheduler();
-		CAStatutesFactory.getInstance().getCodesInterface(true);
+		CAStatutesFactory.getInstance().getParserInterface(true);
 		opJpa.loadAndPersistCases();
 
 	}
@@ -69,10 +68,10 @@ public class LoadNewSlipOpinions {
 			}
 			System.out.println("Cases = " + opinions.size() );
 			// Create the CACodes list
-		    CodesInterface codesInterface = CAStatutesFactory.getInstance().getCodesInterface(true);
+		    ParserInterface parserInterface = CAStatutesFactory.getInstance().getParserInterface(true);
 			
 	//	    QueueUtility queue = new QueueUtility(compressSections);  // true is compress references within individual titles
-			CodeTitles[] codeTitles = codesInterface.getCodeTitles();
+			StatutesTitles[] codeTitles = parserInterface.getStatutesTitles();
 			OpinionDocumentParser parser = new OpinionDocumentParser(codeTitles);
 			
 			System.out.println("There are " + opinions.size() + " SlipOpinions to process");
@@ -87,7 +86,7 @@ public class LoadNewSlipOpinions {
 	    		citationStore.mergeParsedDocumentCitations(parserDocument.opinionBase, parserResults);
 			}
 			
-			LoadHistoricalOpinions loadOpinions = new LoadHistoricalOpinions(emf, codesInterface);
+			LoadHistoricalOpinions loadOpinions = new LoadHistoricalOpinions(emf, parserInterface);
 			loadOpinions.processesOpinions(citationStore);
 			loadOpinions.processesStatutes(citationStore);
 

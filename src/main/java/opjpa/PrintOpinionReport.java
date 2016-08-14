@@ -8,7 +8,6 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import codesparser.CodesInterface;
 import opca.model.OpinionBase;
 import opca.model.OpinionKey;
 import opca.model.OpinionSummary;
@@ -22,11 +21,12 @@ import opca.view.OpinionViewBuilder;
 import opca.view.SectionView;
 import opca.view.StatuteView;
 import opca.view.ViewReference;
+import parser.ParserInterface;
 
 public class PrintOpinionReport {
 
 	public void printSlipOpinionReport(
-    		CodesInterface codesInterface,
+    		ParserInterface parserInterface,
     		EntityManager em, 
     		OpinionKey opinionKey
 	) throws Exception {
@@ -53,7 +53,7 @@ public class PrintOpinionReport {
         OpinionSummary opinionSummary = slipOpinionService.opinionExists(opinionKey);
 		if ( opinionSummary != null ) {
 	    	ParsedOpinionResults parserResults = new ParsedOpinionResults(opinionSummary, slipOpinionService.getPersistenceLookup());
-	        OpinionViewBuilder opinionCaseBuilder = new OpinionViewBuilder(codesInterface);
+	        OpinionViewBuilder opinionCaseBuilder = new OpinionViewBuilder(parserInterface);
 	        //
 	        OpinionView opinionCase = opinionCaseBuilder.buildOpinionSummaryView(opinionSummary, parserResults, true);
 	        opinionCase.trimToLevelOfInterest(2, true);
@@ -75,7 +75,7 @@ public class PrintOpinionReport {
         System.out.println("ApiOpinion: " + opinionCase);
         System.out.println("--------- STATUTES -----------");
         for ( StatuteView opinionCode: opinionCase.getStatutes() ) {
-        	System.out.println(opinionCode.getCodeReference().getTitle(false).toUpperCase());
+        	System.out.println(opinionCode.getStatutesBaseClass().getTitle(false).toUpperCase());
         	List<SectionView> sorted = sortSubcodes(opinionCode);
         	handleSubcode(sorted, opinionCode);
         	List<String> currentTitle = null;
@@ -85,7 +85,7 @@ public class PrintOpinionReport {
         		for ( int i=1, j=currentTitle.size(); i<j; ++i ) {
         			indent = indent + "  ";
         		}
-        		System.out.println(String.format("%s%-5d %-15s %s", indent, section.getRefCount(), section.getDisplaySectionNumber().replace("§ ", " § ").replace("§ §", "§§"), section.getCodeReference().getTitle(true)));
+        		System.out.println(String.format("%s%-5d %-15s %s", indent, section.getRefCount(), section.getDisplaySectionNumber().replace("§ ", " § ").replace("§ §", "§§"), section.getStatutesBaseClass().getTitle(true)));
         	}
         }
         System.out.println("--------- OPINIONS -----------");
@@ -122,7 +122,7 @@ public class PrintOpinionReport {
     }
     
     private List<String> checkPrintTitle(SectionView section, List<String> currentTitle) {
-		ArrayList<String> fullTitle = new ArrayList<String>(Arrays.asList(section.getCodeReference().getFullTitle(":").split("[:]")));
+		ArrayList<String> fullTitle = new ArrayList<String>(Arrays.asList(section.getStatutesBaseClass().getFullTitle(":").split("[:]")));
 		fullTitle.remove(fullTitle.size()-1);
 		if ( currentTitle == null || fullTitle.size() != currentTitle.size() ) {
 			printFullTitle(fullTitle);
@@ -158,8 +158,8 @@ public class PrintOpinionReport {
     	sortedSections.sort(new Comparator<SectionView>() {
 			@Override
 			public int compare(SectionView o1, SectionView o2) {
-				return o1.getCodeReference().getSection().getSectionNumbers().get(0).getPosition()
-						- o2.getCodeReference().getSection().getSectionNumbers().get(0).getPosition();
+				return o1.getStatutesBaseClass().getStatutesLeaf().getSectionNumbers().get(0).getPosition()
+						- o2.getStatutesBaseClass().getStatutesLeaf().getSectionNumbers().get(0).getPosition();
 			}
     		
     	});
