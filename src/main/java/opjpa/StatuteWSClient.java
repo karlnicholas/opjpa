@@ -22,8 +22,7 @@ import javax.xml.bind.Marshaller;
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
 
-import statutes.StatutesBaseClass;
-import statutes.StatutesBaseClassArray;
+import statutews.ResponseArray;
 import statutews.StatuteKey;
 import statutews.StatuteKeyArray;
 import statutews.StatuteWS;
@@ -43,7 +42,7 @@ public class StatuteWSClient {
 
 	public StatuteWSClient() {
 		try {
-			JAXBContext jaxbContext = JAXBContext.newInstance("statutes");
+			JAXBContext jaxbContext = JAXBContext.newInstance("statutes:statutesws");
 			jaxbMarshaller = jaxbContext.createMarshaller();
 
 			// marshalled XML data is formatted with linefeeds and indentation
@@ -70,11 +69,10 @@ public class StatuteWSClient {
             key.setSectionNumber("625");
             StatuteKeyArray statuteKeyArray = new StatuteKeyArray();
             statuteKeyArray.getItem().add(key);
-            StatutesBaseClassArray statutesArray = proxy.echo(statuteKeyArray);
-            System.out.println(statutesArray);
-            for (StatutesBaseClass statutesBaseClass: statutesArray.getItem() )
+            ResponseArray responseArray = proxy.echo(statuteKeyArray);
+            System.out.println(responseArray);
     		try {
-				jaxbMarshaller.marshal(statutesBaseClass, System.out);
+				jaxbMarshaller.marshal(responseArray, System.out);
 			} catch (JAXBException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

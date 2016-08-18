@@ -45,4 +45,20 @@ public class ObjectFactory {
         return new StatuteKey();
     }
 
+    /**
+     * Create an instance of {@link ResponseArray }
+     * 
+     */
+    public ResponseArray createResponseArray() {
+        return new ResponseArray();
+    }
+
+    /**
+     * Create an instance of {@link ResponsePair }
+     * 
+     */
+    public ResponsePair createResponsePair() {
+        return new ResponsePair();
+    }
+
 }
