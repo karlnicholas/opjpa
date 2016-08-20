@@ -19,25 +19,28 @@ package opjpa;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.namespace.QName;
+import javax.xml.ws.Service;
 
 import statutesws.ResponseArray;
 import statutesws.StatuteKey;
 import statutesws.StatuteKeyArray;
 import statutesws.StatutesWS;
-import statutesws.StatutesWS_Service;
 
+import java.lang.System;
+import java.net.URL;
 
 /**
  *
  * @author rsearls@redhat.com
  */
-public class StatuteWSClient {
+public class StatuteWSClientJBoss {
 	private Marshaller jaxbMarshaller;
     public static void main(String[] args) {
-    	new StatuteWSClient().run();
+    	new StatuteWSClientJBoss().run();
     }
 
-	public StatuteWSClient() {
+	public StatuteWSClientJBoss() {
 		try {
 			JAXBContext jaxbContext = JAXBContext.newInstance("statutes:statutesws");
 			jaxbMarshaller = jaxbContext.createMarshaller();
@@ -52,15 +55,32 @@ public class StatuteWSClient {
 		
 	}
 	private void run() {
-        StatutesWS proxy = new StatutesWS_Service().getStatutesWSPort();
+        String endPointAddress = "http://localhost:8080/statutesws-endpoint/StatutesWS";
+        QName serviceName = new QName("http://statutesws/", "StatutesWS");
 
-        StatuteKey key = new StatuteKey();
-        
-        key.setCode("California Penal Code");
-        key.setSectionNumber("625");
-        StatuteKeyArray statuteKeyArray = new StatuteKeyArray();
-        statuteKeyArray.getItem().add(key);
-        ResponseArray responseArray = proxy.findStatutes(statuteKeyArray);
-        System.out.println(responseArray);
+        try {
+            URL wsdlURL = new URL(endPointAddress + "?wsdl");
+            Service service = Service.create(wsdlURL, serviceName);
+            StatutesWS proxy = service.getPort(StatutesWS.class);
+
+            StatuteKey key = new StatuteKey();
+            
+            key.setCode("California Penal Code");
+            key.setSectionNumber("625");
+            StatuteKeyArray statuteKeyArray = new StatuteKeyArray();
+            statuteKeyArray.getItem().add(key);
+            ResponseArray responseArray = proxy.findStatutes(statuteKeyArray);
+            System.out.println(responseArray);
+/*            
+    		try {
+				jaxbMarshaller.marshal(responseArray, System.out);
+			} catch (JAXBException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+*/            
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 }
