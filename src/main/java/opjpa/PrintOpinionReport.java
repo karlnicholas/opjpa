@@ -21,12 +21,12 @@ import opca.view.OpinionViewBuilder;
 import opca.view.SectionView;
 import opca.view.StatuteView;
 import opca.view.ViewReference;
-import parser.ParserInterface;
+import statutesws.StatutesWS;
+import statutesws.StatutesWS_Service;
 
 public class PrintOpinionReport {
 
 	public void printSlipOpinionReport(
-    		ParserInterface parserInterface,
     		EntityManager em, 
     		OpinionKey opinionKey
 	) throws Exception {
@@ -35,12 +35,14 @@ public class PrintOpinionReport {
 		SlipOpinionService slipOpinionService = new SlipOpinionService();
 		slipOpinionService.setEntityManager(em);
 		SlipOpinion slipOpinion = slipOpinionService.slipOpinionExists(opinionKey);
+        StatutesWS statutesWS = new StatutesWS_Service().getStatutesWSPort();
+		
 		if ( slipOpinion != null ) {
 	    	ParsedOpinionResults parserResults = new ParsedOpinionResults(slipOpinion, slipOpinionService.getPersistenceLookup());
 
 	    	OpinionViewBuilder opinionCaseBuilder = new OpinionViewBuilder();
 	        //TODO:FIX FOR STATUTESERVICE
-	        OpinionView opinionCase = opinionCaseBuilder.buildSlipOpinionView(slipOpinion, parserResults);
+	        OpinionView opinionCase = opinionCaseBuilder.buildSlipOpinionView(statutesWS, slipOpinion, parserResults);
 	        opinionCase.trimToLevelOfInterest(2, true);
 
 	    	printBaseOpinionReport(parserResults, slipOpinion, opinionCase);

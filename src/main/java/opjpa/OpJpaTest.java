@@ -323,7 +323,7 @@ public class OpJpaTest {
 			Date startTime = new Date();
 			
 			// Create the CACodes list
-		    ParserInterface parserInterface = CAStatutesFactory.getInstance().getParserInterface(true);
+//		    ParserInterface parserInterface = CAStatutesFactory.getInstance().getParserInterface(true);
 			
 	//	    QueueUtility queue = new QueueUtility(compressSections);  // true is compress references within individual titles
 			// CodeTitles[] statutesTitles = parserInterface.getCodeTitles();
@@ -341,7 +341,7 @@ public class OpJpaTest {
 				if ( slipOpinion.getFileName().equals("A142485") ) continue;
 								
 //				System.out.println("Case = " + slipOpinion.getFileName());
-				opinionReport.printSlipOpinionReport(parserInterface, em, slipOpinion.getOpinionKey());
+				opinionReport.printSlipOpinionReport(em, slipOpinion.getOpinionKey());
 //				if ( slipOpinion.getFileName().contains("143650") ) {
 //					ParsedOpinionResults parserResults = parser.parseCase(caseScraper.getCaseFile(slipOpinion, false), slipOpinion, slipOpinion.getOpinionKey() );
 //				}

@@ -28,7 +28,7 @@ public class OpinionReport {
 	
 	//        String iface = "code.CACodes";
 	//        ParserInterface parserInterface = (ParserInterface) Class.forName(iface).newInstance();
-	        ParserInterface parserInterface = CAStatutesFactory.getInstance().getParserInterface(true);
+//	        ParserInterface parserInterface = CAStatutesFactory.getInstance().getParserInterface(true);
 
 	
 	//        OpinionQueries.getInstance().initializeDB(parserInterface);
@@ -40,10 +40,10 @@ public class OpinionReport {
 	        
 	        PrintOpinionReport opinionReport = new PrintOpinionReport();
 	        
-	        opinionReport.printSlipOpinionReport(parserInterface, em, new OpinionKey("1 Slip.Op 20523050"));
-	        opinionReport.printSlipOpinionReport(parserInterface, em, new OpinionKey("1 Slip.Op 70099571"));
-	        opinionReport.printSlipOpinionReport(parserInterface, em, new OpinionKey("1 Slip.Op 30160198"));	        
-	        opinionReport.printSlipOpinionReport(parserInterface, em, new OpinionKey("1 Slip.Op 100423586"));	        
+	        opinionReport.printSlipOpinionReport(em, new OpinionKey("1 Slip.Op 20523050"));
+	        opinionReport.printSlipOpinionReport(em, new OpinionKey("1 Slip.Op 70099571"));
+	        opinionReport.printSlipOpinionReport(em, new OpinionKey("1 Slip.Op 30160198"));	        
+	        opinionReport.printSlipOpinionReport(em, new OpinionKey("1 Slip.Op 100423586"));	        
 	        
 	        
 	//        for ( OpinionSummary op: persistenceFacade.getAllOpinions() ) {
