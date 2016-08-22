@@ -55,7 +55,7 @@ public class StatuteWSClientJBoss {
 		
 	}
 	private void run() {
-        String endPointAddress = "http://localhost:8080/statutesws-endpoint/StatutesWS";
+        String endPointAddress = "http://statutesws-jsec.rhcloud.com/StatutesWS";
         QName serviceName = new QName("http://statutesws/", "StatutesWS");
 
         try {

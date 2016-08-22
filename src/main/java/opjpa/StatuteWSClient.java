@@ -16,6 +16,9 @@
  */
 package opjpa;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -24,7 +27,7 @@ import statutesws.ResponseArray;
 import statutesws.StatuteKey;
 import statutesws.StatuteKeyArray;
 import statutesws.StatutesWS;
-import statutesws.StatutesWS_Service;
+import statutesws.StatutesWSService;
 
 
 /**
@@ -33,7 +36,7 @@ import statutesws.StatutesWS_Service;
  */
 public class StatuteWSClient {
 	private Marshaller jaxbMarshaller;
-    public static void main(String[] args) {
+    public static void main(String[] args) throws MalformedURLException {
     	new StatuteWSClient().run();
     }
 
@@ -51,8 +54,8 @@ public class StatuteWSClient {
 		}
 		
 	}
-	private void run() {
-        StatutesWS proxy = new StatutesWS_Service().getStatutesWSPort();
+	private void run() throws MalformedURLException {
+        StatutesWS proxy = new StatutesWSService(new URL("http://statutesws-jsec.rhcloud.com/StatutesWS?wsdl")).getStatutesWSPort();
 
         StatuteKey key = new StatuteKey();
         
