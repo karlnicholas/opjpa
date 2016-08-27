@@ -26,6 +26,7 @@ import javax.xml.bind.Marshaller;
 import statutesws.ResponseArray;
 import statutesws.StatuteKey;
 import statutesws.StatuteKeyArray;
+import statutesws.StatutesTitlesArray;
 import statutesws.StatutesWS;
 import statutesws.StatutesWSService;
 
@@ -55,8 +56,11 @@ public class StatuteWSClient {
 		
 	}
 	private void run() throws MalformedURLException {
-        StatutesWS proxy = new StatutesWSService(new URL("http://statutesws-jsec.rhcloud.com/StatutesWS?wsdl")).getStatutesWSPort();
+        StatutesWS proxy = new StatutesWSService(new URL("http://localhost:80/StatutesWS?wsdl")).getStatutesWSPort();
 
+        StatutesTitlesArray statutesTitlesArray = proxy.getStatutesTitles();
+        System.out.println(statutesTitlesArray.getItem());
+        
         StatuteKey key = new StatuteKey();
         
         key.setCode("California Penal Code");

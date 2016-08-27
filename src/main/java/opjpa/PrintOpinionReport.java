@@ -1,5 +1,6 @@
 package opjpa;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -21,8 +22,8 @@ import opca.view.OpinionViewBuilder;
 import opca.view.SectionView;
 import opca.view.StatuteView;
 import opca.view.ViewReference;
+import statutesws.StatutesWSService;
 import statutesws.StatutesWS;
-import statutesws.StatutesWS_Service;
 
 public class PrintOpinionReport {
 
@@ -35,7 +36,7 @@ public class PrintOpinionReport {
 		SlipOpinionService slipOpinionService = new SlipOpinionService();
 		slipOpinionService.setEntityManager(em);
 		SlipOpinion slipOpinion = slipOpinionService.slipOpinionExists(opinionKey);
-        StatutesWS statutesWS = new StatutesWS_Service().getStatutesWSPort();
+        StatutesWS statutesWS = new StatutesWSService(new URL("http://localhost/StatutesWS?wsdl")).getStatutesWSPort();
 		
 		if ( slipOpinion != null ) {
 	    	ParsedOpinionResults parserResults = new ParsedOpinionResults(slipOpinion, slipOpinionService.getPersistenceLookup());

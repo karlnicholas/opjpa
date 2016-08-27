@@ -25,14 +25,14 @@ public class TestOnlineUpdates {
 		try {
 //			OpinionScraperInterface caseScraper = new CACaseScraper(true);
 			OpinionScraperInterface caseScraper = new TestCACaseScraper(false);
-			EntityTransaction tx = em.getTransaction();
+//			EntityTransaction tx = em.getTransaction();
 			try {
-				tx.begin();
+//				tx.begin();
 				new CAOnlineUpdateService(em).updateDatabase(caseScraper);
-				tx.commit();
+//				tx.commit();
 			} catch (Exception ex) {
 				ex.printStackTrace();
-				tx.rollback();
+//				tx.rollback();
 			}
 			em.close();
 		} finally {
