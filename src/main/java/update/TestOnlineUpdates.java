@@ -8,7 +8,7 @@ import javax.persistence.Persistence;
 
 import opca.parser.OpinionScraperInterface;
 import opca.scraper.CACaseScraper;
-import opca.service.CAOnlineUpdateService;
+import opca.service.updates.CAOnlineUpdates;
 import scraper.TestCACaseScraper;
 
 public class TestOnlineUpdates {
@@ -28,7 +28,7 @@ public class TestOnlineUpdates {
 //			EntityTransaction tx = em.getTransaction();
 			try {
 //				tx.begin();
-				new CAOnlineUpdateService(em).updateDatabase(caseScraper);
+				new CAOnlineUpdates(em).updateDatabase(caseScraper);
 //				tx.commit();
 			} catch (Exception ex) {
 				ex.printStackTrace();
