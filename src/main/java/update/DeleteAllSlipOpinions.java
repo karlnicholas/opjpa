@@ -34,9 +34,15 @@ public class DeleteAllSlipOpinions {
 				tx.begin();
 				
 				List<SlipOpinion> slipOpinions = slipOpinionService.listSlipOpinions();
-				logger.info("There are " + slipOpinions.size() + " to be deleted");							
-				slipOpinionService.fetchCitations(slipOpinions);
+				logger.info("There are " + slipOpinions.size() + " to be deleted");
+				// should still be attached?
+//				slipOpinionService.fetchCitations(slipOpinions);
+				int size = slipOpinions.size();
+				
 				for (SlipOpinion deleteOpinion: slipOpinions) {
+					if ( --size == 0 ) continue;	// leave one?
+					// insure attached, or re-attach
+					em.merge(deleteOpinion);
 					for( OpinionKey key: deleteOpinion.getOpinionCitations() ) {
 						OpinionSummary opSummary = slipOpinionService.findOpinion(key);
 						Set<OpinionKey> referringOpinions = opSummary.getReferringOpinions();
@@ -54,9 +60,10 @@ public class DeleteAllSlipOpinions {
 						mapReferringOpinionCount.remove(opKey);
 						em.merge(opStatute);
 					}
-					em.remove(em.merge(deleteOpinion));
+					em.remove(deleteOpinion);
 				}
 				
+				logger.info("size = " + size);
 				tx.commit();
 			} catch (Exception ex) {
 				ex.printStackTrace();
