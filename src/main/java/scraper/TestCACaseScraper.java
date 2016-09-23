@@ -6,8 +6,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.poi.hwpf.HWPFDocument;
-
 import opca.model.SlipOpinion;
 import opca.parser.ScrapedOpinionDocument;
 import opca.scraper.*;
@@ -31,9 +29,10 @@ public class TestCACaseScraper extends CACaseScraper {
 	@Override
 	public List<ScrapedOpinionDocument> scrapeOpinionFiles(List<SlipOpinion> opinions) {
 		List<ScrapedOpinionDocument> documents = new ArrayList<ScrapedOpinionDocument>();
+		CAParseScrapedDocument parseScrapedDocument = new CAParseScrapedDocument();		
 		for (SlipOpinion slipOpinion: opinions ) {
-			try ( InputStream inputStream = Files.newInputStream( Paths.get(casesDir + slipOpinion.getFileName() +".DOC" )) ) {
-				documents.add( new ScrapedOpinionDocument( slipOpinion, new HWPFDocument(inputStream)) );
+			try ( InputStream inputStream = Files.newInputStream( Paths.get(casesDir + slipOpinion.getFileName() + slipOpinion.getFileExtension())) ) {
+				documents.add( parseScrapedDocument.parseScrapedDocument(slipOpinion, inputStream) );
 				inputStream.close();
 			} catch (IOException e) {
 				e.printStackTrace();

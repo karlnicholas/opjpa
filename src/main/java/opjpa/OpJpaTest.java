@@ -89,14 +89,14 @@ public class OpJpaTest {
 		
 		List<ScrapedOpinionDocument> parserDocuments = caseParser.scrapeOpinionFiles(opinions);
 		for( ScrapedOpinionDocument parserDocument: parserDocuments ) {
-			parser.parseOpinionDocument(parserDocument, parserDocument.opinionBase, parserDocument.opinionBase.getOpinionKey() );
+			parser.parseOpinionDocument(parserDocument, parserDocument.getOpinionBase(), parserDocument.getOpinionBase().getOpinionKey() );
         	// look for details
         	// after a summaryParagraph is found, don't check any further .. (might have to change)
 			
 			// look for summary and disposition 
-    		parser.parseSlipOpinionDetails((SlipOpinion) parserDocument.opinionBase, parserDocument);
+    		parser.parseSlipOpinionDetails((SlipOpinion) parserDocument.getOpinionBase(), parserDocument);
 
-			em.persist((SlipOpinion) parserDocument.opinionBase);
+			em.persist((SlipOpinion) parserDocument.getOpinionBase());
 		}
 		
 		tx.commit();
@@ -137,7 +137,13 @@ public class OpJpaTest {
 		Calendar cal = Calendar.getInstance();
 		cal.set(1960, Calendar.JUNE, 1);
 		for ( String caseName: fileNamesCopy ) {
-			SlipOpinion slipOpinion = new SlipOpinion(caseName.replace(".DOC", ""), "title", cal.getTime(), "CA/4" );
+			String fileExtension = ".DOCX";
+			int loc = caseName.indexOf(fileExtension); 
+			if ( loc == -1 ) {
+				fileExtension = ".DOC";
+				loc = caseName.indexOf(fileExtension); 
+			}
+			SlipOpinion slipOpinion = new SlipOpinion(caseName.replace(fileExtension, ""), fileExtension, "title", cal.getTime(), "CA/4" );
 			if ( onlineCases.contains(slipOpinion)) onlineCases.remove(slipOpinion);
 		}
 		
@@ -151,10 +157,10 @@ public class OpJpaTest {
 		
 		List<ScrapedOpinionDocument> parserDocs = caseScaper.scrapeOpinionFiles(onlineCases);
 		for( ScrapedOpinionDocument parserDoc: parserDocs ) {
-			ParsedOpinionResults parserResults = parser.parseOpinionDocument(parserDoc, parserDoc.opinionBase, parserDoc.opinionBase.getOpinionKey() );
+			ParsedOpinionResults parserResults = parser.parseOpinionDocument(parserDoc, parserDoc.getOpinionBase(), parserDoc.getOpinionBase().getOpinionKey() );
 //        	parserResults.mergeParsedDocumentCitationsToMemoryDB(slipOpinionService.getPersistenceInterface(), parserDoc.opinionBase);
 //			em.persist(slipOpinion);
-			System.out.println("Downloaded " + ((SlipOpinion)parserDoc.opinionBase).getFileName() + ".DOC");
+			System.out.println("Downloaded " + ((SlipOpinion)parserDoc.getOpinionBase()).getFileName() + ".DOC");
 			throw new RuntimeException("this was changed");
 		}
 		// tx.commit();
@@ -267,9 +273,9 @@ public class OpJpaTest {
 			List<ScrapedOpinionDocument> parserDocuments = caseParser.scrapeOpinionFiles(onlineCases);
 			for( ScrapedOpinionDocument parserDocument: parserDocuments ) {
 //				if ( slipOpinion.getFileName().contains("143650") ) {
-					ParsedOpinionResults parserResults = parser.parseOpinionDocument(parserDocument, parserDocument.opinionBase, parserDocument.opinionBase.getOpinionKey() );
+					ParsedOpinionResults parserResults = parser.parseOpinionDocument(parserDocument, parserDocument.getOpinionBase(), parserDocument.getOpinionBase().getOpinionKey() );
 //		        	parserResults.mergeParsedDocumentCitationsToMemoryDB(slipOpinionService.getPersistenceInterface(), parserDocument.opinionBase);
-		        	em.persist((SlipOpinion)parserDocument.opinionBase);
+		        	em.persist((SlipOpinion)parserDocument.getOpinionBase());
 					throw new RuntimeException("this was changed");
 //				}
 	/*        	

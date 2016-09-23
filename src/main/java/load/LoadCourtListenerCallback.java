@@ -120,8 +120,8 @@ public class LoadCourtListenerCallback implements CourtListenerCallback {
 					// "Cal.").replace("supp.", "Supp.");
 					OpinionSummary opinionSummary = new OpinionSummary(new OpinionKey(name), op.getCaseName(), op.getDateFiled(), "");
 					ScrapedOpinionDocument parserDocument = new ScrapedOpinionDocument(opinionSummary);
-					parserDocument.footnotes = footnotes;
-					parserDocument.paragraphs = paragraphs;
+					parserDocument.setFootnotes( footnotes );
+					parserDocument.setParagraphs( paragraphs );
 					ParsedOpinionResults parserResults = parser.parseOpinionDocument(parserDocument, opinionSummary,
 							opinionSummary.getOpinionKey());		
 					synchronized ( citationStore ) {

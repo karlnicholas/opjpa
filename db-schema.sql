@@ -96,7 +96,8 @@
         opinionsummary_page bigint not null,
         opinionsummary_volume integer not null,
         opinionsummary_vset integer not null,
-        statutecitations tinyblob
+        code varchar(255),
+        sectionnumber varchar(255)
     ) ENGINE=InnoDB;
 
     create table role (
@@ -114,6 +115,7 @@
         opiniondate date,
         title TEXT,
         disposition TEXT,
+        fileextension TEXT,
         filename TEXT,
         summary TEXT,
         primary key (page, volume, vset)
@@ -143,7 +145,8 @@
         slipopinion_page bigint not null,
         slipopinion_volume integer not null,
         slipopinion_vset integer not null,
-        statutecitations tinyblob
+        code varchar(255),
+        sectionnumber varchar(255)
     ) ENGINE=InnoDB;
 
     create table statutecitation (

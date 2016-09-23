@@ -221,8 +221,8 @@ public class TestCitationBuilder {
 						System.out.println(opinionSummary);
 					}
 					ScrapedOpinionDocument parserDocument = new ScrapedOpinionDocument(opinionSummary);
-					parserDocument.footnotes = footnotes;
-					parserDocument.paragraphs = paragraphs;
+					parserDocument.setFootnotes( footnotes );
+					parserDocument.setParagraphs( paragraphs );
 					ParsedOpinionResults parserResults = parser.parseOpinionDocument(parserDocument, opinionSummary, opinionSummary.getOpinionKey());
 					// managed the opinionCitations and statuteCitations
 					// referred to
