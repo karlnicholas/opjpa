@@ -8,7 +8,7 @@ import javax.persistence.Persistence;
 
 import opca.parser.OpinionScraperInterface;
 import opca.scraper.CACaseScraper;
-import opca.service.updates.CAOnlineUpdates;
+import opca.service.CAOnlineUpdates;
 import scraper.TestCACaseScraper;
 
 public class TestOnlineUpdates {
