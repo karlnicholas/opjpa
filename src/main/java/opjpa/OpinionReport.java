@@ -40,10 +40,10 @@ public class OpinionReport {
 	        
 	        PrintOpinionReport opinionReport = new PrintOpinionReport();
 	        
-	        opinionReport.printSlipOpinionReport(em, new OpinionKey("1 Slip.Op 20523050"));
-	        opinionReport.printSlipOpinionReport(em, new OpinionKey("1 Slip.Op 70099571"));
-	        opinionReport.printSlipOpinionReport(em, new OpinionKey("1 Slip.Op 30160198"));	        
-	        opinionReport.printSlipOpinionReport(em, new OpinionKey("1 Slip.Op 100423586"));	        
+	        opinionReport.printSlipOpinionReport(em, new OpinionKey("1 Slip.Op 30156316"));
+//	        opinionReport.printSlipOpinionReport(em, new OpinionKey("1 Slip.Op 70099571"));
+//	        opinionReport.printSlipOpinionReport(em, new OpinionKey("1 Slip.Op 30160198"));	        
+//	        opinionReport.printSlipOpinionReport(em, new OpinionKey("1 Slip.Op 100423586"));	        
 	        
 	        
 	//        for ( OpinionSummary op: persistenceFacade.getAllOpinions() ) {

@@ -5,6 +5,7 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -27,6 +28,8 @@ import opca.view.StatuteView;
 import opca.view.SubcodeView;
 
 public class SlipOpinionJson {
+	
+	Logger logger = Logger.getLogger(SlipOpinionJson.class.getName());
 
 	public static void main(String... args) {
 		new SlipOpinionJson().run();
@@ -36,8 +39,7 @@ public class SlipOpinionJson {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("opjpa");
 		EntityManager em = emf.createEntityManager();
 		try {
-			OpinionViewCache slipOpinionData = new OpinionViewCache();
-			slipOpinionData.setEntityManager(em);
+			OpinionViewCache slipOpinionData = new OpinionViewCache(em, logger);
 			slipOpinionData.buildCache();
 			em.close();
 
