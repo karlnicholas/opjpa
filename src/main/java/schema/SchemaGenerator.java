@@ -19,7 +19,7 @@ public class SchemaGenerator {
     }
     private void run() throws Exception {
 
-        File f = new File("c:/users/karl/scsb/src/main/java");
+        File f = new File("c:/users/karln/opca/src/main/java");
         String directory = f.getAbsoluteFile().toString();
 
         String packageName[] = { "opca.model"};
@@ -102,7 +102,7 @@ public class SchemaGenerator {
 	    );
 
 	    export.setDelimiter(";");
-	    export.setOutputFile("c:/users/karl/scsb/opjpa/" + "db-schema.sql");
+	    export.setOutputFile("c:/users/karln/opca/opjpa/" + "db-schema.sql");
 	    export.setFormat(true);
 	    export.execute(true, false, false, false);
 	}	

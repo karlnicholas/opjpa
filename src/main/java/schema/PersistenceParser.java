@@ -39,7 +39,7 @@ public class PersistenceParser {
 
 	        SchemaExport export = new SchemaExport(cfg);
 	        export.setDelimiter(";");
-	        export.setOutputFile("C:/users/karl/scsb/opjpa/" + descriptor.getName() + "_create_schema.sql");
+	        export.setOutputFile("C:/users/karl/opca/opjpa/" + descriptor.getName() + "_create_schema.sql");
 	        export.setFormat(true);
 	        export.execute(true, false, false, false);
 
