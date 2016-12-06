@@ -29,7 +29,7 @@ public class DecodeBulk {
 //		JsonFactory factory = new JsonFactory();
 		Map<Long, LoadOpinion> mapLoadOpinions = new TreeMap<Long, LoadOpinion>();
 
-    	TarArchiveInputStream tarIn = new TarArchiveInputStream(new GzipCompressorInputStream(new BufferedInputStream(new FileInputStream("c:/users/karl/downloads/cal-clusters.tar.gz"))));
+    	TarArchiveInputStream tarIn = new TarArchiveInputStream(new GzipCompressorInputStream(new BufferedInputStream(new FileInputStream("c:/users/karln/downloads/cal-clusters.tar.gz"))));
     	TarArchiveEntry entry;
         while ( (entry = tarIn.getNextTarEntry()) != null ) {
 	        if (tarIn.canReadEntryData(entry)) {

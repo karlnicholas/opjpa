@@ -46,11 +46,11 @@ public class TestCitationBuilder {
     	    
     	    TestCourtListenerCallback cb1 = new TestCourtListenerCallback(citationStore, parserInterface);
     	    LoadCourtListenerFiles files1 = new LoadCourtListenerFiles(cb1);
-    	    files1.loadFiles("c:/users/karl/downloads/calctapp-opinions.tar.gz", "c:/users/karl/downloads/calctapp-clusters.tar.gz", 1000);
+    	    files1.loadFiles("c:/users/karln/downloads/calctapp-opinions.tar.gz", "c:/users/karln/downloads/calctapp-clusters.tar.gz", 1000);
 
     	    TestCourtListenerCallback cb2 = new TestCourtListenerCallback(citationStore, parserInterface);
     	    LoadCourtListenerFiles files2 = new LoadCourtListenerFiles(cb2);
-    	    files2.loadFiles("c:/users/karl/downloads/cal-opinions.tar.gz", "c:/users/karl/downloads/cal-clusters.tar.gz", 1000);
+    	    files2.loadFiles("c:/users/karln/downloads/cal-opinions.tar.gz", "c:/users/karln/downloads/cal-clusters.tar.gz", 1000);
 			
     	    for (  OpinionSummary op: citationStore.getAllOpinions() ) {
 	    		if ( op.isNewlyLoadedOpinion() ) {

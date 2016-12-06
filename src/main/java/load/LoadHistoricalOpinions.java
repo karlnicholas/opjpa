@@ -43,11 +43,11 @@ public class LoadHistoricalOpinions {
 
 	    LoadCourtListenerCallback cb1 = new LoadCourtListenerCallback(citationStore, parserInterface);
 	    LoadCourtListenerFiles file1 = new LoadCourtListenerFiles(cb1);
-	    file1.loadFiles("c:/users/karl/downloads/calctapp-opinions.tar.gz", "c:/users/karl/downloads/calctapp-clusters.tar.gz", 1000);
+	    file1.loadFiles("c:/users/karln/downloads/calctapp-opinions.tar.gz", "c:/users/karln/downloads/calctapp-clusters.tar.gz", 1000);
 
 	    LoadCourtListenerCallback cb2 = new LoadCourtListenerCallback(citationStore, parserInterface);
 	    LoadCourtListenerFiles file2 = new LoadCourtListenerFiles(cb2);
-	    file2.loadFiles("c:/users/karl/downloads/cal-opinions.tar.gz", "c:/users/karl/downloads/cal-clusters.tar.gz", 1000);
+	    file2.loadFiles("c:/users/karln/downloads/cal-opinions.tar.gz", "c:/users/karln/downloads/cal-clusters.tar.gz", 1000);
 
 	    processesOpinions(citationStore); 
     	processesStatutes(citationStore); 

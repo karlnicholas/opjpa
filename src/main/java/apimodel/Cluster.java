@@ -46,6 +46,8 @@ public class Cluster
    private String procedural_history;
    private String[] sub_opinions;
    private String case_name_short;
+   //
+   private String date_filed_is_approximate;
 
    public String[] getPanel ()
    {
@@ -391,6 +393,12 @@ public class Cluster
    {
        return "Cluster [panel = "+panel+", specialty_cite_one = "+specialty_cite_one+", attorneys = "+attorneys+", per_curiam = "+per_curiam+", state_cite_two = "+state_cite_two+", federal_cite_two = "+federal_cite_two+", state_cite_one = "+state_cite_one+", date_created = "+date_created+", federal_cite_one = "+federal_cite_one+", westlaw_cite = "+westlaw_cite+", citation_id = "+citation_id+", state_cite_three = "+state_cite_three+", neutral_cite = "+neutral_cite+", scotus_early_cite = "+scotus_early_cite+", blocked = "+blocked+", syllabus = "+syllabus+", absolute_url = "+absolute_url+", lexis_cite = "+lexis_cite+", nature_of_suit = "+nature_of_suit+", scdb_id = "+scdb_id+", date_filed = "+date_filed+", citation_count = "+citation_count+", date_modified = "+date_modified+", judges = "+judges+", date_blocked = "+date_blocked+", scdb_decision_direction = "+scdb_decision_direction+", case_name_full = "+case_name_full+", scdb_votes_majority = "+scdb_votes_majority+", docket = "+docket+", state_cite_regional = "+state_cite_regional+", source = "+source+", non_participating_judges = "+non_participating_judges+", case_name = "+case_name+", resource_uri = "+resource_uri+", slug = "+slug+", federal_cite_three = "+federal_cite_three+", precedential_status = "+precedential_status+", scdb_votes_minority = "+scdb_votes_minority+", posture = "+posture+", procedural_history = "+procedural_history+", sub_opinions = "+sub_opinions+", case_name_short = "+case_name_short+"]";
    }
+public String getDate_filed_is_approximate() {
+	return date_filed_is_approximate;
+}
+public void setDate_filed_is_approximate(String date_filed_is_approximate) {
+	this.date_filed_is_approximate = date_filed_is_approximate;
+}
 }
 			
 			

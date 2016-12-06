@@ -20,6 +20,9 @@ public class ApiOpinion
     private String html;
     private String absolute_url;
     private String html_with_citations;
+    private String per_curiam;
+    private String page_count;
+    private String author_str;
     public String[] getJoined_by ()
     {
         return joined_by;
@@ -205,4 +208,28 @@ public class ApiOpinion
     {
         return "ClassPojo [joined_by = "+joined_by+", html_lawbox = "+html_lawbox+", extracted_by_ocr = "+extracted_by_ocr+", date_modified = "+date_modified+", local_path = "+local_path+", date_created = "+date_created+", sha1 = "+sha1+", plain_text = "+plain_text+", type = "+type+", opinions_cited = "+opinions_cited+", author = "+author+", html_columbia = "+html_columbia+", download_url = "+download_url+", resource_uri = "+resource_uri+", cluster = "+cluster+", html = "+html+", absolute_url = "+absolute_url+", html_with_citations = "+html_with_citations+"]";
     }
+
+	public String getPer_curiam() {
+		return per_curiam;
+	}
+
+	public void setPer_curiam(String per_curiam) {
+		this.per_curiam = per_curiam;
+	}
+
+	public String getPage_count() {
+		return page_count;
+	}
+
+	public void setPage_count(String page_count) {
+		this.page_count = page_count;
+	}
+
+	public String getAuthor_str() {
+		return author_str;
+	}
+
+	public void setAuthor_str(String author_str) {
+		this.author_str = author_str;
+	}
 }
