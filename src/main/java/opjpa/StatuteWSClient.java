@@ -56,7 +56,7 @@ public class StatuteWSClient {
 		
 	}
 	private void run() throws MalformedURLException {
-        StatutesWS proxy = new StatutesWSService(new URL("http://localhost:80/StatutesWS?wsdl")).getStatutesWSPort();
+        StatutesWS proxy = new StatutesWSService(new URL("http://localhost:9080/StatutesWS?wsdl")).getStatutesWSPort();
 
         StatutesTitlesArray statutesTitlesArray = proxy.getStatutesTitles();
         System.out.println(statutesTitlesArray.getItem());

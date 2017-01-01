@@ -15,7 +15,7 @@ import opca.model.OpinionSummary;
 import opca.model.SlipOpinion;
 import opca.model.StatuteCitation;
 import opca.model.StatuteKey;
-import opca.parser.ParsedOpinionResults;
+import opca.parser.ParsedOpinionCitationSet;
 import opca.service.SlipOpinionService;
 import parser.ParserInterface;
 import statutesca.factory.CAStatutesFactory;
@@ -66,7 +66,7 @@ public class OpinionsReport {
 	        List<SlipOpinion> ops = em.createQuery("select op from SlipOpinion op", SlipOpinion.class ).getResultList();
 	        
 	        for ( SlipOpinion slipOpinion: ops ) {
-		    	ParsedOpinionResults parserResults = new ParsedOpinionResults(slipOpinion, slipOpinionService.getPersistenceLookup());
+		    	ParsedOpinionCitationSet parserResults = new ParsedOpinionCitationSet(slipOpinion, slipOpinionService.getPersistenceLookup());
 	            for ( OpinionKey opinionKey: slipOpinion.getOpinionCitations()) {
 	            	OpinionSummary opinionCited = parserResults.findOpinion(opinionKey);
 	            	int countRefs = 0;

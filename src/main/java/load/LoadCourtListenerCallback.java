@@ -18,7 +18,7 @@ import opca.memorydb.CitationStore;
 import opca.model.OpinionKey;
 import opca.model.OpinionSummary;
 import opca.parser.OpinionDocumentParser;
-import opca.parser.ParsedOpinionResults;
+import opca.parser.ParsedOpinionCitationSet;
 import opca.parser.ScrapedOpinionDocument;
 import parser.ParserInterface;
 
@@ -122,7 +122,7 @@ public class LoadCourtListenerCallback implements CourtListenerCallback {
 					ScrapedOpinionDocument parserDocument = new ScrapedOpinionDocument(opinionSummary);
 					parserDocument.setFootnotes( footnotes );
 					parserDocument.setParagraphs( paragraphs );
-					ParsedOpinionResults parserResults = parser.parseOpinionDocument(parserDocument, opinionSummary,
+					ParsedOpinionCitationSet parserResults = parser.parseOpinionDocument(parserDocument, opinionSummary,
 							opinionSummary.getOpinionKey());		
 					synchronized ( citationStore ) {
 						citationStore.mergeParsedDocumentCitations(opinionSummary, parserResults);

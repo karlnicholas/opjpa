@@ -157,7 +157,7 @@ public class OpJpaTest {
 		
 		List<ScrapedOpinionDocument> parserDocs = caseScaper.scrapeOpinionFiles(onlineCases);
 		for( ScrapedOpinionDocument parserDoc: parserDocs ) {
-			ParsedOpinionResults parserResults = parser.parseOpinionDocument(parserDoc, parserDoc.getOpinionBase(), parserDoc.getOpinionBase().getOpinionKey() );
+			ParsedOpinionCitationSet parserResults = parser.parseOpinionDocument(parserDoc, parserDoc.getOpinionBase(), parserDoc.getOpinionBase().getOpinionKey() );
 //        	parserResults.mergeParsedDocumentCitationsToMemoryDB(slipOpinionService.getPersistenceInterface(), parserDoc.opinionBase);
 //			em.persist(slipOpinion);
 			System.out.println("Downloaded " + ((SlipOpinion)parserDoc.getOpinionBase()).getFileName() + ".DOC");
@@ -273,7 +273,7 @@ public class OpJpaTest {
 			List<ScrapedOpinionDocument> parserDocuments = caseParser.scrapeOpinionFiles(onlineCases);
 			for( ScrapedOpinionDocument parserDocument: parserDocuments ) {
 //				if ( slipOpinion.getFileName().contains("143650") ) {
-					ParsedOpinionResults parserResults = parser.parseOpinionDocument(parserDocument, parserDocument.getOpinionBase(), parserDocument.getOpinionBase().getOpinionKey() );
+					ParsedOpinionCitationSet parserResults = parser.parseOpinionDocument(parserDocument, parserDocument.getOpinionBase(), parserDocument.getOpinionBase().getOpinionKey() );
 //		        	parserResults.mergeParsedDocumentCitationsToMemoryDB(slipOpinionService.getPersistenceInterface(), parserDocument.opinionBase);
 		        	em.persist((SlipOpinion)parserDocument.getOpinionBase());
 					throw new RuntimeException("this was changed");

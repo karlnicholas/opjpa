@@ -80,7 +80,7 @@ public class LoadNewSlipOpinions {
 
 			List<ScrapedOpinionDocument> parserDocuments = caseScraper.scrapeOpinionFiles(opinions);
 			for( ScrapedOpinionDocument parserDocument: parserDocuments ) {
-				ParsedOpinionResults parserResults = parser.parseOpinionDocument(parserDocument, parserDocument.getOpinionBase(), parserDocument.getOpinionBase().getOpinionKey() );
+				ParsedOpinionCitationSet parserResults = parser.parseOpinionDocument(parserDocument, parserDocument.getOpinionBase(), parserDocument.getOpinionBase().getOpinionKey() );
 	    		parser.parseSlipOpinionDetails((SlipOpinion) parserDocument.getOpinionBase(), parserDocument);
 
 	    		citationStore.mergeParsedDocumentCitations(parserDocument.getOpinionBase(), parserResults);

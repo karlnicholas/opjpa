@@ -19,7 +19,7 @@ import opca.memorydb.CitationStore;
 import opca.model.OpinionKey;
 import opca.model.OpinionSummary;
 import opca.parser.OpinionDocumentParser;
-import opca.parser.ParsedOpinionResults;
+import opca.parser.ParsedOpinionCitationSet;
 import opca.parser.ScrapedOpinionDocument;
 import parser.ParserInterface;
 import statutesca.factory.CAStatutesFactory;
@@ -223,7 +223,7 @@ public class TestCitationBuilder {
 					ScrapedOpinionDocument parserDocument = new ScrapedOpinionDocument(opinionSummary);
 					parserDocument.setFootnotes( footnotes );
 					parserDocument.setParagraphs( paragraphs );
-					ParsedOpinionResults parserResults = parser.parseOpinionDocument(parserDocument, opinionSummary, opinionSummary.getOpinionKey());
+					ParsedOpinionCitationSet parserResults = parser.parseOpinionDocument(parserDocument, opinionSummary, opinionSummary.getOpinionKey());
 					// managed the opinionCitations and statuteCitations
 					// referred to
 					// add this opinionSummary as a referring opinion.
