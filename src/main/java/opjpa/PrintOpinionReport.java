@@ -21,6 +21,7 @@ import opca.service.SlipOpinionService;
 import opca.view.OpinionView;
 import opca.view.OpinionViewBuilder;
 import opca.view.SectionView;
+import opca.view.StatuteCaseScore;
 import opca.view.StatuteView;
 import opca.view.ViewReference;
 import statutes.StatutesBaseClass;
@@ -30,52 +31,8 @@ import statutesws.StatutesWS;
 
 public class PrintOpinionReport {
 
-	public void printSlipOpinionReport(
-    		EntityManager em, 
-    		OpinionKey opinionKey
-	) throws Exception {
-// Date startDate = new Date();
-        
-		SlipOpinionService slipOpinionService = new SlipOpinionService();
-		slipOpinionService.setEntityManager(em);
-		SlipOpinion slipOpinion = slipOpinionService.slipOpinionExists(opinionKey);
-        StatutesWS statutesWS = new StatutesWSService(new URL("http://localhost:9080/StatutesWS?wsdl")).getStatutesWSPort();
-		
-		if ( slipOpinion != null ) {
-	    	ParsedOpinionCitationSet parserResults = new ParsedOpinionCitationSet(slipOpinion, slipOpinionService.getPersistenceLookup());
-
-	    	OpinionViewBuilder opinionViewBuilder = new OpinionViewBuilder();
-	        //TODO:FIX FOR STATUTESERVICE
-	        OpinionView opinionView = opinionViewBuilder.buildSlipOpinionView(statutesWS, slipOpinion, parserResults);
-	        opinionView.trimToLevelOfInterest(2, true);
-
-	    	printBaseOpinionReport(parserResults, slipOpinion, opinionView);
-
-// System.out.println("TIMING: " + (new Date().getTime()-startDate.getTime()));
-	    	return;
-		}
-		throw new RuntimeException("SlipOpinion not found for key:" + opinionKey);
-/*		
-        OpinionSummary opinionSummary = slipOpinionService.opinionExists(opinionKey);
-		if ( opinionSummary != null ) {
-	    	ParsedOpinionResults parserResults = new ParsedOpinionResults(opinionSummary, slipOpinionService.getPersistenceLookup());
-	        OpinionViewBuilder opinionCaseBuilder = new OpinionViewBuilder(parserInterface);
-	        //
-	        OpinionView opinionCase = opinionCaseBuilder.buildOpinionSummaryView(opinionSummary, parserResults, true);
-	        opinionCase.trimToLevelOfInterest(2, true);
-
-	    	printBaseOpinionReport(parserResults, opinionSummary, opinionCase);
-
-// System.out.println("TIMING: " + (new Date().getTime()-startDate.getTime()));
-	    	return;
-		}
-*/
-    }
-    
-
-    private void printBaseOpinionReport(
+    public void printBaseOpinionReport(
     		ParsedOpinionCitationSet parserResults, 
-    		OpinionBase opinionBase, 
     		OpinionView opinionView
 	) throws Exception {
         System.out.println("ApiOpinion: " + opinionView);
@@ -89,16 +46,15 @@ public class PrintOpinionReport {
 //	        	List<SectionView> sortedSectionViews = sortSectionViews(statuteView);
 	        	List<SectionView> sortedSectionViews = new ArrayList<SectionView>();
 	        	getAllSectionViews(sortedSectionViews, statuteView);
-	        	List<String> currentTitle = null;
 	        	for ( SectionView section: sortedSectionViews ) {
-	        		System.out.print(String.format("%-5d", statuteView.getRefCount() ));
-	        		currentTitle = checkPrintTitle(section, currentTitle);
+		        	List<String> shortTitles = section.getShortTitles();
+		        	String shortTitle = shortTitles.toString().replace("[", "").replace("]", "");
 	        		String indent = "  ";
-	        		for ( int i=1, j=currentTitle.size(); i<j; ++i ) {
+	        		for ( int i=1, j=shortTitles.size(); i<j; ++i ) {
 	        			indent = indent + "  ";
 	        		}
 //	        		System.out.println(String.format("%s%-5d %-15s %s", indent, statuteView.getRefCount(), statuteView.getDisplaySectionNumber(), section.getStatutesBaseClass().getTitle(true)));
-	        		System.out.println(String.format("%s %-15s", section.getStatutesBaseClass().getTitle(true), ("§§ " + section.getStatutesBaseClass().getStatuteRange().toString()) ));
+	        		System.out.println(String.format("%-5d %s, %s %-15s", statuteView.getRefCount(), shortTitle, section.getStatutesBaseClass().getTitle(true), ("§§ " + section.getStatutesBaseClass().getStatuteRange().toString()) ));
 	        	}
         	}
         }
@@ -111,11 +67,49 @@ public class PrintOpinionReport {
         		this.countRefs = countRefs;
 			}
         }
-		//TODO what is opinionBase needed for? Is it just extra info, or should it be in opinionView?
+		
+		//what is opinionBase needed for? Is it just extra info, or should it be in opinionView?
         List<OpinionSummaryPrint> opinionsCited = new ArrayList<OpinionSummaryPrint>();
-        for ( OpinionKey opinionKey: opinionBase.getOpinionCitations()) {
+        for ( OpinionKey opinionKey: opinionView.getOpinionCitations()) {
         	OpinionSummary opinionCited = parserResults.findOpinion(opinionKey);
-        	int countRefs = 0;
+/*        	
+        	for ( StatuteKey statuteKey: opinionCited.getStatuteCitations() ) {
+        		int foundPosition = Collections.binarySearch(opinionStatuteKeys, statuteKey);
+        		if ( foundPosition >= 0 ) {
+        			// search scoreMatrix for opinionStatuteCitation
+        			for ( List<StatuteCaseScore> statuteCaseScoreList: statuteCaseScores ) {
+        				if (statuteCaseScoreList.get(0).getSlipOpinionStatute().equals(opinionStatuteKeys.get(foundPosition))) {
+        					//TODO will all entries be unqiue?
+        					StatuteCaseScore statuteCaseScore = new StatuteCaseScore();
+        					statuteCaseScore.setSlipOpinionStatute(opinionStatuteKeys.get(foundPosition));
+        					statuteCaseScore.add(new )
+        				}
+        			}
+        		}
+        	}
+*/        	
+/*        	
+            // 
+            int countRefs = 0;
+        	// List<StatuteView> statuteViews
+        	for ( StatuteKey statuteKey: opinionView.getStatuteCitations() ) {
+//         		StatuteCitation statuteCited = parserResults.findStatute(statuteKey);
+        		StatuteView existingStatute = null;
+                List<StatuteView> statuteViews = combinedStatutes.get(statuteKey.getCode());
+            	for ( StatuteView statuteView: statuteViews ) {
+            		if ( statuteView.getSectionNumber().equals(statuteKey.getSectionNumber())) {
+            			existingStatute = statuteView;
+            			break;
+            		}
+            	}
+            	if ( existingStatute != null ) {
+            		opinionView.updateStatuteCaseScore(existingStatute, opinionKey);
+            	}
+//        		countRefs += statuteCited.getRefCount(opinionKey);
+//        		System.out.print(":" + statuteCite.getRefCount(opinionKey));
+        	}
+*/        	
+/*
         	for ( StatuteKey statuteKey: opinionBase.getStatuteCitations() ) {
         		StatuteCitation statuteCited = parserResults.findStatute(statuteKey);
         		countRefs += statuteCited.getRefCount(opinionKey);
@@ -124,6 +118,11 @@ public class PrintOpinionReport {
         	if ( countRefs > 0 || opinionCited.getCountReferringOpinions() > 10) {
         		opinionsCited.add(new OpinionSummaryPrint(opinionCited, countRefs));
         	}
+        	if ( countRefs > 0 || opinionCited.getCountReferringOpinions() > 10) {
+        		opinionsCited.add(new OpinionSummaryPrint(opinionCited, opinionCited.getCountReferringOpinions()));
+        	}
+*/        	
+    		opinionsCited.add(new OpinionSummaryPrint(opinionCited, opinionCited.getCountReferringOpinions()));
         }
         Collections.sort(opinionsCited, new Comparator<OpinionSummaryPrint>() {
 			@Override
@@ -134,8 +133,14 @@ public class PrintOpinionReport {
         for ( OpinionSummaryPrint opPrint: opinionsCited) {
         	System.out.println(opPrint.opinionCited.getOpinionKey().toString() + ":" + opPrint.opinionCited.getCountReferringOpinions()+":"+opPrint.countRefs);
         }
+// work on score
+    	// List<StatuteView> statuteViews =  combinedStatutes.get(key);
+        // List<OpinionSummaryPrint> opinionsCited = new ArrayList<OpinionSummaryPrint>();
+
+        
     }
-    
+
+/*
     private List<String> checkPrintTitle(SectionView section, List<String> currentTitle) {
     	ArrayList<StatutesBaseClass> baseStatutes = new ArrayList<StatutesBaseClass>(); 
 		section.getStatutesBaseClass().getParents(baseStatutes);
@@ -147,6 +152,7 @@ public class PrintOpinionReport {
 		}
     	return shortTitles;
     }
+*/    
 	private void printTitle(List<String> shortTitle) {
 /*		
 		String indent = "  ";

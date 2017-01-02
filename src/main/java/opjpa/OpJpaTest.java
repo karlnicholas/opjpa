@@ -347,7 +347,7 @@ public class OpJpaTest {
 				if ( slipOpinion.getFileName().equals("A142485") ) continue;
 								
 //				System.out.println("Case = " + slipOpinion.getFileName());
-				opinionReport.printSlipOpinionReport(em, slipOpinion.getOpinionKey());
+//				opinionReport.printSlipOpinionReport(em, slipOpinion.getOpinionKey());
 //				if ( slipOpinion.getFileName().contains("143650") ) {
 //					ParsedOpinionResults parserResults = parser.parseCase(caseScraper.getCaseFile(slipOpinion, false), slipOpinion, slipOpinion.getOpinionKey() );
 //				}
