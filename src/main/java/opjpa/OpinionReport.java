@@ -22,8 +22,8 @@ import opca.service.SlipOpinionService;
 import opca.view.OpinionScoreList;
 import opca.view.OpinionView;
 import opca.view.OpinionViewBuilder;
-import scoring.StatuteCaseScore;
-import scoring.StatuteCaseScoreList;
+import opca.view.StatuteScore;
+import opca.view.StatuteScoreList;
 import statutesws.StatutesWS;
 import statutesws.StatutesWSService;
 
@@ -59,8 +59,8 @@ public class OpinionReport {
 //	        OpinionSummary opinion = databaseFacade.findOpinion(new OpinionKey("211 Cal.App.4th 13"));
 //        	printOpinionSummaryReport(parserInterface, parserResults, opinion );
     			        
-    		printSlipOpinionReport(em, new OpinionKey("1 Slip.Op 20541592"));
-//    		printSlipOpinionReport(em, new OpinionKey("1 Slip.Op 60140282"));
+//    		printSlipOpinionReport(em, new OpinionKey("1 Slip.Op 20541592"));
+    		printSlipOpinionReport(em, new OpinionKey("1 Slip.Op 60140282"));
 //	        printSlipOpinionReport(em, new OpinionKey("1 Slip.Op 30156316"));
 	        
 //	        opinionReport.printSlipOpinionReport(em, new OpinionKey("1 Slip.Op 70099571"));
@@ -101,12 +101,13 @@ public class OpinionReport {
 			List<StatuteKey> opinionStatuteKeys = new ArrayList<StatuteKey>(opinionView.getStatuteCitations());
 			TypedQuery<StatuteCitation> query = em.createNamedQuery("StatuteCitationData.findStatutesForKeys", StatuteCitation.class);
 			List<StatuteCitation> statuteCitations = query.setParameter("keys", opinionStatuteKeys).getResultList();
-			Collections.sort(statuteCitations);			
+			Collections.sort(statuteCitations);
 	        
-			List<OpinionScoreList> scoreSlipOpinionOpinions = opinionViewBuilder.scoreSlipOpinionOpinions(
-				opinionView, parserResults, statuteCitations
-			);
-	    	printOpinionReport.printBaseOpinionReport(opinionView, parserResults, scoreSlipOpinionOpinions);
+			opinionViewBuilder.scoreSlipOpinionOpinions(opinionView, parserResults, statuteCitations);
+
+			opinionViewBuilder.scoreSlipOpinionStatutes(opinionView, parserResults, statuteCitations);
+
+			printOpinionReport.printBaseOpinionReport(opinionView, parserResults);
 
 // System.out.println("TIMING: " + (new Date().getTime()-startDate.getTime()));
 	    	return;
@@ -129,62 +130,4 @@ public class OpinionReport {
 */
     }
 	
-	private List<StatuteCaseScoreList> scoreSlipOpinionStatutes(OpinionView opinionView, ParsedOpinionCitationSet parserResults) {
-		List<StatuteCaseScoreList> statuteCaseScores = new ArrayList<StatuteCaseScoreList>();
-		// make a sorted list of statuteKey's that opinionView refers to
-		List<StatuteKey> opinionStatuteKeys = new ArrayList<StatuteKey>(opinionView.getStatuteCitations());
-		// need a collection StatutueCitations.
-		
-		TypedQuery<StatuteCitation> query = em.createNamedQuery("StatuteCitationData.findStatutesForKeys", StatuteCitation.class);
-		List<StatuteCitation> statuteCitations = query.setParameter("keys", opinionStatuteKeys).getResultList();
-		Collections.sort(statuteCitations);
-		
-		Comparator comparator = new Comparator() {
-			@Override
-			public int compare(Object o1, Object o2) {
-				StatuteCitation statuteCitation = (StatuteCitation)o1;
-				StatuteKey statuteKey = (StatuteKey)o2;
-				return statuteCitation.getStatuteKey().compareTo(statuteKey);
-			}
-		};
-
-        for ( OpinionKey citedOpinionKey: opinionView.getOpinionCitations()) {
-        	OpinionSummary opinionCited = parserResults.findOpinion(citedOpinionKey);
-        	for ( StatuteKey statuteKey: opinionCited.getStatuteCitations() ) {
-        		@SuppressWarnings("unchecked")
-				int foundPosition = Collections.binarySearch(statuteCitations, statuteKey, comparator);
-        		if ( foundPosition >= 0 ) {
-        			// search scoreMatrix for opinionStatuteCitation
-        			StatuteCaseScoreList statuteCaseScoreList = null;
-        			Iterator<StatuteCaseScoreList> scsIt = statuteCaseScores.iterator(); 
-        			while( scsIt.hasNext() ) {
-        				statuteCaseScoreList = scsIt.next(); 
-        				if (statuteCaseScoreList.getSlipOpinionStatute().equals(statuteKey)) {
-        					for (StatuteCaseScore statuteCaseScore: statuteCaseScoreList.getStatuteCaseScoreList()) {
-        						if ( statuteCaseScore.getOpinionKey().equals(citedOpinionKey)) {
-        							// problems?
-        							throw new RuntimeException("Dont think so??");
-        						}
-        					}
-        					break;
-        				}
-        				statuteCaseScoreList = null;
-        			}
-					StatuteCitation statuteCitation = statuteCitations.get(foundPosition);
-        			if ( statuteCaseScoreList == null ) {
-        				statuteCaseScoreList = new StatuteCaseScoreList();
-        				statuteCaseScoreList.setSlipOpinionStatute(statuteKey);
-        				statuteCaseScoreList.setSlipOpinionReferCount(statuteCitation.getRefCount(opinionView.getOpinionKey()));
-        				statuteCaseScores.add(statuteCaseScoreList);
-        			}
-					//TODO will all entries be unqiue?
-					StatuteCaseScore statuteCaseScore = new StatuteCaseScore();
-					statuteCaseScore.setOpinionKey(citedOpinionKey);
-					statuteCaseScore.setOpinionReferCount(statuteCitation.getRefCount(citedOpinionKey));
-					statuteCaseScoreList.getStatuteCaseScoreList().add(statuteCaseScore);
-        		}
-        	}
-        }
-        return statuteCaseScores;
-	}
 }
