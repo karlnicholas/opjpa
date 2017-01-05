@@ -3,8 +3,6 @@ package opjpa;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -13,17 +11,13 @@ import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
 import opca.model.OpinionKey;
-import opca.model.OpinionSummary;
 import opca.model.SlipOpinion;
 import opca.model.StatuteCitation;
 import opca.model.StatuteKey;
 import opca.parser.ParsedOpinionCitationSet;
 import opca.service.SlipOpinionService;
-import opca.view.OpinionScoreList;
 import opca.view.OpinionView;
 import opca.view.OpinionViewBuilder;
-import opca.view.StatuteScore;
-import opca.view.StatuteScoreList;
 import statutesws.StatutesWS;
 import statutesws.StatutesWSService;
 
@@ -58,9 +52,11 @@ public class OpinionReport {
 	        
 //	        OpinionSummary opinion = databaseFacade.findOpinion(new OpinionKey("211 Cal.App.4th 13"));
 //        	printOpinionSummaryReport(parserInterface, parserResults, opinion );
-    			        
-//    		printSlipOpinionReport(em, new OpinionKey("1 Slip.Op 20541592"));
-    		printSlipOpinionReport(em, new OpinionKey("1 Slip.Op 60140282"));
+
+    		
+//    		printSlipOpinionReport(em, new OpinionKey("1 Slip.Op 20536622"));
+    		printSlipOpinionReport(em, new OpinionKey("1 Slip.Op 20541592"));
+//    		printSlipOpinionReport(em, new OpinionKey("1 Slip.Op 60140282"));
 //	        printSlipOpinionReport(em, new OpinionKey("1 Slip.Op 30156316"));
 	        
 //	        opinionReport.printSlipOpinionReport(em, new OpinionKey("1 Slip.Op 70099571"));
