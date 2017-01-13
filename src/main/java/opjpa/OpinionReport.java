@@ -2,7 +2,6 @@ package opjpa;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -11,9 +10,8 @@ import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
 import opca.model.OpinionKey;
+import opca.model.OpinionSummary;
 import opca.model.SlipOpinion;
-import opca.model.StatuteCitation;
-import opca.model.StatuteKey;
 import opca.parser.ParsedOpinionCitationSet;
 import opca.service.SlipOpinionService;
 import opca.view.OpinionView;
@@ -93,15 +91,18 @@ public class OpinionReport {
 	        opinionView.trimToLevelOfInterest(2, true);
 	        opinionView.combineCommonSections();
 	        
-//	    	List<StatuteCaseScoreList> slipOpinionStatutesScore = scoreSlipOpinionStatutes(opinionView, parserResults);
-			List<StatuteKey> opinionStatuteKeys = new ArrayList<StatuteKey>(opinionView.getStatuteCitations());
-			TypedQuery<StatuteCitation> query = em.createNamedQuery("StatuteCitationData.findStatutesForKeys", StatuteCitation.class);
-			List<StatuteCitation> statuteCitations = query.setParameter("keys", opinionStatuteKeys).getResultList();
-			Collections.sort(statuteCitations);
-	        
-			opinionViewBuilder.scoreSlipOpinionOpinions(opinionView, parserResults, statuteCitations);
+			List<OpinionSummary> opinionSummaries;
+			List<OpinionKey> opinionKeys = new ArrayList<OpinionKey>(opinionView.getOpinionCitations());
 
-			opinionViewBuilder.scoreSlipOpinionStatutes(opinionView, parserResults, statuteCitations);
+			if ( opinionKeys == null || opinionKeys.size() == 0 ) {
+				opinionSummaries = new ArrayList<OpinionSummary>();
+			} else {
+				TypedQuery<OpinionSummary> query = em.createNamedQuery("OpinionSummary.findOpinionsForKeysJoinStatuteCitations", OpinionSummary.class);
+				opinionSummaries = query.setParameter("keys", opinionKeys).getResultList();
+			}
+	        	        
+			opinionViewBuilder.scoreSlipOpinionOpinions(opinionView, parserResults, opinionSummaries);
+			opinionViewBuilder.scoreSlipOpinionStatutes(opinionView, parserResults, opinionSummaries);
 
 			printOpinionReport.printBaseOpinionReport(opinionView, parserResults);
 
