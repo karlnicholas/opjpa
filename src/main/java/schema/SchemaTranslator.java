@@ -7,19 +7,14 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.boot.spi.MetadataImplementor;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
 
-import opca.model.OpinionBase;
-import opca.model.OpinionKey;
-import opca.model.OpinionSummary;
-import opca.model.SlipOpinion;
-import opca.model.StatuteCitation;
-import opca.model.StatuteKey;
-import opca.model.User;
-import opca.model.Role;
+import opca.model.*;
 
 public class SchemaTranslator {
 	public static void main(String[] args) throws IOException {
 
 		Class<?>[] entityClasses = { 
+			Article.class, 
+			ArticleComment.class, 
 			OpinionBase.class, 
 			SlipOpinion.class, 
 			OpinionSummary.class, 
