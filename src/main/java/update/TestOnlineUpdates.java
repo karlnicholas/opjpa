@@ -1,17 +1,11 @@
 package update;
 
-import java.io.IOException;
-import java.nio.file.Paths;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-import com.google.common.io.Files;
-
 import opca.parser.OpinionScraperInterface;
-import opca.scraper.CACaseScraper;
 import opca.service.CAOnlineUpdates;
 import scraper.TestCACaseScraper;
 
@@ -29,14 +23,14 @@ public class TestOnlineUpdates {
 		try {
 //			OpinionScraperInterface caseScraper = new CACaseScraper(true);
 			OpinionScraperInterface caseScraper = new TestCACaseScraper(false);
-//			EntityTransaction tx = em.getTransaction();
+			EntityTransaction tx = em.getTransaction();
 			try {
-//				tx.begin();
+				tx.begin();
 				new CAOnlineUpdates(em).updateDatabase(caseScraper);
-//				tx.commit();
+				tx.commit();
 			} catch (Exception ex) {
-//				ex.printStackTrace();
-//				tx.rollback();
+				ex.printStackTrace();
+				tx.rollback();
 			}
 			em.close();
 		} finally {

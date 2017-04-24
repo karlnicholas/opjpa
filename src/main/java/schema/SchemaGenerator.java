@@ -19,18 +19,13 @@ public class SchemaGenerator {
     }
     private void run() throws Exception {
 
-        File f = new File("c:/users/karln/opca/src/main/java");
-        String directory = f.getAbsoluteFile().toString();
-
         String packageName[] = { "opca.model"};
 
-        generate(directory, packageName);
+        generate(packageName);
 
     }
 
-
-    @SuppressWarnings("rawtypes")
-    private List<Class> getClasses(String packageName) throws Exception {
+    private List<Class<?>> getClasses(String packageName) throws Exception {
         File directory = null;
         try {
             ClassLoader cld = getClassLoader();
@@ -59,9 +54,8 @@ public class SchemaGenerator {
         return resource;
     }
 
-    @SuppressWarnings("rawtypes")
-    private List<Class> collectClasses(String packageName, File directory) throws ClassNotFoundException {
-        List<Class> classes = new ArrayList<>();
+    private List<Class<?>> collectClasses(String packageName, File directory) throws ClassNotFoundException {
+        List<Class<?>> classes = new ArrayList<>();
         if (directory.exists()) {
             String[] files = directory.list();
             for (String file : files) {
@@ -76,7 +70,7 @@ public class SchemaGenerator {
         return classes;
     }
 
-	private void generate(String directory, String[] packagesName) throws Exception {
+	private void generate(String[] packagesName) throws Exception {
 		Map<String, String> settings = new HashMap<String, String>();
 		settings.put("hibernate.hbm2ddl.auto", "create");
 		settings.put("hibernate.dialect", "org.hibernate.dialect.MySQL5InnoDBDialect");
@@ -91,7 +85,7 @@ public class SchemaGenerator {
 
 	    for (String packageName : packagesName) {
 	        System.out.println("packageName: " + packageName);
-	        for (Class clazz : getClasses(packageName)) {
+	        for (Class<?> clazz : getClasses(packageName)) {
 	        	System.out.println("Class: " + clazz);
 	            metadata.addAnnotatedClass(clazz);
 	        }

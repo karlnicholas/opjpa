@@ -11,8 +11,6 @@ import java.util.concurrent.Executors;
 import java.util.logging.Logger;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
 
 import opca.memorydb.CitationStore;
 import opca.model.OpinionSummary;
@@ -23,16 +21,19 @@ import statutesca.factory.CAStatutesFactory;
 
 public class LoadHistoricalOpinions {
 	private static Logger logger = Logger.getLogger(LoadHistoricalOpinions.class.getName());
-	EntityManagerFactory emf;
 	private final CitationStore citationStore;
+	private final SlipOpinionService slipOpinionService;
+	private final EntityManager em;
+	
 //	OpinionDocumentParser parser;
 	
 	public LoadHistoricalOpinions(
-		EntityManagerFactory emf, 
+		EntityManager em, 
 		ParserInterface parserInterface 
 	) {
-		this.emf = emf;
+		this.em = em;
     	citationStore = CitationStore.getInstance();
+    	slipOpinionService = new SlipOpinionService(em);
 //		parser = new OpinionDocumentParser(parserInterface.getCodeTitles());
 	}
 	
@@ -241,9 +242,9 @@ public class LoadHistoricalOpinions {
     	
     	@Override
     	public void run() {
-	    	EntityManager em = emf.createEntityManager();
-	    	SlipOpinionService slipOpinionService = new SlipOpinionService();
-	    	slipOpinionService.setEntityManager(em);
+//	    	EntityManager em = emf.createEntityManager();
+//	    	SlipOpinionService slipOpinionService = new SlipOpinionService();
+//	    	slipOpinionService.setEntityManager(em);
 	    	Date startTime = new Date();
 	    	for(OpinionSummary opinion: opinions ) {
 // This causes a NPE !?!?	    		
@@ -265,7 +266,7 @@ public class LoadHistoricalOpinions {
 					throw new RuntimeException("Merge on DivideOpinionsFromMemory");					
 				}
 	    	}
-	    	em.close();
+//	    	em.close();
 			logger.info("Divided "+opinions.size()+" opinions in "+((new Date().getTime()-startTime.getTime())/1000) + " seconds");
     	}
     }
@@ -277,15 +278,17 @@ public class LoadHistoricalOpinions {
 	    }
 		@Override
 		public void run() {
-	    	EntityManager em = emf.createEntityManager();
-	    	EntityTransaction tx = em.getTransaction();
-	    	tx.begin();
+//	    	EntityManager em = emf.createEntityManager();
+//	    	EntityTransaction tx = em.getTransaction();
+//	    	tx.begin();
 	    	Date startTime = new Date();
 	    	for(OpinionSummary opinion: opinions ) {
-				em.persist(opinion);
+	    		synchronized(em) {
+	    			em.persist(opinion);
+	    		}
 	    	}
-			tx.commit();
-	    	em.close();
+//			tx.commit();
+//	    	em.close();
 			logger.info("Persisted "+opinions.size()+" opinions in "+((new Date().getTime()-startTime.getTime())/1000) + " seconds");
 	    }
 	}
@@ -298,15 +301,17 @@ public class LoadHistoricalOpinions {
     	
     	@Override
     	public void run() {
-	    	EntityManager em = emf.createEntityManager();
-	    	EntityTransaction tx = em.getTransaction();
-	    	tx.begin();
+//	    	EntityManager em = emf.createEntityManager();
+//	    	EntityTransaction tx = em.getTransaction();
+//	    	tx.begin();
 	    	Date startTime = new Date();
 	    	for(OpinionSummary opinion: opinions ) {
-				em.merge(opinion);
+	    		synchronized(em) {
+	    			em.merge(opinion);
+	    		}
 	    	}
-	    	tx.commit();
-	    	em.close();
+//	    	tx.commit();
+//	    	em.close();
 			logger.info("Merged "+opinions.size()+" opinions in "+((new Date().getTime()-startTime.getTime())/1000) + " seconds");
     	}
     }
@@ -327,9 +332,8 @@ public class LoadHistoricalOpinions {
     	
     	@Override
     	public void run() {
-	    	EntityManager em = emf.createEntityManager();
-	    	SlipOpinionService slipOpinionService = new SlipOpinionService();
-	    	slipOpinionService.setEntityManager(em);
+//	    	EntityManager em = emf.createEntityManager();
+//	    	slipOpinionService.setEntityManager(em);
 	    	int count = statutes.size();
 	    	Date startTime = new Date();
 	    	for(StatuteCitation statute: statutes ) {
@@ -344,7 +348,7 @@ public class LoadHistoricalOpinions {
 					throw new RuntimeException("Merge on DivideStatutesFromMemory");					
 				}
 	    	}
-	    	em.close();
+//	    	em.close();
 			logger.info("Divided "+count+" statutes in "+((new Date().getTime()-startTime.getTime())/1000) + " seconds");
     	}
     }
@@ -357,15 +361,17 @@ public class LoadHistoricalOpinions {
     	
     	@Override
     	public void run() {
-	    	EntityManager em = emf.createEntityManager();
-	    	EntityTransaction tx = em.getTransaction();
-	    	tx.begin();
+//	    	EntityManager em = emf.createEntityManager();
+//	    	EntityTransaction tx = em.getTransaction();
+//	    	tx.begin();
 	    	Date startTime = new Date();
 	    	for(StatuteCitation statute: statutes ) {
-				em.persist(statute);
+	    		synchronized(em) {
+	    			em.persist(statute);
+	    		}
 	    	}
-	    	tx.commit();
-	    	em.close();
+//	    	tx.commit();
+//	    	em.close();
 			logger.info("Persisted "+statutes.size()+" statutes in "+((new Date().getTime()-startTime.getTime())/1000) + " seconds");
     	}
     }
@@ -378,15 +384,17 @@ public class LoadHistoricalOpinions {
     	
     	@Override
     	public void run() {
-	    	EntityManager em = emf.createEntityManager();
-	    	EntityTransaction tx = em.getTransaction();
-	    	tx.begin();
+//	    	EntityManager em = emf.createEntityManager();
+//	    	EntityTransaction tx = em.getTransaction();
+//	    	tx.begin();
 	    	Date startTime = new Date();
 	    	for(StatuteCitation statute: statutes ) {
-				em.merge(statute);
+	    		synchronized(em) {
+	    			em.merge(statute);
+	    		}
 	    	}
-	    	tx.commit();
-	    	em.close();
+//	    	tx.commit();
+//	    	em.close();
 			logger.info("Merged "+statutes.size()+" statutes in "+((new Date().getTime()-startTime.getTime())/1000) + " seconds");
     	}
     }

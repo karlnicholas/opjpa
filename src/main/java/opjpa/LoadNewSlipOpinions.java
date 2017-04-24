@@ -86,13 +86,14 @@ public class LoadNewSlipOpinions {
 	    		citationStore.mergeParsedDocumentCitations(parserDocument.getOpinionBase(), parserResults);
 			}
 			
-			LoadHistoricalOpinions loadOpinions = new LoadHistoricalOpinions(emf, parserInterface);
-			loadOpinions.processesOpinions(citationStore);
-			loadOpinions.processesStatutes(citationStore);
-
 			EntityManager em = emf.createEntityManager();
 			EntityTransaction tx = em.getTransaction();
 			tx.begin();
+
+			LoadHistoricalOpinions loadOpinions = new LoadHistoricalOpinions(em, parserInterface);
+			loadOpinions.processesOpinions(citationStore);
+			loadOpinions.processesStatutes(citationStore);
+
 			for( SlipOpinion slipOpinion: opinions ) {
 				em.persist(slipOpinion);
 			}

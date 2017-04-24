@@ -27,8 +27,8 @@ import statutesws.ResponseArray;
 import statutesws.StatuteKey;
 import statutesws.StatuteKeyArray;
 import statutesws.StatutesTitlesArray;
-import statutesws.StatutesWS;
-import statutesws.StatutesWSService;
+import service.StatutesWS;
+import client.StatutesWSService;
 
 
 /**

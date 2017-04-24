@@ -25,7 +25,7 @@ import javax.xml.ws.Service;
 import statutesws.ResponseArray;
 import statutesws.StatuteKey;
 import statutesws.StatuteKeyArray;
-import statutesws.StatutesWS;
+import service.StatutesWS;
 
 import java.lang.System;
 import java.net.URL;

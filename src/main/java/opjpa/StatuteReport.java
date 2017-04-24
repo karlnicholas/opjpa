@@ -35,8 +35,7 @@ public class StatuteReport {
 		
 		try {
 		
-			SlipOpinionService slipOpinionService = new SlipOpinionService();
-			slipOpinionService.setEntityManager(em);
+			SlipOpinionService slipOpinionService = new SlipOpinionService(em);
 	//      String iface = "code.CACodes";
 	//      ParserInterface parserInterface = (ParserInterface) Class.forName(iface).newInstance();
 		    ParserInterface parserInterface = CAStatutesFactory.getInstance().getParserInterface(true);

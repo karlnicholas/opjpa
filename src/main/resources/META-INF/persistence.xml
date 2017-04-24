@@ -17,8 +17,8 @@
       <property name="hibernate.archive.autodetection" value="class" />
       <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/op" />
-      <property name="javax.persistence.jdbc.user" value="op" />
-      <property name="javax.persistence.jdbc.password" value="op" />
+      <property name="javax.persistence.jdbc.user" value="adminnr1up7V" />
+      <property name="javax.persistence.jdbc.password" value="qm1zmQxcZY1t" />
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
       <property name="hibernate.show_sql" value = "false" />
 <!--       

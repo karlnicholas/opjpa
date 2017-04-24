@@ -116,8 +116,7 @@ public class OpJpaTest {
 		OpinionScraperInterface caseScaper = new CACaseScraper(true); 
 		List<SlipOpinion> onlineCases = caseScaper.getCaseList();
 		
-		SlipOpinionService slipOpinionService = new SlipOpinionService();
-		slipOpinionService.setEntityManager(em);
+		SlipOpinionService slipOpinionService = new SlipOpinionService(em);
 		List<SlipOpinion> databaseCases = slipOpinionService.listSlipOpinions();
 
 		// first to deletes
@@ -263,8 +262,7 @@ public class OpJpaTest {
 			OpinionDocumentParser parser = new OpinionDocumentParser(statutesTitles);
 			
 //			OpinionQueries dbFacade = new OpinionQueries(em);
-			SlipOpinionService slipOpinionService = new SlipOpinionService();
-			slipOpinionService.setEntityManager(em);
+			SlipOpinionService slipOpinionService = new SlipOpinionService(em);
 			
 	//		SlipOpinionDao slipOpinionDao = new SlipOpinionDao(em);
 			EntityTransaction tx = em.getTransaction();

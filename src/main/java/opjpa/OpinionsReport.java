@@ -51,8 +51,7 @@ public class OpinionsReport {
 //        	printOpinionSummaryReport(parserInterface, parserResults, opinion );
 	        
 	        PrintOpinionReport opinionReport = new PrintOpinionReport();
-			SlipOpinionService slipOpinionService = new SlipOpinionService();
-			slipOpinionService.setEntityManager(em);
+			SlipOpinionService slipOpinionService = new SlipOpinionService(em);
 			class OpinionSummaryPrint {
 				int countRefs;
 				OpinionSummary opinionCited;

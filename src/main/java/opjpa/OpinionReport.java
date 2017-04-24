@@ -16,8 +16,8 @@ import opca.parser.ParsedOpinionCitationSet;
 import opca.service.SlipOpinionService;
 import opca.view.OpinionView;
 import opca.view.OpinionViewBuilder;
-import statutesws.StatutesWS;
-import statutesws.StatutesWSService;
+import service.StatutesWS;
+import client.StatutesWSService;
 
 public class OpinionReport {
 
@@ -77,8 +77,7 @@ public class OpinionReport {
 	) throws Exception {
 // Date startDate = new Date();
         
-		SlipOpinionService slipOpinionService = new SlipOpinionService();
-		slipOpinionService.setEntityManager(em);
+		SlipOpinionService slipOpinionService = new SlipOpinionService(em);
 		SlipOpinion slipOpinion = slipOpinionService.slipOpinionExists(opinionKey);
         StatutesWS statutesWS = new StatutesWSService(new URL("http://localhost:9080/StatutesWS?wsdl")).getStatutesWSPort();
 		
