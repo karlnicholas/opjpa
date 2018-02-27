@@ -9,6 +9,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
+import client.StatutesRsService;
 import opca.model.OpinionKey;
 import opca.model.OpinionSummary;
 import opca.model.SlipOpinion;
@@ -16,15 +17,14 @@ import opca.parser.ParsedOpinionCitationSet;
 import opca.service.SlipOpinionService;
 import opca.view.OpinionView;
 import opca.view.OpinionViewBuilder;
-import service.StatutesWS;
-import client.StatutesWSService;
+import service.Client;
 
 public class OpinionReport {
 
 	private EntityManagerFactory emf;
 	private EntityManager em;
-    PrintOpinionReport printOpinionReport = new PrintOpinionReport();
-    
+    private PrintOpinionReport printOpinionReport = new PrintOpinionReport();
+	private StatutesRsService service;
 
     public static void main(String... args) throws Exception {
         new OpinionReport().run();
@@ -79,14 +79,16 @@ public class OpinionReport {
         
 		SlipOpinionService slipOpinionService = new SlipOpinionService(em);
 		SlipOpinion slipOpinion = slipOpinionService.slipOpinionExists(opinionKey);
-        StatutesWS statutesWS = new StatutesWSService(new URL("http://localhost:9080/StatutesWS?wsdl")).getStatutesWSPort();
+//        StatutesWS statutesWS = new StatutesWSService(new URL("http://localhost:9080/StatutesWS?wsdl")).getStatutesWSPort();
+		service = new StatutesRsService(new URL("http://localhost:8080/statutesrs/rs/"));
+		Client statutesRs = service.getRsService();
 		
 		if ( slipOpinion != null ) {
 	    	ParsedOpinionCitationSet parserResults = new ParsedOpinionCitationSet(slipOpinion, slipOpinionService.getPersistenceLookup());
 
 	    	OpinionViewBuilder opinionViewBuilder = new OpinionViewBuilder();
 	        //TODO:FIX FOR STATUTESERVICE
-	        OpinionView opinionView = opinionViewBuilder.buildSlipOpinionView(statutesWS, slipOpinion, parserResults);
+	        OpinionView opinionView = opinionViewBuilder.buildSlipOpinionView(statutesRs, slipOpinion, parserResults);
 	        opinionView.trimToLevelOfInterest(2, true);
 	        opinionView.combineCommonSections();
 	        

@@ -95,10 +95,9 @@
       <version>2.3.2.Final</version>
     </dependency>
     <dependency>
-      <groupId>opca</groupId>
-      <artifactId>opca-ejb</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
-      <type>ejb</type>
+      <groupId>legalservices</groupId>
+      <artifactId>opinions-ejb</artifactId>
+      <version>0.3.0</version>
     </dependency>
     <dependency>
       <groupId>org.jboss.resteasy</groupId>
@@ -125,14 +124,14 @@
       <artifactId>resteasy-jettison-provider</artifactId>
     </dependency>
     <dependency>
-      <groupId>statutes</groupId>
+      <groupId>legalservices</groupId>
       <artifactId>statutes</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
+      <version>0.3.0</version>
     </dependency>
     <dependency>
-      <groupId>statutesca</groupId>
+      <groupId>legalservices</groupId>
       <artifactId>statutesca</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
+      <version>0.3.0</version>
     </dependency>
     <dependency>
       <groupId>org.apache.poi</groupId>

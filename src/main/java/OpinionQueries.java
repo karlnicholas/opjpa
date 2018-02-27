@@ -9,7 +9,7 @@ import opca.model.OpinionKey;
 import opca.model.OpinionSummary;
 import opca.model.SlipOpinion;
 import opca.model.StatuteCitation;
-import opca.model.StatuteKey;
+import opca.model.StatuteKeyEntity;
 
 public class OpinionQueries {
 
@@ -51,7 +51,7 @@ public class OpinionQueries {
 	}
 
 	// StatuteCitation
-	public StatuteCitation statuteExists(StatuteKey key) {
+	public StatuteCitation statuteExists(StatuteKeyEntity key) {
 		List<StatuteCitation> list = em.createNamedQuery("StatuteCitation.findByCodeSection", StatuteCitation.class)
 				.setParameter("code", key.getCode())
 				.setParameter("sectionNumber", key.getSectionNumber())
@@ -60,7 +60,7 @@ public class OpinionQueries {
 		return null;
 	}
 
-	public List<StatuteCitation> getStatutes(Collection<StatuteKey> statuteKeys) {
+	public List<StatuteCitation> getStatutes(Collection<StatuteKeyEntity> statuteKeys) {
 		return em.createNamedQuery("StatuteCitation.findStatutesForKeys", StatuteCitation.class).setParameter("keys", statuteKeys).getResultList();
 	}
 
@@ -72,7 +72,7 @@ public class OpinionQueries {
 		return em.merge(statute);
 	}
 	
-	public StatuteCitation findStatute(StatuteKey key) {
+	public StatuteCitation findStatute(StatuteKeyEntity key) {
 		return em.createNamedQuery("StatuteCitation.findByCodeSection", StatuteCitation.class).setParameter("code", key.getCode()).setParameter("sectionNumber", key.getSectionNumber()).getSingleResult();
 	}
     public List<StatuteCitation> selectForCode(String code) {

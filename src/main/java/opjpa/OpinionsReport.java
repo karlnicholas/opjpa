@@ -14,7 +14,7 @@ import opca.model.OpinionKey;
 import opca.model.OpinionSummary;
 import opca.model.SlipOpinion;
 import opca.model.StatuteCitation;
-import opca.model.StatuteKey;
+import opca.model.StatuteKeyEntity;
 import opca.parser.ParsedOpinionCitationSet;
 import opca.service.SlipOpinionService;
 import parser.ParserInterface;
@@ -69,7 +69,7 @@ public class OpinionsReport {
 	            for ( OpinionKey opinionKey: slipOpinion.getOpinionCitations()) {
 	            	OpinionSummary opinionCited = parserResults.findOpinion(opinionKey);
 	            	int countRefs = 0;
-	            	for ( StatuteKey statuteKey: slipOpinion.getStatuteCitations() ) {
+	            	for ( StatuteKeyEntity statuteKey: slipOpinion.getStatuteCitations() ) {
 	            		StatuteCitation statuteCited = parserResults.findStatute(statuteKey);
 	            		countRefs += statuteCited.getRefCount(opinionKey);
 //	            		System.out.print(":" + statuteCite.getRefCount(opinionKey));
