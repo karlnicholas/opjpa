@@ -46,15 +46,15 @@ public class StatuteReport {
 	
 	        System.out.println("statuteTable size = " + slipOpinionService.getCount());
 	        
-			List<StatuteCitation> statutesForCode = slipOpinionService.selectForCode("welfare");
+			List<StatuteCitation> statutesForCode = slipOpinionService.selectForTitle("welfare");
 	        StatuteCitation maxWelfare = getCodeCitationMaxCaseReferrors(statutesForCode );
 	        printCodeCitation(parserInterface, slipOpinionService, maxWelfare);
 	        
-	        printCodeCitation(parserInterface, slipOpinionService, slipOpinionService.testStatuteByCodeSection("welfare", "200"));
+	        printCodeCitation(parserInterface, slipOpinionService, slipOpinionService.testStatuteByTitleSection("welfare", "200"));
 	
-	        printCodeCitation(parserInterface, slipOpinionService, slipOpinionService.testStatuteByCodeSection("family code", "4058"));
+	        printCodeCitation(parserInterface, slipOpinionService, slipOpinionService.testStatuteByTitleSection("family code", "4058"));
 	
-	        printCodeCitation(parserInterface, slipOpinionService, slipOpinionService.testStatuteByCodeSection("family code", "300"));
+	        printCodeCitation(parserInterface, slipOpinionService, slipOpinionService.testStatuteByTitleSection("family code", "300"));
 		} finally {
 			em.close();
 			emf.close();
@@ -82,7 +82,7 @@ public class StatuteReport {
 	    if ( statuteCitation == null ) {
 	        return; 
 	    }
-        StatutesBaseClass reference = parserInterface.findReference(statuteCitation.getStatuteKey().getCode(), new SectionNumber(-1, statuteCitation.getStatuteKey().getSectionNumber()));
+        StatutesBaseClass reference = parserInterface.findReference(statuteCitation.getStatuteKey().getTitle(), new SectionNumber(-1, statuteCitation.getStatuteKey().getSectionNumber()));
         if ( reference == null ) return;
         System.out.println("Total refereeCount = " + statuteCitation.getReferringOpinionCount().size());
         boolean first = true;

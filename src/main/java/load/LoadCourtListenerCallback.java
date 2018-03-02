@@ -45,6 +45,7 @@ public class LoadCourtListenerCallback implements CourtListenerCallback {
 	 */
 	@Override
 	public void callBack(List<LoadOpinion> clOps) {
+		
 		tasks.add(Executors.callable(new BuildCitationStore(clOps, citationStore, parserInterface)));
 		if ( tasks.size() >= processors ) {
 			try {
@@ -55,6 +56,8 @@ public class LoadCourtListenerCallback implements CourtListenerCallback {
 				tasks.clear();
 			}
 		}
+		
+//		new BuildCitationStore(clOps, citationStore, parserInterface).run();
 	}
 
 	@Override
@@ -132,14 +135,11 @@ public class LoadCourtListenerCallback implements CourtListenerCallback {
 						if (existingOpinion != null) {
 							if ( existingOpinion.isNewlyLoadedOpinion() && opinionSummary.isNewlyLoadedOpinion() ) {
 								existingOpinion.mergeCourtRepublishedOpinion(opinionSummary, parserResults, citationStore);
-							} else {
-								citationStore.mergeParsedDocumentCitations(opinionSummary, parserResults);
-								existingOpinion.mergePublishedOpinion(opinionSummary);
 							}
-						} else {
-							citationStore.mergeParsedDocumentCitations(opinionSummary, parserResults);
-							citationStore.persistOpinion(opinionSummary);
 						}
+						// why was I calling citationStore.mergeParsedDocument again? 
+//						citationStore.mergeParsedDocumentCitations(opinionSummary, parserResults);
+						citationStore.persistOpinion(opinionSummary);
 					}
 				}
 			}

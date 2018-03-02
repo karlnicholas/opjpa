@@ -284,7 +284,12 @@ public class LoadHistoricalOpinions {
 	    	Date startTime = new Date();
 	    	for(OpinionSummary opinion: opinions ) {
 	    		synchronized(em) {
-	    			em.persist(opinion);
+	    			try {
+	    				em.persist(opinion);
+	    			} catch ( Exception ex ) {
+	    				logger.severe(ex.toString());
+	    				throw ex;
+	    			}
 	    		}
 	    	}
 //			tx.commit();

@@ -20,7 +20,7 @@ public class SchemaTranslator {
 			OpinionSummary.class, 
 			OpinionKey.class,
 			StatuteCitation.class, 
-			StatuteKeyEntity.class, 
+			StatuteKey.class, 
 			User.class, 
 			Role.class 
 		};

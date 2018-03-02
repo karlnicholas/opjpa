@@ -6,34 +6,27 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 import load.LoadHistoricalOpinions;
+import opca.model.OpinionSummary;
 import parser.ParserInterface;
 import statutesca.factory.CAStatutesFactory;
 
-public class LoadOpinions {
+public class TestJPA {
 
 	private EntityManagerFactory emf;
 
 	public static void main(String[] args) throws Exception {
-		new LoadOpinions().run();
+		new TestJPA().run();
 	}
 	
-	public LoadOpinions() {
+	public TestJPA() {
 		emf = Persistence.createEntityManagerFactory("opjpa");
 	}
 	
 	private void run() throws Exception {
-//	
-	    ParserInterface parserInterface = CAStatutesFactory.getInstance().getParserInterface(true);
         try {
     		EntityManager em = emf.createEntityManager();
-    	    EntityTransaction tx = em.getTransaction();
-    	    tx.begin();
-        	LoadHistoricalOpinions load = new LoadHistoricalOpinions(em, parserInterface);
-        	load.initializeDB();
-        	tx.commit();
+    		em.createNamedQuery("OpinionSummary.findByOpinionKey", OpinionSummary.class);
         	em.close();
-        } catch (Exception ex) {
-        	ex.printStackTrace();
         } finally {
         	emf.close();
         }

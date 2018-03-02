@@ -3,6 +3,16 @@
   xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="opjpa" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+    <class>opca.model.Article</class>
+    <class>opca.model.ArticleComment</class>
+    <class>opca.model.OpinionBase</class>
+    <class>opca.model.OpinionKey</class>
+    <class>opca.model.OpinionSummary</class>
+    <class>opca.model.Role</class>
+    <class>opca.model.SlipOpinion</class>
+    <class>opca.model.StatuteCitation</class>
+    <class>opca.model.StatuteKeyEntity</class>
+    <class>opca.model.User</class>
     <properties>
       <property name="hibernate.archive.autodetection" value="class" />
       <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />

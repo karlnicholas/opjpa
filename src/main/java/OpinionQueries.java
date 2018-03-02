@@ -9,7 +9,7 @@ import opca.model.OpinionKey;
 import opca.model.OpinionSummary;
 import opca.model.SlipOpinion;
 import opca.model.StatuteCitation;
-import opca.model.StatuteKeyEntity;
+import opca.model.StatuteKey;
 
 public class OpinionQueries {
 
@@ -51,16 +51,16 @@ public class OpinionQueries {
 	}
 
 	// StatuteCitation
-	public StatuteCitation statuteExists(StatuteKeyEntity key) {
+	public StatuteCitation statuteExists(StatuteKey key) {
 		List<StatuteCitation> list = em.createNamedQuery("StatuteCitation.findByCodeSection", StatuteCitation.class)
-				.setParameter("code", key.getCode())
+				.setParameter("code", key.getTitle())
 				.setParameter("sectionNumber", key.getSectionNumber())
 				.getResultList();
 		if ( list.size() > 0 ) return list.get(0);
 		return null;
 	}
 
-	public List<StatuteCitation> getStatutes(Collection<StatuteKeyEntity> statuteKeys) {
+	public List<StatuteCitation> getStatutes(Collection<StatuteKey> statuteKeys) {
 		return em.createNamedQuery("StatuteCitation.findStatutesForKeys", StatuteCitation.class).setParameter("keys", statuteKeys).getResultList();
 	}
 
@@ -72,8 +72,8 @@ public class OpinionQueries {
 		return em.merge(statute);
 	}
 	
-	public StatuteCitation findStatute(StatuteKeyEntity key) {
-		return em.createNamedQuery("StatuteCitation.findByCodeSection", StatuteCitation.class).setParameter("code", key.getCode()).setParameter("sectionNumber", key.getSectionNumber()).getSingleResult();
+	public StatuteCitation findStatute(StatuteKey key) {
+		return em.createNamedQuery("StatuteCitation.findByCodeSection", StatuteCitation.class).setParameter("code", key.getTitle()).setParameter("sectionNumber", key.getSectionNumber()).getSingleResult();
 	}
     public List<StatuteCitation> selectForCode(String code) {
     	return em.createNamedQuery("StatuteCitation.selectForCode", StatuteCitation.class).setParameter("code", '%'+code+'%').getResultList();
