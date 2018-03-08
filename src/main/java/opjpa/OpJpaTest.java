@@ -2,6 +2,7 @@ package opjpa;
 
 import javax.persistence.*;
 
+import opca.memorydb.CitationStore;
 import opca.model.SlipOpinion;
 import opca.parser.*;
 import opca.scraper.CACaseScraper;
@@ -86,10 +87,13 @@ public class OpJpaTest {
 
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
-		
+		// this is a holds things in memory
+		CitationStore citationStore = CitationStore.getInstance();
+		citationStore.clearDB();
+
 		List<ScrapedOpinionDocument> parserDocuments = caseParser.scrapeOpinionFiles(opinions);
 		for( ScrapedOpinionDocument parserDocument: parserDocuments ) {
-			parser.parseOpinionDocument(parserDocument, parserDocument.getOpinionBase(), parserDocument.getOpinionBase().getOpinionKey() );
+			parser.parseOpinionDocument(parserDocument, parserDocument.getOpinionBase(), citationStore);
         	// look for details
         	// after a summaryParagraph is found, don't check any further .. (might have to change)
 			
@@ -153,10 +157,11 @@ public class OpJpaTest {
 		//		System.out.println(onlineCases);
 		// EntityTransaction tx = em.getTransaction();
 		// tx.begin();
-		
+		CitationStore citationStore = CitationStore.getInstance();
+		citationStore.clearDB();
 		List<ScrapedOpinionDocument> parserDocs = caseScaper.scrapeOpinionFiles(onlineCases);
 		for( ScrapedOpinionDocument parserDoc: parserDocs ) {
-			ParsedOpinionCitationSet parserResults = parser.parseOpinionDocument(parserDoc, parserDoc.getOpinionBase(), parserDoc.getOpinionBase().getOpinionKey() );
+			ParsedOpinionCitationSet parserResults = parser.parseOpinionDocument(parserDoc, parserDoc.getOpinionBase(), citationStore);
 //        	parserResults.mergeParsedDocumentCitationsToMemoryDB(slipOpinionService.getPersistenceInterface(), parserDoc.opinionBase);
 //			em.persist(slipOpinion);
 			System.out.println("Downloaded " + ((SlipOpinion)parserDoc.getOpinionBase()).getFileName() + ".DOC");
@@ -267,11 +272,13 @@ public class OpJpaTest {
 	//		SlipOpinionDao slipOpinionDao = new SlipOpinionDao(em);
 			EntityTransaction tx = em.getTransaction();
 			tx.begin();
+			CitationStore citationStore = CitationStore.getInstance();
+			citationStore.clearDB();
 			
 			List<ScrapedOpinionDocument> parserDocuments = caseParser.scrapeOpinionFiles(onlineCases);
 			for( ScrapedOpinionDocument parserDocument: parserDocuments ) {
 //				if ( slipOpinion.getFileName().contains("143650") ) {
-					ParsedOpinionCitationSet parserResults = parser.parseOpinionDocument(parserDocument, parserDocument.getOpinionBase(), parserDocument.getOpinionBase().getOpinionKey() );
+					ParsedOpinionCitationSet parserResults = parser.parseOpinionDocument(parserDocument, parserDocument.getOpinionBase(), citationStore);
 //		        	parserResults.mergeParsedDocumentCitationsToMemoryDB(slipOpinionService.getPersistenceInterface(), parserDocument.opinionBase);
 		        	em.persist((SlipOpinion)parserDocument.getOpinionBase());
 					throw new RuntimeException("this was changed");

@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import opca.model.OpinionBase;
 import opca.model.OpinionKey;
 import opca.model.OpinionSummary;
 import opca.model.SlipOpinion;
@@ -54,8 +55,8 @@ public class OpinionsReport {
 			SlipOpinionService slipOpinionService = new SlipOpinionService(em);
 			class OpinionSummaryPrint {
 				int countRefs;
-				OpinionSummary opinionCited;
-				public OpinionSummaryPrint(OpinionSummary opinionCited, int countRefs) {
+				OpinionBase opinionCited;
+				public OpinionSummaryPrint(OpinionBase opinionCited, int countRefs) {
 	        		this.opinionCited = opinionCited;
 	        		this.countRefs = countRefs;
 				}
@@ -66,12 +67,12 @@ public class OpinionsReport {
 	        
 	        for ( SlipOpinion slipOpinion: ops ) {
 		    	ParsedOpinionCitationSet parserResults = new ParsedOpinionCitationSet(slipOpinion, slipOpinionService.getPersistenceLookup());
-	            for ( OpinionKey opinionKey: slipOpinion.getOpinionCitations()) {
-	            	OpinionSummary opinionCited = parserResults.findOpinion(opinionKey);
+	            for ( OpinionBase opinionBase: slipOpinion.getOpinionCitations()) {
+	            	OpinionBase opinionCited = parserResults.findOpinion(opinionBase.getOpinionKey());
 	            	int countRefs = 0;
-	            	for ( StatuteKey statuteKey: slipOpinion.getStatuteCitations() ) {
-	            		StatuteCitation statuteCited = parserResults.findStatute(statuteKey);
-	            		countRefs += statuteCited.getRefCount(opinionKey);
+	            	for ( StatuteCitation statuteCitation: slipOpinion.getOnlyStatuteCitations() ) {
+	            		StatuteCitation statuteCited = parserResults.findStatute(statuteCitation);
+	            		countRefs += statuteCited.getOpinionStatuteReference(opinionBase).getCountReferences();
 //	            		System.out.print(":" + statuteCite.getRefCount(opinionKey));
 	            	}
 	            	if ( countRefs > 0 || opinionCited.getCountReferringOpinions() > 10) {

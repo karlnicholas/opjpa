@@ -25,6 +25,7 @@ public class LoadCourtListenerFiles {
 	private final Pattern pattern;
 	private final CourtListenerCallback courtListenerCallback;
 	private final Logger logger;
+	int total = 0;
 
 	public LoadCourtListenerFiles(CourtListenerCallback courtListenerCallback) {
 		this.courtListenerCallback = courtListenerCallback;
@@ -36,7 +37,6 @@ public class LoadCourtListenerFiles {
 		//
 		ObjectMapper om = new ObjectMapper();
 		Map<Long, LoadOpinion> mapLoadOpinions = new TreeMap<Long, LoadOpinion>();
-
 		TarArchiveInputStream tarIn = new TarArchiveInputStream(new GzipCompressorInputStream(new BufferedInputStream(new FileInputStream(clustersFileName))));
 		TarArchiveEntry entry;
 		try {
@@ -74,12 +74,17 @@ public class LoadCourtListenerFiles {
 			boolean working = true;
 			while (working) {
 				List<LoadOpinion> clOps = getCases(tarIn, om, mapLoadOpinions, loadOpinionsPerCallback);
+//				if ( ++count <= 1 ) {
+//					continue;
+//				}
 				if (clOps.size() == 0) {
 					working = false;
 					courtListenerCallback.shutdown();
 					break;
 				}
 				courtListenerCallback.callBack(clOps);
+// courtListenerCallback.shutdown();
+// break;
 			}
 		} finally {
 			try {
@@ -97,6 +102,10 @@ public class LoadCourtListenerFiles {
 		List<LoadOpinion> clOps = new ArrayList<LoadOpinion>(loadOpinionsPerCallback);
 		while ((entry = tarIn.getNextTarEntry()) != null) {
 			if (tarIn.canReadEntryData(entry)) {
+/*				
+if ( ++total < 38 )
+	continue;
+*/
 				int entrySize = (int) entry.getSize();
 				byte[] content = new byte[entrySize];
 				int offset = 0;
@@ -128,6 +137,10 @@ public class LoadCourtListenerFiles {
 
 				if (++count >= loadOpinionsPerCallback)
 					break;
+/*				
+if ( total >= 39 )
+	break;
+*/					
 			}
 		}
 		return clOps;

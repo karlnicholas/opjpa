@@ -22,7 +22,9 @@ public class SchemaTranslator {
 			StatuteCitation.class, 
 			StatuteKey.class, 
 			User.class, 
-			Role.class 
+			Role.class, 
+			OpinionStatuteCitation.class, 
+			OpinionStatuteCitationId.class, 
 		};
 
 		MetadataSources metadata = new MetadataSources(new StandardServiceRegistryBuilder()

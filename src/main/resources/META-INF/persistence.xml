@@ -11,8 +11,10 @@
     <class>opca.model.Role</class>
     <class>opca.model.SlipOpinion</class>
     <class>opca.model.StatuteCitation</class>
-    <class>opca.model.StatuteKeyEntity</class>
     <class>opca.model.User</class>
+    <class>opca.model.OpinionStatuteCitation</class>
+    <class>opca.model.OpinionStatuteCitationId</class>
+    <class>opca.model.StatuteKey</class>
     <properties>
       <property name="hibernate.archive.autodetection" value="class" />
       <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />

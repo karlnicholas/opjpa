@@ -1,7 +1,9 @@
 package load;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.TreeSet;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -15,8 +17,10 @@ import org.jsoup.select.Elements;
 
 import loadmodel.LoadOpinion;
 import opca.memorydb.CitationStore;
+import opca.model.OpinionBase;
 import opca.model.OpinionKey;
 import opca.model.OpinionSummary;
+import opca.model.StatuteCitation;
 import opca.parser.OpinionDocumentParser;
 import opca.parser.ParsedOpinionCitationSet;
 import opca.parser.ScrapedOpinionDocument;
@@ -45,7 +49,7 @@ public class LoadCourtListenerCallback implements CourtListenerCallback {
 	 */
 	@Override
 	public void callBack(List<LoadOpinion> clOps) {
-		
+/*		
 		tasks.add(Executors.callable(new BuildCitationStore(clOps, citationStore, parserInterface)));
 		if ( tasks.size() >= processors ) {
 			try {
@@ -56,8 +60,8 @@ public class LoadCourtListenerCallback implements CourtListenerCallback {
 				tasks.clear();
 			}
 		}
-		
-//		new BuildCitationStore(clOps, citationStore, parserInterface).run();
+*/		
+		new BuildCitationStore(clOps, citationStore, parserInterface).run();
 	}
 
 	@Override
@@ -121,25 +125,31 @@ public class LoadCourtListenerCallback implements CourtListenerCallback {
 					// name = name.toLowerCase().replace(". ",
 					// ".").replace("app.", "App.").replace("cal.",
 					// "Cal.").replace("supp.", "Supp.");
-					OpinionSummary opinionSummary = new OpinionSummary(new OpinionKey(name), op.getCaseName(), op.getDateFiled(), "");
-					ScrapedOpinionDocument parserDocument = new ScrapedOpinionDocument(opinionSummary);
+					OpinionBase opinionBase = new OpinionBase(new OpinionKey(name), op.getCaseName(), op.getDateFiled(), "");
+					//
+		        	OpinionBase existingOpinion = citationStore.findOpinionByOpinion(opinionBase);
+		            if ( existingOpinion != null ) {
+		            	opinionBase = existingOpinion;
+		            }
+					//
+					ScrapedOpinionDocument parserDocument = new ScrapedOpinionDocument(opinionBase);
 					parserDocument.setFootnotes( footnotes );
 					parserDocument.setParagraphs( paragraphs );
-					ParsedOpinionCitationSet parserResults = parser.parseOpinionDocument(parserDocument, opinionSummary,
-							opinionSummary.getOpinionKey());		
+					ParsedOpinionCitationSet parserResults = parser.parseOpinionDocument(parserDocument, opinionBase, citationStore);
 					synchronized ( citationStore ) {
-						citationStore.mergeParsedDocumentCitations(opinionSummary, parserResults);
+						citationStore.mergeParsedDocumentCitations(opinionBase, parserResults);
 						// when loading big datafile, opinions might already
 						// exist if the court has issued a modification
-						OpinionSummary existingOpinion = citationStore.opinionExists(opinionSummary.getOpinionKey());
+						existingOpinion = citationStore.opinionExists(opinionBase);
 						if (existingOpinion != null) {
-							if ( existingOpinion.isNewlyLoadedOpinion() && opinionSummary.isNewlyLoadedOpinion() ) {
-								existingOpinion.mergeCourtRepublishedOpinion(opinionSummary, parserResults, citationStore);
+							if ( existingOpinion.isNewlyLoadedOpinion() && opinionBase.isNewlyLoadedOpinion() ) {
+								existingOpinion.mergeCourtRepublishedOpinion(opinionBase, parserResults, citationStore);
 							}
 						}
 						// why was I calling citationStore.mergeParsedDocument again? 
 //						citationStore.mergeParsedDocumentCitations(opinionSummary, parserResults);
-						citationStore.persistOpinion(opinionSummary);
+						citationStore.persistOpinion(opinionBase);
+//						System.out.println( opinionSummary.fullPrint() );
 					}
 				}
 			}

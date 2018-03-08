@@ -22,7 +22,6 @@ public class LoadOpinions {
 	}
 	
 	private void run() throws Exception {
-//	
 	    ParserInterface parserInterface = CAStatutesFactory.getInstance().getParserInterface(true);
         try {
     		EntityManager em = emf.createEntityManager();

@@ -10,6 +10,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
+import opca.model.OpinionBase;
 import opca.model.OpinionKey;
 import opca.model.OpinionSummary;
 import opca.model.SlipOpinion;
@@ -43,21 +44,18 @@ public class DeleteAllSlipOpinions {
 					if ( --size == 0 ) continue;	// leave one?
 					// insure attached, or re-attach
 					em.merge(deleteOpinion);
-					for( OpinionKey key: deleteOpinion.getOpinionCitations() ) {
-						OpinionSummary opSummary = slipOpinionService.findOpinion(key);
-						Set<OpinionKey> referringOpinions = opSummary.getReferringOpinions();
-						if ( referringOpinions.remove(deleteOpinion.getOpinionKey()) ) {
+					for( OpinionBase opinionBase: deleteOpinion.getOpinionCitations() ) {
+						OpinionBase opSummary = slipOpinionService.findOpinion(opinionBase);
+						Set<OpinionBase> referringOpinions = opSummary.getReferringOpinions();
+						if ( referringOpinions.remove(deleteOpinion) ) {
 							em.merge(opSummary);
 						} else {
-							logger.warning("deleteOpinion " + deleteOpinion.getOpinionKey() + " not found in " + key);							
+							logger.warning("deleteOpinion " + deleteOpinion.getOpinionKey() + " not found in " + opinionBase);							
 						}
 					}
-					for ( StatuteKey key: deleteOpinion.getStatuteCitations() ) {
-						StatuteCitation opStatute = slipOpinionService.findStatute(key);
-						Map<OpinionKey, Integer> mapReferringOpinionCount = opStatute.getReferringOpinionCount();
-						OpinionKey opKey = deleteOpinion.getOpinionKey();
-						if ( !mapReferringOpinionCount.containsKey(opKey) ) throw new RuntimeException("Cannot delete referring opinion: " + opKey + " " + opStatute);
-						mapReferringOpinionCount.remove(opKey);
+					for ( StatuteCitation statuteCitation: deleteOpinion.getOnlyStatuteCitations() ) {
+						StatuteCitation opStatute = slipOpinionService.findStatute(statuteCitation);
+						opStatute.removeOpinionStatuteReference(deleteOpinion);
 						em.merge(opStatute);
 					}
 					em.remove(deleteOpinion);

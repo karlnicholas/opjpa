@@ -16,6 +16,7 @@ import load.CourtListenerCallback;
 import load.LoadCourtListenerFiles;
 import loadmodel.LoadOpinion;
 import opca.memorydb.CitationStore;
+import opca.model.OpinionBase;
 import opca.model.OpinionKey;
 import opca.model.OpinionSummary;
 import opca.parser.OpinionDocumentParser;
@@ -52,7 +53,7 @@ public class TestCitationBuilder {
     	    LoadCourtListenerFiles files2 = new LoadCourtListenerFiles(cb2);
     	    files2.loadFiles("c:/users/karln/downloads/cal-opinions.tar.gz", "c:/users/karln/downloads/cal-clusters.tar.gz", 1000);
 			
-    	    for (  OpinionSummary op: citationStore.getAllOpinions() ) {
+    	    for (  OpinionBase op: citationStore.getAllOpinions() ) {
 	    		if ( op.isNewlyLoadedOpinion() ) {
 	    			newlyLoaded++;
 	    		} else {
@@ -174,6 +175,7 @@ public class TestCitationBuilder {
 		int totalAdded;
 		int totalMerged;
 		int totalLooped;
+		CitationStore citationStore = CitationStore.getInstance(); 
 		public CitationBuilder(List<LoadOpinion> clOps, ParserInterface parserInterface) {
 			parser = new OpinionDocumentParser(parserInterface.getStatutesTitles());
 			this.clOps = clOps;
@@ -223,7 +225,7 @@ public class TestCitationBuilder {
 					ScrapedOpinionDocument parserDocument = new ScrapedOpinionDocument(opinionSummary);
 					parserDocument.setFootnotes( footnotes );
 					parserDocument.setParagraphs( paragraphs );
-					ParsedOpinionCitationSet parserResults = parser.parseOpinionDocument(parserDocument, opinionSummary, opinionSummary.getOpinionKey());
+					ParsedOpinionCitationSet parserResults = parser.parseOpinionDocument(parserDocument, opinionSummary, citationStore);
 					// managed the opinionCitations and statuteCitations
 					// referred to
 					// add this opinionSummary as a referring opinion.
@@ -231,8 +233,8 @@ public class TestCitationBuilder {
 						// when loading big datafile, opinions might already
 						// exist if the court has issued a modification
 						totalProcessed++;
-						OpinionSummary existingOpinion;
-						existingOpinion = citationStore.opinionExists(opinionSummary.getOpinionKey());
+						OpinionBase existingOpinion;
+						existingOpinion = citationStore.opinionExists(opinionSummary);
 						if (existingOpinion != null) {
 							totalMerged++;
 							if ( existingOpinion.isNewlyLoadedOpinion() && opinionSummary.isNewlyLoadedOpinion() ) {

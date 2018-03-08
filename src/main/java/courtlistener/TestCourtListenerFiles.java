@@ -15,6 +15,7 @@ import load.LoadCourtListenerCallback;
 import load.LoadCourtListenerFiles;
 import loadmodel.LoadOpinion;
 import opca.memorydb.CitationStore;
+import opca.model.OpinionBase;
 import opca.model.OpinionSummary;
 import parser.ParserInterface;
 import statutesca.factory.CAStatutesFactory;
@@ -50,7 +51,7 @@ public class TestCourtListenerFiles {
     	    LoadCourtListenerFiles file2 = new LoadCourtListenerFiles(cb2);
     	    file2.loadFiles("c:/users/karl/downloads/cal-opinions.tar.gz", "c:/users/karl/downloads/cal-clusters.tar.gz", 1000);
 
-    	    for (  OpinionSummary op: citationStore.getAllOpinions() ) {
+    	    for (  OpinionBase op: citationStore.getAllOpinions() ) {
 	    		if ( op.isNewlyLoadedOpinion() ) {
 	    			newlyLoaded++;
 	    		} else {
@@ -68,7 +69,7 @@ public class TestCourtListenerFiles {
 	    	Map<String, Integer> mapCitations = new HashMap<String, Integer>();
 
 	    	try ( BufferedWriter writer = Files.newBufferedWriter(Paths.get("not-titled.txt"))) {
-				for ( OpinionSummary op: citationStore.getAllOpinions() ) {
+				for ( OpinionBase op: citationStore.getAllOpinions() ) {
 					if ( op.isNewlyLoadedOpinion()) 
 						continue;
 					String vSet = op.getOpinionKey().getVSetAsString();

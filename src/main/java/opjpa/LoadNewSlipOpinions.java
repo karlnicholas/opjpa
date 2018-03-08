@@ -7,6 +7,7 @@ import java.util.*;
 
 import load.LoadHistoricalOpinions;
 import opca.memorydb.CitationStore;
+import opca.model.OpinionStatuteCitation;
 import opca.model.SlipOpinion;
 import opca.parser.*;
 import parser.ParserInterface;
@@ -80,7 +81,7 @@ public class LoadNewSlipOpinions {
 
 			List<ScrapedOpinionDocument> parserDocuments = caseScraper.scrapeOpinionFiles(opinions);
 			for( ScrapedOpinionDocument parserDocument: parserDocuments ) {
-				ParsedOpinionCitationSet parserResults = parser.parseOpinionDocument(parserDocument, parserDocument.getOpinionBase(), parserDocument.getOpinionBase().getOpinionKey() );
+				ParsedOpinionCitationSet parserResults = parser.parseOpinionDocument(parserDocument, parserDocument.getOpinionBase(), citationStore );
 	    		parser.parseSlipOpinionDetails((SlipOpinion) parserDocument.getOpinionBase(), parserDocument);
 
 	    		citationStore.mergeParsedDocumentCitations(parserDocument.getOpinionBase(), parserResults);
@@ -91,8 +92,11 @@ public class LoadNewSlipOpinions {
 			tx.begin();
 
 			LoadHistoricalOpinions loadOpinions = new LoadHistoricalOpinions(em, parserInterface);
-			loadOpinions.processesOpinions(citationStore);
-			loadOpinions.processesStatutes(citationStore);
+			List<OpinionStatuteCitation> persistOpinionStatuteCitations = Collections.synchronizedList(new ArrayList<>());
+
+			loadOpinions.processOpinions(citationStore, persistOpinionStatuteCitations); 
+			loadOpinions.processStatutes(citationStore);
+			loadOpinions.processOpinionStatuteCitations(persistOpinionStatuteCitations);
 
 			for( SlipOpinion slipOpinion: opinions ) {
 				em.persist(slipOpinion);

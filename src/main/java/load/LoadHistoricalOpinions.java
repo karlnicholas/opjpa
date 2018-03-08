@@ -13,6 +13,8 @@ import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 
 import opca.memorydb.CitationStore;
+import opca.model.OpinionBase;
+import opca.model.OpinionStatuteCitation;
 import opca.model.OpinionSummary;
 import opca.model.StatuteCitation;
 import opca.service.SlipOpinionService;
@@ -45,19 +47,44 @@ public class LoadHistoricalOpinions {
 	    LoadCourtListenerCallback cb1 = new LoadCourtListenerCallback(citationStore, parserInterface);
 	    LoadCourtListenerFiles file1 = new LoadCourtListenerFiles(cb1);
 	    file1.loadFiles("c:/users/karln/downloads/calctapp-opinions.tar.gz", "c:/users/karln/downloads/calctapp-clusters.tar.gz", 1000);
-
+/*
 	    LoadCourtListenerCallback cb2 = new LoadCourtListenerCallback(citationStore, parserInterface);
 	    LoadCourtListenerFiles file2 = new LoadCourtListenerFiles(cb2);
 	    file2.loadFiles("c:/users/karln/downloads/cal-opinions.tar.gz", "c:/users/karln/downloads/cal-clusters.tar.gz", 1000);
+*/
+/*
+	    Iterator<OpinionBase> oit = citationStore.getAllOpinions().iterator();
+	    OpinionBase opinion1 = oit.next();
+    	em.persist(opinion1);
 
-	    processesOpinions(citationStore); 
-    	processesStatutes(citationStore); 
+    	OpinionBase opinion2 = oit.next();
+    	em.persist(opinion2);
+
+    	Iterator<StatuteCitation> sit = citationStore.getAllStatutes().iterator();
+    	StatuteCitation statute = sit.next();
+    	em.persist(statute);
+    	
+    	Iterator<OpinionStatuteCitation> oscit1 = opinion1.getStatuteCitations().iterator();
+    	OpinionStatuteCitation statuteCitation1 = oscit1.next();
+    	em.persist(statuteCitation1);
+	    
+    	Iterator<OpinionStatuteCitation> oscit2 = opinion2.getStatuteCitations().iterator();
+    	OpinionStatuteCitation statuteCitation2 = oscit2.next();
+    	em.persist(statuteCitation2);
+*/
+		List<OpinionStatuteCitation> persistOpinionStatuteCitations = Collections.synchronizedList(new ArrayList<>());
+
+		processOpinions(citationStore, persistOpinionStatuteCitations); 
+    	processStatutes(citationStore);
+    	processOpinionStatuteCitations(persistOpinionStatuteCitations);
+    	
 		logger.info("count " + citationStore.getAllOpinions().size() + " : " + (new Date().getTime()-startTime.getTime())/1000);
 //    	persistMemory(citationStore);
     }
 
-    public void processesOpinions(
-		CitationStore citationStore 
+	public void processOpinions(
+		CitationStore citationStore, 
+		List<OpinionStatuteCitation> persistOpinionStatuteCitations 
     ) throws Exception {
 		int processors = Runtime.getRuntime().availableProcessors();
 		int number = 1000;
@@ -65,11 +92,11 @@ public class LoadHistoricalOpinions {
 		ExecutorService es = Executors.newFixedThreadPool(processors);
 		try {
 			List<Callable<Object>> tasks = new ArrayList<Callable<Object>>();
-			OpinionSummary[] opArray = new OpinionSummary[citationStore.getAllOpinions().size()];    	
+			OpinionBase[] opArray = new OpinionBase[citationStore.getAllOpinions().size()];    	
 			citationStore.getAllOpinions().toArray(opArray);
-			List<OpinionSummary> opinions = Arrays.asList(opArray);
-			List<OpinionSummary> persistOpinions = Collections.synchronizedList(new ArrayList<OpinionSummary>());
-			List<OpinionSummary> mergeOpinions = Collections.synchronizedList(new ArrayList<OpinionSummary>());
+			List<OpinionBase> opinions = Arrays.asList(opArray);
+			List<OpinionBase> persistOpinions = Collections.synchronizedList(new ArrayList<>());
+			List<OpinionBase> mergeOpinions = Collections.synchronizedList(new ArrayList<>());
 			int opMax = opinions.size();
 			// first decide which ones are persist and which are merge
 			boolean working = true;
@@ -79,13 +106,13 @@ public class LoadHistoricalOpinions {
 				for ( int i=0; i < processors; ++i ) {
 					int from = total>opMax?opMax-1:total;
 					int to = (total+number)>opMax?opMax:(total+number);
-					List<OpinionSummary> clSts = opinions.subList(from, to);
+					List<OpinionBase> clSts = opinions.subList(from, to);
 					if ( clSts.size() == 0 ) {
 						working = false;
 						break;
 					}
 					total = total + clSts.size();
-					tasks.add(Executors.callable(new DivideOpinionsFromMemory(clSts, persistOpinions, mergeOpinions)));
+					tasks.add(Executors.callable(new DivideOpinionsFromMemory(clSts, persistOpinions, mergeOpinions, persistOpinionStatuteCitations)));
 				}
 				es.invokeAll(tasks);
 				logger.info("divided "+processors+"x"+number+" in " + tasks.size() + " tasks : Total = " + total);
@@ -101,7 +128,7 @@ public class LoadHistoricalOpinions {
 					for ( int i=0; i < processors; ++i ) {
 						int from = total>opMax?opMax-1:total;
 						int to = (total+number)>opMax?opMax:(total+number);
-						List<OpinionSummary> clSts = persistOpinions.subList(from, to);
+						List<OpinionBase> clSts = persistOpinions.subList(from, to);
 						if ( clSts.size() == 0 ) {
 							working = false;
 							break;
@@ -124,7 +151,7 @@ public class LoadHistoricalOpinions {
 					for ( int i=0; i < processors; ++i ) {
 						int from = total>opMax?opMax-1:total;
 						int to = (total+number)>opMax?opMax:(total+number);
-						List<OpinionSummary> clSts = mergeOpinions.subList(from, to);
+						List<OpinionBase> clSts = mergeOpinions.subList(from, to);
 						if ( clSts.size() == 0 ) {
 							working = false;
 							break;
@@ -136,12 +163,15 @@ public class LoadHistoricalOpinions {
 					logger.info("merged "+processors+"x"+number+" in " + tasks.size() + " tasks : Total = " + total);
 				}
 			}
+		} catch ( Exception ex) {
+			ex.printStackTrace();
+			throw ex;
 		} finally {
 			es.shutdown();
 		}
     }
 
-    public void processesStatutes(
+    public void processStatutes(
 		CitationStore citationStore 
     ) throws Exception {
 		int processors = Runtime.getRuntime().availableProcessors();
@@ -221,36 +251,53 @@ public class LoadHistoricalOpinions {
 					logger.info("merged "+processors+"x"+number+" in " + tasks.size() + " tasks : Total = " + total);
 				}
 			}
+		} catch ( Exception ex) {
+			ex.printStackTrace();
+			throw ex;
 		} finally {
 			es.shutdown();
 		}
     }
 	
     class DivideOpinionsFromMemory implements Runnable {
-    	List<OpinionSummary> opinions;
-    	List<OpinionSummary> persistOpinions;
-    	List<OpinionSummary> mergeOpinions;
+    	List<OpinionBase> opinions;
+    	List<OpinionBase> persistOpinions;
+    	List<OpinionBase> mergeOpinions;
+		List<OpinionStatuteCitation> persistOpinionStatuteCitations;
+
     	public DivideOpinionsFromMemory(
-			List<OpinionSummary> opinions, 
-	    	List<OpinionSummary> persistOpinions, 
-	    	List<OpinionSummary> mergeOpinions
+			List<OpinionBase> opinions, 
+	    	List<OpinionBase> persistOpinions, 
+	    	List<OpinionBase> mergeOpinions, 
+	    	List<OpinionStatuteCitation> persistOpinionStatuteCitations
 		) {
     		this.opinions = opinions;
     		this.persistOpinions = persistOpinions; 
-    		this.mergeOpinions= mergeOpinions; 
+    		this.mergeOpinions= mergeOpinions;
+    		this.persistOpinionStatuteCitations = persistOpinionStatuteCitations;
     	}
     	
     	@Override
     	public void run() {
+    		try {
 //	    	EntityManager em = emf.createEntityManager();
 //	    	SlipOpinionService slipOpinionService = new SlipOpinionService();
 //	    	slipOpinionService.setEntityManager(em);
 	    	Date startTime = new Date();
-	    	for(OpinionSummary opinion: opinions ) {
+	    	for(OpinionBase opinion: opinions ) {
+	    		if ( opinion.getStatuteCitations() != null ) {
+		    		for ( OpinionStatuteCitation statuteCitation: opinion.getStatuteCitations() ) {
+//		    			if ( !persistOpinionStatuteCitations.contains(statuteCitation)) {
+		    				persistOpinionStatuteCitations.add(statuteCitation);
+//		    			} else {
+//		    				throw new IllegalStateException("Duplicate OpinionStatuteCitation: " + statuteCitation);
+//		    			}
+		    		}
+	    		}
 // This causes a NPE !?!?	    		
 //	    		opinion.checkCountReferringOpinions();
-	    		// this checks the database .. so, it won't be true unless this is a published modification 
-	    		OpinionSummary existingOpinion = slipOpinionService.opinionExists(opinion.getOpinionKey());
+	    		// this checks the database .. so, it won't be true unless this is a published modification 	    		
+	    		OpinionSummary existingOpinion = slipOpinionService.opinionExists(opinion);
 				if ( existingOpinion == null ) {
 					persistOpinions.add(opinion);
 				} else {
@@ -268,21 +315,26 @@ public class LoadHistoricalOpinions {
 	    	}
 //	    	em.close();
 			logger.info("Divided "+opinions.size()+" opinions in "+((new Date().getTime()-startTime.getTime())/1000) + " seconds");
+    		} catch ( Exception ex ) {
+    			ex.printStackTrace();
+    			throw ex;
+    		}
     	}
     }
 
 	class PersistOpinionsFromMemory implements Runnable {
-		List<OpinionSummary> opinions;
-	    public PersistOpinionsFromMemory(List<OpinionSummary> opinions) {
+		List<OpinionBase> opinions;
+	    public PersistOpinionsFromMemory(List<OpinionBase> opinions) {
 	    	this.opinions = opinions;
 	    }
 		@Override
 		public void run() {
+			try {
 //	    	EntityManager em = emf.createEntityManager();
 //	    	EntityTransaction tx = em.getTransaction();
 //	    	tx.begin();
 	    	Date startTime = new Date();
-	    	for(OpinionSummary opinion: opinions ) {
+	    	for(OpinionBase opinion: opinions ) {
 	    		synchronized(em) {
 	    			try {
 	    				em.persist(opinion);
@@ -295,22 +347,27 @@ public class LoadHistoricalOpinions {
 //			tx.commit();
 //	    	em.close();
 			logger.info("Persisted "+opinions.size()+" opinions in "+((new Date().getTime()-startTime.getTime())/1000) + " seconds");
+			} catch ( Exception ex) {
+				ex.printStackTrace();
+				throw ex;
+			}
 	    }
 	}
 	  
     class MergeOpinionsFromMemory implements Runnable {
-    	List<OpinionSummary> opinions;
-    	public MergeOpinionsFromMemory(List<OpinionSummary> opinions) {
+    	List<OpinionBase> opinions;
+    	public MergeOpinionsFromMemory(List<OpinionBase> opinions) {
     		this.opinions = opinions;
     	}
     	
     	@Override
     	public void run() {
+    		try {
 //	    	EntityManager em = emf.createEntityManager();
 //	    	EntityTransaction tx = em.getTransaction();
 //	    	tx.begin();
 	    	Date startTime = new Date();
-	    	for(OpinionSummary opinion: opinions ) {
+	    	for(OpinionBase opinion: opinions ) {
 	    		synchronized(em) {
 	    			em.merge(opinion);
 	    		}
@@ -318,6 +375,10 @@ public class LoadHistoricalOpinions {
 //	    	tx.commit();
 //	    	em.close();
 			logger.info("Merged "+opinions.size()+" opinions in "+((new Date().getTime()-startTime.getTime())/1000) + " seconds");
+    		} catch (Exception ex) {
+    			ex.printStackTrace();
+    			throw ex;
+    		}
     	}
     }
 
@@ -337,12 +398,13 @@ public class LoadHistoricalOpinions {
     	
     	@Override
     	public void run() {
+    		try {
 //	    	EntityManager em = emf.createEntityManager();
 //	    	slipOpinionService.setEntityManager(em);
 	    	int count = statutes.size();
 	    	Date startTime = new Date();
 	    	for(StatuteCitation statute: statutes ) {
-	    		StatuteCitation existingStatute = slipOpinionService.statuteExists(statute.getStatuteKey());
+	    		StatuteCitation existingStatute = slipOpinionService.statuteExists(statute);
 				if ( existingStatute == null ) {
 					persistStatutes.add(statute);
 				} else {
@@ -355,6 +417,10 @@ public class LoadHistoricalOpinions {
 	    	}
 //	    	em.close();
 			logger.info("Divided "+count+" statutes in "+((new Date().getTime()-startTime.getTime())/1000) + " seconds");
+    		} catch (Exception ex) {
+    			ex.printStackTrace();
+    			throw ex;
+    		}
     	}
     }
 
@@ -366,6 +432,7 @@ public class LoadHistoricalOpinions {
     	
     	@Override
     	public void run() {
+    		try {
 //	    	EntityManager em = emf.createEntityManager();
 //	    	EntityTransaction tx = em.getTransaction();
 //	    	tx.begin();
@@ -378,6 +445,10 @@ public class LoadHistoricalOpinions {
 //	    	tx.commit();
 //	    	em.close();
 			logger.info("Persisted "+statutes.size()+" statutes in "+((new Date().getTime()-startTime.getTime())/1000) + " seconds");
+    		} catch (Exception ex) {
+    			ex.printStackTrace();
+    			throw ex;
+    		}
     	}
     }
 
@@ -389,6 +460,7 @@ public class LoadHistoricalOpinions {
     	
     	@Override
     	public void run() {
+    		try {
 //	    	EntityManager em = emf.createEntityManager();
 //	    	EntityTransaction tx = em.getTransaction();
 //	    	tx.begin();
@@ -401,7 +473,82 @@ public class LoadHistoricalOpinions {
 //	    	tx.commit();
 //	    	em.close();
 			logger.info("Merged "+statutes.size()+" statutes in "+((new Date().getTime()-startTime.getTime())/1000) + " seconds");
+    		} catch (Exception ex) {
+    			ex.printStackTrace();
+    			throw ex;
+    		}
     	}
     }
+
+    public void processOpinionStatuteCitations(List<OpinionStatuteCitation> persistOpinionStatuteCitations) 
+		throws Exception 
+    {
+		int processors = Runtime.getRuntime().availableProcessors();
+		int number = 1000;
+		int total = 0;
+		ExecutorService es = Executors.newFixedThreadPool(processors);
+		try {
+			List<Callable<Object>> tasks = new ArrayList<Callable<Object>>();
+			//now persist opinionStatuteCitations
+			boolean working = true;
+			int opMax = persistOpinionStatuteCitations.size();
+			total = 0;
+			logger.info("There are " + opMax + " opinionStatuteCitations to be persisted");
+			if ( opMax >= 0 ) {
+				while ( working ) {
+					tasks.clear();
+					for ( int i=0; i < processors; ++i ) {
+						int from = total>opMax?opMax-1:total;
+						int to = (total+number)>opMax?opMax:(total+number);
+						List<OpinionStatuteCitation> clSts = persistOpinionStatuteCitations.subList(from, to);
+						if ( clSts.size() == 0 ) {
+							working = false;
+							break;
+						}
+						total = total + clSts.size();
+						tasks.add(Executors.callable(new PersistOpinionStatuteCitations(clSts)));
+					}
+					es.invokeAll(tasks);
+					logger.info("persisted "+processors+"x"+number+" in " + tasks.size() + " tasks : Total = " + total);
+				}
+			}
+			
+		} catch ( Exception ex) {
+			ex.printStackTrace();
+			throw ex;
+		} finally {
+			es.shutdown();
+		}
+	}
+	class PersistOpinionStatuteCitations implements Runnable {
+		List<OpinionStatuteCitation> opinionStatuteCitations;
+	    public PersistOpinionStatuteCitations(List<OpinionStatuteCitation> opinionStatuteCitations) {
+	    	this.opinionStatuteCitations = opinionStatuteCitations;
+	    }
+		@Override
+		public void run() {
+			try {
+//	    	EntityManager em = emf.createEntityManager();
+//	    	EntityTransaction tx = em.getTransaction();
+//	    	tx.begin();
+	    	Date startTime = new Date();
+	    	for(OpinionStatuteCitation opinionStatuteCitation: opinionStatuteCitations ) {
+	    		synchronized(em) {
+	    			try {
+	    				em.persist(opinionStatuteCitation);
+	    			} catch ( Exception ex ) {
+	    				logger.severe(ex.toString());
+	    				throw ex;
+	    			}
+	    		}
+	    	}
+//			tx.commit();
+//	    	em.close();
+			logger.info("Persisted "+ opinionStatuteCitations.size()+" opinionStatuteCitation in "+((new Date().getTime()-startTime.getTime())/1000) + " seconds");
+			} catch ( Exception ex) {
+				ex.printStackTrace();
+			}
+	    }
+	}
 
 }

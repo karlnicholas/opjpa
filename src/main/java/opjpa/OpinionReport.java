@@ -10,6 +10,7 @@ import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
 import client.StatutesRsService;
+import opca.model.OpinionBase;
 import opca.model.OpinionKey;
 import opca.model.OpinionSummary;
 import opca.model.SlipOpinion;
@@ -92,14 +93,18 @@ public class OpinionReport {
 	        opinionView.trimToLevelOfInterest(2, true);
 	        opinionView.combineCommonSections();
 	        
-			List<OpinionSummary> opinionSummaries;
-			List<OpinionKey> opinionKeys = new ArrayList<OpinionKey>(opinionView.getOpinionCitations());
+			List<OpinionBase> opinionSummaries;
+			List<OpinionBase> opinions = new ArrayList<OpinionBase>(opinionView.getOpinionCitations());
 
-			if ( opinionKeys == null || opinionKeys.size() == 0 ) {
-				opinionSummaries = new ArrayList<OpinionSummary>();
+			if ( opinions == null || opinions.size() == 0 ) {
+				opinionSummaries = new ArrayList<>();
 			} else {
-				TypedQuery<OpinionSummary> query = em.createNamedQuery("OpinionSummary.findOpinionsForKeysJoinStatuteCitations", OpinionSummary.class);
-				opinionSummaries = query.setParameter("keys", opinionKeys).getResultList();
+				TypedQuery<OpinionBase> query = em.createNamedQuery("OpinionSummary.findOpinionsForKeysJoinStatuteCitations", OpinionBase.class);
+				List<OpinionKey> keys = new ArrayList<>();
+				for (OpinionBase opinion: opinions) {
+					keys.add(opinion.getOpinionKey());
+				}				
+				opinionSummaries = query.setParameter("keys", keys).getResultList();
 			}
 	        	        
 			opinionViewBuilder.scoreSlipOpinionOpinions(opinionView, parserResults, opinionSummaries);
