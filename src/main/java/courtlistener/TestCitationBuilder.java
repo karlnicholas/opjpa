@@ -18,7 +18,6 @@ import loadmodel.LoadOpinion;
 import opca.memorydb.CitationStore;
 import opca.model.OpinionBase;
 import opca.model.OpinionKey;
-import opca.model.OpinionSummary;
 import opca.parser.OpinionDocumentParser;
 import opca.parser.ParsedOpinionCitationSet;
 import opca.parser.ScrapedOpinionDocument;
@@ -218,35 +217,35 @@ public class TestCitationBuilder {
 					// name = name.toLowerCase().replace(". ",
 					// ".").replace("app.", "App.").replace("cal.",
 					// "Cal.").replace("supp.", "Supp.");
-					OpinionSummary opinionSummary = new OpinionSummary(new OpinionKey(name), op.getCaseName(), dateFiled, "");
-					if ( opinionSummary.getOpinionKey().toString().equals("57 Cal.App.2d 892") ) {
-						System.out.println(opinionSummary);
+					OpinionBase opinionBase = new OpinionBase(new OpinionKey(name), op.getCaseName(), dateFiled, "");
+					if ( opinionBase.getOpinionKey().toString().equals("57 Cal.App.2d 892") ) {
+						System.out.println(opinionBase);
 					}
-					ScrapedOpinionDocument parserDocument = new ScrapedOpinionDocument(opinionSummary);
+					ScrapedOpinionDocument parserDocument = new ScrapedOpinionDocument(opinionBase);
 					parserDocument.setFootnotes( footnotes );
 					parserDocument.setParagraphs( paragraphs );
-					ParsedOpinionCitationSet parserResults = parser.parseOpinionDocument(parserDocument, opinionSummary, citationStore);
+					ParsedOpinionCitationSet parserResults = parser.parseOpinionDocument(parserDocument, opinionBase, citationStore);
 					// managed the opinionCitations and statuteCitations
 					// referred to
-					// add this opinionSummary as a referring opinion.
+					// add this opinionBase as a referring opinion.
 					synchronized ( citationStore ) {
 						// when loading big datafile, opinions might already
 						// exist if the court has issued a modification
 						totalProcessed++;
 						OpinionBase existingOpinion;
-						existingOpinion = citationStore.opinionExists(opinionSummary);
+						existingOpinion = citationStore.opinionExists(opinionBase);
 						if (existingOpinion != null) {
 							totalMerged++;
-							if ( existingOpinion.isNewlyLoadedOpinion() && opinionSummary.isNewlyLoadedOpinion() ) {
-								existingOpinion.mergeCourtRepublishedOpinion(opinionSummary, parserResults, citationStore);
+							if ( existingOpinion.isNewlyLoadedOpinion() && opinionBase.isNewlyLoadedOpinion() ) {
+								existingOpinion.mergeCourtRepublishedOpinion(opinionBase, parserResults, citationStore);
 							} else {
-								citationStore.mergeParsedDocumentCitations(opinionSummary, parserResults);
-								existingOpinion.mergePublishedOpinion(opinionSummary);
+								citationStore.mergeParsedDocumentCitations(opinionBase, parserResults);
+								existingOpinion.mergePublishedOpinion(opinionBase);
 							}
 						} else {
 							totalAdded++;
-							citationStore.mergeParsedDocumentCitations(opinionSummary, parserResults);
-							citationStore.persistOpinion(opinionSummary);
+							citationStore.mergeParsedDocumentCitations(opinionBase, parserResults);
+							citationStore.persistOpinion(opinionBase);
 						}
 					}
 				}

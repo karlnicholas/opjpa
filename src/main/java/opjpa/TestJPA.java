@@ -6,7 +6,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 import load.LoadHistoricalOpinions;
-import opca.model.OpinionSummary;
+import opca.model.OpinionBase;
 import parser.ParserInterface;
 import statutesca.factory.CAStatutesFactory;
 
@@ -25,7 +25,7 @@ public class TestJPA {
 	private void run() throws Exception {
         try {
     		EntityManager em = emf.createEntityManager();
-    		em.createNamedQuery("OpinionSummary.findByOpinionKey", OpinionSummary.class);
+    		em.createNamedQuery("OpinionBase.findByOpinionKey", OpinionBase.class);
         	em.close();
         } finally {
         	emf.close();

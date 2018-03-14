@@ -5,8 +5,8 @@ import java.util.*;
 import javax.inject.Inject;
 import javax.persistence.*;
 
+import opca.model.OpinionBase;
 import opca.model.OpinionKey;
-import opca.model.OpinionSummary;
 import opca.model.SlipOpinion;
 import opca.model.StatuteCitation;
 import opca.model.StatuteKey;
@@ -19,8 +19,8 @@ public class OpinionQueries {
 	private TypedQuery<StatuteCitation> findByCodeSection;
 	private TypedQuery<StatuteCitation> selectForCode;
 	private TypedQuery<StatuteCitation> findStatutesForKeys;
-	private TypedQuery<OpinionSummary> findOpinionSummaryByOpinionKey;
-	private TypedQuery<OpinionSummary> findOpinionsForKeys;
+	private TypedQuery<OpinionBase> findOpinionBaseByOpinionKey;
+	private TypedQuery<OpinionBase> findOpinionsForKeys;
 	private TypedQuery<SlipOpinion> findByOpinionDate;
 	private TypedQuery<SlipOpinion> findByOpinionDateRange;
 	private TypedQuery<SlipOpinion> findSlipOpinionByOpinionKey;
@@ -33,8 +33,8 @@ public class OpinionQueries {
 	    selectForCode = em.createNamedQuery("StatuteCitation.selectForCode", StatuteCitation.class);
 	    findStatutesForKeys = em.createNamedQuery("StatuteCitation.findStatutesForKeys", StatuteCitation.class);
 	    
-	    findOpinionSummaryByOpinionKey = em.createNamedQuery("OpinionSummary.findByOpinionKey", OpinionSummary.class);
-	    findOpinionsForKeys = em.createNamedQuery("OpinionSummary.findOpinionsForKeys", OpinionSummary.class);
+	    findOpinionBaseByOpinionKey = em.createNamedQuery("OpinionBase.findByOpinionKey", OpinionBase.class);
+	    findOpinionsForKeys = em.createNamedQuery("OpinionBase.findOpinionsForKeys", OpinionBase.class);
 	    
 	    findByOpinionDate = em.createNamedQuery("SlipOpinion.findByOpinionDate", SlipOpinion.class);
 	    findByOpinionDateRange = em.createNamedQuery("SlipOpinion.findByOpinionDateRange", SlipOpinion.class);
@@ -85,31 +85,31 @@ public class OpinionQueries {
     	else return null;
     }
 
-	// OpinionSummary
+	// OpinionBase
 
-	public OpinionSummary opinionExists(OpinionKey key) {
-		List<OpinionSummary> list = em.createNamedQuery("OpinionSummary.findByOpinionKey", OpinionSummary.class).setParameter("key", key).getResultList();
+	public OpinionBase opinionExists(OpinionKey key) {
+		List<OpinionBase> list = em.createNamedQuery("OpinionBase.findByOpinionKey", OpinionBase.class).setParameter("key", key).getResultList();
 		if ( list.size() > 0 ) return list.get(0);
 		return null;
 	}
 
-	public List<OpinionSummary> getOpinions(Collection<OpinionKey> opinionKeys) {
-		return em.createNamedQuery("OpinionSummary.findOpinionsForKeys", OpinionSummary.class).setParameter("keys", opinionKeys).getResultList();
+	public List<OpinionBase> getOpinions(Collection<OpinionKey> opinionKeys) {
+		return em.createNamedQuery("OpinionBase.findOpinionsForKeys", OpinionBase.class).setParameter("keys", opinionKeys).getResultList();
 	}
 
-	public void persistOpinion(OpinionSummary opinion) {
+	public void persistOpinion(OpinionBase opinion) {
 		
 		em.persist(opinion);
 	}
 
-	public OpinionSummary mergeOpinion(OpinionSummary opinion) {
+	public OpinionBase mergeOpinion(OpinionBase opinion) {
 		return em.merge(opinion);
 	}
-	public List<OpinionSummary> listOpinionSummaries() {
-        return em.createQuery("select from OpinionSummary", OpinionSummary.class).getResultList();
+	public List<OpinionBase> listOpinionSummaries() {
+        return em.createQuery("select from OpinionBase", OpinionBase.class).getResultList();
     }
-	public OpinionSummary findOpinion(OpinionKey key) {
-		return em.createNamedQuery("OpinionSummary.findByOpinionKey", OpinionSummary.class).setParameter("key", key).getSingleResult();
+	public OpinionBase findOpinion(OpinionKey key) {
+		return em.createNamedQuery("OpinionBase.findByOpinionKey", OpinionBase.class).setParameter("key", key).getSingleResult();
 	}
 	
 	// SlipOpinion
@@ -117,8 +117,8 @@ public class OpinionQueries {
 		return em.find(SlipOpinion.class, key);
 	}
 	public void removeSlipOpinions(List<SlipOpinion> oldOpinions) {
-		for( SlipOpinion opinionSummary: oldOpinions ) {
-			em.remove(opinionSummary);
+		for( SlipOpinion OpinionBase: oldOpinions ) {
+			em.remove(OpinionBase);
 		}
 	}
 	public void persistSlipOpinions(List<SlipOpinion> opinions) {
@@ -144,8 +144,8 @@ public class OpinionQueries {
 	public List<SlipOpinion> listSlipOpinions() {
 		return em.createQuery("select from SlipOpinion", SlipOpinion.class).getResultList();
 	}
-	public SlipOpinion findSlipOpinionBySummaryKey(OpinionKey opinionSummaryKey) {
-		return em.createNamedQuery("SlipOpinion.findByOpinionKey", SlipOpinion.class).setParameter("key", opinionSummaryKey).getSingleResult();
+	public SlipOpinion findSlipOpinionBySummaryKey(OpinionKey OpinionBaseKey) {
+		return em.createNamedQuery("SlipOpinion.findByOpinionKey", SlipOpinion.class).setParameter("key", OpinionBaseKey).getSingleResult();
 	}
 
 	public SlipOpinion slipOpinionExists(OpinionKey opinionKey) {

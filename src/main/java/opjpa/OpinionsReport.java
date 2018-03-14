@@ -12,7 +12,6 @@ import javax.persistence.Persistence;
 
 import opca.model.OpinionBase;
 import opca.model.OpinionKey;
-import opca.model.OpinionSummary;
 import opca.model.SlipOpinion;
 import opca.model.StatuteCitation;
 import opca.model.StatuteKey;

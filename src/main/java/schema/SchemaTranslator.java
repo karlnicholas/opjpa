@@ -17,7 +17,6 @@ public class SchemaTranslator {
 			ArticleComment.class, 
 			OpinionBase.class, 
 			SlipOpinion.class, 
-			OpinionSummary.class, 
 			OpinionKey.class,
 			StatuteCitation.class, 
 			StatuteKey.class, 

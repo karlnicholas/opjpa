@@ -1,0 +1,3 @@
+       Root User: adminnr1up7V
+   Root Password: qm1zmQxcZY1t
+   Database Name: op

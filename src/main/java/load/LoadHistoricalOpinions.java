@@ -15,7 +15,6 @@ import javax.persistence.EntityManager;
 import opca.memorydb.CitationStore;
 import opca.model.OpinionBase;
 import opca.model.OpinionStatuteCitation;
-import opca.model.OpinionSummary;
 import opca.model.StatuteCitation;
 import opca.service.SlipOpinionService;
 import parser.ParserInterface;
@@ -47,11 +46,11 @@ public class LoadHistoricalOpinions {
 	    LoadCourtListenerCallback cb1 = new LoadCourtListenerCallback(citationStore, parserInterface);
 	    LoadCourtListenerFiles file1 = new LoadCourtListenerFiles(cb1);
 	    file1.loadFiles("c:/users/karln/downloads/calctapp-opinions.tar.gz", "c:/users/karln/downloads/calctapp-clusters.tar.gz", 1000);
-/*
+
 	    LoadCourtListenerCallback cb2 = new LoadCourtListenerCallback(citationStore, parserInterface);
 	    LoadCourtListenerFiles file2 = new LoadCourtListenerFiles(cb2);
 	    file2.loadFiles("c:/users/karln/downloads/cal-opinions.tar.gz", "c:/users/karln/downloads/cal-clusters.tar.gz", 1000);
-*/
+
 /*
 	    Iterator<OpinionBase> oit = citationStore.getAllOpinions().iterator();
 	    OpinionBase opinion1 = oit.next();
@@ -73,6 +72,7 @@ public class LoadHistoricalOpinions {
     	em.persist(statuteCitation2);
 */
 		List<OpinionStatuteCitation> persistOpinionStatuteCitations = Collections.synchronizedList(new ArrayList<>());
+//        em.setFlushMode(FlushModeType.COMMIT);
 
 		processOpinions(citationStore, persistOpinionStatuteCitations); 
     	processStatutes(citationStore);
@@ -86,7 +86,7 @@ public class LoadHistoricalOpinions {
 		CitationStore citationStore, 
 		List<OpinionStatuteCitation> persistOpinionStatuteCitations 
     ) throws Exception {
-		int processors = Runtime.getRuntime().availableProcessors();
+		int processors = Runtime.getRuntime().availableProcessors()/2;
 		int number = 1000;
 		int total = 0;
 		ExecutorService es = Executors.newFixedThreadPool(processors);
@@ -174,7 +174,7 @@ public class LoadHistoricalOpinions {
     public void processStatutes(
 		CitationStore citationStore 
     ) throws Exception {
-		int processors = Runtime.getRuntime().availableProcessors();
+		int processors = Runtime.getRuntime().availableProcessors()/2;
 		int number = 1000;
 		int total = 0;
 		ExecutorService es = Executors.newFixedThreadPool(processors);
@@ -283,6 +283,7 @@ public class LoadHistoricalOpinions {
 //	    	EntityManager em = emf.createEntityManager();
 //	    	SlipOpinionService slipOpinionService = new SlipOpinionService();
 //	    	slipOpinionService.setEntityManager(em);
+    			
 	    	Date startTime = new Date();
 	    	for(OpinionBase opinion: opinions ) {
 	    		if ( opinion.getStatuteCitations() != null ) {
@@ -297,7 +298,7 @@ public class LoadHistoricalOpinions {
 // This causes a NPE !?!?	    		
 //	    		opinion.checkCountReferringOpinions();
 	    		// this checks the database .. so, it won't be true unless this is a published modification 	    		
-	    		OpinionSummary existingOpinion = slipOpinionService.opinionExists(opinion);
+	    		OpinionBase existingOpinion = slipOpinionService.opinionExists(opinion);
 				if ( existingOpinion == null ) {
 					persistOpinions.add(opinion);
 				} else {
@@ -308,7 +309,7 @@ public class LoadHistoricalOpinions {
 					// what about the entire collection of referred from?
 					// in other words, it's a modification already in memory DB
 					// and now its another modification during save?
-//                    existingOpinion.addOpinionSummaryReferredFrom(opinion.getOpinionKey());
+//                    existingOpinion.addOpinionBaseReferredFrom(opinion.getOpinionKey());
 					mergeOpinions.add(existingOpinion);
 					throw new RuntimeException("Merge on DivideOpinionsFromMemory");					
 				}
@@ -483,7 +484,7 @@ public class LoadHistoricalOpinions {
     public void processOpinionStatuteCitations(List<OpinionStatuteCitation> persistOpinionStatuteCitations) 
 		throws Exception 
     {
-		int processors = Runtime.getRuntime().availableProcessors();
+		int processors = Runtime.getRuntime().availableProcessors()/2;
 		int number = 1000;
 		int total = 0;
 		ExecutorService es = Executors.newFixedThreadPool(processors);

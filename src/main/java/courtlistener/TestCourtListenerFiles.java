@@ -4,7 +4,6 @@ import java.io.BufferedWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -16,7 +15,6 @@ import load.LoadCourtListenerFiles;
 import loadmodel.LoadOpinion;
 import opca.memorydb.CitationStore;
 import opca.model.OpinionBase;
-import opca.model.OpinionSummary;
 import parser.ParserInterface;
 import statutesca.factory.CAStatutesFactory;
 

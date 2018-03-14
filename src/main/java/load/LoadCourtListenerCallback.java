@@ -19,7 +19,6 @@ import loadmodel.LoadOpinion;
 import opca.memorydb.CitationStore;
 import opca.model.OpinionBase;
 import opca.model.OpinionKey;
-import opca.model.OpinionSummary;
 import opca.model.StatuteCitation;
 import opca.parser.OpinionDocumentParser;
 import opca.parser.ParsedOpinionCitationSet;

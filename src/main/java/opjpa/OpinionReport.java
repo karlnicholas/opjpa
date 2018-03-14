@@ -12,7 +12,6 @@ import javax.persistence.TypedQuery;
 import client.StatutesRsService;
 import opca.model.OpinionBase;
 import opca.model.OpinionKey;
-import opca.model.OpinionSummary;
 import opca.model.SlipOpinion;
 import opca.parser.ParsedOpinionCitationSet;
 import opca.service.SlipOpinionService;
