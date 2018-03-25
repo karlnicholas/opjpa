@@ -13,8 +13,6 @@ public class SchemaTranslator {
 	public static void main(String[] args) throws IOException {
 
 		Class<?>[] entityClasses = { 
-			Article.class, 
-			ArticleComment.class, 
 			OpinionBase.class, 
 			SlipOpinion.class, 
 			OpinionKey.class,
