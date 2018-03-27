@@ -15,6 +15,7 @@ public class SchemaTranslator {
 		Class<?>[] entityClasses = { 
 			OpinionBase.class, 
 			SlipOpinion.class, 
+			SlipProperties.class, 
 			OpinionKey.class,
 			StatuteCitation.class, 
 			StatuteKey.class, 
