@@ -1,18 +1,25 @@
 package opjpa;
 
+import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.toSet;
+
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
 
 import client.StatutesRsService;
 import opca.model.OpinionBase;
 import opca.model.OpinionKey;
+import opca.model.OpinionStatuteCitation;
 import opca.model.SlipOpinion;
+import opca.model.SlipProperties;
+import opca.model.StatuteCitation;
 import opca.parser.ParsedOpinionCitationSet;
 import opca.service.SlipOpinionService;
 import opca.view.OpinionView;
@@ -53,7 +60,8 @@ public class OpinionReport {
 
     		
 //    		printSlipOpinionReport(em, new OpinionKey("1 Slip.Op 20536622"));
-    		printSlipOpinionReport(em, new OpinionKey("1 Slip.Op 20541592"));
+//    		System.out.println( OpinionKey.printKey(281474986991962L) );
+    		printSlipOpinionReport(em, new OpinionKey("1 Slip.Op 10281306"));
 //    		printSlipOpinionReport(em, new OpinionKey("1 Slip.Op 60140282"));
 //	        printSlipOpinionReport(em, new OpinionKey("1 Slip.Op 30156316"));
 	        
@@ -77,9 +85,29 @@ public class OpinionReport {
 	) throws Exception {
 // Date startDate = new Date();
         
+		// select along specific joins so that the result stays hierarchically oriented.
+		// in other words join -> join -> join -> join along the same path
+		// don't try to mix joins
 		SlipOpinionService slipOpinionService = new SlipOpinionService(em);
-		SlipOpinion slipOpinion = slipOpinionService.slipOpinionExists(opinionKey);
-//        StatutesWS statutesWS = new StatutesWSService(new URL("http://localhost:9080/StatutesWS?wsdl")).getStatutesWSPort();
+		SlipOpinion slipOpinion = em.createQuery("select so from SlipOpinion so where so.opinionKey = :key", SlipOpinion.class).setParameter("key", opinionKey).getSingleResult();
+		slipOpinion.setOpinionCitations( em.createQuery("select so from SlipOpinion so left join fetch so.opinionCitations oc left join fetch oc.statuteCitations ocsc left join fetch ocsc.statuteCitation ocscsc left join fetch ocscsc.referringOpinions ocscscro left join fetch ocscscro.opinionBase ocscscroob where so.opinionKey = :key", SlipOpinion.class).setParameter("key", opinionKey).getSingleResult().getOpinionCitations() );
+		slipOpinion.setStatuteCitations( em.createQuery("select so from SlipOpinion so left join fetch so.statuteCitations sc left join fetch sc.statuteCitation scsc left join fetch scsc.referringOpinions scscro left join fetch scscro.opinionBase scscroob where so.opinionKey = :key", SlipOpinion.class).setParameter("key", opinionKey).getSingleResult().getStatuteCitations() );
+		slipOpinion.setSlipProperties( em.createNamedQuery("SlipProperties.findOne", SlipProperties.class).setParameter("opinion", slipOpinion).getSingleResult() );
+//		SlipOpinion slipOpinion = slipOpinionService.slipOpinionExists(opinionKey);
+/*		
+		SlipOpinion slipOpinion = slipOpinionService.loadOpinion(opinionKey);
+		slipOpinion.setSlipProperties( em.createNamedQuery("SlipProperties.findOne", SlipProperties.class).setParameter("opinion", slipOpinion).getSingleResult() );
+		
+		Map<StatuteCitation, Set<OpinionStatuteCitation>> osCitations = em.createNamedQuery("OpinionStatuteCitation.findByOpinion", OpinionStatuteCitation.class)
+				.setParameter("opinion", slipOpinion)
+				.getResultList()
+				.stream()
+				.collect( groupingBy(OpinionStatuteCitation::getStatuteCitation, toSet() ));
+		for ( StatuteCitation statuteCitation: slipOpinion.getOnlyStatuteCitations() ) {
+			statuteCitation.setReferringOpinions(osCitations.get(statuteCitation));
+		}
+*/		
+		//        StatutesWS statutesWS = new StatutesWSService(new URL("http://localhost:9080/StatutesWS?wsdl")).getStatutesWSPort();
 		service = new StatutesRsService(new URL("http://localhost:8080/statutesrs/rs/"));
 		Client statutesRs = service.getRsService();
 		
@@ -92,22 +120,13 @@ public class OpinionReport {
 	        opinionView.trimToLevelOfInterest(2, true);
 	        opinionView.combineCommonSections();
 	        
-			List<OpinionBase> opinionSummaries;
-			List<OpinionBase> opinions = new ArrayList<OpinionBase>(opinionView.getOpinionCitations());
-
-			if ( opinions == null || opinions.size() == 0 ) {
-				opinionSummaries = new ArrayList<>();
-			} else {
-				TypedQuery<OpinionBase> query = em.createNamedQuery("OpinionSummary.findOpinionsForKeysJoinStatuteCitations", OpinionBase.class);
-				List<OpinionKey> keys = new ArrayList<>();
-				for (OpinionBase opinion: opinions) {
-					keys.add(opinion.getOpinionKey());
-				}				
-				opinionSummaries = query.setParameter("keys", keys).getResultList();
-			}
-	        	        
-			opinionViewBuilder.scoreSlipOpinionOpinions(opinionView, parserResults, opinionSummaries);
-			opinionViewBuilder.scoreSlipOpinionStatutes(opinionView, parserResults, opinionSummaries);
+//	        Set<OpinionBase> opinionsCited = opinionView.getOpinionCitations();
+	        // get statuteCitations for opinionsCited
+//			em.createNamedQuery("StatuteCitation.findStatuteCitationsForOpinions", StatuteCitation.class).setParameter("opinions", opinionsCited).getResultList();
+	        
+	        
+			opinionViewBuilder.scoreSlipOpinionOpinions(opinionView, parserResults);
+			opinionViewBuilder.scoreSlipOpinionStatutes(opinionView, parserResults);
 
 			printOpinionReport.printBaseOpinionReport(opinionView, parserResults);
 
