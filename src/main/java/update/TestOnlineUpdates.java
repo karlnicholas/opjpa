@@ -6,6 +6,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 import opca.parser.OpinionScraperInterface;
+import opca.scraper.CACaseScraper;
 import opca.service.CAOnlineUpdates;
 import scraper.TestCACaseScraper;
 
@@ -21,8 +22,8 @@ public class TestOnlineUpdates {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("opjpa");
 		em = emf.createEntityManager();
 		try {
-//			OpinionScraperInterface caseScraper = new CACaseScraper(true);
-			OpinionScraperInterface caseScraper = new TestCACaseScraper(false);
+			OpinionScraperInterface caseScraper = new CACaseScraper(true);
+//			OpinionScraperInterface caseScraper = new TestCACaseScraper(false);
 			EntityTransaction tx = em.getTransaction();
 			try {
 				tx.begin();
