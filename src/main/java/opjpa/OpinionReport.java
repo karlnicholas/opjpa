@@ -125,8 +125,8 @@ public class OpinionReport {
 //			em.createNamedQuery("StatuteCitation.findStatuteCitationsForOpinions", StatuteCitation.class).setParameter("opinions", opinionsCited).getResultList();
 	        
 	        
-			opinionViewBuilder.scoreSlipOpinionOpinions(opinionView, parserResults);
-			opinionViewBuilder.scoreSlipOpinionStatutes(opinionView, parserResults);
+			opinionViewBuilder.scoreSlipOpinionOpinions(opinionView);
+			opinionViewBuilder.scoreSlipOpinionStatutes(opinionView);
 
 			printOpinionReport.printBaseOpinionReport(opinionView, parserResults);
 
