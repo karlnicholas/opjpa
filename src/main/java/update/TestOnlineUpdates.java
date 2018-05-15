@@ -22,8 +22,8 @@ public class TestOnlineUpdates {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("opjpa");
 		em = emf.createEntityManager();
 		try {
-			OpinionScraperInterface caseScraper = new CACaseScraper(true);
-//			OpinionScraperInterface caseScraper = new TestCACaseScraper(false);
+//			OpinionScraperInterface caseScraper = new CACaseScraper(true);
+			OpinionScraperInterface caseScraper = new TestCACaseScraper(false);
 			EntityTransaction tx = em.getTransaction();
 			try {
 				tx.begin();
