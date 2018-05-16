@@ -117,8 +117,8 @@ public class OpinionReport {
 	    	OpinionViewBuilder opinionViewBuilder = new OpinionViewBuilder();
 	        //TODO:FIX FOR STATUTESERVICE
 	        OpinionView opinionView = opinionViewBuilder.buildSlipOpinionView(statutesRs, slipOpinion, parserResults);
-	        opinionView.trimToLevelOfInterest(2, true);
 	        opinionView.combineCommonSections();
+	        opinionView.trimToLevelOfInterest(2, true);
 	        
 //	        Set<OpinionBase> opinionsCited = opinionView.getOpinionCitations();
 	        // get statuteCitations for opinionsCited

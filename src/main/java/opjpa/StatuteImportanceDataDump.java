@@ -25,13 +25,14 @@ import opca.view.OpinionViewBuilder;
 import opca.view.StatuteView;
 import service.Client;
 
-public class StatuteImportance implements AutoCloseable {
+public class StatuteImportanceDataDump implements AutoCloseable {
 	private EntityManagerFactory emf;
 	private EntityManager em;
 
     public static void main(String... args) throws Exception {
-    	try ( StatuteImportance statuteImportance = new StatuteImportance() ) {	    	
+    	try ( StatuteImportanceDataDump statuteImportance = new StatuteImportanceDataDump() ) {	    	
 	    	List<OpinionView> getOpinionCases = statuteImportance.getOpinionCases(true, 2);
+/*	    	
 	    	for( OpinionView opinionView: getOpinionCases) {
 	    		System.out.println("\n=============================");
 	    		for( StatuteView statuteView: opinionView.getStatutes() ) {
@@ -46,10 +47,11 @@ public class StatuteImportance implements AutoCloseable {
     				);
 	    		}
 	    	}
+*/	    	
     	}
     }
 
-	public StatuteImportance() {
+	public StatuteImportanceDataDump() {
 		emf = Persistence.createEntityManagerFactory("opjpa");
 		em = emf.createEntityManager();
 	}
@@ -73,7 +75,7 @@ public class StatuteImportance implements AutoCloseable {
 				opinionView.combineCommonSections();
 				opinionView.trimToLevelOfInterest(levelOfInterest, true);
 
-				opinionViewBuilder.scoreSlipOpinionStatutes(opinionView);
+	    		opinionViewBuilder.scoreSlipOpinionStatutes(opinionView);
 				opinionViewBuilder.scoreSlipOpinionOpinions(opinionView);
 				
 				opinionViews.add(opinionView);
@@ -145,8 +147,8 @@ public class StatuteImportance implements AutoCloseable {
 		}
 
 		class MyPersistenceLookup implements PersistenceLookup {
-			protected StatuteImportance slipOpinionRepository;
-			public MyPersistenceLookup(StatuteImportance slipOpinionRepository) {
+			protected StatuteImportanceDataDump slipOpinionRepository;
+			public MyPersistenceLookup(StatuteImportanceDataDump slipOpinionRepository) {
 				this.slipOpinionRepository = slipOpinionRepository;
 			}
 			@Override
