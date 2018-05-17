@@ -21,7 +21,9 @@ create table slipproperties (court varchar(15), disposition varchar(31), fileext
 create table statutecitation (id integer not null auto_increment, designated bit not null, sectionnumber char(32), title char(3), primary key (id)) ENGINE=InnoDB;
 create table user (id bigint not null auto_increment, createdate datetime, email varchar(255), emailupdates bit not null, firstname varchar(255), lastname varchar(255), locale varchar(255), optout bit not null, optoutkey varchar(255), password varchar(255), titles tinyblob, updatedate datetime, verified bit not null, verifycount integer not null, verifyerrors integer not null, verifykey varchar(255), welcomeerrors integer not null, welcomed bit not null, primary key (id)) ENGINE=InnoDB;
 create table user_role (user_id bigint not null, roles_id bigint not null) ENGINE=InnoDB;
+create index IDXd587qslmmirn7juop20is6gwt on opinionbase (vset, volume, page);
 alter table role add constraint UK_bjxn5ii7v7ygwx39et0wawu0q unique (role);
+create index IDXa0xjansqjx14py55e14jnar89 on statutecitation (title, sectionnumber);
 alter table user add constraint UKob8kqyqqgmefl0aco34akdtpe unique (email);
 alter table opinionbase_opinionbase add constraint FKv9vgyvlfwws091112o975tdf foreign key (opinioncitations_id) references opinionbase (id);
 alter table opinionbase_opinionbase add constraint FKta2uodkexsd423u05p76th66o foreign key (referringopinions_id) references opinionbase (id);
