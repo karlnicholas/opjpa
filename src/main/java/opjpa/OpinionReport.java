@@ -1,25 +1,15 @@
 package opjpa;
 
-import static java.util.stream.Collectors.groupingBy;
-import static java.util.stream.Collectors.toSet;
-
 import java.net.URL;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import client.StatutesRsService;
-import opca.model.OpinionBase;
 import opca.model.OpinionKey;
-import opca.model.OpinionStatuteCitation;
 import opca.model.SlipOpinion;
 import opca.model.SlipProperties;
-import opca.model.StatuteCitation;
 import opca.parser.ParsedOpinionCitationSet;
 import opca.service.SlipOpinionService;
 import opca.view.OpinionView;
@@ -114,9 +104,9 @@ public class OpinionReport {
 		if ( slipOpinion != null ) {
 	    	ParsedOpinionCitationSet parserResults = new ParsedOpinionCitationSet(slipOpinion, slipOpinionService.getPersistenceLookup());
 
-	    	OpinionViewBuilder opinionViewBuilder = new OpinionViewBuilder();
+	    	OpinionViewBuilder opinionViewBuilder = new OpinionViewBuilder(statutesRs);
 	        //TODO:FIX FOR STATUTESERVICE
-	        OpinionView opinionView = opinionViewBuilder.buildSlipOpinionView(statutesRs, slipOpinion, parserResults);
+	        OpinionView opinionView = opinionViewBuilder.buildOpinionView(slipOpinion, parserResults);
 	        opinionView.combineCommonSections();
 	        opinionView.trimToLevelOfInterest(2, true);
 	        
@@ -124,9 +114,7 @@ public class OpinionReport {
 	        // get statuteCitations for opinionsCited
 //			em.createNamedQuery("StatuteCitation.findStatuteCitationsForOpinions", StatuteCitation.class).setParameter("opinions", opinionsCited).getResultList();
 	        
-	        
-			opinionViewBuilder.scoreSlipOpinionOpinions(opinionView);
-			opinionViewBuilder.scoreSlipOpinionStatutes(opinionView);
+	        opinionView.scoreCitations(opinionViewBuilder);
 
 			printOpinionReport.printBaseOpinionReport(opinionView, parserResults);
 
