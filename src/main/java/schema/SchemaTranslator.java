@@ -1,11 +1,13 @@
 package schema;
 
 import java.io.IOException;
+import java.util.EnumSet;
 
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.boot.spi.MetadataImplementor;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
+import org.hibernate.tool.schema.TargetType;
 
 import opca.model.*;
 
@@ -37,12 +39,14 @@ public class SchemaTranslator {
 		for (Class<?> clazz : entityClasses)
 			metadata.addAnnotatedClass(clazz);
 
-		SchemaExport export = new SchemaExport((MetadataImplementor) metadata.buildMetadata())
+        EnumSet<TargetType> targetTypes = EnumSet.of(TargetType.STDOUT, TargetType.SCRIPT);
+
+        SchemaExport export = new SchemaExport()
 			// .setHaltOnError( haltOnError )
 			.setOutputFile("db-schema.sql")
 			.setDelimiter(";");
 
-		export.create(true, false);
+		export.create(targetTypes, (MetadataImplementor) metadata.buildMetadata());
 
 	}
 
