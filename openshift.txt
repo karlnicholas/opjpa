@@ -1,3 +1,9 @@
        Root User: adminnr1up7V
    Root Password: qm1zmQxcZY1t
    Database Name: op
+   
+   
+   Username: adminnr1up7V
+       Password: qm1zmQxcZY1t
+  Database Name: op
+ Connection URL: mysql://mysql:3306/
