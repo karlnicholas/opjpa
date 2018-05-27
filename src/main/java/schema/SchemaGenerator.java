@@ -10,7 +10,6 @@ import java.util.Map;
 
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.boot.spi.MetadataImplementor;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
 import org.hibernate.tool.schema.TargetType;
 
@@ -76,9 +75,7 @@ public class SchemaGenerator {
 		Map<String, String> settings = new HashMap<String, String>();
 		settings.put("hibernate.hbm2ddl.auto", "create");
 		settings.put("hibernate.dialect", "org.hibernate.dialect.MySQL5InnoDBDialect");
-//		settings.put("hibernate.implicit_naming_strategy", "opca.ejb.util.ImprovedImplicitNamingStrategy");
-		settings.put("hibernate.physical_naming_strategy", "opca.ejb.util.ImprovedNamingStrategy");
-
+		settings.put("hibernate.physical_naming_strategy", "opca.ejb.util.ImprovedNamingStrategy" );
         
 	    MetadataSources metadata = new MetadataSources(
 	            new StandardServiceRegistryBuilder()

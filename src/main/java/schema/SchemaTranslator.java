@@ -8,6 +8,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.boot.spi.MetadataImplementor;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
 import org.hibernate.tool.schema.TargetType;
+import opca.ejb.util.ImprovedNamingStrategy;
 
 import opca.model.*;
 
@@ -28,9 +29,8 @@ public class SchemaTranslator {
 		};
 
 		MetadataSources metadata = new MetadataSources(new StandardServiceRegistryBuilder()
+			.applySetting("hibernate.hbm2ddl.auto", "create")
 			.applySetting("hibernate.dialect", "org.hibernate.dialect.MySQL5InnoDBDialect")
-			// .applySetting("hibernate.implicit_naming_strategy",
-			// "opca.xxx.util.ImprovedImplicitNamingStrategy")
 			.applySetting("hibernate.physical_naming_strategy", "opca.ejb.util.ImprovedNamingStrategy")
 			.build()
 		);

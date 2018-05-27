@@ -7,3 +7,5 @@
        Password: qm1zmQxcZY1t
   Database Name: op
  Connection URL: mysql://mysql:3306/
+
+ jdbc:mysql://mysql:3306/op

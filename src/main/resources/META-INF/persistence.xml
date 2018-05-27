@@ -22,10 +22,7 @@
       <property name="javax.persistence.jdbc.password" value="qm1zmQxcZY1t" />
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
       <property name="hibernate.show_sql" value = "false" />
-<!--       
-      <property name="hibernate.implicit_naming_strategy" value="opca.ejb.util.ImprovedImplicitNamingStrategy" />
-      <property name="hibernate.physical_naming_strategy" value="opca.ejb.util.ImprovedNamingStrategy" />
- -->      
+      <property name="hibernate.physical_naming_strategy" value="opca.ejb.util.ImprovedNamingStrategy" />      
     </properties>
   </persistence-unit>
 </persistence>
