@@ -53,17 +53,15 @@ public class StatuteImportanceDataDump implements AutoCloseable {
 		emf = Persistence.createEntityManagerFactory("opjpa");
 		em = emf.createEntityManager();
 	}
-
 	
 	public List<OpinionView> getOpinionCases(
 			boolean compressCodeReferences, 
 			int levelOfInterest
 		) {
 			List<OpinionView> opinionViews = new ArrayList<OpinionView>();
-			
 	        Client statutesRs = new RestServicesFactory().connectStatutesRsService();
+			//
 			OpinionViewBuilder opinionViewBuilder = new OpinionViewBuilder(statutesRs);
-			
 			List<SlipOpinion> opinions = findByPublishDateRange();
 			MyPersistenceLookup pl = new MyPersistenceLookup(this);
 			TypedQuery<OpinionBase> focfs = em.createNamedQuery("OpinionBase.fetchOpinionCitationsForScore", OpinionBase.class);
@@ -73,11 +71,11 @@ public class StatuteImportanceDataDump implements AutoCloseable {
 				OpinionView opinionView = opinionViewBuilder.buildOpinionView(slipOpinion, parserResults);
 				opinionView.combineCommonSections();
 				opinionView.trimToLevelOfInterest(levelOfInterest, true);
-	    		opinionView.scoreCitations(opinionViewBuilder);
+				opinionView.scoreCitations(opinionViewBuilder);
 				
 				opinionViews.add(opinionView);
 			}
-			return opinionViews;
+			return opinionViews;	
 		}
 
 		// OpinionBase

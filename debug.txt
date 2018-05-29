@@ -1,25 +1,111 @@
-19:10:30,654 INFO  [stdout] (default task-4) Hibernate: select statutecit0_.opinionbase_id as opinionb2_2_0_, statutecit0_.statutecitation_id as statutec3_2_0_, statutecit0_.opinionbase_id as opinionb2_2_1_, statutecit0_.statutecitation_id as statutec3_2_1_, statutecit0_.countreferences as countref1_2_1_, statutecit1_.id as id1_5_2_, statutecit1_.designated as designat2_5_2_, statutecit1_.sectionnumber as sectionn3_5_2_, statutecit1_.title as title4_5_2_ from opinionstatutecitation statutecit0_ inner join statutecitation statutecit1_ on statutecit0_.statutecitation_id=statutecit1_.id where statutecit0_.opinionbase_id=?
-19:10:30,667 INFO  [stdout] (default task-4) Hibernate: select opinioncit0_.referringopinions_id as referrin1_1_0_, opinioncit0_.opinioncitations_id as opinionc2_1_0_, opinionbas1_.id as id2_0_1_, opinionbas1_.countreferringopinions as countref3_0_1_, opinionbas1_.opiniondate as opiniond4_0_1_, opinionbas1_.page as page5_0_1_, opinionbas1_.volume as volume6_0_1_, opinionbas1_.vset as vset7_0_1_, opinionbas1_.title as title8_0_1_, opinionbas1_.dtype as dtype1_0_1_ from opinionbase_opinionbase opinioncit0_ inner join opinionbase opinionbas1_ on opinioncit0_.opinioncitations_id=opinionbas1_.id where opinioncit0_.referringopinions_id=?
-....
-19:10:37,218 INFO  [stdout] (default task-4) Hibernate: select referringo0_.statutecitation_id as statutec3_2_0_, referringo0_.opinionbase_id as opinionb2_2_0_, referringo0_.opinionbase_id as opinionb2_2_1_, referringo0_.statutecitation_id as statutec3_2_1_, referringo0_.countreferences as countref1_2_1_, opinionbas1_.id as id2_0_2_, opinionbas1_.countreferringopinions as countref3_0_2_, opinionbas1_.opiniondate as opiniond4_0_2_, opinionbas1_.page as page5_0_2_, opinionbas1_.volume as volume6_0_2_, opinionbas1_.vset as vset7_0_2_, opinionbas1_.title as title8_0_2_, opinionbas1_.dtype as dtype1_0_2_ from opinionstatutecitation referringo0_ inner join opinionbase opinionbas1_ on referringo0_.opinionbase_id=opinionbas1_.id where referringo0_.statutecitation_id=?
-19:10:37,243 INFO  [stdout] (default task-4) Hibernate: select referringo0_.statutecitation_id as statutec3_2_0_, referringo0_.opinionbase_id as opinionb2_2_0_, referringo0_.opinionbase_id as opinionb2_2_1_, referringo0_.statutecitation_id as statutec3_2_1_, referringo0_.countreferences as countref1_2_1_, opinionbas1_.id as id2_0_2_, opinionbas1_.countreferringopinions as countref3_0_2_, opinionbas1_.opiniondate as opiniond4_0_2_, opinionbas1_.page as page5_0_2_, opinionbas1_.volume as volume6_0_2_, opinionbas1_.vset as vset7_0_2_, opinionbas1_.title as title8_0_2_, opinionbas1_.dtype as dtype1_0_2_ from opinionstatutecitation referringo0_ inner join opinionbase opinionbas1_ on referringo0_.opinionbase_id=opinionbas1_.id where referringo0_.statutecitation_id=?
---------------
+
+May 28, 2018 4:01:30 PM org.hibernate.engine.jdbc.connections.internal.PooledConnections <init>
+INFO: HHH000115: Hibernate connection pool size: 20 (min=1)
+Mon May 28 16:01:31 MST 2018 WARN: Establishing SSL connection without server's identity verification is not recommended. According to MySQL 5.5.45+, 5.6.26+ and 5.7.6+ requirements SSL connection must be established by default if explicit option isn't set. For compliance with existing applications not using SSL the verifyServerCertificate property is set to 'false'. You need either to explicitly disable SSL by setting useSSL=false, or set useSSL=true and provide truststore for server certificate verification.
+May 28, 2018 4:01:31 PM org.hibernate.dialect.Dialect <init>
+INFO: HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+May 28, 2018 4:01:31 PM org.hibernate.hql.internal.QueryTranslatorFactoryInitiator initiateService
+INFO: HHH000397: Using ASTQueryTranslatorFactory
+May 28, 2018 4:01:32 PM opca.scraper.CACaseScraper <init>
+INFO: CACaseScraper
+May 28, 2018 4:01:32 PM opca.scraper.CACaseScraper parseCaseList
+WARNING: Duplicate Detected:E060438A : 04/12/18 : P. V. PEREZ
+May 28, 2018 4:01:32 PM opca.scraper.CACaseScraper parseCaseList
+WARNING: Duplicate Detected:B270903A : 03/15/18 : P. V. ALMANZA
+May 28, 2018 4:01:32 PM opca.service.CAOnlineUpdates updateDatabase
+INFO: Found 0 in the database.
+May 28, 2018 4:01:32 PM opca.service.CAOnlineUpdates updateDatabase
+INFO: Split Transactions
+May 28, 2018 4:01:32 PM opca.service.CAOnlineUpdates updateDatabase
+INFO: No cases deleted.
+May 28, 2018 4:01:32 PM opca.service.CAOnlineUpdates processAndPersistCases
+INFO: There are 361 SlipOpinions to process
+May 28, 2018 4:01:51 PM opca.service.CAOnlineUpdates processOpinions
+INFO: Divided 4863 opinions in 3 seconds
+May 28, 2018 4:01:55 PM opca.service.CAOnlineUpdates processStatutes
+INFO: Divided 1835 statutes in 3 seconds
+May 28, 2018 4:01:56 PM opca.service.CAOnlineUpdates processAndPersistCases
+INFO: Persisted 1378 opinions in 0 seconds
+May 28, 2018 4:01:56 PM opca.service.CAOnlineUpdates processAndPersistCases
+INFO: Merged 3485 opinions in 0 seconds
+May 28, 2018 4:01:56 PM opca.service.CAOnlineUpdates processAndPersistCases
+INFO: Persisted 3011 opinionStatuteCitation in 0 seconds
+May 28, 2018 4:01:56 PM opca.service.CAOnlineUpdates processAndPersistCases
+INFO: Persisted 495 statutes in 0 seconds
+May 28, 2018 4:01:57 PM opca.service.CAOnlineUpdates processAndPersistCases
+INFO: Merged 1340 statutes in 0 seconds
+May 28, 2018 4:01:58 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl stop
+INFO: HHH10001008: Cleaning up connection pool [jdbc:mysql://localhost:3306/op]
 
 
 
-19:47:32,840 INFO  [stdout] (default task-8) Hibernate: select statutecit0_.opinionbase_id as opinionb2_2_0_, statutecit0_.statutecitation_id as statutec3_2_0_, statutecit0_.opinionbase_id as opinionb2_2_1_, statutecit0_.statutecitation_id as statutec3_2_1_, statutecit0_.countreferences as countref1_2_1_, statutecit1_.id as id1_5_2_, statutecit1_.designated as designat2_5_2_, statutecit1_.sectionnumber as sectionn3_5_2_, statutecit1_.title as title4_5_2_ from opinionstatutecitation statutecit0_ inner join statutecitation statutecit1_ on statutecit0_.statutecitation_id=statutecit1_.id where statutecit0_.opinionbase_id=?
+INFO: CACaseScraper
+May 28, 2018 4:54:55 PM opca.scraper.CACaseScraper parseCaseList
+WARNING: Duplicate Detected:E060438A : 04/12/18 : P. V. PEREZ
+May 28, 2018 4:54:55 PM opca.scraper.CACaseScraper parseCaseList
+WARNING: Duplicate Detected:B270903A : 03/15/18 : P. V. ALMANZA
+May 28, 2018 4:54:55 PM opca.service.CAOnlineUpdates updateDatabase
+INFO: Found 0 in the database.
+May 28, 2018 4:54:55 PM opca.service.CAOnlineUpdates updateDatabase
+INFO: Split Transactions
+May 28, 2018 4:54:55 PM opca.service.CAOnlineUpdates updateDatabase
+INFO: No cases deleted.
+May 28, 2018 4:54:55 PM opca.service.CAOnlineUpdates processAndPersistCases
+INFO: There are 361 SlipOpinions to process
+May 28, 2018 4:55:28 PM opca.service.CAOnlineUpdates processOpinions
+INFO: Divided 4863 opinions in 5 seconds
+May 28, 2018 4:55:33 PM opca.service.CAOnlineUpdates processStatutes
+INFO: Divided 1835 statutes in 5 seconds
+May 28, 2018 4:55:34 PM opca.service.CAOnlineUpdates processAndPersistCases
+INFO: Persisted 63 opinions in 0 seconds
+May 28, 2018 4:55:34 PM opca.service.CAOnlineUpdates processAndPersistCases
+INFO: Merged 4800 opinions in 0 seconds
+May 28, 2018 4:55:35 PM opca.service.CAOnlineUpdates processAndPersistCases
+INFO: Persisted 3011 opinionStatuteCitation in 0 seconds
+May 28, 2018 4:55:35 PM opca.service.CAOnlineUpdates processAndPersistCases
+INFO: Persisted 35 statutes in 0 seconds
+May 28, 2018 4:55:35 PM opca.service.CAOnlineUpdates processAndPersistCases
+INFO: Merged 1800 statutes in 0 seconds
+May 28, 2018 4:55:37 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl stop
+INFO: HHH10001008: Cleaning up connection pool [jdbc:mysql://localhost:3306/op]
 
-...
-19:47:42,512 INFO  [stdout] (default task-8) Hibernate: select referringo0_.statutecitation_id as statutec3_2_0_, referringo0_.opinionbase_id as opinionb2_2_0_, referringo0_.opinionbase_id as opinionb2_2_1_, referringo0_.statutecitation_id as statutec3_2_1_, referringo0_.countreferences as countref1_2_1_, opinionbas1_.id as id2_0_2_, opinionbas1_.countreferringopinions as countref3_0_2_, opinionbas1_.opiniondate as opiniond4_0_2_, opinionbas1_.page as page5_0_2_, opinionbas1_.volume as volume6_0_2_, opinionbas1_.vset as vset7_0_2_, opinionbas1_.title as title8_0_2_, opinionbas1_.dtype as dtype1_0_2_ from opinionstatutecitation referringo0_ inner join opinionbase opinionbas1_ on referringo0_.opinionbase_id=opinionbas1_.id where referringo0_.statutecitation_id=?
-
-19:47:42,529 INFO  [stdout] (default task-8) Hibernate: select referringo0_.statutecitation_id as statutec3_2_0_, referringo0_.opinionbase_id as opinionb2_2_0_, referringo0_.opinionbase_id as opinionb2_2_1_, referringo0_.statutecitation_id as statutec3_2_1_, referringo0_.countreferences as countref1_2_1_, opinionbas1_.id as id2_0_2_, opinionbas1_.countreferringopinions as countref3_0_2_, opinionbas1_.opiniondate as opiniond4_0_2_, opinionbas1_.page as page5_0_2_, opinionbas1_.volume as volume6_0_2_, opinionbas1_.vset as vset7_0_2_, opinionbas1_.title as title8_0_2_, opinionbas1_.dtype as dtype1_0_2_ from opinionstatutecitation referringo0_ inner join opinionbase opinionbas1_ on referringo0_.opinionbase_id=opinionbas1_.id where referringo0_.statutecitation_id=?
 
 
-.....
 
-select distinct slipopinio0_.id as id2_0_0_, opinionbas2_.id as id2_0_1_, slipopinio0_.countreferringopinions as countref3_0_0_, slipopinio0_.opiniondate as opiniond4_0_0_, slipopinio0_.page as page5_0_0_, slipopinio0_.volume as volume6_0_0_, slipopinio0_.vset as vset7_0_0_, slipopinio0_.title as title8_0_0_, opinionbas2_.countreferringopinions as countref3_0_1_, opinionbas2_.opiniondate as opiniond4_0_1_, opinionbas2_.page as page5_0_1_, opinionbas2_.volume as volume6_0_1_, opinionbas2_.vset as vset7_0_1_, opinionbas2_.title as title8_0_1_, opinionbas2_.dtype as dtype1_0_1_, opinioncit1_.referringopinions_id as referrin1_1_0__, opinioncit1_.opinioncitations_id as opinionc2_1_0__ 
-from opinionbase slipopinio0_ 
-left outer join opinionbase_opinionbase opinioncit1_ on slipopinio0_.id=opinioncit1_.referringopinions_id 
-left outer join opinionbase opinionbas2_ on opinioncit1_.opinioncitations_id=opinionbas2_.id 
-where slipopinio0_.dtype=-1344462334 order by slipopinio0_.opiniondate desc
+Mon May 28 17:32:25 MST 2018 WARN: Establishing SSL connection without server's identity verification is not recommended. According to MySQL 5.5.45+, 5.6.26+ and 5.7.6+ requirements SSL connection must be established by default if explicit option isn't set. For compliance with existing applications not using SSL the verifyServerCertificate property is set to 'false'. You need either to explicitly disable SSL by setting useSSL=false, or set useSSL=true and provide truststore for server certificate verification.
+May 28, 2018 5:32:25 PM org.hibernate.dialect.Dialect <init>
+INFO: HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+May 28, 2018 5:32:26 PM org.hibernate.hql.internal.QueryTranslatorFactoryInitiator initiateService
+INFO: HHH000397: Using ASTQueryTranslatorFactory
+May 28, 2018 5:32:26 PM opca.scraper.CACaseScraper <init>
+INFO: CACaseScraper
+May 28, 2018 5:32:26 PM opca.scraper.CACaseScraper parseCaseList
+WARNING: Duplicate Detected:E060438A : 04/12/18 : P. V. PEREZ
+May 28, 2018 5:32:26 PM opca.scraper.CACaseScraper parseCaseList
+WARNING: Duplicate Detected:B270903A : 03/15/18 : P. V. ALMANZA
+May 28, 2018 5:32:27 PM opca.service.CAOnlineUpdates updateDatabase
+INFO: Found 0 in the database.
+May 28, 2018 5:32:27 PM opca.service.CAOnlineUpdates updateDatabase
+INFO: Split Transactions
+May 28, 2018 5:32:27 PM opca.service.CAOnlineUpdates updateDatabase
+INFO: No cases deleted.
+May 28, 2018 5:32:27 PM opca.service.CAOnlineUpdates processAndPersistCases
+INFO: There are 361 SlipOpinions to process
+May 28, 2018 5:32:44 PM opca.service.CAOnlineUpdates processOpinions
+INFO: Divided 4863 opinions in 5 seconds
+May 28, 2018 5:32:50 PM opca.service.CAOnlineUpdates processStatutes
+INFO: Divided 1835 statutes in 6 seconds
+May 28, 2018 5:32:51 PM opca.service.CAOnlineUpdates processAndPersistCases
+INFO: Persisted 63 opinions in 0 seconds
+May 28, 2018 5:32:52 PM opca.service.CAOnlineUpdates processAndPersistCases
+INFO: Merged 4800 opinions in 0 seconds
+May 28, 2018 5:32:52 PM opca.service.CAOnlineUpdates processAndPersistCases
+INFO: Persisted 3011 opinionStatuteCitation in 0 seconds
+May 28, 2018 5:32:52 PM opca.service.CAOnlineUpdates processAndPersistCases
+INFO: Persisted 35 statutes in 0 seconds
+May 28, 2018 5:32:53 PM opca.service.CAOnlineUpdates processAndPersistCases
+INFO: Merged 1800 statutes in 0 seconds
+May 28, 2018 5:32:55 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl stop
+INFO: HHH10001008: Cleaning up connection pool [jdbc:mysql://localhost:3306/op]
+
 
