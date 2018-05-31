@@ -1,111 +1,61 @@
-
-May 28, 2018 4:01:30 PM org.hibernate.engine.jdbc.connections.internal.PooledConnections <init>
-INFO: HHH000115: Hibernate connection pool size: 20 (min=1)
-Mon May 28 16:01:31 MST 2018 WARN: Establishing SSL connection without server's identity verification is not recommended. According to MySQL 5.5.45+, 5.6.26+ and 5.7.6+ requirements SSL connection must be established by default if explicit option isn't set. For compliance with existing applications not using SSL the verifyServerCertificate property is set to 'false'. You need either to explicitly disable SSL by setting useSSL=false, or set useSSL=true and provide truststore for server certificate verification.
-May 28, 2018 4:01:31 PM org.hibernate.dialect.Dialect <init>
-INFO: HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
-May 28, 2018 4:01:31 PM org.hibernate.hql.internal.QueryTranslatorFactoryInitiator initiateService
-INFO: HHH000397: Using ASTQueryTranslatorFactory
-May 28, 2018 4:01:32 PM opca.scraper.CACaseScraper <init>
 INFO: CACaseScraper
-May 28, 2018 4:01:32 PM opca.scraper.CACaseScraper parseCaseList
+May 29, 2018 4:43:39 PM opca.scraper.CACaseScraper parseCaseList
 WARNING: Duplicate Detected:E060438A : 04/12/18 : P. V. PEREZ
-May 28, 2018 4:01:32 PM opca.scraper.CACaseScraper parseCaseList
+May 29, 2018 4:43:39 PM opca.scraper.CACaseScraper parseCaseList
 WARNING: Duplicate Detected:B270903A : 03/15/18 : P. V. ALMANZA
-May 28, 2018 4:01:32 PM opca.service.CAOnlineUpdates updateDatabase
+May 29, 2018 4:43:39 PM opca.service.CAOnlineUpdates updateDatabase
 INFO: Found 0 in the database.
-May 28, 2018 4:01:32 PM opca.service.CAOnlineUpdates updateDatabase
+May 29, 2018 4:43:39 PM opca.service.CAOnlineUpdates updateDatabase
 INFO: Split Transactions
-May 28, 2018 4:01:32 PM opca.service.CAOnlineUpdates updateDatabase
+May 29, 2018 4:43:39 PM opca.service.CAOnlineUpdates updateDatabase
 INFO: No cases deleted.
-May 28, 2018 4:01:32 PM opca.service.CAOnlineUpdates processAndPersistCases
+May 29, 2018 4:43:39 PM opca.service.CAOnlineUpdates processAndPersistCases
 INFO: There are 361 SlipOpinions to process
-May 28, 2018 4:01:51 PM opca.service.CAOnlineUpdates processOpinions
-INFO: Divided 4863 opinions in 3 seconds
-May 28, 2018 4:01:55 PM opca.service.CAOnlineUpdates processStatutes
+May 29, 2018 4:44:00 PM opca.service.CAOnlineUpdates processOpinions
+INFO: Divided 4863 opinions in 2 seconds
+May 29, 2018 4:44:04 PM opca.service.CAOnlineUpdates processStatutes
+INFO: Divided 1835 statutes in 4 seconds
+May 29, 2018 4:44:05 PM opca.service.CAOnlineUpdates processAndPersistCases
+INFO: Persisted 1317 opinions in 0 seconds
+May 29, 2018 4:44:05 PM opca.service.CAOnlineUpdates processAndPersistCases
+INFO: Merged 3546 opinions in 0 seconds
+May 29, 2018 4:44:05 PM opca.service.CAOnlineUpdates processAndPersistCases
+INFO: Persisted 3011 opinionStatuteCitation in 0 seconds
+May 29, 2018 4:44:05 PM opca.service.CAOnlineUpdates processAndPersistCases
+INFO: Persisted 463 statutes in 0 seconds
+May 29, 2018 4:44:06 PM opca.service.CAOnlineUpdates processAndPersistCases
+INFO: Merged 1372 statutes in 0 seconds
+May 29, 2018 4:44:07 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl stop
+INFO: HHH10001008: Cleaning up connection pool [jdbc:mysql://localhost:3306/op]
+
+
+INFO: CACaseScraper
+May 29, 2018 5:06:18 PM opca.scraper.CACaseScraper parseCaseList
+WARNING: Duplicate Detected:E060438A : 04/12/18 : P. V. PEREZ
+May 29, 2018 5:06:18 PM opca.scraper.CACaseScraper parseCaseList
+WARNING: Duplicate Detected:B270903A : 03/15/18 : P. V. ALMANZA
+May 29, 2018 5:06:18 PM opca.service.CAOnlineUpdates updateDatabase
+INFO: Found 0 in the database.
+May 29, 2018 5:06:18 PM opca.service.CAOnlineUpdates updateDatabase
+INFO: Split Transactions
+May 29, 2018 5:06:18 PM opca.service.CAOnlineUpdates updateDatabase
+INFO: No cases deleted.
+May 29, 2018 5:06:18 PM opca.service.CAOnlineUpdates processAndPersistCases
+INFO: There are 361 SlipOpinions to process
+May 29, 2018 5:06:32 PM opca.service.CAOnlineUpdates processOpinions
+INFO: Divided 4863 opinions in 4 seconds
+May 29, 2018 5:06:36 PM opca.service.CAOnlineUpdates processStatutes
 INFO: Divided 1835 statutes in 3 seconds
-May 28, 2018 4:01:56 PM opca.service.CAOnlineUpdates processAndPersistCases
-INFO: Persisted 1378 opinions in 0 seconds
-May 28, 2018 4:01:56 PM opca.service.CAOnlineUpdates processAndPersistCases
-INFO: Merged 3485 opinions in 0 seconds
-May 28, 2018 4:01:56 PM opca.service.CAOnlineUpdates processAndPersistCases
+May 29, 2018 5:06:36 PM opca.service.CAOnlineUpdates processAndPersistCases
+INFO: Persisted 0 opinions in 0 seconds
+May 29, 2018 5:06:36 PM opca.service.CAOnlineUpdates processAndPersistCases
+INFO: Merged 4863 opinions in 0 seconds
+May 29, 2018 5:06:36 PM opca.service.CAOnlineUpdates processAndPersistCases
 INFO: Persisted 3011 opinionStatuteCitation in 0 seconds
-May 28, 2018 4:01:56 PM opca.service.CAOnlineUpdates processAndPersistCases
-INFO: Persisted 495 statutes in 0 seconds
-May 28, 2018 4:01:57 PM opca.service.CAOnlineUpdates processAndPersistCases
-INFO: Merged 1340 statutes in 0 seconds
-May 28, 2018 4:01:58 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl stop
+May 29, 2018 5:06:36 PM opca.service.CAOnlineUpdates processAndPersistCases
+INFO: Persisted 0 statutes in 0 seconds
+May 29, 2018 5:06:37 PM opca.service.CAOnlineUpdates processAndPersistCases
+INFO: Merged 1835 statutes in 0 seconds
+May 29, 2018 5:06:38 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl stop
 INFO: HHH10001008: Cleaning up connection pool [jdbc:mysql://localhost:3306/op]
-
-
-
-INFO: CACaseScraper
-May 28, 2018 4:54:55 PM opca.scraper.CACaseScraper parseCaseList
-WARNING: Duplicate Detected:E060438A : 04/12/18 : P. V. PEREZ
-May 28, 2018 4:54:55 PM opca.scraper.CACaseScraper parseCaseList
-WARNING: Duplicate Detected:B270903A : 03/15/18 : P. V. ALMANZA
-May 28, 2018 4:54:55 PM opca.service.CAOnlineUpdates updateDatabase
-INFO: Found 0 in the database.
-May 28, 2018 4:54:55 PM opca.service.CAOnlineUpdates updateDatabase
-INFO: Split Transactions
-May 28, 2018 4:54:55 PM opca.service.CAOnlineUpdates updateDatabase
-INFO: No cases deleted.
-May 28, 2018 4:54:55 PM opca.service.CAOnlineUpdates processAndPersistCases
-INFO: There are 361 SlipOpinions to process
-May 28, 2018 4:55:28 PM opca.service.CAOnlineUpdates processOpinions
-INFO: Divided 4863 opinions in 5 seconds
-May 28, 2018 4:55:33 PM opca.service.CAOnlineUpdates processStatutes
-INFO: Divided 1835 statutes in 5 seconds
-May 28, 2018 4:55:34 PM opca.service.CAOnlineUpdates processAndPersistCases
-INFO: Persisted 63 opinions in 0 seconds
-May 28, 2018 4:55:34 PM opca.service.CAOnlineUpdates processAndPersistCases
-INFO: Merged 4800 opinions in 0 seconds
-May 28, 2018 4:55:35 PM opca.service.CAOnlineUpdates processAndPersistCases
-INFO: Persisted 3011 opinionStatuteCitation in 0 seconds
-May 28, 2018 4:55:35 PM opca.service.CAOnlineUpdates processAndPersistCases
-INFO: Persisted 35 statutes in 0 seconds
-May 28, 2018 4:55:35 PM opca.service.CAOnlineUpdates processAndPersistCases
-INFO: Merged 1800 statutes in 0 seconds
-May 28, 2018 4:55:37 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl stop
-INFO: HHH10001008: Cleaning up connection pool [jdbc:mysql://localhost:3306/op]
-
-
-
-
-Mon May 28 17:32:25 MST 2018 WARN: Establishing SSL connection without server's identity verification is not recommended. According to MySQL 5.5.45+, 5.6.26+ and 5.7.6+ requirements SSL connection must be established by default if explicit option isn't set. For compliance with existing applications not using SSL the verifyServerCertificate property is set to 'false'. You need either to explicitly disable SSL by setting useSSL=false, or set useSSL=true and provide truststore for server certificate verification.
-May 28, 2018 5:32:25 PM org.hibernate.dialect.Dialect <init>
-INFO: HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
-May 28, 2018 5:32:26 PM org.hibernate.hql.internal.QueryTranslatorFactoryInitiator initiateService
-INFO: HHH000397: Using ASTQueryTranslatorFactory
-May 28, 2018 5:32:26 PM opca.scraper.CACaseScraper <init>
-INFO: CACaseScraper
-May 28, 2018 5:32:26 PM opca.scraper.CACaseScraper parseCaseList
-WARNING: Duplicate Detected:E060438A : 04/12/18 : P. V. PEREZ
-May 28, 2018 5:32:26 PM opca.scraper.CACaseScraper parseCaseList
-WARNING: Duplicate Detected:B270903A : 03/15/18 : P. V. ALMANZA
-May 28, 2018 5:32:27 PM opca.service.CAOnlineUpdates updateDatabase
-INFO: Found 0 in the database.
-May 28, 2018 5:32:27 PM opca.service.CAOnlineUpdates updateDatabase
-INFO: Split Transactions
-May 28, 2018 5:32:27 PM opca.service.CAOnlineUpdates updateDatabase
-INFO: No cases deleted.
-May 28, 2018 5:32:27 PM opca.service.CAOnlineUpdates processAndPersistCases
-INFO: There are 361 SlipOpinions to process
-May 28, 2018 5:32:44 PM opca.service.CAOnlineUpdates processOpinions
-INFO: Divided 4863 opinions in 5 seconds
-May 28, 2018 5:32:50 PM opca.service.CAOnlineUpdates processStatutes
-INFO: Divided 1835 statutes in 6 seconds
-May 28, 2018 5:32:51 PM opca.service.CAOnlineUpdates processAndPersistCases
-INFO: Persisted 63 opinions in 0 seconds
-May 28, 2018 5:32:52 PM opca.service.CAOnlineUpdates processAndPersistCases
-INFO: Merged 4800 opinions in 0 seconds
-May 28, 2018 5:32:52 PM opca.service.CAOnlineUpdates processAndPersistCases
-INFO: Persisted 3011 opinionStatuteCitation in 0 seconds
-May 28, 2018 5:32:52 PM opca.service.CAOnlineUpdates processAndPersistCases
-INFO: Persisted 35 statutes in 0 seconds
-May 28, 2018 5:32:53 PM opca.service.CAOnlineUpdates processAndPersistCases
-INFO: Merged 1800 statutes in 0 seconds
-May 28, 2018 5:32:55 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl stop
-INFO: HHH10001008: Cleaning up connection pool [jdbc:mysql://localhost:3306/op]
-
 

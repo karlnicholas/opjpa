@@ -64,9 +64,25 @@ public class StatuteImportanceDataDump implements AutoCloseable {
 			OpinionViewBuilder opinionViewBuilder = new OpinionViewBuilder(statutesRs);
 			List<SlipOpinion> opinions = findByPublishDateRange();
 			MyPersistenceLookup pl = new MyPersistenceLookup(this);
-			TypedQuery<OpinionBase> focfs = em.createNamedQuery("OpinionBase.fetchOpinionCitationsForScore", OpinionBase.class);
+//			TypedQuery<OpinionBase> fetchOpinions = em.createNamedQuery("OpinionBase.fetchOpinionCitations", OpinionBase.class);
+			List<OpinionBase> opinionOpinionCitations = new ArrayList<>();
+			List<Integer> opinionIds = new ArrayList<>();
+			int i = 0;
 			for ( SlipOpinion slipOpinion: opinions ) {
-				slipOpinion.setOpinionCitations( focfs.setParameter("id", slipOpinion.getId()).getSingleResult().getOpinionCitations() );			
+				opinionIds.add(slipOpinion.getId());
+				if ( ++i % 100 == 0 ) {
+					opinionOpinionCitations.addAll( 
+						em.createNamedQuery("OpinionBase.fetchOpinionCitationsForOpinions", OpinionBase.class).setParameter("opinionIds", opinionIds).getResultList()
+					);
+					opinionIds.clear();
+				}
+			}
+			opinionOpinionCitations.addAll( 
+				em.createNamedQuery("OpinionBase.fetchOpinionCitationsForOpinions", OpinionBase.class).setParameter("opinionIds", opinionIds).getResultList()
+			);
+			for ( SlipOpinion slipOpinion: opinions ) {
+//				slipOpinion.setOpinionCitations( fetchOpinions.setParameter("id", slipOpinion.getId()).getSingleResult().getOpinionCitations() );
+				slipOpinion.setOpinionCitations( opinionOpinionCitations.get( opinionOpinionCitations.indexOf(slipOpinion)).getOpinionCitations() );
 				ParsedOpinionCitationSet parserResults = new ParsedOpinionCitationSet(slipOpinion, pl);
 				OpinionView opinionView = opinionViewBuilder.buildOpinionView(slipOpinion, parserResults);
 				opinionView.combineCommonSections();
