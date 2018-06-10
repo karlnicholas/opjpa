@@ -9,3 +9,40 @@
  Connection URL: mysql://mysql:3306/
 
  jdbc:mysql://mysql:3306/op
+ 
+ 
+   logging:
+    root-logger:
+      level: DEBUG
+    console-handler:
+      level: DEBUG
+    loggers:
+      com:
+        level: INFO
+      javax:
+        level: INFO
+      io:
+        level: INFO
+      org.jboss:
+        level: DEBUG
+      org.hibernate:
+        level: INFO
+      org.apache:
+        level: INFO
+      org.infinispan:
+        level: INFO
+      org.xnio:
+        level: INFO
+      org.jboss.as:
+        level: INFO
+      org.jboss.jca:
+        level: INFO
+      org.jboss.modules:
+        level: INFO
+      org.jboss.weld:
+        level: INFO
+      org.jboss.resteasy:
+        level: INFO
+      org.jboss.resteasy:
+        level: INFO
+ 
