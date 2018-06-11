@@ -82,61 +82,25 @@ public class OpinionReport {
 		SlipOpinion slipOpinion = em.createQuery("select so from SlipOpinion so where so.opinionKey = :key", SlipOpinion.class).setParameter("key", opinionKey).getSingleResult();
 		slipOpinion.setOpinionCitations( em.createQuery("select so from SlipOpinion so left join fetch so.opinionCitations oc left join fetch oc.statuteCitations ocsc left join fetch ocsc.statuteCitation ocscsc left join fetch ocscsc.referringOpinions ocscscro left join fetch ocscscro.opinionBase ocscscroob where so.opinionKey = :key", SlipOpinion.class).setParameter("key", opinionKey).getSingleResult().getOpinionCitations() );
 		slipOpinion.setStatuteCitations( em.createQuery("select so from SlipOpinion so left join fetch so.statuteCitations sc left join fetch sc.statuteCitation scsc left join fetch scsc.referringOpinions scscro left join fetch scscro.opinionBase scscroob where so.opinionKey = :key", SlipOpinion.class).setParameter("key", opinionKey).getSingleResult().getStatuteCitations() );
-		slipOpinion.setSlipProperties( em.createNamedQuery("SlipProperties.findOne", SlipProperties.class).setParameter("opinion", slipOpinion).getSingleResult() );
-//		SlipOpinion slipOpinion = slipOpinionService.slipOpinionExists(opinionKey);
-/*		
-		SlipOpinion slipOpinion = slipOpinionService.loadOpinion(opinionKey);
-		slipOpinion.setSlipProperties( em.createNamedQuery("SlipProperties.findOne", SlipProperties.class).setParameter("opinion", slipOpinion).getSingleResult() );
-		
-		Map<StatuteCitation, Set<OpinionStatuteCitation>> osCitations = em.createNamedQuery("OpinionStatuteCitation.findByOpinion", OpinionStatuteCitation.class)
-				.setParameter("opinion", slipOpinion)
-				.getResultList()
-				.stream()
-				.collect( groupingBy(OpinionStatuteCitation::getStatuteCitation, toSet() ));
-		for ( StatuteCitation statuteCitation: slipOpinion.getOnlyStatuteCitations() ) {
-			statuteCitation.setReferringOpinions(osCitations.get(statuteCitation));
-		}
-*/		
-		//        StatutesWS statutesWS = new StatutesWSService(new URL("http://localhost:9080/StatutesWS?wsdl")).getStatutesWSPort();
+		slipOpinion.setSlipProperties( em.createQuery("select p from SlipProperties p where p.slipOpinion = :opinion", SlipProperties.class).setParameter("opinion", slipOpinion).getSingleResult() );
+
 		service = new StatutesRsService(new URL("http://localhost:8080/statutesrs/rs/"));
 		Client statutesRs = service.getRsService();
 		
-		if ( slipOpinion != null ) {
-	    	ParsedOpinionCitationSet parserResults = new ParsedOpinionCitationSet(slipOpinion, slipOpinionService.getPersistenceLookup());
+    	ParsedOpinionCitationSet parserResults = new ParsedOpinionCitationSet(slipOpinion, slipOpinionService.getPersistenceLookup());
 
-	    	OpinionViewBuilder opinionViewBuilder = new OpinionViewBuilder(statutesRs);
-	        //TODO:FIX FOR STATUTESERVICE
-	        OpinionView opinionView = opinionViewBuilder.buildOpinionView(slipOpinion, parserResults);
-	        opinionView.combineCommonSections();
-	        opinionView.trimToLevelOfInterest(2, true);
-	        
-//	        Set<OpinionBase> opinionsCited = opinionView.getOpinionCitations();
-	        // get statuteCitations for opinionsCited
-//			em.createNamedQuery("StatuteCitation.findStatuteCitationsForOpinions", StatuteCitation.class).setParameter("opinions", opinionsCited).getResultList();
-	        
-	        opinionView.scoreCitations(opinionViewBuilder);
+    	OpinionViewBuilder opinionViewBuilder = new OpinionViewBuilder(statutesRs);
+        //TODO:FIX FOR STATUTESERVICE
+        OpinionView opinionView = opinionViewBuilder.buildOpinionView(slipOpinion, parserResults);
+        opinionView.combineCommonSections();
+        opinionView.trimToLevelOfInterest(2, true);
+        
+        opinionView.scoreCitations(opinionViewBuilder);
 
-			printOpinionReport.printBaseOpinionReport(opinionView, parserResults);
+		printOpinionReport.printBaseOpinionReport(opinionView, parserResults);
 
 // System.out.println("TIMING: " + (new Date().getTime()-startDate.getTime()));
-	    	return;
-		}
-		throw new RuntimeException("SlipOpinion not found for key:" + opinionKey);
-/*		
-        OpinionSummary opinionSummary = slipOpinionService.opinionExists(opinionKey);
-		if ( opinionSummary != null ) {
-	    	ParsedOpinionResults parserResults = new ParsedOpinionResults(opinionSummary, slipOpinionService.getPersistenceLookup());
-	        OpinionViewBuilder opinionCaseBuilder = new OpinionViewBuilder(parserInterface);
-	        //
-	        OpinionView opinionCase = opinionCaseBuilder.buildOpinionSummaryView(opinionSummary, parserResults, true);
-	        opinionCase.trimToLevelOfInterest(2, true);
-
-	    	printBaseOpinionReport(parserResults, opinionSummary, opinionCase);
-
-// System.out.println("TIMING: " + (new Date().getTime()-startDate.getTime()));
-	    	return;
-		}
-*/
+    	return;
     }
 	
 }

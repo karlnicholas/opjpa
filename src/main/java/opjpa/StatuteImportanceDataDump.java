@@ -64,7 +64,6 @@ public class StatuteImportanceDataDump implements AutoCloseable {
 			OpinionViewBuilder opinionViewBuilder = new OpinionViewBuilder(statutesRs);
 			List<SlipOpinion> opinions = findByPublishDateRange();
 			MyPersistenceLookup pl = new MyPersistenceLookup(this);
-//			TypedQuery<OpinionBase> fetchOpinions = em.createNamedQuery("OpinionBase.fetchOpinionCitations", OpinionBase.class);
 			List<OpinionBase> opinionOpinionCitations = new ArrayList<>();
 			List<Integer> opinionIds = new ArrayList<>();
 			int i = 0;
@@ -143,7 +142,7 @@ public class StatuteImportanceDataDump implements AutoCloseable {
 		}
 
 		public SlipOpinion slipOpinionExists(OpinionKey opinionKey) {
-			List<SlipOpinion> list = em.createNamedQuery("SlipOpinion.findByOpinionKey", SlipOpinion.class).setParameter("key", opinionKey).getResultList();
+			List<SlipOpinion> list = em.createQuery("select o from SlipOpinion o where o.opinionKey = :key", SlipOpinion.class).setParameter("key", opinionKey).getResultList();
 			if ( list.size() > 0 ) return list.get(0);
 			return null;
 		}

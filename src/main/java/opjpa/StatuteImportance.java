@@ -129,7 +129,7 @@ public class StatuteImportance implements AutoCloseable {
 		}
 
 		public SlipOpinion slipOpinionExists(OpinionKey opinionKey) {
-			List<SlipOpinion> list = em.createNamedQuery("SlipOpinion.findByOpinionKey", SlipOpinion.class).setParameter("key", opinionKey).getResultList();
+			List<SlipOpinion> list = em.createQuery("select o from SlipOpinion o where o.opinionKey = :key", SlipOpinion.class).setParameter("key", opinionKey).getResultList();
 			if ( list.size() > 0 ) return list.get(0);
 			return null;
 		}
