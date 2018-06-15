@@ -32,6 +32,12 @@ MYSQL_PASSWORD
  -XX:CICompilerCount=2 
  -XX:+ExitOnOutOfMemoryError -cp . -jar /deployments/opinions-web-swarm.jar
  
+ 
+ -javaagent:/opt/jolokia/jolokia.jar=config=/opt/jolokia/etc/jolokia.properties 
+ -Xms64m -Xmx256m 
+ -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap 
+ -XX:+UseParallelOldGC -XX:MinHeapFreeRatio=10 -XX:MaxHeapFreeRatio=20 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -XX:MaxMetaspaceSize=100m -XX:ParallelGCThreads=1 -Djava.util.concurrent.ForkJoinPool.common.parallelism=1 -XX:CICompilerCount=2 -XX:+ExitOnOutOfMemoryError -cp . -jar /deployments/guidedsearch-rs-rs-0.3.0-swarm.jar
+ 
  exec java 
    -javaagent:/opt/jolokia/jolokia.jar=config=/opt/jolokia/etc/jolokia.properties 
    -Xms512m # -Xmssize Sets the initial size (in bytes) of the heap. 
