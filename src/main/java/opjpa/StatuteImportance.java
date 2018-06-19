@@ -64,11 +64,10 @@ public class StatuteImportance implements AutoCloseable {
 			//
 			OpinionViewBuilder opinionViewBuilder = new OpinionViewBuilder(statutesRs);
 			List<SlipOpinion> opinions = findByPublishDateRange();
-			MyPersistenceLookup pl = new MyPersistenceLookup(this);
 			TypedQuery<OpinionBase> focfs = em.createNamedQuery("OpinionBase.fetchOpinionCitationsForScore", OpinionBase.class);
 			for ( SlipOpinion slipOpinion: opinions ) {
 				slipOpinion.setOpinionCitations( focfs.setParameter("id", slipOpinion.getId()).getSingleResult().getOpinionCitations() );			
-				ParsedOpinionCitationSet parserResults = new ParsedOpinionCitationSet(slipOpinion, pl);
+				ParsedOpinionCitationSet parserResults = new ParsedOpinionCitationSet(slipOpinion);
 				OpinionView opinionView = opinionViewBuilder.buildOpinionView(slipOpinion, parserResults);
 				opinionView.combineCommonSections();
 				opinionView.trimToLevelOfInterest(levelOfInterest, true);

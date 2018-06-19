@@ -11,7 +11,6 @@ import opca.model.OpinionKey;
 import opca.model.SlipOpinion;
 import opca.model.SlipProperties;
 import opca.parser.ParsedOpinionCitationSet;
-import opca.service.SlipOpinionService;
 import opca.view.OpinionView;
 import opca.view.OpinionViewBuilder;
 import service.Client;
@@ -78,7 +77,6 @@ public class OpinionReport {
 		// select along specific joins so that the result stays hierarchically oriented.
 		// in other words join -> join -> join -> join along the same path
 		// don't try to mix joins
-		SlipOpinionService slipOpinionService = new SlipOpinionService(em);
 		SlipOpinion slipOpinion = em.createQuery("select so from SlipOpinion so where so.opinionKey = :key", SlipOpinion.class).setParameter("key", opinionKey).getSingleResult();
 		slipOpinion.setOpinionCitations( em.createQuery("select so from SlipOpinion so left join fetch so.opinionCitations oc left join fetch oc.statuteCitations ocsc left join fetch ocsc.statuteCitation ocscsc left join fetch ocscsc.referringOpinions ocscscro left join fetch ocscscro.opinionBase ocscscroob where so.opinionKey = :key", SlipOpinion.class).setParameter("key", opinionKey).getSingleResult().getOpinionCitations() );
 		slipOpinion.setStatuteCitations( em.createQuery("select so from SlipOpinion so left join fetch so.statuteCitations sc left join fetch sc.statuteCitation scsc left join fetch scsc.referringOpinions scscro left join fetch scscro.opinionBase scscroob where so.opinionKey = :key", SlipOpinion.class).setParameter("key", opinionKey).getSingleResult().getStatuteCitations() );
@@ -87,7 +85,7 @@ public class OpinionReport {
 		service = new StatutesRsService(new URL("http://localhost:8080/statutesrs/rs/"));
 		Client statutesRs = service.getRsService();
 		
-    	ParsedOpinionCitationSet parserResults = new ParsedOpinionCitationSet(slipOpinion, slipOpinionService.getPersistenceLookup());
+    	ParsedOpinionCitationSet parserResults = new ParsedOpinionCitationSet(slipOpinion);
 
     	OpinionViewBuilder opinionViewBuilder = new OpinionViewBuilder(statutesRs);
         //TODO:FIX FOR STATUTESERVICE

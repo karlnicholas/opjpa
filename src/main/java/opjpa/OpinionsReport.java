@@ -11,14 +11,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import opca.model.OpinionBase;
-import opca.model.OpinionKey;
 import opca.model.SlipOpinion;
 import opca.model.StatuteCitation;
-import opca.model.StatuteKey;
 import opca.parser.ParsedOpinionCitationSet;
-import opca.service.SlipOpinionService;
-import parser.ParserInterface;
-import statutesca.factory.CAStatutesFactory;
 
 public class OpinionsReport {
 
@@ -40,7 +35,6 @@ public class OpinionsReport {
 	
 	//        String iface = "code.CACodes";
 	//        ParserInterface parserInterface = (ParserInterface) Class.forName(iface).newInstance();
-	        ParserInterface parserInterface = CAStatutesFactory.getInstance().getParserInterface(true);
 
 	
 	//        OpinionQueries.getInstance().initializeDB(parserInterface);
@@ -50,8 +44,6 @@ public class OpinionsReport {
 //	        OpinionSummary opinion = databaseFacade.findOpinion(new OpinionKey("211 Cal.App.4th 13"));
 //        	printOpinionSummaryReport(parserInterface, parserResults, opinion );
 	        
-	        PrintOpinionReport opinionReport = new PrintOpinionReport();
-			SlipOpinionService slipOpinionService = new SlipOpinionService(em);
 			class OpinionSummaryPrint {
 				int countRefs;
 				OpinionBase opinionCited;
@@ -65,7 +57,7 @@ public class OpinionsReport {
 	        List<SlipOpinion> ops = em.createQuery("select op from SlipOpinion op", SlipOpinion.class ).getResultList();
 	        
 	        for ( SlipOpinion slipOpinion: ops ) {
-		    	ParsedOpinionCitationSet parserResults = new ParsedOpinionCitationSet(slipOpinion, slipOpinionService.getPersistenceLookup());
+		    	ParsedOpinionCitationSet parserResults = new ParsedOpinionCitationSet(slipOpinion);
 	            for ( OpinionBase opinionBase: slipOpinion.getOpinionCitations()) {
 	            	OpinionBase opinionCited = parserResults.findOpinion(opinionBase.getOpinionKey());
 	            	int countRefs = 0;

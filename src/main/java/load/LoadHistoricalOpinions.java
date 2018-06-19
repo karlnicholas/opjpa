@@ -11,19 +11,18 @@ import java.util.concurrent.Executors;
 import java.util.logging.Logger;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 import opca.memorydb.CitationStore;
 import opca.model.OpinionBase;
 import opca.model.OpinionStatuteCitation;
 import opca.model.StatuteCitation;
-import opca.service.SlipOpinionService;
 import parser.ParserInterface;
 import statutesca.factory.CAStatutesFactory;
 
 public class LoadHistoricalOpinions {
 	private static Logger logger = Logger.getLogger(LoadHistoricalOpinions.class.getName());
 	private final CitationStore citationStore;
-	private final SlipOpinionService slipOpinionService;
 	private final EntityManager em;
 	
 //	OpinionDocumentParser parser;
@@ -34,7 +33,6 @@ public class LoadHistoricalOpinions {
 	) {
 		this.em = em;
     	citationStore = CitationStore.getInstance();
-    	slipOpinionService = new SlipOpinionService(em);
 //		parser = new OpinionDocumentParser(parserInterface.getCodeTitles());
 	}
 	
@@ -298,7 +296,7 @@ public class LoadHistoricalOpinions {
 // This causes a NPE !?!?	    		
 //	    		opinion.checkCountReferringOpinions();
 	    		// this checks the database .. so, it won't be true unless this is a published modification 	    		
-	    		OpinionBase existingOpinion = slipOpinionService.opinionExists(opinion);
+	    		OpinionBase existingOpinion = opinionExists(opinion);
 				if ( existingOpinion == null ) {
 					persistOpinions.add(opinion);
 				} else {
@@ -405,7 +403,7 @@ public class LoadHistoricalOpinions {
 	    	int count = statutes.size();
 	    	Date startTime = new Date();
 	    	for(StatuteCitation statute: statutes ) {
-	    		StatuteCitation existingStatute = slipOpinionService.statuteExists(statute);
+	    		StatuteCitation existingStatute = statuteExists(statute);
 				if ( existingStatute == null ) {
 					persistStatutes.add(statute);
 				} else {
@@ -550,6 +548,25 @@ public class LoadHistoricalOpinions {
 				ex.printStackTrace();
 			}
 	    }
+	}
+
+    // used to lookup OpinionSummaries
+	private OpinionBase opinionExists(OpinionBase opinionBase) {
+		TypedQuery<OpinionBase> OpinionBaseFindByOpinionKey = em.createNamedQuery("OpinionBase.findByOpinionKey", OpinionBase.class);
+		List<OpinionBase> list = OpinionBaseFindByOpinionKey.setParameter("key", opinionBase.getOpinionKey()).getResultList();
+		if ( list.size() > 0 ) return list.get(0);
+		return null;
+	}
+
+	// StatuteCitation
+	private StatuteCitation statuteExists(StatuteCitation statuteCitation) {
+		TypedQuery<StatuteCitation> statuteCitationFindByTitleSection = em.createNamedQuery("StatuteCitation.findByStatuteKeyJoinReferringOpinions", StatuteCitation.class);
+		List<StatuteCitation> list = 
+				statuteCitationFindByTitleSection.setParameter("statuteKey", statuteCitation.getStatuteKey())
+				.getResultList();
+		if ( list.size() > 0 ) return list.get(0);
+		return null;
+//		return em.find(StatuteCitation.class, primaryKey);
 	}
 
 }

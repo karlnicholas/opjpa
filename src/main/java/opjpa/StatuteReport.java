@@ -11,9 +11,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import opca.model.OpinionBase;
+import opca.model.OpinionKey;
 import opca.model.OpinionStatuteCitation;
 import opca.model.StatuteCitation;
-import opca.service.SlipOpinionService;
 import parser.ParserInterface;
 import statutes.SectionNumber;
 import statutes.StatutesBaseClass;
@@ -37,7 +37,7 @@ public class StatuteReport {
 		
 		try {
 		
-			SlipOpinionService slipOpinionService = new SlipOpinionService(em);
+//			SlipOpinionService slipOpinionService = new SlipOpinionService(em);
 	//      String iface = "code.CACodes";
 	//      ParserInterface parserInterface = (ParserInterface) Class.forName(iface).newInstance();
 		    ParserInterface parserInterface = CAStatutesFactory.getInstance().getParserInterface(true);
@@ -46,23 +46,32 @@ public class StatuteReport {
 	//        OpinionQueries.getInstance().writeToXML();
 	//        OpinionQueries.getInstance().initFromXML();
 	
-	        System.out.println("statuteTable size = " + slipOpinionService.getCount());
+		    Long count = em.createQuery("select count(*) from StatuteCitation", Long.class).getSingleResult();
+	        System.out.println("statuteTable size = " + count );
 	        
-			List<StatuteCitation> statutesForCode = slipOpinionService.selectForTitle("welfare");
+	    	String title = "welfare";
+			List<StatuteCitation> statutesForCode
+				= em.createNamedQuery("StatuteCitation.selectForTitle", StatuteCitation.class).setParameter("title", '%'+title+'%').getResultList();
 	        StatuteCitation maxWelfare = getCodeCitationMaxCaseReferrors(statutesForCode );
-	        printCodeCitation(parserInterface, slipOpinionService, maxWelfare);
+	        printCodeCitation(parserInterface, maxWelfare);
 	        
-	        printCodeCitation(parserInterface, slipOpinionService, slipOpinionService.testStatuteByTitleSection("welfare", "200"));
+	        printCodeCitation(parserInterface, testStatuteByTitleSection("welfare", "200"));
 	
-	        printCodeCitation(parserInterface, slipOpinionService, slipOpinionService.testStatuteByTitleSection("family code", "4058"));
+	        printCodeCitation(parserInterface, testStatuteByTitleSection("family code", "4058"));
 	
-	        printCodeCitation(parserInterface, slipOpinionService, slipOpinionService.testStatuteByTitleSection("family code", "300"));
+	        printCodeCitation(parserInterface, testStatuteByTitleSection("family code", "300"));
 		} finally {
 			em.close();
 			emf.close();
 		}
 	}
 	
+	private StatuteCitation testStatuteByTitleSection(String title, String sectionNumber) {
+    	List<StatuteCitation> list = em.createNamedQuery("StatuteCitation.findByTitleSection", StatuteCitation.class).setParameter("title", title).setParameter("sectionNumber", sectionNumber).getResultList();
+    	if ( list.size() > 0 ) return list.get(0);
+    	else return null;
+    }
+
 	private StatuteCitation getCodeCitationMaxCaseReferrors(
 		List<StatuteCitation> statutesForCode
 	) {
@@ -76,9 +85,17 @@ public class StatuteReport {
         return statutesForCode.get(statutesForCode.size()-1);
 	}
 	
+	private List<OpinionBase> getOpinions(Collection<OpinionBase> opinions) {
+		if ( opinions.size() == 0 ) return new ArrayList<OpinionBase>();
+		List<OpinionKey> keys = new ArrayList<>();
+		for ( OpinionBase opinion: opinions) {
+			keys.add(opinion.getOpinionKey());
+		}
+		return em.createNamedQuery("OpinionBase.findOpinionsForKeys", OpinionBase.class).setParameter("keys", keys).getResultList();
+	}
+
 	private void printCodeCitation(
 	    ParserInterface parserInterface,
-	    SlipOpinionService slipOpinionService, 
 	    StatuteCitation statuteCitation
 	) {
 	    if ( statuteCitation == null ) {
@@ -95,7 +112,7 @@ public class StatuteReport {
         for ( OpinionStatuteCitation statuteOpinionCitation: referredOpinions ) {
         	opinions.add( statuteOpinionCitation.getOpinionBase() );
         }
-        List<OpinionBase> foundOpinions = slipOpinionService.getOpinions(opinions);
+        List<OpinionBase> foundOpinions = getOpinions(opinions);
         List<OpinionBase> referringOpinions = new ArrayList<>();
         
 //        for ( OpinionKey caseCitationKey: statuteCitation.getReferringOpinionCount().keySet() ) {

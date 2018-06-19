@@ -8,7 +8,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
 
 import opca.memorydb.PersistenceLookup;
 import opca.model.OpinionBase;
@@ -29,7 +28,6 @@ public class StatuteImportanceDataDump implements AutoCloseable {
 
     public static void main(String... args) throws Exception {
     	try ( StatuteImportanceDataDump statuteImportance = new StatuteImportanceDataDump() ) {	    	
-	    	List<OpinionView> getOpinionCases = statuteImportance.getOpinionCases(true, 2);
 /*	    	
 	    	for( OpinionView opinionView: getOpinionCases) {
 	    		System.out.println("\n=============================");
@@ -63,7 +61,6 @@ public class StatuteImportanceDataDump implements AutoCloseable {
 			//
 			OpinionViewBuilder opinionViewBuilder = new OpinionViewBuilder(statutesRs);
 			List<SlipOpinion> opinions = findByPublishDateRange();
-			MyPersistenceLookup pl = new MyPersistenceLookup(this);
 			List<OpinionBase> opinionOpinionCitations = new ArrayList<>();
 			List<Integer> opinionIds = new ArrayList<>();
 			int i = 0;
@@ -82,7 +79,7 @@ public class StatuteImportanceDataDump implements AutoCloseable {
 			for ( SlipOpinion slipOpinion: opinions ) {
 //				slipOpinion.setOpinionCitations( fetchOpinions.setParameter("id", slipOpinion.getId()).getSingleResult().getOpinionCitations() );
 				slipOpinion.setOpinionCitations( opinionOpinionCitations.get( opinionOpinionCitations.indexOf(slipOpinion)).getOpinionCitations() );
-				ParsedOpinionCitationSet parserResults = new ParsedOpinionCitationSet(slipOpinion, pl);
+				ParsedOpinionCitationSet parserResults = new ParsedOpinionCitationSet(slipOpinion);
 				OpinionView opinionView = opinionViewBuilder.buildOpinionView(slipOpinion, parserResults);
 				opinionView.combineCommonSections();
 				opinionView.trimToLevelOfInterest(levelOfInterest, true);

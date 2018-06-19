@@ -2,13 +2,9 @@ package opjpa;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-import load.LoadHistoricalOpinions;
 import opca.model.OpinionBase;
-import parser.ParserInterface;
-import statutesca.factory.CAStatutesFactory;
 
 public class TestJPA {
 
