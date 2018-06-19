@@ -10,7 +10,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
-import opca.memorydb.PersistenceLookup;
 import opca.model.OpinionBase;
 import opca.model.OpinionKey;
 import opca.model.SlipOpinion;
@@ -140,36 +139,6 @@ public class StatuteImportance implements AutoCloseable {
 		}
 		public List<SlipOpinion> listSlipOpinions() {
 			return em.createQuery("select from SlipOpinion", SlipOpinion.class).getResultList();
-		}
-
-		class MyPersistenceLookup implements PersistenceLookup {
-			protected StatuteImportance slipOpinionRepository;
-			public MyPersistenceLookup(StatuteImportance slipOpinionRepository) {
-				this.slipOpinionRepository = slipOpinionRepository;
-			}
-			@Override
-			public StatuteCitation statuteExists(StatuteCitation statuteCitation) {			
-				return slipOpinionRepository.statuteExists(statuteCitation);
-			}
-
-			@Override
-			public List<StatuteCitation> getStatutes(Collection<StatuteCitation> statuteCitations) {
-				return slipOpinionRepository.getStatutes(statuteCitations);
-			}
-
-			@Override
-			public OpinionBase opinionExists(OpinionBase opinionBase) {
-				return slipOpinionRepository.opinionExists(opinionBase);
-			}
-
-			@Override
-			public List<OpinionBase> getOpinions(Collection<OpinionBase> opinions) {
-				return slipOpinionRepository.getOpinions(opinions);
-			}	
-		}
-		
-		public PersistenceLookup getPersistenceLookup() {
-			return new MyPersistenceLookup(this); 
 		}
 
 		@Override
