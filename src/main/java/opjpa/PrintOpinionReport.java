@@ -17,7 +17,7 @@ public class PrintOpinionReport {
 //	        	System.out.println(statuteView.getStatutesBaseClass().getTitle(false).toUpperCase());
 //	        	System.out.println(statuteView.getStatutesBaseClass().getShortTitle().toUpperCase());
 //	        	List<SectionView> sortedSectionViews = sortSectionViews(statuteView);
-    		System.out.println(String.format("%-10d%-10d%-10d%-80s%-20s", statuteView.getImportance(), statuteView.getScore(), statuteView.getRefCount(), statuteView.getDisplayTitlePath(), statuteView.getDisplaySections()));
+//    		System.out.println(String.format("%-10d%-10d%-10d%-80s%-20s", statuteView.getImportance(), statuteView.getScore(), statuteView.getRefCount(), statuteView.getDisplayTitlePath(), statuteView.getDisplaySections()));
         }
         System.out.println("--------- OPINIONS -----------");		
 		//what is opinionBase needed for? Is it just extra info, or should it be in opinionView?

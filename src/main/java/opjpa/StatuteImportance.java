@@ -34,7 +34,8 @@ public class StatuteImportance implements AutoCloseable {
 	    	for( OpinionView opinionView: getOpinionCases) {
 	    		System.out.println("\n=============================");
 	    		for( StatuteView statuteView: opinionView.getStatutes() ) {
-	        		System.out.println("\t"+statuteView.getImportance()+":"+statuteView.getDisplaySections()+":"+statuteView.getDisplayTitlePath());
+//	        		System.out.println("\t"+statuteView.getImportance()+":"+statuteView.getDisplaySections()+":"+statuteView.getDisplayTitlePath());
+	        		System.out.println("\t"+statuteView.getImportance()+":"+statuteView.getTitle());
 	    		}
 	    		for( CaseView caseView: opinionView.getCases() ) {
 	        		System.out.println("\t"
@@ -68,8 +69,8 @@ public class StatuteImportance implements AutoCloseable {
 				slipOpinion.setOpinionCitations( focfs.setParameter("id", slipOpinion.getId()).getSingleResult().getOpinionCitations() );			
 				ParsedOpinionCitationSet parserResults = new ParsedOpinionCitationSet(slipOpinion);
 				OpinionView opinionView = opinionViewBuilder.buildOpinionView(slipOpinion, parserResults);
-				opinionView.combineCommonSections();
-				opinionView.trimToLevelOfInterest(levelOfInterest, true);
+//				opinionView.combineCommonSections();
+//				opinionView.trimToLevelOfInterest(levelOfInterest, true);
 
 				opinionView.scoreCitations(opinionViewBuilder);
 				

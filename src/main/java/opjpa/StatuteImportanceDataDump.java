@@ -17,8 +17,10 @@ import opca.model.StatuteCitation;
 import opca.model.StatuteKey;
 import opca.parser.ParsedOpinionCitationSet;
 import opca.service.RestServicesFactory;
+import opca.view.CaseView;
 import opca.view.OpinionView;
 import opca.view.OpinionViewBuilder;
+import opca.view.StatuteView;
 import service.Client;
 
 public class StatuteImportanceDataDump implements AutoCloseable {
@@ -26,23 +28,8 @@ public class StatuteImportanceDataDump implements AutoCloseable {
 	private EntityManager em;
 
     public static void main(String... args) throws Exception {
-    	try ( StatuteImportanceDataDump statuteImportance = new StatuteImportanceDataDump() ) {	    	
-/*	    	
-	    	for( OpinionView opinionView: getOpinionCases) {
-	    		System.out.println("\n=============================");
-	    		for( StatuteView statuteView: opinionView.getStatutes() ) {
-	        		System.out.println("\t"+statuteView.getImportance()+":"+statuteView.getDisplaySections()+":"+statuteView.getDisplayTitlePath());
-	    		}
-	    		for( CaseView caseView: opinionView.getCases() ) {
-	        		System.out.println("\t"
-        				+caseView.getImportance()
-        				+":"+caseView.getCitation()
-        				+(caseView.getOpinionDate()==null?"":" ("+caseView.getOpinionDate()+")")
-        				+(caseView.getTitle()==null?"":" " + caseView.getTitle())
-    				);
-	    		}
-	    	}
-*/	    	
+    	try ( StatuteImportanceDataDump statuteImportance = new StatuteImportanceDataDump() ) {
+    		statuteImportance.run();
     	}
     }
 
@@ -51,10 +38,25 @@ public class StatuteImportanceDataDump implements AutoCloseable {
 		em = emf.createEntityManager();
 	}
 	
-	public List<OpinionView> getOpinionCases(
-			boolean compressCodeReferences, 
-			int levelOfInterest
-		) {
+	private void run() throws Exception {
+    	for( OpinionView opinionView: getOpinionCases() ) {
+    		System.out.println("\n=============================");
+    		for( StatuteView statuteView: opinionView.getStatutes() ) {
+//        		System.out.println("\t"+statuteView.getImportance()+":"+statuteView.getDisplaySections()+":"+statuteView.getDisplayTitlePath());
+        		System.out.println("\t"+statuteView.getImportance()+":"+statuteView.getTitle());
+    		}
+    		for( CaseView caseView: opinionView.getCases() ) {
+        		System.out.println("\t"
+    				+caseView.getImportance()
+    				+":"+caseView.getCitation()
+    				+(caseView.getOpinionDate()==null?"":" ("+caseView.getOpinionDate()+")")
+    				+(caseView.getTitle()==null?"":" " + caseView.getTitle())
+				);
+    		}
+    	}
+	}
+	
+	public List<OpinionView> getOpinionCases() {
 			List<OpinionView> opinionViews = new ArrayList<OpinionView>();
 	        Client statutesRs = new RestServicesFactory().connectStatutesRsService();
 			//
@@ -80,8 +82,8 @@ public class StatuteImportanceDataDump implements AutoCloseable {
 				slipOpinion.setOpinionCitations( opinionOpinionCitations.get( opinionOpinionCitations.indexOf(slipOpinion)).getOpinionCitations() );
 				ParsedOpinionCitationSet parserResults = new ParsedOpinionCitationSet(slipOpinion);
 				OpinionView opinionView = opinionViewBuilder.buildOpinionView(slipOpinion, parserResults);
-				opinionView.combineCommonSections();
-				opinionView.trimToLevelOfInterest(levelOfInterest, true);
+//				opinionView.combineCommonSections();
+//				opinionView.trimToLevelOfInterest(levelOfInterest, true);
 				opinionView.scoreCitations(opinionViewBuilder);
 				
 				opinionViews.add(opinionView);
