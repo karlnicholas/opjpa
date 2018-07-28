@@ -20,7 +20,7 @@ import opca.service.RestServicesFactory;
 import opca.view.CaseView;
 import opca.view.OpinionView;
 import opca.view.OpinionViewBuilder;
-import opca.view.StatuteView;
+import opca.view.SectionView;
 import service.Client;
 
 public class StatuteImportanceDataDump implements AutoCloseable {
@@ -41,9 +41,10 @@ public class StatuteImportanceDataDump implements AutoCloseable {
 	private void run() throws Exception {
     	for( OpinionView opinionView: getOpinionCases() ) {
     		System.out.println("\n=============================");
-    		for( StatuteView statuteView: opinionView.getStatutes() ) {
+    		for( SectionView sectionView: opinionView.getSectionViews() ) {
 //        		System.out.println("\t"+statuteView.getImportance()+":"+statuteView.getDisplaySections()+":"+statuteView.getDisplayTitlePath());
-        		System.out.println("\t"+statuteView.getImportance()+":"+statuteView.getTitle());
+        		System.out.println("\t"+sectionView.getImportance()+":"+sectionView.getDisplaySections()+":"+sectionView.getDisplayTitlePath());
+//        		System.out.println("\t"+sectionView.getImportance()+":"+sectionView.getTitle());
     		}
     		for( CaseView caseView: opinionView.getCases() ) {
         		System.out.println("\t"

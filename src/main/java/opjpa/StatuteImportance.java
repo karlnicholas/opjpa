@@ -21,7 +21,7 @@ import opca.service.RestServicesFactory;
 import opca.view.CaseView;
 import opca.view.OpinionView;
 import opca.view.OpinionViewBuilder;
-import opca.view.StatuteView;
+import opca.view.SectionView;
 import service.Client;
 
 public class StatuteImportance implements AutoCloseable {
@@ -33,9 +33,9 @@ public class StatuteImportance implements AutoCloseable {
 	    	List<OpinionView> getOpinionCases = statuteImportance.getOpinionCases(true, 2);
 	    	for( OpinionView opinionView: getOpinionCases) {
 	    		System.out.println("\n=============================");
-	    		for( StatuteView statuteView: opinionView.getStatutes() ) {
+	    		for( SectionView sectionView: opinionView.getSectionViews() ) {
 //	        		System.out.println("\t"+statuteView.getImportance()+":"+statuteView.getDisplaySections()+":"+statuteView.getDisplayTitlePath());
-	        		System.out.println("\t"+statuteView.getImportance()+":"+statuteView.getTitle());
+	        		System.out.println("\t"+sectionView.getImportance()+":"+sectionView.getTitle());
 	    		}
 	    		for( CaseView caseView: opinionView.getCases() ) {
 	        		System.out.println("\t"
