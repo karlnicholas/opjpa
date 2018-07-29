@@ -1,51 +1,49 @@
 package opjpa;
 
+import java.io.InputStream;
+import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.util.JAXBSource;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 
+import opca.mailer.EmailInformation;
 import opca.model.OpinionBase;
 import opca.model.OpinionKey;
 import opca.model.SlipOpinion;
 import opca.model.SlipProperties;
 import opca.model.StatuteCitation;
 import opca.model.StatuteKey;
+import opca.model.User;
 import opca.parser.ParsedOpinionCitationSet;
+import opca.service.OpinionViewCache;
 import opca.service.RestServicesFactory;
-import opca.view.CaseView;
 import opca.view.OpinionView;
 import opca.view.OpinionViewBuilder;
-import opca.view.SectionView;
 import service.Client;
 
 public class StatuteImportance implements AutoCloseable {
+	Logger logger = Logger.getLogger(StatuteImportance.class.getName());
 	private EntityManagerFactory emf;
 	private EntityManager em;
 
     public static void main(String... args) throws Exception {
-    	try ( StatuteImportance statuteImportance = new StatuteImportance() ) {	    	
-	    	List<OpinionView> getOpinionCases = statuteImportance.getOpinionCases(true, 2);
-	    	for( OpinionView opinionView: getOpinionCases) {
-	    		System.out.println("\n=============================");
-	    		for( SectionView sectionView: opinionView.getSectionViews() ) {
-//	        		System.out.println("\t"+statuteView.getImportance()+":"+statuteView.getDisplaySections()+":"+statuteView.getDisplayTitlePath());
-	        		System.out.println("\t"+sectionView.getImportance()+":"+sectionView.getTitle());
-	    		}
-	    		for( CaseView caseView: opinionView.getCases() ) {
-	        		System.out.println("\t"
-        				+caseView.getImportance()
-        				+":"+caseView.getCitation()
-        				+(caseView.getOpinionDate()==null?"":" ("+caseView.getOpinionDate()+")")
-        				+(caseView.getTitle()==null?"":" " + caseView.getTitle())
-    				);
-	    		}
-	    	}
+    	try ( StatuteImportance statuteImportance = new StatuteImportance() ) {
+    		statuteImportance.run();
     	}
     }
 
@@ -53,30 +51,92 @@ public class StatuteImportance implements AutoCloseable {
 		emf = Persistence.createEntityManagerFactory("opjpa");
 		em = emf.createEntityManager();
 	}
-
 	
-	public List<OpinionView> getOpinionCases(
-			boolean compressCodeReferences, 
-			int levelOfInterest
-		) {
+	private void run() throws Exception {
+		OpinionViewCache slipOpinionData = new OpinionViewCache(em, logger);
+
+		User user = new User();
+		user.setEmail("test@test.com");
+		user.setFirstName("First");
+		user.setLastName("Lastname");
+		user.setOptoutKey("optoutkey");
+		TransformerFactory tf = TransformerFactory.newInstance();
+        Calendar calNow = Calendar.getInstance();
+        Calendar calLastWeek = Calendar.getInstance();
+        int year = calLastWeek.get(Calendar.YEAR);
+        int dayOfYear = calLastWeek.get(Calendar.DAY_OF_YEAR);
+        dayOfYear = dayOfYear - 7;
+        if ( dayOfYear < 1 ) {
+            year = year - 1;
+            dayOfYear = 365 + dayOfYear;
+        }
+        calLastWeek.set(Calendar.YEAR, year);
+        calLastWeek.set(Calendar.DAY_OF_YEAR, dayOfYear);
+        List<OpinionView> opinionCases = slipOpinionData.getOpinionCases();
+        Iterator<OpinionView> ovIt = opinionCases.iterator();
+        while ( ovIt.hasNext() ) {
+        	OpinionView opinionView = ovIt.next();
+        	if ( opinionView.getOpinionDate().compareTo(calLastWeek.getTime()) < 0 ) {
+        		ovIt.remove();
+        		continue;
+        	}
+        	if ( opinionView.getOpinionDate().compareTo(calNow.getTime()) > 0 ) {
+        		ovIt.remove();
+        		continue;
+        	}
+        }
+		EmailInformation emailInformation = new EmailInformation(user, opinionCases);
+		
+		JAXBContext jc = JAXBContext.newInstance(EmailInformation.class);
+		JAXBSource source = new JAXBSource(jc, emailInformation);
+		// set up XSLT transformation
+		InputStream is = getClass().getResourceAsStream("/xsl/opinionreport.xsl");
+		StreamSource streamSource = new StreamSource(is);
+		StringWriter htmlContent = null;
+		try {
+			htmlContent = new StringWriter();
+			synchronized(this) {
+				Transformer t = tf.newTransformer(streamSource);
+				// run transformation
+				t.transform(source, new StreamResult(htmlContent));
+			}
+		} catch (TransformerException e) {
+			throw new RuntimeException(e); 
+		} finally {
+			System.out.println("htmlContent: " + htmlContent);
+			htmlContent.close();
+		}
+	}
+	
+	public List<OpinionView> getOpinionCases() {
 			List<OpinionView> opinionViews = new ArrayList<OpinionView>();
 	        Client statutesRs = new RestServicesFactory().connectStatutesRsService();
 			//
 			OpinionViewBuilder opinionViewBuilder = new OpinionViewBuilder(statutesRs);
 			List<SlipOpinion> opinions = findByPublishDateRange();
-			TypedQuery<OpinionBase> focfs = em.createNamedQuery("OpinionBase.fetchOpinionCitationsForScore", OpinionBase.class);
+			List<OpinionBase> opinionOpinionCitations = new ArrayList<>();
+			List<Integer> opinionIds = new ArrayList<>();
+			int i = 0;
 			for ( SlipOpinion slipOpinion: opinions ) {
-				slipOpinion.setOpinionCitations( focfs.setParameter("id", slipOpinion.getId()).getSingleResult().getOpinionCitations() );			
+				opinionIds.add(slipOpinion.getId());
+				if ( ++i % 100 == 0 ) {
+					opinionOpinionCitations.addAll( 
+						em.createNamedQuery("OpinionBase.fetchOpinionCitationsForOpinions", OpinionBase.class).setParameter("opinionIds", opinionIds).getResultList()
+					);
+					opinionIds.clear();
+				}
+			}
+			opinionOpinionCitations.addAll( 
+				em.createNamedQuery("OpinionBase.fetchOpinionCitationsForOpinions", OpinionBase.class).setParameter("opinionIds", opinionIds).getResultList()
+			);
+			for ( SlipOpinion slipOpinion: opinions ) {
+//				slipOpinion.setOpinionCitations( fetchOpinions.setParameter("id", slipOpinion.getId()).getSingleResult().getOpinionCitations() );
+				slipOpinion.setOpinionCitations( opinionOpinionCitations.get( opinionOpinionCitations.indexOf(slipOpinion)).getOpinionCitations() );
 				ParsedOpinionCitationSet parserResults = new ParsedOpinionCitationSet(slipOpinion);
-				OpinionView opinionView = opinionViewBuilder.buildOpinionView(slipOpinion, parserResults);
-//				opinionView.combineCommonSections();
-//				opinionView.trimToLevelOfInterest(levelOfInterest, true);
-
-				opinionView.scoreCitations(opinionViewBuilder);
-				
+				OpinionView opinionView = opinionViewBuilder.buildOpinionView(slipOpinion, parserResults);				
 				opinionViews.add(opinionView);
 			}
-			return opinionViews;
+			return opinionViews;	
 		}
 
 		// OpinionBase

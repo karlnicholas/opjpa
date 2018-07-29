@@ -90,10 +90,6 @@ public class OpinionReport {
     	OpinionViewBuilder opinionViewBuilder = new OpinionViewBuilder(statutesRs);
         //TODO:FIX FOR STATUTESERVICE
         OpinionView opinionView = opinionViewBuilder.buildOpinionView(slipOpinion, parserResults);
-//        opinionView.combineCommonSections();
-//        opinionView.trimToLevelOfInterest(2, true);
-        
-        opinionView.scoreCitations(opinionViewBuilder);
 
 		printOpinionReport.printBaseOpinionReport(opinionView, parserResults);
 
