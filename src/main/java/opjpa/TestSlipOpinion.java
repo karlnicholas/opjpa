@@ -13,7 +13,7 @@ import javax.xml.bind.Marshaller;
 
 import opca.mailer.EmailInformation;
 import opca.model.User;
-import opca.service.OpinionViewCache;
+import opca.service.OpinionViewSingleton;
 import opca.view.OpinionView;
 
 public class TestSlipOpinion {
@@ -29,7 +29,7 @@ public class TestSlipOpinion {
 		try  {
 			emf = Persistence.createEntityManagerFactory("opjpa");
 			EntityManager em = emf.createEntityManager();
-			OpinionViewCache slipOpinionData = new OpinionViewCache(em, logger);
+			OpinionViewSingleton slipOpinionData = new OpinionViewSingleton(em);
 	//		slipOpinionData.buildCache();
 	
 	        Calendar calNow = Calendar.getInstance();
@@ -44,7 +44,7 @@ public class TestSlipOpinion {
 	        calLastWeek.set(Calendar.YEAR, year);
 	        calLastWeek.set(Calendar.DAY_OF_YEAR, dayOfYear);
 	
-	        List<OpinionView> opinionCases = slipOpinionData.getOpinionCases();
+	        List<OpinionView> opinionCases = slipOpinionData.getOpinionViews();
 	        Iterator<OpinionView> ovIt = opinionCases.iterator();
 	        while ( ovIt.hasNext() ) {
 	        	OpinionView opinionView = ovIt.next();

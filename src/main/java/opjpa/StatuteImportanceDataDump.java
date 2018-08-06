@@ -1,7 +1,6 @@
 package opjpa;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -13,8 +12,6 @@ import opca.model.OpinionBase;
 import opca.model.OpinionKey;
 import opca.model.SlipOpinion;
 import opca.model.SlipProperties;
-import opca.model.StatuteCitation;
-import opca.model.StatuteKey;
 import opca.parser.ParsedOpinionCitationSet;
 import opca.service.RestServicesFactory;
 import opca.view.CaseView;
@@ -88,40 +85,6 @@ public class StatuteImportanceDataDump implements AutoCloseable {
 			return opinionViews;	
 		}
 
-		// OpinionBase
-		public OpinionBase opinionExists(OpinionBase opinion) {
-			List<OpinionBase> list = em.createNamedQuery("OpinionBase.findByOpinionKey", OpinionBase.class).setParameter("key", opinion.getOpinionKey()).getResultList();
-			if ( list.size() > 0 ) return list.get(0);
-			return null;
-		}
-
-		public List<OpinionBase> getOpinions(Collection<OpinionBase> opinions) {
-			if ( opinions.size() == 0 ) return new ArrayList<OpinionBase>();
-			List<OpinionKey> keys = new ArrayList<>();
-			for(OpinionBase opinion: opinions) {
-				keys.add(opinion.getOpinionKey());
-			}
-			return em.createNamedQuery("OpinionBase.findOpinionsForKeys", OpinionBase.class).setParameter("keys", keys).getResultList();
-		}
-
-		// StatuteCitation
-		public StatuteCitation statuteExists(StatuteCitation statuteCitation) {
-			List<StatuteCitation> list = em.createNamedQuery("StatuteCitation.findByStatuteKey", StatuteCitation.class)
-				.setParameter("statuteKey", statuteCitation.getStatuteKey())
-				.getResultList();
-			if ( list.size() > 0 ) return list.get(0);
-			return null;
-		}
-
-		public List<StatuteCitation> getStatutes(Collection<StatuteCitation> statuteCitations) {
-			if ( statuteCitations.size() == 0 ) return new ArrayList<StatuteCitation>();
-			List<StatuteKey> keys = new ArrayList<>();
-			for(StatuteCitation statuteCitation: statuteCitations) {
-				keys.add(statuteCitation.getStatuteKey());
-			}
-			return em.createNamedQuery("StatuteCitationData.findStatutesForKeys", StatuteCitation.class).setParameter("keys", keys).getResultList();
-		}
-
 		public List<SlipOpinion> findByPublishDateRange() {
 			List<SlipOpinion> opinions = em.createNamedQuery("SlipOpinion.loadOpinionsWithJoins", SlipOpinion.class).getResultList();
 
@@ -140,12 +103,6 @@ public class StatuteImportanceDataDump implements AutoCloseable {
 			List<SlipOpinion> list = em.createQuery("select o from SlipOpinion o where o.opinionKey = :key", SlipOpinion.class).setParameter("key", opinionKey).getResultList();
 			if ( list.size() > 0 ) return list.get(0);
 			return null;
-		}
-		public StatuteCitation findStatute(StatuteKey key) {
-			return (StatuteCitation) em.createNamedQuery("StatuteCitation.findByCodeSection").setParameter("code", key.getTitle()).setParameter("sectionNumber", key.getSectionNumber()).getResultList().get(0);
-		}
-		public OpinionBase findOpinion(OpinionKey key) {
-			return (OpinionBase) em.createNamedQuery("OpinionBase.findByOpinionKey").setParameter("key", key).getResultList().get(0);
 		}
 		public List<SlipOpinion> listSlipOpinions() {
 			return em.createQuery("select from SlipOpinion", SlipOpinion.class).getResultList();

@@ -1,13 +1,10 @@
 package update;
 
-import java.util.logging.Logger;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-import opca.model.OpinionBase;
 import opca.model.StatuteCitation;
 
 public class DeleteAllSlipOpinions {
@@ -38,10 +35,6 @@ public class DeleteAllSlipOpinions {
 
 	public StatuteCitation findStatute(StatuteCitation statuteCitation) {
 		return em.createNamedQuery("StatuteCitation.findByStatuteKey", StatuteCitation.class).setParameter("statuteKey", statuteCitation.getStatuteKey()).getSingleResult();
-	}
-
-	public OpinionBase findOpinion(OpinionBase opinionBase) {
-		return em.createNamedQuery("OpinionBase.findByOpinionKey", OpinionBase.class).setParameter("key", opinionBase.getOpinionKey()).getSingleResult();
 	}
 
 }
