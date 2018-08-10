@@ -5,7 +5,6 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -29,6 +28,7 @@ import opca.model.User;
 import opca.parser.ParsedOpinionCitationSet;
 import opca.service.OpinionViewSingleton;
 import opca.service.RestServicesFactory;
+import opca.service.ViewParameters;
 import opca.view.OpinionView;
 import opca.view.OpinionViewBuilder;
 import service.Client;
@@ -50,7 +50,7 @@ public class StatuteImportance implements AutoCloseable {
 	}
 	
 	private void run() throws Exception {
-		OpinionViewSingleton slipOpinionData = new OpinionViewSingleton(em);
+		OpinionViewSingleton slipOpinionSingleton = new OpinionViewSingleton(em);
 
 		User user = new User();
 		user.setEmail("test@test.com");
@@ -69,19 +69,9 @@ public class StatuteImportance implements AutoCloseable {
         }
         calLastWeek.set(Calendar.YEAR, year);
         calLastWeek.set(Calendar.DAY_OF_YEAR, dayOfYear);
-        List<OpinionView> opinionCases = slipOpinionData.getOpinionViews();
-        Iterator<OpinionView> ovIt = opinionCases.iterator();
-        while ( ovIt.hasNext() ) {
-        	OpinionView opinionView = ovIt.next();
-        	if ( opinionView.getOpinionDate().compareTo(calLastWeek.getTime()) < 0 ) {
-        		ovIt.remove();
-        		continue;
-        	}
-        	if ( opinionView.getOpinionDate().compareTo(calNow.getTime()) > 0 ) {
-        		ovIt.remove();
-        		continue;
-        	}
-        }
+        List<OpinionView> opinionCases = slipOpinionSingleton.getOpinionCasesForAccount(
+        		new ViewParameters(calLastWeek.getTime(), calNow.getTime())
+    		);
 		EmailInformation emailInformation = new EmailInformation(user, opinionCases);
 		
 		JAXBContext jc = JAXBContext.newInstance(EmailInformation.class);

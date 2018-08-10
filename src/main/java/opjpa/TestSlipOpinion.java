@@ -1,7 +1,6 @@
 package opjpa;
 
 import java.util.Calendar;
-import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -14,6 +13,7 @@ import javax.xml.bind.Marshaller;
 import opca.mailer.EmailInformation;
 import opca.model.User;
 import opca.service.OpinionViewSingleton;
+import opca.service.ViewParameters;
 import opca.view.OpinionView;
 
 public class TestSlipOpinion {
@@ -29,7 +29,7 @@ public class TestSlipOpinion {
 		try  {
 			emf = Persistence.createEntityManagerFactory("opjpa");
 			EntityManager em = emf.createEntityManager();
-			OpinionViewSingleton slipOpinionData = new OpinionViewSingleton(em);
+			OpinionViewSingleton slipOpinionSingleton = new OpinionViewSingleton(em);
 	//		slipOpinionData.buildCache();
 	
 	        Calendar calNow = Calendar.getInstance();
@@ -44,19 +44,9 @@ public class TestSlipOpinion {
 	        calLastWeek.set(Calendar.YEAR, year);
 	        calLastWeek.set(Calendar.DAY_OF_YEAR, dayOfYear);
 	
-	        List<OpinionView> opinionCases = slipOpinionData.getOpinionViews();
-	        Iterator<OpinionView> ovIt = opinionCases.iterator();
-	        while ( ovIt.hasNext() ) {
-	        	OpinionView opinionView = ovIt.next();
-	        	if ( opinionView.getOpinionDate().compareTo(calLastWeek.getTime()) < 0 ) {
-	        		ovIt.remove();
-	        		continue;
-	        	}
-	        	if ( opinionView.getOpinionDate().compareTo(calNow.getTime()) > 0 ) {
-	        		ovIt.remove();
-	        		continue;
-	        	}
-	        }
+	        List<OpinionView> opinionCases = slipOpinionSingleton.getOpinionCasesForAccount(
+	        		new ViewParameters(calLastWeek.getTime(), calNow.getTime())
+	    		);
 	        User user = new User();
 	        user.setEmail("test@test.com");
 	        EmailInformation emailInformation = new EmailInformation(user, opinionCases);
