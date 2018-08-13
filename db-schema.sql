@@ -32,9 +32,3 @@ alter table opinionstatutecitation add constraint FKfeousb71h1ayu6myk7wp7mgfc fo
 alter table slipproperties add constraint FK97edwcyxhia5mmhb1qqgury8o foreign key (slipopinion_id) references opinionbase (id);
 alter table user_role add constraint FKeog8p06nu33ihk13roqnrp1y6 foreign key (roles_id) references role (id);
 alter table user_role add constraint FK859n2jvi8ivhui0rl0esws6o foreign key (user_id) references user (id);
-
-
-alter table user_role drop foreign key FK859n2jvi8ivhui0rl0esws6o;
-drop table if exists user;
-create table user (id bigint not null auto_increment, createdate datetime, email varchar(255), emailupdates bit not null, firstname varchar(255), lastname varchar(255), locale varchar(255), optout bit not null, optoutkey varchar(255), password varchar(255), startverify bit not null, titles tinyblob, updatedate datetime, verified bit not null, verifycount integer not null, verifyerrors integer not null, verifykey varchar(255), welcomeerrors integer not null, welcomed bit not null, primary key (id)) ENGINE=InnoDB;
-alter table user_role add constraint FK859n2jvi8ivhui0rl0esws6o foreign key (user_id) references user (id);
