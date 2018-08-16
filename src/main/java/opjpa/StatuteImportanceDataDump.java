@@ -1,24 +1,25 @@
 package opjpa;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import client.StatutesRsService;
 import opca.model.OpinionBase;
 import opca.model.OpinionKey;
 import opca.model.SlipOpinion;
 import opca.model.SlipProperties;
 import opca.parser.ParsedOpinionCitationSet;
-import opca.service.RestServicesFactory;
 import opca.view.CaseView;
 import opca.view.OpinionView;
 import opca.view.OpinionViewBuilder;
 import opca.view.SectionView;
-import service.Client;
+import service.StatutesService;
 
 public class StatuteImportanceDataDump implements AutoCloseable {
 	private EntityManagerFactory emf;
@@ -56,7 +57,12 @@ public class StatuteImportanceDataDump implements AutoCloseable {
 	
 	public List<OpinionView> getOpinionCases() {
 			List<OpinionView> opinionViews = new ArrayList<OpinionView>();
-	        Client statutesRs = new RestServicesFactory().connectStatutesRsService();
+			StatutesService statutesRs = null;
+			try {
+				statutesRs = new StatutesRsService(new URL("http://localhost:8080/statutesrs/rs/")).getRsService();
+			} catch (MalformedURLException e) {
+				throw new RuntimeException(e);
+			}
 			//
 			OpinionViewBuilder opinionViewBuilder = new OpinionViewBuilder(statutesRs);
 			List<SlipOpinion> opinions = findByPublishDateRange();

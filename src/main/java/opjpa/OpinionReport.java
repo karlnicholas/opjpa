@@ -13,7 +13,7 @@ import opca.model.SlipProperties;
 import opca.parser.ParsedOpinionCitationSet;
 import opca.view.OpinionView;
 import opca.view.OpinionViewBuilder;
-import service.Client;
+import service.StatutesService;
 
 public class OpinionReport {
 
@@ -83,7 +83,7 @@ public class OpinionReport {
 		slipOpinion.setSlipProperties( em.createQuery("select p from SlipProperties p where p.slipOpinion = :opinion", SlipProperties.class).setParameter("opinion", slipOpinion).getSingleResult() );
 
 		service = new StatutesRsService(new URL("http://localhost:8080/statutesrs/rs/"));
-		Client statutesRs = service.getRsService();
+		StatutesService statutesRs = service.getRsService();
 		
     	ParsedOpinionCitationSet parserResults = new ParsedOpinionCitationSet(slipOpinion);
 

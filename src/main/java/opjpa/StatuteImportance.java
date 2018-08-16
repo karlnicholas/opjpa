@@ -2,9 +2,10 @@ package opjpa;
 
 import java.io.InputStream;
 import java.io.StringWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -19,6 +20,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
+import client.StatutesRsService;
 import opca.mailer.EmailInformation;
 import opca.model.OpinionBase;
 import opca.model.OpinionKey;
@@ -27,11 +29,10 @@ import opca.model.SlipProperties;
 import opca.model.User;
 import opca.parser.ParsedOpinionCitationSet;
 import opca.service.OpinionViewSingleton;
-import opca.service.RestServicesFactory;
 import opca.service.ViewParameters;
 import opca.view.OpinionView;
 import opca.view.OpinionViewBuilder;
-import service.Client;
+import service.StatutesService;
 
 public class StatuteImportance implements AutoCloseable {
 	Logger logger = Logger.getLogger(StatuteImportance.class.getName());
@@ -97,7 +98,13 @@ public class StatuteImportance implements AutoCloseable {
 	
 	public List<OpinionView> getOpinionCases() {
 			List<OpinionView> opinionViews = new ArrayList<OpinionView>();
-	        Client statutesRs = new RestServicesFactory().connectStatutesRsService();
+			
+			StatutesService statutesRs = null;
+			try {
+				statutesRs = new StatutesRsService(new URL("http://localhost:8080/statutesrs/rs/")).getRsService();
+			} catch (MalformedURLException e) {
+				throw new RuntimeException(e);
+			}
 			//
 			OpinionViewBuilder opinionViewBuilder = new OpinionViewBuilder(statutesRs);
 			List<SlipOpinion> opinions = findByPublishDateRange();
