@@ -21,8 +21,8 @@ import opca.model.OpinionKey;
 import opca.parser.OpinionDocumentParser;
 import opca.parser.ParsedOpinionCitationSet;
 import opca.parser.ScrapedOpinionDocument;
-import parser.ParserInterface;
-import statutesca.factory.CAStatutesFactory;
+import statutes.api.IStatutesApi;
+import statutesca.statutesapi.CAStatutesApiImpl;
 
 public class TestCitationBuilder {
 	public static void main(String...strings) {
@@ -42,13 +42,14 @@ public class TestCitationBuilder {
     		int notNewlyLoaded = 0;    		
     		int titled = 0;
     		int notTitled= 0;    		
-    	    ParserInterface parserInterface = CAStatutesFactory.getInstance().getParserInterface(true);
+    	    IStatutesApi iStatutesApi = new CAStatutesApiImpl();
+    	    iStatutesApi.loadStatutes();
     	    
-    	    TestCourtListenerCallback cb1 = new TestCourtListenerCallback(citationStore, parserInterface);
+    	    TestCourtListenerCallback cb1 = new TestCourtListenerCallback(citationStore, iStatutesApi);
     	    LoadCourtListenerFiles files1 = new LoadCourtListenerFiles(cb1);
     	    files1.loadFiles("c:/users/karln/downloads/calctapp-opinions.tar.gz", "c:/users/karln/downloads/calctapp-clusters.tar.gz", 1000);
 
-    	    TestCourtListenerCallback cb2 = new TestCourtListenerCallback(citationStore, parserInterface);
+    	    TestCourtListenerCallback cb2 = new TestCourtListenerCallback(citationStore, iStatutesApi);
     	    LoadCourtListenerFiles files2 = new LoadCourtListenerFiles(cb2);
     	    files2.loadFiles("c:/users/karln/downloads/cal-opinions.tar.gz", "c:/users/karln/downloads/cal-clusters.tar.gz", 1000);
 			
@@ -79,7 +80,7 @@ public class TestCitationBuilder {
 	}
 
 	class TestCourtListenerCallback implements CourtListenerCallback {
-		private ParserInterface parserInterface;
+		private IStatutesApi iStatutesApi;
 		int totalPassed;
 		int totalProcessed;
 		int totalAdded;
@@ -89,8 +90,8 @@ public class TestCitationBuilder {
 		private final List<Callable<Object>> tasks;
 		private final List<CitationBuilder> builders;
 		
-		public TestCourtListenerCallback(CitationStore citationStore, ParserInterface parserInterface) {
-			this.parserInterface = parserInterface;
+		public TestCourtListenerCallback(CitationStore citationStore, IStatutesApi iStatutesApi) {
+			this.iStatutesApi = iStatutesApi;
 			es = Executors.newFixedThreadPool(4);
 			tasks = new ArrayList<Callable<Object>>();
 			builders = new ArrayList<CitationBuilder>();
@@ -106,7 +107,7 @@ public class TestCitationBuilder {
 		 */
 		@Override
 		public void callBack(List<LoadOpinion> clOps) {
-			CitationBuilder citationBuilder = new CitationBuilder(clOps, parserInterface);
+			CitationBuilder citationBuilder = new CitationBuilder(clOps, iStatutesApi);
 			builders.add(citationBuilder);
 			tasks.add(Executors.callable(citationBuilder));
 			if ( tasks.size() == 4 ) {
@@ -175,8 +176,8 @@ public class TestCitationBuilder {
 		int totalMerged;
 		int totalLooped;
 		CitationStore citationStore = CitationStore.getInstance(); 
-		public CitationBuilder(List<LoadOpinion> clOps, ParserInterface parserInterface) {
-			parser = new OpinionDocumentParser(parserInterface.getStatutesTitles());
+		public CitationBuilder(List<LoadOpinion> clOps, IStatutesApi iStatutesApi) {
+			parser = new OpinionDocumentParser(iStatutesApi.getStatutesTitles());
 			this.clOps = clOps;
 			totalPassed = 0;
 			totalProcessed = 0;

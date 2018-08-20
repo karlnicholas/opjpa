@@ -20,7 +20,6 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
-import client.StatutesRsService;
 import opca.mailer.EmailInformation;
 import opca.model.OpinionBase;
 import opca.model.OpinionKey;
@@ -32,7 +31,8 @@ import opca.service.OpinionViewSingleton;
 import opca.service.ViewParameters;
 import opca.view.OpinionView;
 import opca.view.OpinionViewBuilder;
-import service.StatutesService;
+import statutes.service.StatutesService;
+import statutes.service.client.StatutesServiceClientImpl;
 
 public class StatuteImportance implements AutoCloseable {
 	Logger logger = Logger.getLogger(StatuteImportance.class.getName());
@@ -101,7 +101,7 @@ public class StatuteImportance implements AutoCloseable {
 			
 			StatutesService statutesRs = null;
 			try {
-				statutesRs = new StatutesRsService(new URL("http://localhost:8080/statutesrs/rs/")).getRsService();
+				statutesRs = new StatutesServiceClientImpl(new URL("http://localhost:8080/statutesrs/rs/"));
 			} catch (MalformedURLException e) {
 				throw new RuntimeException(e);
 			}

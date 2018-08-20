@@ -15,8 +15,8 @@ import load.LoadCourtListenerFiles;
 import loadmodel.LoadOpinion;
 import opca.memorydb.CitationStore;
 import opca.model.OpinionBase;
-import parser.ParserInterface;
-import statutesca.factory.CAStatutesFactory;
+import statutes.api.IStatutesApi;
+import statutesca.statutesapi.CAStatutesApiImpl;
 
 public class TestCourtListenerFiles {
 	public static void main(String...strings) {
@@ -40,7 +40,9 @@ public class TestCourtListenerFiles {
     		int notNewlyLoaded = 0;    		
     		int titled = 0;
     		int notTitled= 0;    		
-    	    ParserInterface codesInterface = CAStatutesFactory.getInstance().getParserInterface(true);
+    	    IStatutesApi codesInterface = new CAStatutesApiImpl();
+    	    codesInterface.loadStatutes();
+
     	    LoadCourtListenerCallback cb1 = new LoadCourtListenerCallback(citationStore, codesInterface);
     	    LoadCourtListenerFiles file1 = new LoadCourtListenerFiles(cb1);
     	    file1.loadFiles("c:/users/karl/downloads/calctapp-opinions.tar.gz", "c:/users/karl/downloads/calctapp-clusters.tar.gz", 1000);

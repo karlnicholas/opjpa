@@ -8,11 +8,11 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-import client.StatutesRsService;
 import opca.parser.OpinionScraperInterface;
 import opca.service.CAOnlineUpdates;
 import scraper.TestCACaseScraper;
-import service.StatutesService;
+import statutes.service.client.StatutesServiceClient;
+import statutes.service.client.StatutesServiceClientImpl;
 
 public class TestOnlineUpdates {
 	private EntityManager em;
@@ -25,9 +25,9 @@ public class TestOnlineUpdates {
 	private void run() {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("opjpa");
 		em = emf.createEntityManager();
-		StatutesService statutesService;
+		StatutesServiceClient statutesService;
 		try {
-			statutesService = new StatutesRsService(new URL("http://localhost:8080/statutesrs/rs/")).getRsService();
+			statutesService = new StatutesServiceClientImpl(new URL("http://localhost:8080/statutesrs/rs/"));
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}

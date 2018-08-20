@@ -18,8 +18,8 @@ import opca.model.OpinionBase;
 import opca.model.OpinionKey;
 import opca.model.OpinionStatuteCitation;
 import opca.model.StatuteCitation;
-import parser.ParserInterface;
-import statutesca.factory.CAStatutesFactory;
+import statutes.api.IStatutesApi;
+import statutesca.statutesapi.CAStatutesApiImpl;
 
 public class LoadHistoricalOpinions {
 	private static Logger logger = Logger.getLogger(LoadHistoricalOpinions.class.getName());
@@ -30,7 +30,7 @@ public class LoadHistoricalOpinions {
 	
 	public LoadHistoricalOpinions(
 		EntityManager em, 
-		ParserInterface parserInterface 
+		IStatutesApi iStatutesApi 
 	) {
 		this.em = em;
     	citationStore = CitationStore.getInstance();
@@ -40,13 +40,14 @@ public class LoadHistoricalOpinions {
     public void initializeDB() throws Exception {
     	Date startTime = new Date();
     	//
-	    ParserInterface parserInterface = CAStatutesFactory.getInstance().getParserInterface(true);
+	    IStatutesApi iStatutesApi = new CAStatutesApiImpl();
+	    iStatutesApi.loadStatutes();
 
-	    LoadCourtListenerCallback cb1 = new LoadCourtListenerCallback(citationStore, parserInterface);
+	    LoadCourtListenerCallback cb1 = new LoadCourtListenerCallback(citationStore, iStatutesApi);
 	    LoadCourtListenerFiles file1 = new LoadCourtListenerFiles(cb1);
 	    file1.loadFiles("c:/users/karln/downloads/calctapp-opinions.tar.gz", "c:/users/karln/downloads/calctapp-clusters.tar.gz", 1000);
 
-	    LoadCourtListenerCallback cb2 = new LoadCourtListenerCallback(citationStore, parserInterface);
+	    LoadCourtListenerCallback cb2 = new LoadCourtListenerCallback(citationStore, iStatutesApi);
 	    LoadCourtListenerFiles file2 = new LoadCourtListenerFiles(cb2);
 	    file2.loadFiles("c:/users/karln/downloads/cal-opinions.tar.gz", "c:/users/karln/downloads/cal-clusters.tar.gz", 1000);
 

@@ -6,21 +6,20 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import client.StatutesRsService;
 import opca.model.OpinionKey;
 import opca.model.SlipOpinion;
 import opca.model.SlipProperties;
 import opca.parser.ParsedOpinionCitationSet;
 import opca.view.OpinionView;
 import opca.view.OpinionViewBuilder;
-import service.StatutesService;
+import statutes.service.StatutesService;
+import statutes.service.client.StatutesServiceClientImpl;
 
 public class OpinionReport {
 
 	private EntityManagerFactory emf;
 	private EntityManager em;
     private PrintOpinionReport printOpinionReport = new PrintOpinionReport();
-	private StatutesRsService service;
 
     public static void main(String... args) throws Exception {
         new OpinionReport().run();
@@ -82,8 +81,7 @@ public class OpinionReport {
 		slipOpinion.setStatuteCitations( em.createQuery("select so from SlipOpinion so left join fetch so.statuteCitations sc left join fetch sc.statuteCitation scsc left join fetch scsc.referringOpinions scscro left join fetch scscro.opinionBase scscroob where so.opinionKey = :key", SlipOpinion.class).setParameter("key", opinionKey).getSingleResult().getStatuteCitations() );
 		slipOpinion.setSlipProperties( em.createQuery("select p from SlipProperties p where p.slipOpinion = :opinion", SlipProperties.class).setParameter("opinion", slipOpinion).getSingleResult() );
 
-		service = new StatutesRsService(new URL("http://localhost:8080/statutesrs/rs/"));
-		StatutesService statutesRs = service.getRsService();
+		StatutesService statutesRs = new StatutesServiceClientImpl(new URL("http://localhost:8080/statutesrs/rs/"));
 		
     	ParsedOpinionCitationSet parserResults = new ParsedOpinionCitationSet(slipOpinion);
 

@@ -20,20 +20,20 @@ import opca.model.OpinionKey;
 import opca.parser.OpinionDocumentParser;
 import opca.parser.ParsedOpinionCitationSet;
 import opca.parser.ScrapedOpinionDocument;
-import parser.ParserInterface;
+import statutes.api.IStatutesApi;
 
 public class LoadCourtListenerCallback implements CourtListenerCallback {
 	private final Logger logger;
 	private final CitationStore citationStore;
-	private final ParserInterface parserInterface;
+	private final IStatutesApi iStatutesApi;
 	private final int processors;
 	private final List<Callable<Object>> tasks;
 	private final ExecutorService es;
 	
 
-	public LoadCourtListenerCallback(CitationStore citationStore, ParserInterface parserInterface) {
+	public LoadCourtListenerCallback(CitationStore citationStore, IStatutesApi iStatutesApi) {
 		this.citationStore = citationStore;
-		this.parserInterface = parserInterface;
+		this.iStatutesApi = iStatutesApi;
 		logger = Logger.getLogger(LoadCourtListenerCallback.class.getName());
 		processors = Runtime.getRuntime().availableProcessors();
 		es = Executors.newFixedThreadPool(processors);
@@ -45,7 +45,7 @@ public class LoadCourtListenerCallback implements CourtListenerCallback {
 	 */
 	@Override
 	public void callBack(List<LoadOpinion> clOps) {
-		tasks.add(Executors.callable(new BuildCitationStore(clOps, citationStore, parserInterface)));
+		tasks.add(Executors.callable(new BuildCitationStore(clOps, citationStore, iStatutesApi)));
 		if ( tasks.size() >= processors ) {
 			try {
 				es.invokeAll(tasks);
@@ -83,10 +83,10 @@ public class LoadCourtListenerCallback implements CourtListenerCallback {
 		CitationStore citationStore;
 		private final OpinionDocumentParser parser;
 
-		public BuildCitationStore(List<LoadOpinion> clOps, CitationStore persistence, ParserInterface parserInterface) {
+		public BuildCitationStore(List<LoadOpinion> clOps, CitationStore persistence, IStatutesApi iStatutesApi) {
 			this.clOps = clOps;
 			this.citationStore = persistence;
-			parser = new OpinionDocumentParser(parserInterface.getStatutesTitles());
+			parser = new OpinionDocumentParser(iStatutesApi.getStatutesTitles());
 		}
 
 		@Override

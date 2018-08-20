@@ -6,8 +6,8 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 import load.LoadHistoricalOpinions;
-import parser.ParserInterface;
-import statutesca.factory.CAStatutesFactory;
+import statutes.api.IStatutesApi;
+import statutesca.statutesapi.CAStatutesApiImpl;
 
 public class LoadOpinions {
 
@@ -22,12 +22,13 @@ public class LoadOpinions {
 	}
 	
 	private void run() throws Exception {
-	    ParserInterface parserInterface = CAStatutesFactory.getInstance().getParserInterface(true);
+	    IStatutesApi iStatutesApi = new CAStatutesApiImpl();
+	    
         try {
     		EntityManager em = emf.createEntityManager();
     	    EntityTransaction tx = em.getTransaction();
     	    tx.begin();
-        	LoadHistoricalOpinions load = new LoadHistoricalOpinions(em, parserInterface);
+        	LoadHistoricalOpinions load = new LoadHistoricalOpinions(em, iStatutesApi);
         	load.initializeDB();
         	tx.commit();
         	em.close();

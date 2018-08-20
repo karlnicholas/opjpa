@@ -9,7 +9,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import client.StatutesRsService;
 import opca.model.OpinionBase;
 import opca.model.OpinionKey;
 import opca.model.SlipOpinion;
@@ -19,7 +18,8 @@ import opca.view.CaseView;
 import opca.view.OpinionView;
 import opca.view.OpinionViewBuilder;
 import opca.view.SectionView;
-import service.StatutesService;
+import statutes.service.StatutesService;
+import statutes.service.client.StatutesServiceClientImpl;
 
 public class StatuteImportanceDataDump implements AutoCloseable {
 	private EntityManagerFactory emf;
@@ -59,7 +59,7 @@ public class StatuteImportanceDataDump implements AutoCloseable {
 			List<OpinionView> opinionViews = new ArrayList<OpinionView>();
 			StatutesService statutesRs = null;
 			try {
-				statutesRs = new StatutesRsService(new URL("http://localhost:8080/statutesrs/rs/")).getRsService();
+				statutesRs = new StatutesServiceClientImpl(new URL("http://localhost:8080/statutesrs/rs/"));
 			} catch (MalformedURLException e) {
 				throw new RuntimeException(e);
 			}
