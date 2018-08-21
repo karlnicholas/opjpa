@@ -11,7 +11,7 @@ import javax.persistence.Persistence;
 import opca.parser.OpinionScraperInterface;
 import opca.service.CAOnlineUpdates;
 import scraper.TestCACaseScraper;
-import statutes.service.client.StatutesServiceClient;
+import statutes.service.StatutesService;
 import statutes.service.client.StatutesServiceClientImpl;
 
 public class TestOnlineUpdates {
@@ -25,7 +25,7 @@ public class TestOnlineUpdates {
 	private void run() {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("opjpa");
 		em = emf.createEntityManager();
-		StatutesServiceClient statutesService;
+		StatutesService statutesService;
 		try {
 			statutesService = new StatutesServiceClientImpl(new URL("http://localhost:8080/statutesrs/rs/"));
 		} catch (MalformedURLException e) {
@@ -37,7 +37,7 @@ public class TestOnlineUpdates {
 			EntityTransaction tx = em.getTransaction();
 			try {
 				tx.begin();
-				new CAOnlineUpdates(em, statutesService).updateDatabase(caseScraper);
+				new CAOnlineUpdates(em).updateDatabase(caseScraper, statutesService);
 				tx.commit();
 			} catch (Exception ex) {
 				ex.printStackTrace();
