@@ -8,7 +8,6 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.boot.spi.MetadataImplementor;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
 import org.hibernate.tool.schema.TargetType;
-import opca.ejb.util.ImprovedNamingStrategy;
 
 import opca.model.*;
 

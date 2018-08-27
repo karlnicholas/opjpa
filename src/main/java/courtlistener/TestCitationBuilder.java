@@ -30,11 +30,9 @@ public class TestCitationBuilder {
 	}
 	//
 	private final CitationStore citationStore;
-	private final Object mergeLock;
 		
 	private TestCitationBuilder() {
     	this.citationStore = CitationStore.getInstance();
-		mergeLock = new Object();
 	}
 	private void run() {
     	try {

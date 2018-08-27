@@ -1,28 +1,20 @@
 package load;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.logging.Logger;
 
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 
 import opca.memorydb.CitationStore;
 import opca.model.OpinionBase;
-import opca.model.OpinionKey;
 import opca.model.OpinionStatuteCitation;
 import opca.model.StatuteCitation;
 import statutes.api.IStatutesApi;
 import statutesca.statutesapi.CAStatutesApiImpl;
 
 public class LoadHistoricalOpinions {
-	private static Logger logger = Logger.getLogger(LoadHistoricalOpinions.class.getName());
+//	private static Logger logger = Logger.getLogger(LoadHistoricalOpinions.class.getName());
 	private final CitationStore citationStore;
 	private final EntityManager em;
 	
@@ -38,7 +30,6 @@ public class LoadHistoricalOpinions {
 	}
 	
     public void initializeDB() throws Exception {
-    	Date startTime = new Date();
     	//
 	    IStatutesApi iStatutesApi = new CAStatutesApiImpl();
 	    iStatutesApi.loadStatutes();
