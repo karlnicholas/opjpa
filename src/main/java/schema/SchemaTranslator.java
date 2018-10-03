@@ -25,11 +25,6 @@ public class SchemaTranslator {
 			Role.class, 
 			OpinionStatuteCitation.class, 
 			OpinionStatuteCitationId.class, 
-		    Summary.class,
-		    TrialCourt.class,
-		    Disposition.class,
-		    PartyAttorneyPair.class,
-		    PartiesAndAttornies.class,
 		};
 
 		MetadataSources metadata = new MetadataSources(new StandardServiceRegistryBuilder()

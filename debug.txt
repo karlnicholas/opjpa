@@ -1,30 +1,8 @@
+http://appellatecases.courtinfo.ca.gov/search/searchResults.cfm?dist=5&search=number&useSession=0&query_caseNumber=F074243A
 
 
-http://appellatecases.courtinfo.ca.gov/search/searchResults.cfm?dist=0&search=number&useSession=0&query_caseNumber=S099549
-
-INFO: 
-HttpRequest arg0: GET /search/searchResults.cfm?dist=0&search=number&useSession=0&query_caseNumber=S099549 HTTP/1.1 [Host: appellatecases.courtinfo.ca.gov, Connection: Keep-Alive, User-Agent: Apache-HttpClient/4.5 (Java/1.8.0_171), Accept-Encoding: gzip,deflate] 
-HttpResponse arg1: 
-    HttpResponseProxy{HTTP/1.1 302 Found [Date: Fri, 21 Sep 2018 19:12:23 GMT, Server: Apache, Set-Cookie: cfid=985cdbaa-82e0-4675-b6d6-bab39ae80f08;Path=/;Expires=Thu, 11-Oct-2018 20:50:27 UTC;HTTPOnly, Set-Cookie: cftoken=0;Path=/;Expires=Thu, 11-Oct-2018 20:50:27 UTC;HTTPOnly, Expires: {ts '2018-09-21 12:12:23'}, Connection: close, 
-    location: /search/case/mainCaseScreen.cfm?dist=0&doc_id=1831228&doc_no=S099549&request_token=NiIwLSIkXkw2W1BJSCMtWElIMFA0UDxbKiBOUz5RICAgCg%3D%3D, 
-    Content-Type: text/html;charset=UTF-8, 
-    Content-Length: 96] 
-    ResponseEntityProxy{[Content-Type: text/html;charset=UTF-8,Content-Length: 96, Chunked: false]}} 
-HttpContext arg2: org.apache.http.client.protocol.HttpClientContext@32cf48b7
-
-/search/case/mainCaseScreen.cfm?dist=0&doc_id=1831228&doc_no=S099549&request_token=NiIwLSIkXkw2W1BJSCMtWElIMFA0UDxbKiBOUz5RICAgCg%3D%3D
+http://appellatecases.courtinfo.ca.gov/search/searchResults.cfm?dist=5&search=number&useSession=0&query_caseNumber=F073689
 
 
-http://appellatecases.courtinfo.ca.gov/search/case/mainCaseScreen.cfm?dist=0&doc_id=1831228&doc_no=S099549&request_token=NiIwLSIkXkw2W1BJSCNdVEJJQFQ0UDxbKiBOUz5RICAgCg%3D%3D
+http://appellatecases.courtinfo.ca.gov/search/searchResults.cfm?dist=5&search=number&useSession=0&query_caseNumber=F073689
 
-Summary
-http://appellatecases.courtinfo.ca.gov/search/case/mainCaseScreen.cfm?dist=43&doc_id=2152547&doc_no=G053914&request_token=NiIwLSIkXkw2W1BJSSFNWEhJUEQ7UFxbJiIuIztSMCAgCg%3D%3D
-
-Disposition
-http://appellatecases.courtinfo.ca.gov/search/case/disposition.cfm?dist=43&doc_id=2152547&doc_no=G053914&request_token=NiIwLSIkXkw2W1BJSSFNWEhJUEQ7UFxbJiIuIztSMCAgCg%3D%3D
-
-Parties and Attornies
-http://appellatecases.courtinfo.ca.gov/search/case/partiesAndAttorneys.cfm?dist=43&doc_id=2152547&doc_no=G053914&request_token=NiIwLSIkXkw2W1BJSSFNWEhJUEQ7UFxbJiIuIztSMCAgCg%3D%3D
-
-Trial Court
-appellatecases.courtinfo.ca.gov/search/case/trialCourt.cfm?dist=43&doc_id=2152547&doc_no=G053914&request_token=NiIwLSIkXkw2W1BJSSFNWEhJUEQ7UFxbJiIuIztSMCAgCg%3D%3D
