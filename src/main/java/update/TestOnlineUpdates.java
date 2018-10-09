@@ -9,6 +9,8 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 import opca.parser.OpinionScraperInterface;
+import opca.scraper.CACaseScraper;
+import opca.scraper.TestCAParseSlipDetails;
 import opca.service.CAOnlineUpdates;
 import scraper.TestCACaseScraper;
 import statutes.service.StatutesService;
@@ -33,7 +35,8 @@ public class TestOnlineUpdates {
 		}
 		try {
 //			OpinionScraperInterface caseScraper = new CACaseScraper(true);
-			OpinionScraperInterface caseScraper = new TestCACaseScraper(false);
+//			OpinionScraperInterface caseScraper = new TestCACaseScraper(false);
+			OpinionScraperInterface caseScraper = new TestCAParseSlipDetails(false);
 			EntityTransaction tx = em.getTransaction();
 			try {
 				tx.begin();
@@ -41,7 +44,7 @@ public class TestOnlineUpdates {
 				tx.commit();
 			} catch (Exception ex) {
 				ex.printStackTrace();
-				tx.rollback();
+//				tx.rollback();
 			}
 			em.close();
 		} finally {

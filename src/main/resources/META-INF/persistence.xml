@@ -14,6 +14,7 @@
     <class>opca.model.OpinionStatuteCitationId</class>
     <class>opca.model.StatuteKey</class>
     <class>opca.model.SlipProperties</class>
+    <class>opca.model.PartyAttorneyPair</class>
     <properties>
       <property name="hibernate.archive.autodetection" value="class" />
       <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
