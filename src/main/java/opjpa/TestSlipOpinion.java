@@ -44,7 +44,7 @@ public class TestSlipOpinion {
 	        calLastWeek.set(Calendar.YEAR, year);
 	        calLastWeek.set(Calendar.DAY_OF_YEAR, dayOfYear);
 	
-	        List<OpinionView> opinionCases = slipOpinionSingleton.getOpinionCasesForAccount(
+	        List<OpinionView> opinionCases = slipOpinionSingleton.getOpinionCases(
 	        		new ViewParameters(calLastWeek.getTime(), calNow.getTime())
 	    		);
 	        User user = new User();
