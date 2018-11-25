@@ -3,8 +3,18 @@
   xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="opjpa" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+    <class>opca.model.OpinionBase</class>
+    <class>opca.model.OpinionKey</class>
+    <class>opca.model.Role</class>
+    <class>opca.model.SlipOpinion</class>
+    <class>opca.model.SlipProperties</class>
+    <class>opca.model.StatuteCitation</class>
+    <class>opca.model.User</class>
+    <class>opca.model.OpinionStatuteCitation</class>
+    <class>opca.model.OpinionStatuteCitationId</class>
+    <class>opca.model.StatuteKey</class>
+    <class>opca.model.PartyAttorneyPair</class>
     <properties>
-      <property name="hibernate.archive.autodetection" value="class" />
       <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/op" />
       <property name="javax.persistence.jdbc.user" value="adminnr1up7V" />
