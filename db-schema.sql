@@ -21,12 +21,12 @@ create table opinionstatutecitation (countreferences integer not null, opinionba
 create table partyattorneypair (id integer not null auto_increment, attorney varchar(3070), party varchar(1022), slipproperties_slipopinion_id integer, primary key (id)) ENGINE=InnoDB;
 create table role (id bigint not null auto_increment, role varchar(255) not null, primary key (id)) ENGINE=InnoDB;
 create table slipproperties (author varchar(63), casecaption varchar(255), casecitation varchar(255), casetype varchar(15), completiondate datetime, county varchar(127), court varchar(15), date datetime, disposition varchar(127), dispositiondescription varchar(255), division varchar(31), fileextension varchar(7), filename varchar(31), filingdate datetime, participants varchar(255), publicationstatus varchar(31), summary varchar(4094), trialcourtcase varchar(63), trialcourtcasenumber varchar(63), trialcourtjudge varchar(127), trialcourtjudgmentdate datetime, trialcourtname varchar(127), slipopinion_id integer not null, primary key (slipopinion_id)) ENGINE=InnoDB;
-create table statutecitation (id integer not null auto_increment, designated bit not null, sectionnumber char(32), title char(4), primary key (id)) ENGINE=InnoDB;
+create table statutecitation (id integer not null auto_increment, designated bit not null, lawcode char(4), sectionnumber char(32), primary key (id)) ENGINE=InnoDB;
 create table user (id bigint not null auto_increment, createdate datetime, email varchar(255), emailupdates bit not null, firstname varchar(255), lastname varchar(255), locale varchar(255), optout bit not null, optoutkey varchar(255), password varchar(255), startverify bit not null, titles tinyblob, updatedate datetime, verified bit not null, verifycount integer not null, verifyerrors integer not null, verifykey varchar(255), welcomeerrors integer not null, welcomed bit not null, primary key (id)) ENGINE=InnoDB;
 create table user_role (user_id bigint not null, roles_id bigint not null) ENGINE=InnoDB;
 create index IDXd587qslmmirn7juop20is6gwt on opinionbase (vset, volume, page);
 alter table role add constraint UK_bjxn5ii7v7ygwx39et0wawu0q unique (role);
-create index IDXa0xjansqjx14py55e14jnar89 on statutecitation (title, sectionnumber);
+create index IDX13npyxqldj3ydwfdy3o7x2vit on statutecitation (lawcode, sectionnumber);
 alter table user add constraint UKob8kqyqqgmefl0aco34akdtpe unique (email);
 alter table opinionbase_opinionbase add constraint FKv9vgyvlfwws091112o975tdf foreign key (opinioncitations_id) references opinionbase (id);
 alter table opinionbase_opinionbase add constraint FKta2uodkexsd423u05p76th66o foreign key (referringopinions_id) references opinionbase (id);
