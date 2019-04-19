@@ -8,7 +8,8 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
-    <version.wildfly.bom>11.0.0.Final</version.wildfly.bom>
+    <version.wildfly.bom>15.0.1.Final</version.wildfly.bom>
+	<version.opca>0.5.1-SNAPSHOT</version.opca>
   </properties>
   <repositories>
     <repository>
@@ -28,7 +29,7 @@
           from the Hibernate family of projects) -->
       <dependency>
           <groupId>org.wildfly.bom</groupId>
-          <artifactId>wildfly-javaee7-with-tools</artifactId>
+          <artifactId>wildfly-javaee8-with-tools</artifactId>
           <version>${version.wildfly.bom}</version>
           <type>pom</type>
           <scope>import</scope>
@@ -36,10 +37,6 @@
     </dependencies>
   </dependencyManagement>
   <dependencies>
-    <dependency>
-      <groupId>org.hibernate.javax.persistence</groupId>
-      <artifactId>hibernate-jpa-2.1-api</artifactId>
-    </dependency>
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-entitymanager</artifactId>
@@ -96,12 +93,12 @@
     <dependency>
       <groupId>legalservices</groupId>
       <artifactId>statutes</artifactId>
-      <version>0.5.0-SNAPSHOT</version>
+      <version>${version.opca}</version>
     </dependency>
     <dependency>
       <groupId>legalservices</groupId>
       <artifactId>statutesca</artifactId>
-      <version>0.5.0-SNAPSHOT</version>
+      <version>${version.opca}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.poi</groupId>
@@ -115,7 +112,7 @@
     <dependency>
       <groupId>legalservices</groupId>
       <artifactId>opinions-ejb</artifactId>
-      <version>0.5.0-SNAPSHOT</version>
+      <version>${version.opca}</version>
       <type>ejb</type>
     </dependency>
   </dependencies>
