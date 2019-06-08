@@ -8,13 +8,17 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
-    <version.wildfly.bom>15.0.1.Final</version.wildfly.bom>
-	<version.opca>0.5.1-SNAPSHOT</version.opca>
+    <version.wildfly.bom>16.0.0.Final</version.wildfly.bom>
+	<version.opca>0.5.2-SNAPSHOT</version.opca>
   </properties>
   <repositories>
     <repository>
-      <id>eap</id>
-      <url>http://maven.repository.redhat.com/techpreview/all</url>
+      <id>maven-repository</id>
+      <url>https://repo.maven.apache.org/maven2/</url>
+    </repository>
+    <repository>
+      <id>jboss-repository</id>
+      <url>https://repository.jboss.org/nexus/content/groups/public/</url>
     </repository>
   </repositories>
   <dependencyManagement>
