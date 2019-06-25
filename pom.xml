@@ -73,7 +73,7 @@
     <dependency>
       <groupId>org.jsoup</groupId>
       <artifactId>jsoup</artifactId>
-      <version>1.8.3</version>
+      <version>1.12.1</version>
     </dependency>
     <dependency>
       <groupId>org.hibernate</groupId>
@@ -118,6 +118,11 @@
       <artifactId>opinions-ejb</artifactId>
       <version>${version.opca}</version>
       <type>ejb</type>
+    </dependency>
+    <dependency>
+      <groupId>legalservices</groupId>
+      <artifactId>statutesaz</artifactId>
+      <version>${version.opca}</version>
     </dependency>
   </dependencies>
 </project>
