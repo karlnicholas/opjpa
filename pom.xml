@@ -119,10 +119,12 @@
       <version>${version.opca}</version>
       <type>ejb</type>
     </dependency>
+<!-- 
     <dependency>
       <groupId>legalservices</groupId>
       <artifactId>statutesaz</artifactId>
       <version>${version.opca}</version>
     </dependency>
+ -->    
   </dependencies>
 </project>

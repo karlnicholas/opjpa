@@ -19,7 +19,7 @@ import statutes.StatutesNode;
 import statutes.StatutesRoot;
 import statutes.StatutesTitles;
 import statutes.api.IStatutesApi;
-import statutesaz.statutesapi.AZStatutesApiImpl;
+//import statutesaz.statutesapi.AZStatutesApiImpl;
 
 public class AZSiteRip {
 	private static final String TITLE = "Title";
@@ -29,8 +29,10 @@ public class AZSiteRip {
 	
 	protected void parse( Consumer<StatutesRoot> statutesRootConsumer, BiConsumer<SectionContent, StatutesLeaf> statutesLeafConsumer) throws Exception {
 		globalCount = 1;
-		IStatutesApi iStatutesApi = new AZStatutesApiImpl();
-	    Map<String, StatutesTitles> mapStatutes = iStatutesApi.getMapStatutesToTitles();
+//		IStatutesApi iStatutesApi = new AZStatutesApiImpl();
+//	    Map<String, StatutesTitles> mapStatutes = iStatutesApi.getMapStatutesToTitles();
+		IStatutesApi iStatutesApi = null;
+	    Map<String, StatutesTitles> mapStatutes = null;
 
 		for ( int i=1; i <= 49; ++i ) {
 			// hard-coded skips for empty titles.
